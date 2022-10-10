@@ -1,0 +1,7 @@
+.*
+
+!.gitignore
+
+migrations
+
+__pycache__
