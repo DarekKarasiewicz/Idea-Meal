@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Cuisine_category(models.Model):
     name = models.CharField(max_length = 32)
@@ -29,12 +30,12 @@ class Products(models.Model):
 class Comment(models.Model):
     raiting = models.IntegerField()
     description = models.TextField()
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.description
 
-class Recipes(models.model):
+class Recipes(models.Model):
     name = models.CharField(max_length = 32)
     description = models.TextField()
     difficulty = models.IntegerField()
@@ -49,10 +50,10 @@ class Recipes(models.model):
     def __str__(self):
         return self.name
 
-class Fridge(models.model):
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+class Fridge(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-class Fridge_products_counts(models.model):
+class Fridge_products_counts(models.Model):
     product = models.ManyToManyField(Products)
     item_count = models.IntegerField()
     fridge = models.ManyToManyField(Fridge)
