@@ -4,23 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.urls import reverse
-
-
-def index(request):
-    return HttpResponse("Hello world!")
-
-
-@csrf_exempt
-def login_page(request):
-    if request.method == "POST":
-        auth_login = request.POST["auth_login"]
-        auth_password = request.POST["auth_password"]
-        if user := authenticate(username=auth_login, password=auth_password):
-            return HttpResponse("Hello World!")
-        else:
-            return HttpResponse("Sorry ale coś ci chyba nie poszło !")
-    return render(request, "login_page.html")
-
+from django.contrib.auth.decorators import login_required
 
 def register_page(request):
     if request.method == "POST":
@@ -33,3 +17,20 @@ def register_page(request):
             return HttpResponse("400")
 
     return render(request, "register_page.html")
+
+@csrf_exempt
+def login_page(request):
+    if request.method == "POST":
+        auth_login = request.POST["auth_login"]
+        auth_password = request.POST["auth_password"]
+        if user := authenticate(username=auth_login, password=auth_password):
+            return HttpResponseRedirect(reverse("main", args=(user.id,)))
+        else:
+            return HttpResponse("Sorry ale coś ci chyba nie poszło !")
+    return render(request, "login_page.html")
+
+# @login_required
+def main_page(request,user_id):
+    # print(user_id)
+    sesion_user = User.objects.filter(id=user_id)[0]
+    return render(request,"main_page.html",{'name':sesion_user.username})
