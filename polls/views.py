@@ -23,7 +23,7 @@ def register_page(request):
         else:
             return HttpResponse("400")
 
-    return render(request, "register_page.html")
+    return render(request, "polls/register_page.html")
 
 @csrf_exempt
 def login_page(request):
