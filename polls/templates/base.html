@@ -1,0 +1,32 @@
+{% load static %}
+{% load sass_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {# Global styles #} 
+    {% block site_css %}
+    <link href="{% sass_src 'css/main.scss' %}" rel="stylesheet" type="text/css"/>
+    {% endblock %} 
+    {# Page-specific styles #} 
+    {% autoescape off %} 
+    {% block page_css %}{% endblock %} 
+    {% endautoescape %}
+    <title>{% block page_title %}{% endblock %}</title>
+  </head>
+  <body class="{% block body_class %}{% endblock %}">
+    {% block body %}
+    {# Page content will go here #} 
+    {% endblock %} 
+    {# Globaljavascript #} 
+    {% block site_js %}
+      <script type="text/javascript" src="{{ STATIC_URL }} /static/js/jquery-3.6.1.js"></script> 
+      <script src="{% static 'js/main.js' %}" defer></script>  
+    {% endblock %} 
+    {# Page javascript #} 
+    {% autoescape off %} 
+    {% block page_js%} {% endblock %} 
+    {% endautoescape %}
+  </body>
+</html>

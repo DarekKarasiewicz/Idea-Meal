@@ -1,8 +1,18 @@
-<form method="post">                                                                             
-    <input type = "text" name="auth_login"  id="auth_login"> 
-    <input type = "text" name="auth_password" id="auth_password">    
-    <button type="submit">Log In</button>                  
-</form>
-<br>
+{% extends 'base.html' %}
+{% block page_title %}
+  Idea-Meal || Login Page
+{% endblock %}
+{% block body %}
+  <h1>Login Page</h1>
+  <form method="post">
+    <input type="text" name="auth_login" id="auth_login" />
+    <input type="text" name="auth_password" id="auth_password" />
+    <button type="submit">Log In</button>
+  </form>
+  <button id="jquery_test">CLICK ME!!!!</button>
+  <br />
 
-<a href="{% url 'register'%}">Register</a>
+  {% comment %} <h1>This template's stylesheet was written SASS/SCSS</h1> {% endcomment %}
+
+  <a href="{% url 'register'%}">Register</a>
+{% endblock %} 
