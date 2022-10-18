@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login,logout
@@ -39,6 +39,8 @@ def login_page(request):
 
 @login_required
 def main_page(request,user_id):
-    # print(user_id)
-    sesion_user = User.objects.filter(id=user_id)[0]
-    return render(request,"polls/main_page.html",{'name':sesion_user.username})
+    if int(request.session['_auth_user_id']) != int(user_id):
+        raise Http404
+    session_user = get_object_or_404(User, pk=user_id)
+    # sesion_user = User.objects.filter(id=user_id)[0]
+    return render(request,"polls/main_page.html",{'name':session_user.username})
