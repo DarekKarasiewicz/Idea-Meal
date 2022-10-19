@@ -1,6 +1,30 @@
+$font-main: 16px;
+
 h1 {
   color: blue;
 }
+h2{
+  color: green;
+}
+.stary{
+  height: 300px;
+  width: 300px;
+  background-color: yellow;
+  position: relative;
+  div{
+    height: 200px;
+    width: 200px;
+    background-color: red;
+    position: relative;
+    h1{
+      color: lightcoral;
+    }
+    p{
+      font-size: $font-main;
+    }
+  }
+}
+
 
 body{
   background-color: darkblue;
