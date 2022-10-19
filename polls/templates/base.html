@@ -15,7 +15,7 @@
     {% endautoescape %}
     <title>{% block page_title %}{% endblock %}</title>
   </head>
-  <body class="{% block body_class %}{% endblock %}">
+  <body>
     {% block body %}
     {# Page content will go here #} 
     {% endblock %} 
@@ -29,4 +29,7 @@
     {% block page_js%} {% endblock %} 
     {% endautoescape %}
   </body>
+  <footer>
+    All icons are provided by <a href="https://icons8.com" target="_blank">icons8</a>
+  <footer>
 </html>
