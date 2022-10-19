@@ -1,0 +1,23 @@
+  <div class="form_holder">
+    <h1>Add recipe</h1>
+    <form method="post">
+      {% csrf_token %}
+      <label for="recipe_name">recipe_name: </label>
+      <input type="text" name="recipe_name" id="recipe_name" required/><br>
+      <label for="description">description: </label>
+      <input type="text" name="description" id="description" required/><br>
+      <label for="difficulty">difficulty: </label>
+      <input type="number" name="difficulty" id="difficulty" min="1" max="3" required/><br>
+      <label for="cuisine_category">cuisine_category: </label>
+      <input type="text" name="cuisine_category" id="cuisine_category" required/><br>
+      <label for="meal_time_category">meal_time_category: </label>
+      <input type="text" name="meal_time_category" id="meal_time_category" required/><br>
+      <label for="prepare_time">prepare_time: </label>
+      <input type="time" name="prepare_time" id="prepare_time" min="00:00" max="24:00" required/><br>
+      <label for="spiciness">spiciness: </label>
+      <input type="number" name="spiciness" id="spiciness" min="1" max="3" required/><br>
+      <label for="per_serving">per_serving: </label>
+      <input type="number" name="per_serving" id="per_serving" min="1" max="20" required/><br>
+      <button type="submit">ADD</button>
+    </form>
+  </div> 
