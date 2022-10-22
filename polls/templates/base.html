@@ -9,7 +9,7 @@
     {% block site_css %}
     <link href="{% sass_src 'css/main.scss' %}" rel="stylesheet" type="text/css"/>
     {% endblock %} 
-    {# Page-specific styles #} 
+    {# Page-specific styles #}
     {% autoescape off %} 
     {% block page_css %}{% endblock %} 
     {% endautoescape %}
@@ -30,6 +30,6 @@
     {% endautoescape %}
   </body>
   <footer>
-    All icons are provided by <a href="https://icons8.com" target="_blank">icons8</a>
+    <span>All icons are provided by <a href="https://icons8.com" target="_blank">icons8</a></span>
   <footer>
 </html>

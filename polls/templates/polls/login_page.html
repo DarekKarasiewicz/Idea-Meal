@@ -1,28 +1,26 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block page_title %}
   Idea-Meal || Login Page
 {% endblock %}
 {% block body %}
-  <h1>Login Page</h1>
-  <h2>WEWEWEWEWEWE</h2>
-  <form method="post">
-    <input type="text" name="auth_login" id="auth_login" />
-    <input type="text" name="auth_password" id="auth_password" />
-    <button type="submit">Log In</button>
-  </form>
-  <button id="jquery_test">CLICK ME!!!!</button>
-  {% comment %} <p>{{ MEDIA_URL }}</p>
-  <img src="{% media 'media/icons8-sausage-96.png' %}" alt="icons8-sausage-96" height="75px" width="75px"> {% endcomment %}
-  <br />
-  <div class="stary">
-    <div>
-      <div class="mlodszy">
-        <h1>TEST</h1>
-        <p>text under</p>
-      </div>
+  <div class="form_holder">  
+    <div class="form_holder__logo">
+      <img src="http://via.placeholder.com/128x128" alt="" height="128" width="128">
+    </div>
+    <div class="form_holder__content">
+      <p>Login Page</p>
+      <form method="post">
+        <label for="auth_login">Login: </label>
+        <input type="text" name="auth_login" id="auth_login" required/><br>
+        <label for="auth_password">Password: </label>
+        <input type="password" name="auth_password" id="auth_password" required/><br>
+        <button type="submit">Log In</button><br>
+      </form>
+      <br />
+    </div>
+    <div class="form_holder__footer">
+      <a href="{% url 'register'%}">Don't have an account yet? Sign Up!</a>
     </div>
   </div> 
-  {% comment %} <h1>This template's stylesheet was written SASS/SCSS</h1> {% endcomment %}
-
-  <a href="{% url 'register'%}">Register</a>
 {% endblock %} 
