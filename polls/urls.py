@@ -10,5 +10,4 @@ urlpatterns = [
     path('recipes', views.add_recipes, name='recipes_add'),
     path('recipe/<int:recipe_id>', views.recipes_page, name='recipe_page'),
     path('main_page/<int:user_id>', views.main_page, name='main'),
-    path('main_page/recipes', views.recipes, name='recipes'),
     ]
