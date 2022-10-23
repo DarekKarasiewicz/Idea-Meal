@@ -85,7 +85,8 @@ def add_recipes(request):
                           )
         recipes.save()
         return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
-    return render(request, "polls/recipes_page.html")
+    return render(request, "polls/recipes_page.html", {'user_id':
+                                                       session_user.id})
 
 @login_required
 def recipes_page(request,recipe_id):
