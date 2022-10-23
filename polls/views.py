@@ -34,7 +34,7 @@ def login_page(request):
             login(request,user)
             return HttpResponseRedirect(reverse("main", args=(user.id,)))
         else:
-            return HttpResponse("Sorry ale coś ci chyba nie poszło !")
+            return render(request, "polls/login_page.html", {'incorrect_password':True})
     return render(request, "polls/login_page.html")
 
 @login_required
