@@ -64,6 +64,17 @@ def add_recipes(request):
         spiciness = request.POST["spiciness"]
         per_serving = request.POST["per_serving"]
         is_verificated = False
+
+        match difficulty:
+            case "easy":
+                difficulty = 1
+            case "medium":
+                difficulty = 2
+            case "hard":
+                difficulty = 3
+            case _:
+                raise Http404
+
         recipes = Recipes(name = name
                           , description = description
                           , difficulty = difficulty
