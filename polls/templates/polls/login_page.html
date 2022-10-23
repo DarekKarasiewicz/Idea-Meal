@@ -15,9 +15,12 @@
         <input type="text" name="auth_login" id="auth_login" required/><br>
         <label for="auth_password">Password: </label>
         <input type="password" name="auth_password" id="auth_password" required/><br>
-        {%if incorrect_password %}
-            <button id="test" onclick="testfunc()">Wrong password!</button>
-        {%endif%}
+        <!-- {%if incorrect_password %} -->
+        <!--     <button id="test" onclick="testfunc()">Wrong password!</button> -->
+        <!-- {%endif%} -->
+        {% for message in messages %}
+            <p id="messages">{{message}}</p>
+        {% endfor %}
         <button type="submit">Log In</button><br>
       </form>
       <br />

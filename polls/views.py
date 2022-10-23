@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login,logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def welcome_page(request):
     return HttpResponseRedirect('login')
@@ -34,7 +35,8 @@ def login_page(request):
             login(request,user)
             return HttpResponseRedirect(reverse("main", args=(user.id,)))
         else:
-            return render(request, "polls/login_page.html", {'incorrect_password':True})
+            messages.info(request, 'Wrong password')
+            # return render(request, "polls/login_page.html", {'incorrect_password':True})
     return render(request, "polls/login_page.html")
 
 @login_required
