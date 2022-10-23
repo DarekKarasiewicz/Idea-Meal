@@ -4,15 +4,15 @@
 {% endblock %}
 {% block body %}
   <div class="navbar-left">
-    <h2 style="margin: 0;">Welcome {{name}}, you are on Main Page</h2><br>
-    <h3>Work in progres</h3><br>
-    <ul>
-      <li>ADD recipe</li>
-      <li><a href="{% url 'recipes'%}">Recipes</a></li>
-      <li>Your fridge</li>
-      <li>Main Page</li>
-    </ul>
+    <h1>Hello World !</h1>
+    <h2>Welcome {{name}}, you are on Main Page</h2>
+    <h3>Work in progres</h3>
     <h1><a href="{% url 'logout'%}">Logout</a></h1>
+    <h1><a href="{% url 'recipes_add'%}">Add Recipes</a></h1>
+    <h3>Recipes:</h3>
+    {%for x in recipes%}
+    <a href ="/recipe/{{x.id}}">{{x}}</a><br>
+    {% endfor %}
   </div>
   <div class="main-content"></div>
 {% endblock %} 

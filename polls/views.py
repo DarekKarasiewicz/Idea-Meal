@@ -7,6 +7,9 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+from .models import Cuisine_category,Meal_time_category,Products_category,Products,Comment,Recipes,Fridge,Fridge_products_counts
+
+
 def welcome_page(request):
     return HttpResponseRedirect('login')
 
@@ -43,11 +46,52 @@ def login_page(request):
 def main_page(request,user_id):
     if int(request.session['_auth_user_id']) != int(user_id):
         raise Http404
-    session_user = get_object_or_404(User, pk=user_id)
-    # sesion_user = User.objects.filter(id=user_id)[0]
-    return render(request,"polls/main_page.html",{'name':session_user.username})
+    session_user = get_object_or_404(User,
+                                     pk=int(request.session['_auth_user_id']))
+    all_recipes = Recipes.objects.all()
+    return render(request,"polls/main_page.html",{'name':session_user.username
+                                                 ,'recipes': all_recipes})
 
-def recipes(request):
-    return render(request,"polls/recipes.html")
+@login_required
+def add_recipes(request):
+    session_user = get_object_or_404(User, pk=int(request.session['_auth_user_id']))
+    if request.method == "POST":
+        name = request.POST["recipe_name"]
+        description = request.POST["description"]
+        difficulty = request.POST["difficulty"]
+        # cuisine_category = request.POST["cuisine_category"]
+        # meal_time_category = request.POST["meal_time_category"]
+        prepare_time_post = request.POST["prepare_time"].split(":")
+        prepare_time = int(prepare_time_post[0])*60 + int(prepare_time_post[1])
+        spiciness = request.POST["spiciness"]
+        per_serving = request.POST["per_serving"]
+        is_verificated = False
 
+        match difficulty:
+            case "easy":
+                difficulty = 1
+            case "medium":
+                difficulty = 2
+            case "hard":
+                difficulty = 3
+            case _:
+                raise Http404
 
+        recipes = Recipes(name = name
+                          , description = description
+                          , difficulty = difficulty
+                          , prepare_time = prepare_time
+                          , spiciness= spiciness
+                          , is_verificated = is_verificated
+                          , per_serving = per_serving
+                          )
+        recipes.save()
+        return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
+    return render(request, "polls/recipes_page.html", {'user_id':
+                                                       session_user.id})
+
+@login_required
+def recipes_page(request,recipe_id):
+    recipe = get_object_or_404(Recipes, pk=recipe_id)
+    test_show = recipe.__dict__
+    return render(request, "polls/recipe_view.html", {'recipe': test_show})

@@ -39,13 +39,15 @@ class Recipes(models.Model):
     name = models.CharField(max_length = 32)
     description = models.TextField()
     difficulty = models.IntegerField()
-    cuisine_category = models.ForeignKey(Cuisine_category, on_delete=models.CASCADE)
-    meal_time_category = models.ForeignKey(Meal_time_category, on_delete=models.CASCADE)
-    prepare_time = models.IntegerField()
-    spiciness = models.IntegerField()
-    per_serving = models.IntegerField()
+    cuisine_category = models.ForeignKey(Cuisine_category,
+                                         on_delete=models.CASCADE, null=True)
+    meal_time_category = models.ForeignKey(Meal_time_category,
+                                           on_delete=models.CASCADE, null=True)
+    prepare_time = models.IntegerField(null=True)
+    spiciness = models.IntegerField(null=True)
+    per_serving = models.IntegerField(null=True)
     is_verificated = models.BooleanField()
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
