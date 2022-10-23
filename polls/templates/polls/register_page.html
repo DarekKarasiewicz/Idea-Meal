@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block page_title %}
   Idea-Meal || Register Page
 {% endblock %}
 {% block body %}
 <div class="form_holder">
   <div class="form_holder__logo">
-    <img src="http://via.placeholder.com/128x128" alt="" height="128" width="128">
+    <img src="{% static 'img/first_logo.png' %}" alt="" height="128" width="128">
   </div>
   <div class="form_holder__content">
     <p>Register Page</p>

@@ -6,7 +6,7 @@
 {% block body %}
   <div class="form_holder">  
     <div class="form_holder__logo">
-      <img src="http://via.placeholder.com/128x128" alt="" height="128" width="128">
+      <img src="{% static 'img/first_logo.png' %}" alt="" height="128" width="128">
     </div>
     <div class="form_holder__content">
       <p>Login Page</p>
@@ -16,7 +16,7 @@
         <label for="auth_password">Password: </label>
         <input type="password" name="auth_password" id="auth_password" required/><br>
         {%if incorrect_password %}
-            <p style="color:red">Wrong password!</p>
+            <button id="test" onclick="testfunc()">Wrong password!</button>
         {%endif%}
         <button type="submit">Log In</button><br>
       </form>

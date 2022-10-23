@@ -20,10 +20,11 @@ body{
 }
 body::before {
   content: ' ';
+  // border-image: url('/static/img/repeated_food_bg.png');;
   border-top: 100vh solid $idea-color2;
   border-right: 100vw solid transparent;
-  border-bottom:0;
-  border-left:0;
+  border-bottom: 0; 
+  border-left: 0; 
   width: 0;
   position: absolute;
   z-index: -1;
@@ -94,6 +95,7 @@ footer {
       left: 50%;
       transform: translate(-50%, -35%);
       border-radius: 45px;
+      margin-top: 25px;
       label{
         color: $idea-color6;
         font-weight: bold;
@@ -141,9 +143,28 @@ footer {
       display: table;
       color: $idea-color6;
       font-size: 18px;
+      font-family: sans-serif;
       &:hover{
         color: $idea-color1;
       }
     }
   }
+}
+
+#test{
+  display: none;
+}
+
+
+//sweetalert2 replaced base styles
+.swal2-styled.swal2-confirm {
+  background-color: $idea-color3 !important;
+  color: $idea-color1 !important;
+}
+.swal2-popup {
+  background: $idea-color1 !important;
+  color: #545454;
+}
+.swal2-container.swal2-backdrop-show, .swal2-container.swal2-noanimation {
+  background: rgba(0,0,0,.6) !important;
 }
