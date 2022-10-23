@@ -44,3 +44,8 @@ def main_page(request,user_id):
     session_user = get_object_or_404(User, pk=user_id)
     # sesion_user = User.objects.filter(id=user_id)[0]
     return render(request,"polls/main_page.html",{'name':session_user.username})
+
+def recipes(request):
+    return render(request,"polls/recipes.html")
+
+

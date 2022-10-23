@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block page_title %}
-  Idea-Meal || Main Page
+  Idea-Meal || Recipes
 {% endblock %}
 {% block body %}
   <div class="navbar-left">
@@ -10,9 +10,10 @@
       <li>ADD recipe</li>
       <li><a href="{% url 'recipes'%}">Recipes</a></li>
       <li>Your fridge</li>
-      <li>Main Page</li>
     </ul>
     <h1><a href="{% url 'logout'%}">Logout</a></h1>
   </div>
-  <div class="main-content"></div>
+  <div class="main-content">
+    <h1>RECIPES PAGE</h1>
+  </div>
 {% endblock %} 

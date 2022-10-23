@@ -168,3 +168,17 @@ footer {
 .swal2-container.swal2-backdrop-show, .swal2-container.swal2-noanimation {
   background: rgba(0,0,0,.6) !important;
 }
+
+//mainpage styles
+.navbar-left{
+  background-color: red;
+  width: 15%;
+  height: 100%;
+  float: left;
+}
+.main-content{
+  background-color: transparent;
+  width: 85%;
+  height: 100%;
+  float: left;
+}
