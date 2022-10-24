@@ -95,4 +95,3 @@ def recipes_page(request,recipe_id):
     recipe = get_object_or_404(Recipes, pk=recipe_id)
     test_show = recipe.__dict__
     return render(request, "polls/recipe_view.html", {'recipe': test_show})
-x

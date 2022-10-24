@@ -11,7 +11,7 @@
  *
  * Date: 2022-08-26T17:52Z
  */
-( function( global, factory ) {x
+( function( global, factory ) {
 
 	"use strict";
 
