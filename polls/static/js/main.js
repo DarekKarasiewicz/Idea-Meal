@@ -8,7 +8,7 @@ $(document).ready(()=>{
   $('#test').trigger('click');
 })
 
-function testfunc(){
+function testfunc(){x
   Swal.fire({
     icon: 'error',
     title: 'Oops...',
