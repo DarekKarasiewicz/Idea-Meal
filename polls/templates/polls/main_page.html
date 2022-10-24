@@ -3,8 +3,27 @@
   Idea-Meal || Main Page
 {% endblock %}
 {% block body %}
-  <div class="navbar-left">
-    <h1>Hello World !</h1>
+  {%block navbar %}
+  <div class="navbar">
+    <div class="navbar__logo"><img src="https://cdn.pixabay.com/photo/2016/12/26/18/33/logo-1932539_960_720.png" alt="testLogo"/></div>
+    <div class="navbar__links">
+      <ul id="links">
+        <li class="link">link</li>
+        <li class="link">link</li>
+        <li class="link">link</li>
+        <li class="link">link</li>
+      </ul>
+    </div>
+    <div class="navbar__user">
+      <div class="user_info">
+        <div class="user_img"><img src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg" alt="userIcon"/></div>
+        <div class="user_name">Nick</div>
+      </div>
+      <div class="settings">Settings</div>
+    </div>
+  </div>
+  {%endblock%}
+    <h1 style="margin: 0;">Hello World !</h1>
     <h2>Welcome {{name}}, you are on Main Page</h2>
     <h3>Work in progres</h3>
     <h1><a href="{% url 'logout'%}">Logout</a></h1>
@@ -13,6 +32,4 @@
     {%for x in recipes%}
     <a href ="/recipe/{{x.id}}">{{x}}</a><br>
     {% endfor %}
-  </div>
-  <div class="main-content"></div>
 {% endblock %} 

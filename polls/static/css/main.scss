@@ -182,3 +182,133 @@ footer {
   height: 100%;
   float: left;
 }
+
+//navbar styles
+.navbar{
+  height: 100vh;
+  width: 10px;
+  float: left;
+  left: -200px;
+  transition: 0.5s;
+  &__logo{
+    position: relative;
+    left: -200px;
+    height: 20vh;
+    transition: 0.5s;
+    img{
+      border-radius: 0px 10px 0px 0px;
+      height: 20vh;
+      width: 200px;
+    }
+  }
+  &__links{
+    position: relative;
+    left: -200px;
+    height: 70vh;
+    ul{
+      list-style-type: none;
+      padding: 0;
+      margin: 0;     
+      li{
+        // font-size: 28px;
+        // padding: 5px;        
+        // background-color: aqua;
+        // cursor: pointer;
+        appearance: none;
+        background-color: $idea-color1;
+        // border-radius: 4px;
+        border-width: 0;
+        box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,$idea-color2 0 -3px 0 inset;
+        box-sizing: border-box;
+        color: black;
+        cursor: pointer;
+        // display: inline-flex;
+        font-family: "JetBrains Mono",monospace;
+        height: 48px;
+        justify-content: center;
+        line-height: 1;
+        // list-style: none;
+        overflow: hidden;
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 5px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        transition: box-shadow .15s,transform .15s;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+        will-change: box-shadow,transform;
+        font-size: 18px;
+      }
+      li:hover{
+        box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, $idea-color2 0 -3px 0 inset;
+        transform: translateY(-2px);      
+      }
+      li:active{
+        box-shadow: $idea-color2 0 3px 7px inset;
+      }
+      .active{
+        box-shadow: $idea-color2 0 3px 7px inset;
+      }
+    }
+  }
+  &__user{
+    position: relative;
+    left: -200px;
+    transition: 0.5s;
+    height:10vh;
+    .user_info{
+      width: 200px;
+      height: 5vh;
+      .user_img{
+        float: left;
+        width: 50px;
+        height: 5vh;
+        img{
+          width: 50px;
+          height: 5vh;
+        }
+      }
+
+      .user_name{
+        float: left;
+        width: 150px;
+        height: 5vh;
+        display: flex;
+        align-items: center;
+        justify-content: center
+      }
+    }
+    .settings{
+      width: 200px;
+      height: 5vh;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+  }
+}
+
+.navbar:hover{
+  float: left;
+  height: 100vh;
+  width: 200px;
+  transition: 0.5s;
+  background-color: $idea-color3;
+  box-shadow: 0px 0px 10px grey;
+  border-radius: 0px 10px 10px 0px;
+  .navbar__logo{
+    left: 0px;
+  }
+  .navbar__links{
+    left: 0px;
+  }
+  .navbar__user{
+    left: 0px;
+  }
+}
