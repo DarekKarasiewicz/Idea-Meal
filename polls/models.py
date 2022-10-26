@@ -19,10 +19,10 @@ class Products_category(models.Model):
     def __str__(self):
         return self.name
 
-class Products(models.Model):
+class Product(models.Model):
     name = models.CharField(max_length = 32)
-    icon = models.CharField(max_length = 128)
-    product_category = models.ForeignKey(Products_category, on_delete=models.CASCADE)
+    product_category = models.ForeignKey(Products_category,
+                                         on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
@@ -56,6 +56,6 @@ class Fridge(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Fridge_products_counts(models.Model):
-    product = models.ManyToManyField(Products)
+    product = models.ManyToManyField(Product)
     item_count = models.IntegerField()
     fridge = models.ManyToManyField(Fridge)
