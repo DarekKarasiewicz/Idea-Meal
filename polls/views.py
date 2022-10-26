@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login,logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .models import Cuisine_category,Meal_time_category,Products_category,Products,Comment,Recipes,Fridge,Fridge_products_counts
+from .models import Cuisine_category,Meal_time_category,Products_category,Product,Comment,Recipes,Fridge,Fridge_products_counts
 
 
 def welcome_page(request):
@@ -47,8 +47,11 @@ def main_page(request,user_id):
     session_user = get_object_or_404(User,
                                      pk=int(request.session['_auth_user_id']))
     all_recipes = Recipes.objects.all()
+    all_products = Product.objects.all()
     return render(request,"polls/main_page.html",{'name':session_user.username
-                                                 ,'recipes': all_recipes})
+                                                 ,'recipes': all_recipes
+                                                 ,'products': all_products
+                                                  })
 
 @login_required
 def add_recipes(request):
@@ -93,3 +96,15 @@ def recipes_page(request,recipe_id):
     recipe = get_object_or_404(Recipes, pk=recipe_id)
     test_show = recipe.__dict__
     return render(request, "polls/recipe_view.html", {'recipe': test_show})
+
+def product_page(request):
+    session_user = get_object_or_404(User, pk=int(request.session['_auth_user_id']))
+    if request.method == "POST":
+        name = request.POST["product_name"]
+        product = Product(name = name)
+        product.save()
+        return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
+
+    return render(request, "polls/product_page.html", {'user_id':
+                                                       session_user.id})
+
