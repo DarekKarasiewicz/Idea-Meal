@@ -1,25 +1,30 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block page_title %}
   Idea-Meal || Main Page
 {% endblock %}
 {% block body %}
   {%block navbar %}
-  <div class="navbar">
-    <div class="navbar__logo"><img src="https://cdn.pixabay.com/photo/2016/12/26/18/33/logo-1932539_960_720.png" alt="testLogo"/></div>
+  <div class="navbar" id="nav">
+    <div class="navbar__logo"><img src="{% static 'img/first_logo.png' %}" alt="testLogo"/></div>
     <div class="navbar__links">
       <ul id="links">
+        <li class="link"><a href="{% url 'recipes_add'%}"><img src="{% static 'img/icon_add.png' %}" alt="add"/><p>Add Recipes</p></a></li>
         <li class="link">link</li>
         <li class="link">link</li>
-        <li class="link">link</li>
-        <li class="link">link</li>
+        <li class="link"><a href="{% url 'logout'%}"><img src="{% static 'img/icon_logout.png' %}" alt="logout"/><p>Logout</p></a></li>
       </ul>
     </div>
+    <div class="navbar__toggle_btn" >
+      <img src="{% static 'img/icon_arrow.png' %}" alt="arrow" id="navBtn"/>
+    </div>
+    <div class="navbar__blank_space"></div>
     <div class="navbar__user">
       <div class="user_info">
         <div class="user_img"><img src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg" alt="userIcon"/></div>
-        <div class="user_name">Nick</div>
+        <div class="user_name"><p>Nick</p></div>
       </div>
-      <div class="settings">Settings</div>
+      <div class="settings"><img src="{% static 'img/icon_gear.png' %}" /><p>Settings</p></div>
     </div>
   </div>
   {%endblock%}

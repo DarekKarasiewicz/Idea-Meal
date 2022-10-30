@@ -186,54 +186,44 @@ footer {
 //navbar styles
 .navbar{
   height: 100vh;
-  width: 10px;
+  width: 200px;
   float: left;
-  left: -200px;
-  transition: 0.5s;
+  transition: 0.25s;
+  background-color: $idea-color3;
+  box-shadow: 0px 0px 10px grey;
+  border-radius: 0px 10px 10px 0px;
   &__logo{
     position: relative;
-    left: -200px;
     height: 20vh;
-    transition: 0.5s;
     img{
       border-radius: 0px 10px 0px 0px;
       height: 20vh;
       width: 200px;
+      transition: .15s;
     }
   }
   &__links{
     position: relative;
-    left: -200px;
-    height: 70vh;
+    height: 26.5vh;
+    // transition: .25s;
     ul{
       list-style-type: none;
       padding: 0;
-      margin: 0;     
+      margin: 0;  
       li{
-        // font-size: 28px;
-        // padding: 5px;        
-        // background-color: aqua;
-        // cursor: pointer;
         appearance: none;
         background-color: $idea-color1;
-        // border-radius: 4px;
         border-width: 0;
+        margin-top: 1vh ;
         box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,$idea-color2 0 -3px 0 inset;
         box-sizing: border-box;
         color: black;
         cursor: pointer;
-        // display: inline-flex;
         font-family: "JetBrains Mono",monospace;
         height: 48px;
-        justify-content: center;
         line-height: 1;
-        // list-style: none;
         overflow: hidden;
-        padding-left: 16px;
-        padding-right: 16px;
-        padding-top: 5px;
         position: relative;
-        text-align: center;
         text-decoration: none;
         transition: box-shadow .15s,transform .15s;
         user-select: none;
@@ -242,6 +232,25 @@ footer {
         white-space: nowrap;
         will-change: box-shadow,transform;
         font-size: 18px;
+        a{
+          display: block;
+          height: 48px;
+          width: 200px;
+          color: black;
+          img{
+            display: block;
+            float: left;
+            height: 36px;
+            padding: 5px;
+          }
+          p{ 
+            display: block;
+            float: left;
+            padding-left: 5px;
+            padding-top: 13px;
+            margin: 0;
+          }
+        }
       }
       li:hover{
         box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, $idea-color2 0 -3px 0 inset;
@@ -255,11 +264,25 @@ footer {
       }
     }
   }
+  &__toggle_btn{
+    height: 5vh;
+    img{
+      display: flex;
+      float: right;
+      height: 5vh;
+      transform: rotate(180deg);
+      transition: 0.25s;
+      cursor: pointer;
+    }
+  }
+  &__blank_space{
+    height: 37.5vh;
+  }  
   &__user{
     position: relative;
-    left: -200px;
-    transition: 0.5s;
     height:10vh;
+    background-color: $idea-color4;
+    border-radius: 0px 0px 10px 0px;
     .user_info{
       width: 200px;
       height: 5vh;
@@ -279,7 +302,8 @@ footer {
         height: 5vh;
         display: flex;
         align-items: center;
-        justify-content: center
+        justify-content: center;
+        transition: .25s;
       }
     }
     .settings{
@@ -289,26 +313,84 @@ footer {
       margin: 0;
       display: flex;
       align-items: center;
-      justify-content: center
+      justify-content: center;
+      appearance: none;
+      background-color: $idea-color4;
+      border-width: 0;
+      box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,$idea-color5 0 -3px 0 inset;
+      box-sizing: border-box;
+      color: black;
+      cursor: pointer;
+      font-family: "JetBrains Mono",monospace;
+      line-height: 1;
+      overflow: hidden;
+      position: relative;
+      text-decoration: none;
+      transition: box-shadow .25s,transform .25s, width .25s;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      white-space: nowrap;
+      will-change: box-shadow,transform;
+      font-size: 18px;
+      border-radius: 0px 0px 10px 0px;
+      img{
+        height: 5vh;
+      }
+    }
+    .settings:hover{
+      box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, $idea-color5 0 -3px 0 inset;
+        transform: translateY(-2px); 
+    }
+    .settings:active{
+      box-shadow: $idea-color5 0 3px 7px inset;
     }
   }
 }
 
-.navbar:hover{
-  float: left;
-  height: 100vh;
-  width: 200px;
-  transition: 0.5s;
-  background-color: $idea-color3;
-  box-shadow: 0px 0px 10px grey;
-  border-radius: 0px 10px 10px 0px;
+.navbar.short{
+  width: 50px;
+  transition: 0.25s;
   .navbar__logo{
-    left: 0px;
+    height: 5vh;
+    img{
+      width: 50px;
+      height: 5vh;
+    }
   }
+
   .navbar__links{
-    left: 0px;
+    height: 41.5vh;
   }
+
+  .navbar__toggle_btn{
+    img{
+      transform: rotate(0deg);
+      transition: 0.25s;
+    }
+  }
+  
+  .navbar__blank_space{
+    height: 37.5vh;
+  }
+
   .navbar__user{
-    left: 0px;
+    .user_info{
+      width: 50px;
+      .user_name{
+        display: none;
+      }
+    }
+
+    .settings{
+      width: 50px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      img{
+        padding-left: 3.06px;
+      }
+    }
   }
+
 }
