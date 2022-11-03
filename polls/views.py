@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login,logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .models import Cuisine_category,Meal_time_category,Products_category,Product,Comment,Recipes,Fridge,Fridge_products_counts
+from .models import Cuisine_category,Meal_time_category,Products_category,Product,Comment,Recipes,Fridge,Fridge_products_counts,Tempomary_field
 
 
 def welcome_page(request):
@@ -93,9 +93,28 @@ def add_recipes(request):
 
 @login_required
 def recipes_page(request,recipe_id):
+    session_user = get_object_or_404(User, pk=int(request.session['_auth_user_id']))
     recipe = get_object_or_404(Recipes, pk=recipe_id)
+
+    if request.method == "POST":
+        raiting = request.POST["raiting"]
+        comment_text = request.POST["comment"]
+        comment = Comment(raiting=raiting, description=comment_text,
+                          user=session_user )
+        comment.save()
+        tmf=Tempomary_field(recipe=recipe,comment=comment)
+        tmf.save()
+
+
     test_show = recipe.__dict__
-    return render(request, "polls/recipe_view.html", {'recipe': test_show})
+    test_show1 = Tempomary_field.objects.all()
+    all_comments = []
+    for x in test_show1:
+        if x.recipe.id == recipe.id:
+            all_comments.append(x)
+
+    return render(request, "polls/recipe_view.html", {'recipe': test_show
+                                                      ,'all_comments':all_comments})
 
 def product_page(request):
     session_user = get_object_or_404(User, pk=int(request.session['_auth_user_id']))

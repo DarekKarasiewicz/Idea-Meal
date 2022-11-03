@@ -1,1 +1,10 @@
 {{recipe}}
+<h1>Put Comment here:<h1><br>
+<form method="post">
+    {% csrf_token %}
+    <input type="number" name="raiting" id="raiting"><br>
+    <input type="text" name="comment" id="comment"><br>
+    <button type="submit">ADD</button>
+</form>
+<br>
+{{all_comments}}
