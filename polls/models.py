@@ -55,9 +55,12 @@ class Recipes(models.Model):
     def __str__(self):
         return self.name
 
-class Tempomary_field(models.Model):
+class Comments_to_Recipes(models.Model):
     recipe=models.ForeignKey(Recipes,on_delete=models.CASCADE)
     comment=models.ForeignKey(Comment,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.comment.description
 
 class Fridge(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

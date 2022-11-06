@@ -7,4 +7,6 @@
     <button type="submit">ADD</button>
 </form>
 <br>
-{{all_comments}}
+{% for x in all_comments %}
+    {{x}}<br>
+{% endfor %}

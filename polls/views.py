@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login,logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .models import Cuisine_category,Meal_time_category,Products_category,Product,Comment,Recipes,Fridge,Fridge_products_counts,Tempomary_field
+from .models import Cuisine_category,Meal_time_category,Products_category,Product,Comment,Recipes,Fridge,Fridge_products_counts,Comments_to_Recipes
 
 
 def welcome_page(request):
@@ -102,12 +102,12 @@ def recipes_page(request,recipe_id):
         comment = Comment(raiting=raiting, description=comment_text,
                           user=session_user )
         comment.save()
-        tmf=Tempomary_field(recipe=recipe,comment=comment)
+        tmf=Comments_to_Recipes(recipe=recipe,comment=comment)
         tmf.save()
 
 
     test_show = recipe.__dict__
-    test_show1 = Tempomary_field.objects.all()
+    test_show1 = Comments_to_Recipes.objects.all()
     all_comments = []
     for x in test_show1:
         if x.recipe.id == recipe.id:
@@ -116,6 +116,7 @@ def recipes_page(request,recipe_id):
     return render(request, "polls/recipe_view.html", {'recipe': test_show
                                                       ,'all_comments':all_comments})
 
+@login_required
 def product_page(request):
     session_user = get_object_or_404(User, pk=int(request.session['_auth_user_id']))
     if request.method == "POST":
