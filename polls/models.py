@@ -66,6 +66,6 @@ class Fridge(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Fridge_products_counts(models.Model):
-    product = models.ManyToManyField(Product)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     item_count = models.IntegerField()
-    fridge = models.ManyToManyField(Fridge)
+    fridge = models.ForeignKey(Fridge, on_delete=models.CASCADE)

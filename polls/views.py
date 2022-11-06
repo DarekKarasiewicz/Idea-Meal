@@ -16,6 +16,7 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect('login')
 
+#we should create new fridge for user add user to someone fridge
 def register_page(request):
     if request.method == "POST":
         login = request.POST["login"]
@@ -48,7 +49,7 @@ def main_page(request,user_id):
                                      pk=int(request.session['_auth_user_id']))
     all_recipes = Recipes.objects.all()
     all_products = Product.objects.all()
-    return render(request,"polls/main_page.html",{'name':session_user.username
+    return render(request,"polls/main_page.html",{'user':session_user
                                                  ,'recipes': all_recipes
                                                  ,'products': all_products
                                                   })
@@ -128,3 +129,18 @@ def product_page(request):
     return render(request, "polls/product_page.html", {'user_id':
                                                        session_user.id})
 
+@login_required
+def user_fridge(request,user_id):
+    session_user = get_object_or_404(User, pk=int(request.session['_auth_user_id']))
+    fridge = get_object_or_404(Fridge, user=session_user)
+    all_products = Product.objects.all()
+    if request.method == "POST":
+        product_name = request.POST["product_name"]
+        product = get_object_or_404(Product, name=product_name)
+        product_number = request.POST["product_number"]
+        fridge_product = Fridge_products_counts(product=product,
+                                                item_count = product_number,
+                                                fridge=fridge)
+
+    return render(request, "polls/fridge.html", {'user_id':session_user.id,
+                                                 'products':all_products})
