@@ -70,7 +70,8 @@ footer {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -35%);
-      border-radius: 45px; }
+      border-radius: 45px;
+      margin-top: 25px; }
       .form_holder__content form label {
         color: #4d4d4d;
         font-weight: bold; }
@@ -111,8 +112,200 @@ footer {
       padding-top: 35px;
       display: table;
       color: #4d4d4d;
-      font-size: 18px; }
+      font-size: 18px;
+      font-family: sans-serif; }
       .form_holder__footer a:hover {
         color: #deedde; }
+
+#test {
+  display: none; }
+
+.swal2-styled.swal2-confirm {
+  background-color: #8DB596 !important;
+  color: #deedde !important; }
+
+.swal2-popup {
+  background: #deedde !important;
+  color: #545454; }
+
+.swal2-container.swal2-backdrop-show, .swal2-container.swal2-noanimation {
+  background: rgba(0, 0, 0, 0.6) !important; }
+
+.navbar-left {
+  background-color: red;
+  width: 15%;
+  height: 100%;
+  float: left; }
+
+.main-content {
+  background-color: transparent;
+  width: 85%;
+  height: 100%;
+  float: left; }
+
+.navbar {
+  height: 100vh;
+  width: 200px;
+  float: left;
+  transition: 0.25s;
+  background-color: #8DB596;
+  box-shadow: 0px 0px 10px grey;
+  border-radius: 0px 10px 10px 0px; }
+  .navbar__logo {
+    position: relative;
+    height: 20vh; }
+    .navbar__logo img {
+      border-radius: 0px 10px 0px 0px;
+      height: 20vh;
+      width: 200px;
+      transition: .15s; }
+  .navbar__links {
+    position: relative;
+    height: 26.5vh; }
+    .navbar__links ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0; }
+      .navbar__links ul li {
+        appearance: none;
+        background-color: #deedde;
+        border-width: 0;
+        margin-top: 1vh;
+        box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #BEDBBB 0 -3px 0 inset;
+        box-sizing: border-box;
+        color: black;
+        cursor: pointer;
+        font-family: "JetBrains Mono",monospace;
+        height: 48px;
+        line-height: 1;
+        overflow: hidden;
+        position: relative;
+        text-decoration: none;
+        transition: box-shadow .15s,transform .15s;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+        will-change: box-shadow,transform;
+        font-size: 18px; }
+        .navbar__links ul li a {
+          display: block;
+          height: 48px;
+          width: 200px;
+          color: black; }
+          .navbar__links ul li a img {
+            display: block;
+            float: left;
+            height: 36px;
+            padding: 5px; }
+          .navbar__links ul li a p {
+            display: block;
+            float: left;
+            padding-left: 5px;
+            padding-top: 13px;
+            margin: 0; }
+      .navbar__links ul li:hover {
+        box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #BEDBBB 0 -3px 0 inset;
+        transform: translateY(-2px); }
+      .navbar__links ul li:active {
+        box-shadow: #BEDBBB 0 3px 7px inset; }
+      .navbar__links ul .active {
+        box-shadow: #BEDBBB 0 3px 7px inset; }
+  .navbar__toggle_btn {
+    height: 5vh; }
+    .navbar__toggle_btn img {
+      display: flex;
+      float: right;
+      height: 5vh;
+      transform: rotate(180deg);
+      transition: 0.25s;
+      cursor: pointer; }
+  .navbar__blank_space {
+    height: 37.5vh; }
+  .navbar__user {
+    position: relative;
+    height: 10vh;
+    background-color: #92817A;
+    border-radius: 0px 0px 10px 0px; }
+    .navbar__user .user_info {
+      width: 200px;
+      height: 5vh; }
+      .navbar__user .user_info .user_img {
+        float: left;
+        width: 50px;
+        height: 5vh; }
+        .navbar__user .user_info .user_img img {
+          width: 50px;
+          height: 5vh; }
+      .navbar__user .user_info .user_name {
+        float: left;
+        width: 150px;
+        height: 5vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: .25s; }
+    .navbar__user .settings {
+      width: 200px;
+      height: 5vh;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      appearance: none;
+      background-color: #92817A;
+      border-width: 0;
+      box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #707070 0 -3px 0 inset;
+      box-sizing: border-box;
+      color: black;
+      cursor: pointer;
+      font-family: "JetBrains Mono",monospace;
+      line-height: 1;
+      overflow: hidden;
+      position: relative;
+      text-decoration: none;
+      transition: box-shadow .25s,transform .25s, width .25s;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      white-space: nowrap;
+      will-change: box-shadow,transform;
+      font-size: 18px;
+      border-radius: 0px 0px 10px 0px; }
+      .navbar__user .settings img {
+        height: 5vh; }
+    .navbar__user .settings:hover {
+      box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #707070 0 -3px 0 inset;
+      transform: translateY(-2px); }
+    .navbar__user .settings:active {
+      box-shadow: #707070 0 3px 7px inset; }
+
+.navbar.short {
+  width: 50px;
+  transition: 0.25s; }
+  .navbar.short .navbar__logo {
+    height: 5vh; }
+    .navbar.short .navbar__logo img {
+      width: 50px;
+      height: 5vh; }
+  .navbar.short .navbar__links {
+    height: 41.5vh; }
+  .navbar.short .navbar__toggle_btn img {
+    transform: rotate(0deg);
+    transition: 0.25s; }
+  .navbar.short .navbar__blank_space {
+    height: 37.5vh; }
+  .navbar.short .navbar__user .user_info {
+    width: 50px; }
+    .navbar.short .navbar__user .user_info .user_name {
+      display: none; }
+  .navbar.short .navbar__user .settings {
+    width: 50px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start; }
+    .navbar.short .navbar__user .settings img {
+      padding-left: 3.06px; }
 
 /*# sourceMappingURL=main.css.map */
