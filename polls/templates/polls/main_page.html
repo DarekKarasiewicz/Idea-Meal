@@ -5,7 +5,7 @@
 {% endblock %}
 {% block body %}
   {%block navbar %}
-  <div class="navbar" id="nav">
+  <div class="navbar" id="nav" style="display: none;">
     <div class="navbar__logo"><img src="{% static 'img/first_logo.png' %}" alt="testLogo"/></div>
     <div class="navbar__links">
       <ul id="links">
@@ -37,4 +37,113 @@
     {%for x in recipes%}
     <a href ="/recipe/{{x.id}}">{{x}}</a><br>
     {% endfor %}
+    <button id="disable_nav">Enable_nav</button>
+
+  <div id="nav_reciper_show"></div>
+  <div id="nav_recipe_res_div">
+    <div class="nav_title">
+      <div id="nav_reciper_hidder"></div>
+      <p>Recipes</p>
+    </div>
+    <div class="nav_filters">
+      <p class="nav_recipe_h">Filters</p>
+      <form>
+        <input type="checkbox" id="filter1" name="filter1" value="difficulty">
+        <label for="filter1" title="difficulty"> difficulty</label>
+        <input type="checkbox" id="filter2" name="filter2" value="Car">
+        <label for="filter2" title="prepare time">prepare time</label><br>
+        <input type="checkbox" id="filter3" name="filter3" value="Boat">
+        <label for="filter3" title="raiting">raiting</label>
+        <input type="checkbox" id="filter4" name="filter4" value="Bike">
+        <label for="filter4" title="per serving"> per serving</label><br>
+        <input type="checkbox" id="filter5" name="filter5" value="Car">
+        <label for="filter5" title="verificated"> verificated</label><br>
+        <input type="submit" value="Apply">
+      </form>
+      
+    </div>
+    <div class="nav_results">
+      <p class="nav_recipe_h">Results</p>
+      <div class="recipe_box">
+        <div class="recipe_box_simple">
+          <div class="verificated"></div>
+          <div class="name"><p>Polish Pierogis</p></div>
+          <div></div>
+        </div>
+        <div class="recipe_box_extended" style="display: none;">
+          <div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed ligula metus. Duis sollicitudin ut tellus id lacinia. Cras viverra enim non nisi feugiat, et condimentum sem hendrerit. Suspendisse ut accumsan mauris. Nulla elit dui, vulputate in aliquam a, ultricies et enim. Pellentesque rhoncus gravida cursus. Nulla quis erat ultricies, venenatis velit id, cursus justo. Nam convallis dignissim lectus id consectetur.</div>
+            <div>
+              <div class="spicy_img"></div>
+            </div>
+          </div>
+          <div class="small-div">
+            <div class="three-seg">
+              <div class="time_img"></div>
+              <div class="info">5H</div>
+            </div>
+            <div class="three-seg">
+              <div class="people_img"></div>
+              <div class="info">12</div>
+            </div>
+            <div class="three-seg">
+              <div class="cuisine_img"></div>
+              <div class="info">Asian</div>
+            </div>
+          </div>
+          <div class="small-div">
+            <div class="two-seg-one">
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="counter">(5)</div>
+            </div>
+            <div class="two-seg-two"><p>See more</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="recipe_box">
+        <div class="recipe_box_simple">
+          <div class="verificated" style="display: none;"></div>
+          <div class="name"><p>Milk flakes</p></div>
+          <div style="background-color: green !important"></div>
+        </div>
+        <div class="recipe_box_extended" style="display: none;">
+          <div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed ligula metus. Duis sollicitudin ut tellus id lacinia. Cras viverra enim non nisi feugiat, et condimentum sem hendrerit. Suspendisse ut accumsan mauris. Nulla elit dui, vulputate in aliquam a, ultricies et enim. Pellentesque rhoncus gravida cursus. Nulla quis erat ultricies, venenatis velit id, cursus justo. Nam convallis dignissim lectus id consectetur.</div>
+            <div>
+              <div class="spicy_img"></div>
+            </div>
+          </div>
+          <div class="small-div">
+            <div class="three-seg">
+              <div class="time_img"></div>
+              <div class="info">2H</div>
+            </div>
+            <div class="three-seg">
+              <div class="people_img"></div>
+              <div class="info">1</div>
+            </div>
+            <div class="three-seg">
+              <div class="cuisine_img"></div>
+              <div class="info">---</div>
+            </div>
+          </div>
+          <div class="small-div">
+            <div class="two-seg-one">
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="counter">(15)</div>
+            </div>
+            <div class="two-seg-two"><p>See more</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %} 

@@ -392,5 +392,237 @@ footer {
       }
     }
   }
-
 }
+
+#nav_recipe_res_div{
+  background-color: $idea-color3;
+  height: 100%;
+  width: 15%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  .nav_title{
+    width: 100%;
+    height: 7vh;
+    background-color: transparent;
+    #nav_reciper_hidder{
+      width: 30px;
+      height: 30px;
+      background-color: $idea-color3;
+      background-image: url('/static/img/icons8-chevron-left-50.png');
+      transform: rotate(-180deg);
+      background-repeat: no-repeat;
+      background-size: contain;
+      position: absolute;
+      left: -30px;
+      cursor: pointer;
+      pointer-events: all;
+    }
+    p{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      font-size: $font-main*2;
+    }
+  }
+  .nav_filters{
+    width: 100%;
+    min-height: 13vh;
+    background-color: transparent;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    form{
+      margin-bottom: 15px;
+      text-align: center;
+      input[type=submit]{
+        pointer-events: none;
+      }
+    }
+  }
+  .nav_results{
+    width: 100%;
+    min-height: 60vh;
+    background-color: transparent;
+    .recipe_box{
+      width: 90%;
+      min-height: 5vh;
+      background-color: transparent;
+      margin: auto;
+      margin-bottom: 10px;
+      position: relative;
+      cursor: pointer;
+      pointer-events: all;
+      .recipe_box_simple{
+        width: 100%;
+        height: 5vh;
+        background-color: $idea-color2;
+        .verificated{
+          background-image: url('/static/img/icons8-checkmark-30.png');
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center;
+          height: 20px !important;
+          width: 20px !important;
+          position: absolute;
+          top: -9px;
+          left: -9px;
+        }
+        .name{
+          width: 80%;
+          height: 5vh;
+          float: left;
+          p{
+            line-height: 5vh;
+            padding-left: 10px;
+          }
+        }
+        div:last-child{
+          width: 20%;
+          height: 5vh;
+          background-color: red;
+          float: left;
+        }
+      }
+      .recipe_box_extended{
+        width: 100%;
+        height: 15vh;
+        background-color: $idea-color2;
+        border-top: 1px solid black;
+        div:first-child{
+          height: 9vh;
+          width: 100%;
+          div:first-child{
+            width: 80%;
+            height: 9vh;
+            // background-color: yellow;
+            float: left;
+            overflow: hidden;
+            font-size: 11px;
+            padding-left: 10px;
+            padding-top: 2px;
+          }
+          div:last-child{
+            width: 20%;
+            height: 9vh;
+            float: left;
+            .spicy_img{
+              background-image: url('/static/img/icons8-chili-pepper-30.png');
+              background-repeat: no-repeat;
+              background-size: 32px;
+              height: 5vh;
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              right: -8px;
+              margin: auto;
+            }
+          }
+        }
+        .small-div{
+          background-color: transparent;
+          height: 3vh;
+          .three-seg{
+            width: 25%;
+            height: 3vh;
+            // background-color: blue;
+            float: left;
+            .time_img{
+              background-image: url('/static/img/icons8-wall-clock-32.png');
+              background-repeat: no-repeat;
+              background-size: contain;
+              background-position: center;
+              width: 50%;
+              height: 3vh;
+              float: left;
+            }
+            .people_img{
+              background-image: url('/static/img/icons8-user-groups-32.png');
+              background-repeat: no-repeat;
+              background-size: contain;
+              background-position: center;
+              width: 50%;
+              height: 3vh;
+              float: left;
+            }
+            .cuisine_img{
+              background-image: url('/static/img/icons8-earth-globe-64.png');
+              background-repeat: no-repeat;
+              background-size: 25px;
+              background-position: center;
+              width: 25%;
+              height: 3vh;
+              float: left;
+            }
+            .info{
+              width: 50%;
+              height: 3vh;
+              float: left;
+            }
+          }
+          .three-seg:last-child{
+            width: 50% !important;
+          }
+          .two-seg-one{
+            width: 70%;
+            height: 3vh;
+            background-color: transparent;
+            float: left;
+            margin: auto;
+            .star{
+              background-image: url('/static/img/icons8-star-32-yellow.png');
+              background-repeat: no-repeat;
+              background-size: contain;
+              background-color: transparent;
+              width: 15%;
+              height: 3vh;
+              float: left;
+            }
+            .counter{
+              background-color: transparent;
+              height: 3vh;
+            }
+          }
+          .two-seg-two{
+            width: 30%;
+            height: 3vh;
+            background-color: $idea-color4;
+            color: white;
+            float: left;
+            cursor: pointer;
+            border-radius: 45px;
+            p{
+              line-height: 3vh;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+#nav_reciper_show {
+  display: none;
+  width: 30px;
+  height: 30px;
+  background-color: $idea-color3;
+  background-image: url('/static/img/icons8-chevron-left-50.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  pointer-events: all;
+}
+.nav_recipe_h {
+  text-align: center;
+  padding: 10px 0px;
+  font-size: $font-main;
+  font-weight: bold;
+  margin: 0;
+}
+.showclass{
+  display: block !important;
+}
+

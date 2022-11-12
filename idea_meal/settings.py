@@ -135,6 +135,12 @@ STATICFILES_FINDERS = [
     'sass_processor.finders.CssFinder',
 ]
 
+COMPRESS_PRECOMPILERS = (
+    ('text/x-sass', 'django_libsass.SassCompiler'),
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 

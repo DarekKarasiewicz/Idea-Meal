@@ -1,11 +1,24 @@
-// console.log("Say hello to my little friend");
-
-// $("#jquery_test").click(() => {
-//   console.log("Finally!");
-// });
-
 $(document).ready(()=>{
   $('#test').trigger('click');
+  $('#disable_nav').on('click',()=>{
+    $('#nav').show();
+  })
+  $('#nav_reciper_hidder').on('click',()=>{
+    $('#nav_recipe_res_div').hide("fast");
+    $('#nav_reciper_show').show("fast");
+  })
+  $('#nav_reciper_show').on('click',()=>{
+    $('#nav_recipe_res_div').show("fast");
+    $('#nav_reciper_show').hide("fast");
+  })
+})
+
+$('.recipe_box_simple').on('click',function(){
+  if($(this).siblings('.recipe_box_extended').hasClass('showclass')){
+    $(this).siblings('.recipe_box_extended').removeClass('showclass');
+  }else{
+    $(this).siblings('.recipe_box_extended').addClass('showclass');
+  }
 })
 
 function testfunc(){
