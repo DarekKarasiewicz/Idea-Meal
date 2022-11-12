@@ -66,6 +66,11 @@ class Fridge(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Fridge_products_counts(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    item_count = models.IntegerField()
-    fridge = models.ForeignKey(Fridge, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,
+                                null=False,default=None)
+    item_count = models.IntegerField(null=False ,default=None)
+    fridge = models.ForeignKey(Fridge, on_delete=models.CASCADE,
+                               null=False,default=None)
+
+    def __str__(self):
+        return f"{self.product}:{self.item_count}"

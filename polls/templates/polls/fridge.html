@@ -10,3 +10,8 @@
     <button type="submit">ADD</button>
 </form>
 
+<h3>Products in Fridge<h3>
+<!-- <h4>{{product_in_fridge}}<h4> -->
+{% for x in product_in_fridge %}
+    <h4>{{x.product.name}} : {{x.item_count}}<h4>
+{% endfor %}
