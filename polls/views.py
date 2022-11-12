@@ -134,6 +134,8 @@ def user_fridge(request,user_id):
     session_user = get_object_or_404(User, pk=int(request.session['_auth_user_id']))
     fridge = get_object_or_404(Fridge, user=session_user)
     all_products = Product.objects.all()
+    product_in_fridge = Fridge_products_counts.objects.all()
+    # product_in_fridge = ["DUPa"]
     if request.method == "POST":
         product_name = request.POST["product_name"]
         product = get_object_or_404(Product, name=product_name)
@@ -141,6 +143,9 @@ def user_fridge(request,user_id):
         fridge_product = Fridge_products_counts(product=product,
                                                 item_count = product_number,
                                                 fridge=fridge)
+        fridge_product.save()
 
-    return render(request, "polls/fridge.html", {'user_id':session_user.id,
-                                                 'products':all_products})
+    return render(request, "polls/fridge.html", {'user_id': session_user.id,
+                                                 'products': all_products,
+                                                 'product_in_fridge':product_in_fridge,
+                                                 })
