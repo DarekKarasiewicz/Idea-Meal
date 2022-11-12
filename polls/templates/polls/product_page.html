@@ -1,0 +1,10 @@
+<div class="form_holder">
+<h1>Add product</h1>
+<form method="post">
+  {% csrf_token %}
+  <label for="product_name">product_name: </label>
+  <input type="text" name="product_name" id="product_name" required/><br>
+  <button type="submit">ADD</button>
+</form>
+<a href="/main_page/{{user_id}}">Back</a>
+</div> 

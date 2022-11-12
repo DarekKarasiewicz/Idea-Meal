@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+# from django.contrib.postgres.fields import ArrayField
 
 class Cuisine_category(models.Model):
     name = models.CharField(max_length = 32)
@@ -19,10 +20,10 @@ class Products_category(models.Model):
     def __str__(self):
         return self.name
 
-class Products(models.Model):
+class Product(models.Model):
     name = models.CharField(max_length = 32)
-    icon = models.CharField(max_length = 128)
-    product_category = models.ForeignKey(Products_category, on_delete=models.CASCADE)
+    product_category = models.ForeignKey(Products_category,
+                                         on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
@@ -47,15 +48,29 @@ class Recipes(models.Model):
     spiciness = models.IntegerField(null=True)
     per_serving = models.IntegerField(null=True)
     is_verificated = models.BooleanField()
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
+    comment = models.ForeignKey(Comment,
+                             on_delete=models.CASCADE,
+                             null=True)
 
     def __str__(self):
         return self.name
+
+class Comments_to_Recipes(models.Model):
+    recipe=models.ForeignKey(Recipes,on_delete=models.CASCADE)
+    comment=models.ForeignKey(Comment,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.comment.description
 
 class Fridge(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Fridge_products_counts(models.Model):
-    product = models.ManyToManyField(Products)
-    item_count = models.IntegerField()
-    fridge = models.ManyToManyField(Fridge)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,
+                                null=False,default=None)
+    item_count = models.IntegerField(null=False ,default=None)
+    fridge = models.ForeignKey(Fridge, on_delete=models.CASCADE,
+                               null=False,default=None)
+
+    def __str__(self):
+        return f"{self.product}:{self.item_count}"
