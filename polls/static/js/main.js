@@ -70,3 +70,29 @@ $('#theme_switcher').on('change',function(){
     console.log('checked false');
   }
 })
+
+//helper
+$('.nav_recipe_helper').on('click',function(){
+  Swal.fire({
+    title: '<strong>Results explanation</strong>',
+    icon: 'info',
+    html:
+      '<p>On the right side of the recipe name is colored block that determines difficulty level of recipe:</p>' +
+      '<p><span style="color:green;">green</span> - easy , <span style="color:yellow";>yellow</span> - medium , <span style="color:red";>red</span> - hard</p>' +
+      '<ul>'+
+      '<li class="result_helper_li"><div class="verificated_helper_img"></div><div class="img_info">Tells if recipe was accepted by moderators</div></li>'+
+      '<li class="result_helper_li"><div class="spicy_helper_img"></div><div class="img_info">Tells about spiciness of recipe</div></li>'+
+      '<li class="result_helper_li"><ul>'+
+      '<li class="result_helper_li"><span style="color:green;">green</span> - mild , <span style="color:yellow";>yellow</span> - slightly spicy</li>'+
+      '<li class="result_helper_li"><span style="color:orange";>orange</span> - medium spicy , <span style="color:red";>red</span> - very spicy</li>'+
+      '</ul></li>'+
+      '<li class="result_helper_li"><div class="time_img"></div><div class="img_info">Tells about time prepare time of recipe</div></li>'+
+      '<li class="result_helper_li"><div class="people_img"></div><div class="img_info">Tells how many portion you receive</div></li>'+
+      '<li class="result_helper_li"><div class="cuisine_img"></div><div class="img_info">Tells about cuisine origin of that recipe</div></li>'+
+      '</ul>',
+    showCloseButton: true,
+    showCancelButton: false,
+    showConfirmButton: false,
+    focusConfirm: false,
+  })
+})

@@ -455,6 +455,20 @@ footer {
     width: 100%;
     min-height: 60vh;
     background-color: transparent;
+    position: relative;
+    .nav_recipe_helper{
+      background-image: url('/static/img/icons8-puzzled-30.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      height: 20px !important;
+      width: 20px !important;
+      position: absolute;
+      top: 13px;
+      right: 15px;
+      cursor: pointer;
+      pointer-events: all;
+    }
     .recipe_box{
       width: 90%;
       min-height: 5vh;
@@ -605,6 +619,13 @@ footer {
             p{
               line-height: 3vh;
               text-align: center;
+              a{
+                text-decoration: none;
+                color: white;
+              }
+              a:hover{
+                color: red;
+              }
             }
           }
         }
@@ -720,3 +741,68 @@ footer {
   }
 }
 
+//spicy color filters
+.green_filter{
+  filter: invert(65%) sepia(50%) saturate(6785%) hue-rotate(87deg) brightness(130%) contrast(112%);
+}
+.yellow_filter{
+  filter: invert(97%) sepia(69%) saturate(7496%) hue-rotate(357deg) brightness(106%) contrast(107%);
+}
+.orange_filter{
+  filter: invert(70%) sepia(41%) saturate(4415%) hue-rotate(359deg) brightness(107%) contrast(103%);
+}
+.red_filter{
+  filter: invert(15%) sepia(96%) saturate(7143%) hue-rotate(0deg) brightness(104%) contrast(112%);
+}
+
+#result-explanation{
+  display: none;
+}
+
+
+//result_helper
+.spicy_helper_img{
+  background-image: url('/static/img/icons8-chili-pepper-30.png');
+  background-repeat: no-repeat;
+  height: 4vh;
+  width: 5vh;
+  float: left;
+}
+.verificated_helper_img{
+  background-image: url('/static/img/icons8-checkmark-30.png');
+  background-repeat: no-repeat;
+  height: 4vh;
+  width: 5vh;
+  float: left;
+}
+.time_img{
+  background-image: url('/static/img/icons8-wall-clock-32.png');
+  background-repeat: no-repeat;
+  height: 4vh;
+  width: 5vh;
+  float: left;
+}
+.people_img{
+  background-image: url('/static/img/icons8-user-groups-32.png');
+  background-repeat: no-repeat;
+  height: 4vh;
+  width: 5vh;
+  float: left;
+}
+.cuisine_img{
+  background-image: url('/static/img/icons8-earth-globe-64.png');
+  background-repeat: no-repeat;
+  background-size: 32px;
+  height: 4vh;
+  width: 5vh;
+  float: left;
+}
+.img_info{
+  float: left;
+}
+.result_helper_li{
+  margin-bottom: 5px;
+  min-height: 4vh;
+  list-style-type: none;
+  text-align: left;
+}
