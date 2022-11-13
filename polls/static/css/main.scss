@@ -1,12 +1,12 @@
 //Predefined web-attr
-$idea-color0:#ffffff;
-$idea-color1:#deedde;
-$idea-color2:#BEDBBB;
-$idea-color3:#8DB596;
-$idea-color4:#92817A;
-$idea-color5:#707070;
-$idea-color6:#4d4d4d;
-$font-main: 16px;
+  $idea-color0:#ffffff;
+  $idea-color1:#deedde;
+  $idea-color2:#BEDBBB;
+  $idea-color3:#8DB596;
+  $idea-color4:#92817A;
+  $idea-color5:#707070;
+  $idea-color6:#4d4d4d;
+  $font-main: 16px;
 
 //Predefined color blue(someone rly wanted this color so ...)
 $idea-color7:#89abc6;
@@ -192,6 +192,8 @@ footer {
   background-color: $idea-color3;
   box-shadow: 0px 0px 10px grey;
   border-radius: 0px 10px 10px 0px;
+  display: block !important;
+  padding: 0 !important;
   &__logo{
     position: relative;
     height: 20vh;
@@ -240,8 +242,9 @@ footer {
           img{
             display: block;
             float: left;
-            height: 36px;
+            height: 45px;
             padding: 5px;
+            margin-left: 3px;
           }
           p{ 
             display: block;
@@ -300,13 +303,14 @@ footer {
         float: left;
         width: 150px;
         height: 5vh;
+        line-height: 5vh;
         display: flex;
-        align-items: center;
+        // align-items: center;
         justify-content: center;
         transition: .25s;
       }
     }
-    .settings{
+    .user_panel{
       width: 200px;
       height: 5vh;
       padding: 0;
@@ -334,15 +338,22 @@ footer {
       will-change: box-shadow,transform;
       font-size: 18px;
       border-radius: 0px 0px 10px 0px;
-      img{
+      .user_panel__option{
+        width: 50px;
         height: 5vh;
+        display: flex;
+        img{
+          height: 4vh;
+          display: flex;
+          margin: 5px;
+        }
       }
     }
-    .settings:hover{
+    .user_panel:hover{
       box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, $idea-color5 0 -3px 0 inset;
         transform: translateY(-2px); 
     }
-    .settings:active{
+    .user_panel:active{
       box-shadow: $idea-color5 0 3px 7px inset;
     }
   }
@@ -382,7 +393,7 @@ footer {
       }
     }
 
-    .settings{
+    .user_panel{
       width: 50px;
       display: flex;
       align-items: flex-start;
@@ -602,7 +613,7 @@ footer {
   }
 }
 #nav_reciper_show {
-  display: none;
+  // display: none;
   width: 30px;
   height: 30px;
   background-color: $idea-color3;
@@ -624,5 +635,88 @@ footer {
 }
 .showclass{
   display: block !important;
+}
+
+//theme switcher slider
+.switch-box_wrapper{
+	display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100px;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.switch_box{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-width: 100px;
+  margin-top: 0px;
+  height: 5vh;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  #checkbox_moon{
+    pointer-events: none;
+    img{
+      // display: none;
+      height: 2vh;
+      position: absolute;
+      top: 14px;
+      right: 53px;
+    }
+  }
+  #checkbox_sun{
+    pointer-events: none;
+    img{
+      // display: none;
+      height: 2vh;
+      position: absolute;
+      top: 13px;
+      right: 27px;
+    }
+  }
+  input[type="checkbox"].switch_1{
+    font-size: 20px;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 3em;
+    height: 1.5em;
+    background: #ddd;
+    border-radius: 3em;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+  }
+    
+  input[type="checkbox"].switch_1:after{
+    position: absolute;
+    content: "";
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    background: black;
+    -webkit-box-shadow: 0 0 .25em rgba(0,0,0,.3);
+            box-shadow: 0 0 .25em rgba(0,0,0,.3);
+    -webkit-transform: scale(.7);
+            transform: scale(.7);
+    left: 0.05em;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+  }
+  
+  input[type="checkbox"].switch_1:checked:after{
+    left: calc(100% - 1.55em);
+  }
 }
 

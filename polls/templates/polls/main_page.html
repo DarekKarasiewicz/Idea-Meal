@@ -5,7 +5,7 @@
 {% endblock %}
 {% block body %}
   {%block navbar %}
-  <div class="navbar" id="nav" style="display: none;">
+  <div class="navbar" id="nav">
     <div class="navbar__logo"><img src="{% static 'img/first_logo.png' %}" alt="testLogo"/></div>
     <div class="navbar__links">
       <ul id="links">
@@ -22,9 +22,30 @@
     <div class="navbar__user">
       <div class="user_info">
         <div class="user_img"><img src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg" alt="userIcon"/></div>
-        <div class="user_name"><p>Nick</p></div>
+        <div class="user_name"><p>{{user.username}}</p></div>
       </div>
-      <div class="settings"><img src="{% static 'img/icon_gear.png' %}" /><p>Settings</p></div>
+      <!-- <div class="settings"><img src="{% static 'img/icon_gear.png' %}" /><p>Settings</p></div> -->
+      <div class="user_panel">
+        <div class="user_panel__option">
+          <img src="{% static 'img/icon_gear.png' %}" alt="settings_img" title="Settings"/>
+        </div>
+        <div class="user_panel__option">
+          <a href="{% url 'logout'%}">
+            <img src="{% static 'img/icon_logout.png' %}" alt="logout" title="logout"/>
+          </a>
+        </div>
+        <div class="switch-box_wrapper">
+          <div class="switch_box box_1" id="theme_switcher">
+            <input type="checkbox" class="switch_1">
+            <div id="checkbox_sun">
+              <img src="{% static 'img/icons8-sun-30.png' %}" alt="sun_icon" title="sun_icon"/>
+            </div>
+            <div id="checkbox_moon">
+              <img src="{% static 'img/icons8-moon-and-stars-30.png' %}" alt="moon_icon" title="moon_icon"/>
+            </div>
+          </div>	
+        </div>
+      </div>
     </div>
   </div>
   {%endblock%}
@@ -43,10 +64,9 @@
     {%for x in products%}
     {{x}}<br>
     {% endfor %}
-    <button id="disable_nav">Enable_nav</button>
 
   <div id="nav_reciper_show"></div>
-  <div id="nav_recipe_res_div">
+  <div id="nav_recipe_res_div" style="display: none;">
     <div class="nav_title">
       <div id="nav_reciper_hidder"></div>
       <p>Recipes</p>
