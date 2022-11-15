@@ -16,13 +16,14 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect('login')
 
-#we should create new fridge for user add user to someone fridge
 def register_page(request):
     if request.method == "POST":
         login = request.POST["login"]
         password = request.POST["password"]
         if User.objects.filter(username=login).exists() == False:
-            User.objects.create_user(login, None, password).save()
+            user = User.objects.create_user(login, None, password)
+            user.save()
+            Fridge(user=user).save()
             return HttpResponseRedirect(reverse("login"))
         else:
             return HttpResponse("400")
