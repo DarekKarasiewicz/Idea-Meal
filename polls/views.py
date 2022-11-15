@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login,logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import time
 
 from .models import Cuisine_category,Meal_time_category,Products_category,Product,Comment,Recipes,Fridge,Fridge_products_counts,Comments_to_Recipes
 
@@ -90,6 +91,7 @@ def add_recipes(request):
                           , per_serving = per_serving
                           )
         recipes.save()
+        time.sleep(2)
         return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
     return render(request, "polls/recipes_page.html", {'user_id':
                                                        session_user.id})

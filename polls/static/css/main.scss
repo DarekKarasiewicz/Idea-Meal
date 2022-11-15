@@ -49,6 +49,11 @@ footer {
   }
 }
 
+//reusable class
+.centered{
+  text-align: center;
+}
+
 //Login and Register styles
 .form_holder {
   height: 650px;
@@ -170,17 +175,17 @@ footer {
 }
 
 //mainpage styles
-.navbar-left{
-  background-color: red;
-  width: 15%;
-  height: 100%;
-  float: left;
-}
-.main-content{
-  background-color: transparent;
-  width: 85%;
-  height: 100%;
-  float: left;
+.fridge_holder{
+  height: 850px;
+  width: 650px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 45px;
+  box-shadow: 0px 4px 18px #4d4d4d;
+  padding: 25px;
+  background: rgba(77, 77, 77, 0.85);
 }
 
 //navbar styles
@@ -454,8 +459,10 @@ footer {
   .nav_results{
     width: 100%;
     min-height: 60vh;
+    max-height: 67vh;
     background-color: transparent;
     position: relative;
+    overflow: auto;
     .nav_recipe_helper{
       background-image: url('/static/img/icons8-puzzled-30.png');
       background-repeat: no-repeat;
@@ -632,6 +639,22 @@ footer {
       }
     }
   }
+  .nav_results::-webkit-scrollbar-track {
+    border: 1px solid #000;
+    padding: 2px 0;
+    background-color: $idea-color6;
+  }
+  
+  .nav_results::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .nav_results::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: $idea-color5;
+    border: 1px solid #000;
+  }
 }
 #nav_reciper_show {
   // display: none;
@@ -759,7 +782,6 @@ footer {
   display: none;
 }
 
-
 //result_helper
 .spicy_helper_img{
   background-image: url('/static/img/icons8-chili-pepper-30.png');
@@ -805,4 +827,84 @@ footer {
   min-height: 4vh;
   list-style-type: none;
   text-align: left;
+}
+.text_visibility span{
+  text-shadow: 0 0 1px black, 0 0 1px black;
+}
+
+//recipe_page
+.add_recipe_holder{
+  height: 750px;
+  width: 1100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 45px;
+  box-shadow: 0px 4px 18px #4d4d4d;
+  .back_button_img{
+    background-image: url(/static/img/back-button.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 50px !important;
+    width: 50px !important;
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    cursor: pointer;
+    z-index: 5;
+    filter: drop-shadow(0 0 0.75rem $idea-color7);
+  }
+  .add_recipe_left, .add_recipe_right{
+    width: 550px;
+    position: relative;
+    float: left;
+    height: 750px;
+    padding: 15px;
+    background: rgba(77, 77, 77, .85);
+  }
+  .add_recipe_left{
+    border-top-left-radius: 45px;
+    border-bottom-left-radius: 45px;
+  }
+  .add_recipe_right{
+    border-left: 1px solid black ;
+    border-top-right-radius: 45px;
+    border-bottom-right-radius: 45px;
+    h1{
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    #add_recipe_form{
+      width: 75%;
+      margin: auto;
+      input, select{
+        float: right;
+        height: 30px;
+        width: 225px;
+        border: 2px solid $idea-color3;
+      }
+      label{
+        margin-bottom: 1rem;
+        font-weight: bold;
+      }
+      .submit_center{
+        text-align: center;
+        #submit_recipe{
+          width: 125px;
+          border: none;
+          background: $idea-color2;
+          color: $idea-color6;
+          margin-top: 10px;
+          padding: 5px;
+          &:hover{
+            background-color: $idea-color6;
+            color: $idea-color2;
+            cursor: pointer;
+          }
+        }
+      }    
+    }
+  }
 }

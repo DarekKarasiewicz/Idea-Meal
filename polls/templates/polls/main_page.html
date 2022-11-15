@@ -49,6 +49,7 @@
     </div>
   </div>
   {%endblock%}
+  <div class="fridge_holder">
     <h1>Hello World !</h1>
     <h2>Welcome {{user.username}}, you are on Main Page</h2>
     <h3>Work in progres</h3>
@@ -56,14 +57,15 @@
     <h1><a href="{% url 'recipes_add'%}">Add Recipes</a></h1>
     <h1><a href="{% url 'product_page'%}">Add Product</a></h1>
     <h1><a href="/fridge/{{user.id}}">Fridge</a></h1>
-    <h3>Recipes:</h3>
+    <!-- <h3>Recipes:</h3>
     {%for x in recipes%}
     <a href ="/recipe/{{x.id}}"></a><br>
-    {% endfor %}
+    {% endfor %} -->
     <h3>Products:</h3>
     {%for x in products%}
     {{x}}<br>
     {% endfor %}
+  </div>
 
   <div id="nav_reciper_show"></div>
   <div id="nav_recipe_res_div" style="display: none;">

@@ -1,29 +1,91 @@
-  <div class="form_holder">
-    <h1>Add recipe</h1>
-    <form method="post">
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}
+  Idea-Meal || Adding Recipe
+{% endblock %}
+{% block body %}  
+  <div class="add_recipe_holder">
+    <a href="/main_page/{{user_id}}"><div class="back_button_img"></div></a>
+    <div class="add_recipe_left">
+      <h1 class="centered" style="margin-top: 15px;">How to create good recipe?</h1>
+      <p class="centered">
+        In this section I want to tell you more about in which way fill form on the right side to create clear and legible recipe that maybe some day will be the most popular on this site.
+      <p>
+        <ol>
+          <li>First of all, <b>Give simple as possible title</b>  of your recipe that attract people</li>
+          <li><b>Write easy to follow instructions.</b> No one wants to read block of complex text, <b>don't you?</b></li>
+          <li><b>Give your readers clear list of ingredients</b> that are needed to prepare this dish</li>
+          <li>When you will be setting a prepare time make sure that you summary <b>all activities</b> that are needed to make it from alpha to omega</li>
+          <li>If you don't know which <b>cuisine</b> is that recipe belongs to choose option <b>unknown</b>. Same thing do for <b>meal_time_category</b></li>
+          <li>When you face to set what <b>difficulty</b> and <b>spiciness</b> of this recipe is keep in mind that should be defined for average person(not experienced one)</li>
+          <li>Set <b>per serving</b> number which says: How many servings you end up with.</li>
+        </ol>
+      </p>
+      <p class="centered">
+        If you follow this quick tutorial you will end with solid recipe which one will be growing in popularity before you know it.
+      </p>
+    </div>
+    <div class="add_recipe_right">
+      <h1 style="margin-top: 15px;">Add recipe</h1>
+    <form id="add_recipe_form" method="post">
       {% csrf_token %}
-      <label for="recipe_name">recipe_name: </label>
+      <label for="img">Upload image:</label>
+      <input type="file" id="img" name="img" accept="image/*" disabled>
+      <label for="recipe_name">Recipe_name: </label>
       <input type="text" name="recipe_name" id="recipe_name" required/><br>
-      <label for="description">description: </label>
+      <label for="description">Description: </label>
       <input type="text" name="description" id="description" required/><br>
-      <label for="difficulty">difficulty: </label>
-      <select name="difficulty" id=difficulty>
+      <label for="difficulty">Difficulty: </label>
+      <select name="difficulty" id="difficulty">
           <option value="easy">Easy</option>
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>
       </select><br>
       <!-- <input type="number" name="difficulty" id="difficulty" min="1" max="3" required/><br> -->
-      <label for="cuisine_category">cuisine_category: </label>
+      <label for="cuisine_category">Cuisine_category: </label>
       <input type="text" name="cuisine_category" id="cuisine_category" required/><br>
-      <label for="meal_time_category">meal_time_category: </label>
+      <label for="meal_time_category">Meal_time_category: </label>
       <input type="text" name="meal_time_category" id="meal_time_category" required/><br>
-      <label for="prepare_time">prepare_time: </label>
+      <label for="prepare_time">Prepare_time: </label>
       <input type="time" name="prepare_time" id="prepare_time" min="00:00" max="24:00" required/><br>
-      <label for="spiciness">spiciness: </label>
-      <input type="number" name="spiciness" id="spiciness" min="1" max="3" required/><br>
-      <label for="per_serving">per_serving: </label>
+      <label for="spiciness">Spiciness: </label>
+      <input type="number" name="spiciness" id="spiciness" min="1" max="4" required/><br>
+      <label for="per_serving">Per_serving: </label>
       <input type="number" name="per_serving" id="per_serving" min="1" max="20" required/><br>
-      <button type="submit">ADD</button>
+      <div class="submit_center">
+        <button id="submit_recipe">ADD</button>
+      </div>
     </form>
-    <a href="/main_page/{{user_id}}">Back</a>
+    </div>
   </div> 
+{% endblock %} 
+{% block page_js%} 
+<script>  
+  $('#submit_recipe').on('click',function(){
+    if(!$('.recipe_name').val() || 
+        !$('.description').val() ||
+        !$('.difficulty').val() ||
+        !$('.cuisine_category').val() ||
+        !$('.meal_time_category').val() ||
+        !$('.prepare_time').val() ||
+        !$('.spiciness').val() ||
+        !$('.per_serving').val()){
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Something went wrong. Try again!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }else{
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }  
+  })
+</script>
+{% endblock %} 
