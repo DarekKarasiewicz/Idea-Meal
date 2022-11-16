@@ -30,6 +30,14 @@ def register_page(request):
 
     return render(request, "polls/register_page.html")
 
+def find_recipe_base_on_products():
+    #Here alghoritm to
+    return
+
+def create_shopping_list():
+    #Here alghoritm to
+    return
+
 @csrf_exempt
 def login_page(request):
     if request.method == "POST":
@@ -136,7 +144,6 @@ def user_fridge(request,user_id):
     fridge = get_object_or_404(Fridge, user=session_user)
     all_products = Product.objects.all()
     product_in_fridge = Fridge_products_counts.objects.all()
-    # product_in_fridge = ["DUPa"]
     if request.method == "POST":
         product_name = request.POST["product_name"]
         product = get_object_or_404(Product, name=product_name)
@@ -150,3 +157,4 @@ def user_fridge(request,user_id):
                                                  'products': all_products,
                                                  'product_in_fridge':product_in_fridge,
                                                  })
+
