@@ -1,3 +1,6 @@
+from strenum import StrEnum #Python 3.11 = from enum
+
+#DJANGO IMPORTS
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.views.decorators.csrf import csrf_exempt
@@ -6,7 +9,28 @@ from django.contrib.auth import authenticate, login,logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .models import Cuisine_category,Meal_time_category,Products_category,Product,Comment,Recipes,Fridge,Fridge_products_counts,Comments_to_Recipes
+#MODELS IMPORTS
+from .models import Product,Comment,Recipes,Fridge,Fridge_products_counts,Comments_to_Recipes
+
+#Here puts all cuisine category
+class Cuisine_category(StrEnum):
+    POLAND = 'Poland'
+    AMERICAN = 'American'
+    ASIAN = 'Asin'
+
+#Here puts all Meal_time_category
+class Meal_time_category(StrEnum):
+    BREAKFAST = 'Breakfast'
+    DINER = 'Diner'
+    SUPPER = 'Supper'
+
+#Here puts all Products_category
+class Product_category(StrEnum):
+    MEAT = 'Meat'
+    FISH = 'Fish'
+    DAIRY = 'Dairy'
+    FRUIT = 'Fruit'
+    VEGETABLES = 'Vegetables'
 
 
 def welcome_page(request):
@@ -40,6 +64,7 @@ def create_shopping_list():
 
 @csrf_exempt
 def login_page(request):
+    print(Product_category.MEAT)
     if request.method == "POST":
         auth_login = request.POST["auth_login"]
         auth_password = request.POST["auth_password"]
