@@ -908,3 +908,65 @@ footer {
     }
   }
 }
+
+
+// Product Page
+.add_product_holder{
+  height: 850px;
+  width: 650px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 45px;
+  box-shadow: 0px 4px 18px #4d4d4d;
+  background: rgba(77, 77, 77, .85);
+  padding: 15px;
+  .input_form{
+    width: 75%;
+    margin: auto;
+  }
+  input, select{
+    float: right;
+    height: 30px;
+    width: 225px;
+    border: 2px solid $idea-color3;
+  }
+  label{
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+  h1{
+    text-align: center;
+  }
+  .submit_center{
+    text-align: center;
+    #submit_product{
+      width: 125px;
+      border: none;
+      background: $idea-color2;
+      color: $idea-color6;
+      margin-top: 20px;
+      padding: 5px;
+      &:hover{
+        background-color: $idea-color6;
+        color: $idea-color2;
+        cursor: pointer;
+      }
+    }
+  }
+  .back_button_img{
+    background-image: url(/static/img/back-button.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 50px !important;
+    width: 50px !important;
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    cursor: pointer;
+    z-index: 5;
+    filter: drop-shadow(0 0 0.75rem $idea-color7);
+  }
+}

@@ -36,27 +36,27 @@ $("#navBtn").on("click",() => {
 })
 
 //function for buttons
-let btnContainer = document.getElementById("links");
-let btns = btnContainer.getElementsByClassName("link");
+// let btnContainer = document.getElementById("links");
+// let btns = btnContainer.getElementsByClassName("link");
 
-for (let i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function() {
-    let current = document.getElementsByClassName("active");
+// for (let i = 0; i < btns.length; i++) {
+//   btns[i].addEventListener("click", function() {
+//     let current = document.getElementsByClassName("active");
 
-    if (current.length > 0) {
-      current[0].className = current[0].className.replace(" active", "");
-    }
+//     if (current.length > 0) {
+//       current[0].className = current[0].className.replace(" active", "");
+//     }
 
-    this.className += " active";
-  });
-}
-$('.navbar__toggle_btn').on('click',function(){
-  if($('#nav').hasClass('short')){
-    $('.switch-box_wrapper').hide();
-  }else{
-    $('.switch-box_wrapper').show();
-  }
-})
+//     this.className += " active";
+//   });
+// }
+// $('.navbar__toggle_btn').on('click',function(){
+//   if($('#nav').hasClass('short')){
+//     $('.switch-box_wrapper').hide();
+//   }else{
+//     $('.switch-box_wrapper').show();
+//   }
+// })
 
 //theme switcher controller
 $('#theme_switcher').on('change',function(){
