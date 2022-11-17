@@ -33,8 +33,14 @@ class Product_category(StrEnum):
     FRUIT = auto()
     VEGETABLES = auto()
 
+class Product_category(StrEnum):
+    ML = auto()
+    GRAMS = auto()
+    UNIT = auto()
+
 def welcome_page(request):
-    return HttpResponseRedirect('login')
+    pass
+    # return HttpResponseRedirect('login')
 
 def logout_view(request):
     logout(request)
@@ -54,17 +60,15 @@ def register_page(request):
 
     return render(request, "polls/register_page.html")
 
-def find_recipe_base_on_products():
-    #Here alghoritm to
-    return
+def find_recipe_base_on_products(product: dict) -> Recipes:
+    pass
 
-def create_shopping_list():
-    #Here alghoritm to
-    return
+def create_shopping_list(list_of_recipes: list) -> list:
+    dict_of_products = {}
+    return list_of_products
 
 @csrf_exempt
 def login_page(request):
-    print(Product_category.MEAT)
     if request.method == "POST":
         auth_login = request.POST["auth_login"]
         auth_password = request.POST["auth_password"]

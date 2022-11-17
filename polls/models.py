@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Product(models.Model):
     name = models.CharField(max_length = 32)
     product_category = models.CharField(max_length = 32)
+    unit = models.IntegerField()
 
     def __str__(self):
         return self.name
@@ -23,7 +24,7 @@ class Recipes(models.Model):
     difficulty = models.IntegerField()
     cuisine_category = models.CharField(max_length = 32)
     meal_time_category = models.CharField(max_length = 32)
-    prepare_time = models.IntegerField(null=True)
+    prepare_time = models.DateTimeField(default=None, null=True)
     spiciness = models.IntegerField(null=True)
     per_serving = models.IntegerField(null=True)
     is_verificated = models.BooleanField()
@@ -47,7 +48,6 @@ class Fridge(models.Model):
 class Fridge_products_counts(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE,
                                 null=False,default=None)
-    item_count = models.IntegerField(null=False ,default=None)
     fridge = models.ForeignKey(Fridge, on_delete=models.CASCADE,
                                null=False,default=None)
 
