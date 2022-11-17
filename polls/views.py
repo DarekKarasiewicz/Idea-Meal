@@ -11,7 +11,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 #MODELS IMPORTS
-from .models import Product,Comment,Recipes,Fridge,Fridge_products_counts,Comments_to_Recipes
+from .models import Product,Comment,Recipe,Fridge,Fridge_products_counts,Comments_to_Recipe
 
 #Here puts all cuisine category
 class Cuisine_category(StrEnum):
@@ -32,6 +32,11 @@ class Product_category(StrEnum):
     DAIRY = auto()
     FRUIT = auto()
     VEGETABLES = auto()
+
+class Product_unit(StrEnum):
+    ML = auto()
+    GRAMS = auto()
+    UNIT = auto()
 
 def welcome_page(request):
     return HttpResponseRedirect('login')
@@ -54,17 +59,15 @@ def register_page(request):
 
     return render(request, "polls/register_page.html")
 
-def find_recipe_base_on_products():
-    #Here alghoritm to
-    return
+def find_recipe_base_on_products(product: dict) -> Recipe:
+    pass
 
-def create_shopping_list():
-    #Here alghoritm to
-    return
+def create_shopping_list(list_of_recipes: list) -> list:
+    dict_of_products = {}
+    return list_of_products
 
 @csrf_exempt
 def login_page(request):
-    print(Product_category.MEAT)
     if request.method == "POST":
         auth_login = request.POST["auth_login"]
         auth_password = request.POST["auth_password"]
@@ -81,7 +84,7 @@ def main_page(request,user_id):
         raise Http404
     session_user = get_object_or_404(User,
                                      pk=int(request.session['_auth_user_id']))
-    all_recipes = Recipes.objects.all()
+    all_recipes = Recipe.objects.all()
     all_products = Product.objects.all()
     return render(request,"polls/main_page.html",{'user':session_user
                                                  ,'recipes': all_recipes
@@ -123,7 +126,7 @@ def add_recipes(request):
             case _:
                 raise Http404
 
-        recipes = Recipes(name = name
+        recipes = Recipe(name = name
                           , description = description
                           , difficulty = difficulty
                           , prepare_time = prepare_time
@@ -141,7 +144,7 @@ def add_recipes(request):
 @login_required
 def recipes_page(request,recipe_id):
     session_user = get_object_or_404(User, pk=int(request.session['_auth_user_id']))
-    recipe = get_object_or_404(Recipes, pk=recipe_id)
+    recipe = get_object_or_404(Recipe, pk=recipe_id)
 
     if request.method == "POST":
         raiting = request.POST["raiting"]
@@ -149,12 +152,12 @@ def recipes_page(request,recipe_id):
         comment = Comment(raiting=raiting, description=comment_text,
                           user=session_user )
         comment.save()
-        tmf=Comments_to_Recipes(recipe=recipe,comment=comment)
+        tmf=Comments_to_Recipe(recipe=recipe,comment=comment)
         tmf.save()
 
 
     test_show = recipe.__dict__
-    test_show1 = Comments_to_Recipes.objects.all()
+    test_show1 = Comments_to_Recipe.objects.all()
     all_comments = []
     for x in test_show1:
         if x.recipe.id == recipe.id:
