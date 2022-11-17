@@ -1,4 +1,5 @@
 from strenum import StrEnum #Python 3.11 = from enum
+from enum import auto
 
 #DJANGO IMPORTS
 from django.shortcuts import render, get_object_or_404
@@ -14,24 +15,23 @@ from .models import Product,Comment,Recipes,Fridge,Fridge_products_counts,Commen
 
 #Here puts all cuisine category
 class Cuisine_category(StrEnum):
-    POLAND = 'Poland'
-    AMERICAN = 'American'
-    ASIAN = 'Asin'
+    POLAND = auto()
+    AMERICAN = auto()
+    ASIAN = auto()
 
 #Here puts all Meal_time_category
 class Meal_time_category(StrEnum):
-    BREAKFAST = 'Breakfast'
-    DINER = 'Diner'
-    SUPPER = 'Supper'
+    BREAKFAST = auto()
+    DINER = auto()
+    SUPPER = auto()
 
 #Here puts all Products_category
 class Product_category(StrEnum):
-    MEAT = 'Meat'
-    FISH = 'Fish'
-    DAIRY = 'Dairy'
-    FRUIT = 'Fruit'
-    VEGETABLES = 'Vegetables'
-
+    MEAT = auto()
+    FISH = auto()
+    DAIRY = auto()
+    FRUIT = auto()
+    VEGETABLES = auto()
 
 def welcome_page(request):
     return HttpResponseRedirect('login')
@@ -95,13 +95,23 @@ def add_recipes(request):
         name = request.POST["recipe_name"]
         description = request.POST["description"]
         difficulty = request.POST["difficulty"]
-        # cuisine_category = request.POST["cuisine_category"]
-        # meal_time_category = request.POST["meal_time_category"]
+        cuisine_category = request.POST["cuisine_category"]
+        meal_time_category = request.POST["meal_time_category"]
         prepare_time_post = request.POST["prepare_time"].split(":")
         prepare_time = int(prepare_time_post[0])*60 + int(prepare_time_post[1])
         spiciness = request.POST["spiciness"]
         per_serving = request.POST["per_serving"]
         is_verificated = False
+
+        #YES I KNOW IT WILL WORK DIFRENTLY
+        enum_cuisine_category= [e.value for e in Cuisine_category if
+                                str(e.value).lower()
+                                ==cuisine_category.lower()]
+        enum_meal_time_category= [e.value for e in Meal_time_category if
+                                str(e.value).lower()
+                                  ==meal_time_category.lower()]
+        if(len(enum_meal_time_category) == 0 and len(enum_cuisine_category) == 0):
+            raise Http404
 
         match difficulty:
             case "easy":
@@ -119,6 +129,8 @@ def add_recipes(request):
                           , prepare_time = prepare_time
                           , spiciness= spiciness
                           , is_verificated = is_verificated
+                          , cuisine_category = enum_cuisine_category[0]
+                          , meal_time_category = enum_meal_time_category[0]
                           , per_serving = per_serving
                           )
         recipes.save()
@@ -154,14 +166,19 @@ def recipes_page(request,recipe_id):
 @login_required
 def product_page(request):
     session_user = get_object_or_404(User, pk=int(request.session['_auth_user_id']))
+    product_category = [e.value for e in Product_category]
+    print(product_category)
     if request.method == "POST":
         name = request.POST["product_name"]
-        product = Product(name = name)
+        product_category_post = request.POST["product_name"]
+
+        product = Product(name = name, product_category = product_category_post)
         product.save()
         return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
 
     return render(request, "polls/product_page.html", {'user_id':
-                                                       session_user.id})
+                                                       session_user.id,
+                                                       'product_categories':product_category})
 
 @login_required
 def user_fridge(request,user_id):

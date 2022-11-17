@@ -4,6 +4,12 @@
   {% csrf_token %}
   <label for="product_name">product_name: </label>
   <input type="text" name="product_name" id="product_name" required/><br>
+  <select name="product_category" id="product_category">
+     {% for product_category in product_categories %}
+         <option value="{{product_category}}">{{product_category}}</option>
+     {% endfor %}
+  </select>
+
   <button type="submit">ADD</button>
 </form>
 <a href="/main_page/{{user_id}}">Back</a>
