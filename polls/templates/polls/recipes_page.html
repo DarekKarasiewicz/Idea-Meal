@@ -3,89 +3,119 @@
 {% block page_title %}
   Idea-Meal || Adding Recipe
 {% endblock %}
-{% block body %}  
+{% block body %}
+  <div id="recipe_helper" title="How to fill Add recipe form?"></div>  
   <div class="add_recipe_holder">
-    <a href="/main_page/{{user_id}}"><div class="back_button_img"></div></a>
-    <div class="add_recipe_left">
-      <h1 class="centered" style="margin-top: 15px;">How to create good recipe?</h1>
-      <p class="centered">
-        In this section I want to tell you more about in which way fill form on the right side to create clear and legible recipe that maybe some day will be the most popular on this site.
-      <p>
-        <ol>
-          <li>First of all, <b>Give simple as possible title</b>  of your recipe that attract people</li>
-          <li><b>Write easy to follow instructions.</b> No one wants to read block of complex text, <b>don't you?</b></li>
-          <li><b>Give your readers clear list of ingredients</b> that are needed to prepare this dish</li>
-          <li>When you will be setting a prepare time make sure that you summary <b>all activities</b> that are needed to make it from alpha to omega</li>
-          <li>If you don't know which <b>cuisine</b> is that recipe belongs to choose option <b>unknown</b>. Same thing do for <b>meal_time_category</b></li>
-          <li>When you face to set what <b>difficulty</b> and <b>spiciness</b> of this recipe is keep in mind that should be defined for average person(not experienced one)</li>
-          <li>Set <b>per serving</b> number which says: How many servings you end up with.</li>
-        </ol>
-      </p>
-      <p class="centered">
-        If you follow this quick tutorial you will end with solid recipe which one will be growing in popularity before you know it.
-      </p>
+    <div id="page_title">
+      <h1>Add recipe</h1>
     </div>
-    <div class="add_recipe_right">
-      <h1 style="margin-top: 15px;">Add recipe</h1>
+    <a href="/main_page/{{user_id}}"><div class="back_button_img"></div></a>
     <form id="add_recipe_form" method="post">
-      {% csrf_token %}
-      <label for="img">Upload image:</label>
-      <input type="file" id="img" name="img" accept="image/*" disabled>
-      <label for="recipe_name">Recipe_name: </label>
-      <input type="text" name="recipe_name" id="recipe_name" required/><br>
-      <label for="description">Description: </label>
-      <input type="text" name="description" id="description" required/><br>
-      <label for="difficulty">Difficulty: </label>
-      <select name="difficulty" id="difficulty">
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-      </select><br>
-      <!-- <input type="number" name="difficulty" id="difficulty" min="1" max="3" required/><br> -->
-      <label for="cuisine_category">Cuisine_category: </label>
-      <input type="text" name="cuisine_category" id="cuisine_category" required/><br>
-      <label for="meal_time_category">Meal_time_category: </label>
-      <input type="text" name="meal_time_category" id="meal_time_category" required/><br>
-      <label for="prepare_time">Prepare_time: </label>
-      <input type="time" name="prepare_time" id="prepare_time" min="00:00" max="24:00" required/><br>
-      <label for="spiciness">Spiciness: </label>
-      <input type="number" name="spiciness" id="spiciness" min="1" max="4" required/><br>
-      <label for="per_serving">Per_serving: </label>
-      <input type="number" name="per_serving" id="per_serving" min="1" max="20" required/><br>
+      <div class="add_recipe_left">
+        {% csrf_token %}
+        <div class="old-form">
+          <div id="img-preview">
+            <img id="img_preview__img" src="https://img.icons8.com/ios/100/null/upload-document.png" alt="your image" />
+          </div>
+          <label for="img">Upload image:</label>
+          <input type="file" id="imgInp" name="img" accept="image/*">
+          <label for="recipe_name">Recipe_name: </label>
+          <input type="text" name="recipe_name" id="recipe_name" required/><br>
+          <label for="short_description" style="height: 100px;">Short description: </label>
+          <textarea type="text" name="short_description" id="short_description" rows="4" required disabled></textarea><br>
+          <label for="difficulty">Difficulty: </label>
+          <select name="difficulty" id="difficulty">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+          </select><br>
+          <label for="cuisine_category">Cuisine_category: </label>
+          <input type="text" name="cuisine_category" id="cuisine_category" required/><br>
+          <label for="meal_time_category">Meal_time_category: </label>
+          <input type="text" name="meal_time_category" id="meal_time_category" required/><br>
+          <label for="prepare_time">Prepare_time: </label>
+          <input type="time" name="prepare_time" id="prepare_time" min="00:00" max="24:00" required/><br>
+          <label for="spiciness">Spiciness: </label>
+          <input type="number" name="spiciness" id="spiciness" min="1" max="4" required/><br>
+          <label for="per_serving">Per_serving: </label>
+          <input type="number" name="per_serving" id="per_serving" min="1" max="20" required/><br>
+        </div>
+      </div>
+      <div class="add_recipe_right">
+        <div class="old-form form-i_block">
+          <label for="description">Description: </label>
+          <textarea type="text" name="description" id="description" rows="25" placeholder="Enter a description..." required></textarea><br>
+        </div>
+      </div>
       <div class="submit_center">
         <button id="submit_recipe">ADD</button>
       </div>
     </form>
-    </div>
   </div> 
 {% endblock %} 
 {% block page_js%} 
 <script>  
-  $('#submit_recipe').on('click',function(){
-    if(!$('.recipe_name').val() || 
-        !$('.description').val() ||
-        !$('.difficulty').val() ||
-        !$('.cuisine_category').val() ||
-        !$('.meal_time_category').val() ||
-        !$('.prepare_time').val() ||
-        !$('.spiciness').val() ||
-        !$('.per_serving').val()){
-          Swal.fire({
-            position: 'top-end',
-            icon: 'error',
-            title: 'Something went wrong. Try again!',
-            showConfirmButton: false,
-            timer: 1500
-          })
-        }else{
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Your work has been saved',
-            showConfirmButton: false,
-            timer: 1500
-          })
-        }  
+imgInp.onchange = evt => {
+  const [file] = imgInp.files
+  if (file) {
+    img_preview__img.src = URL.createObjectURL(file)
+  }
+}
+
+$('#submit_recipe').on('click',function(){
+  if(!$('.recipe_name').val() || 
+      !$('.description').val() ||
+      !$('.difficulty').val() ||
+      !$('.cuisine_category').val() ||
+      !$('.meal_time_category').val() ||
+      !$('.prepare_time').val() ||
+      !$('.spiciness').val() ||
+      !$('.per_serving').val()){
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Something went wrong. Try again!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }else{
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your work has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }  
+})
+//main page helper
+$('#recipe_helper').on('click',function(){
+  Swal.fire({
+    title: '<strong>How to create good recipe?</strong>',
+    icon: 'info',
+    html:
+      '<p class="centered">'+
+      '  In this section I want to tell you more about in which way fill form on the right side to create clear and legible recipe that maybe some day will be the most popular on this site.'+
+      '<p>'+
+      '  <ol>'+
+      '    <li>First of all, <b>Give simple as possible title</b>  of your recipe that attract people</li>'+
+      "    <li><b>Write easy to follow instructions.</b> No one wants to read block of complex text, <b>don't you?</b></li>"+
+      '    <li><b>Give your readers clear list of ingredients</b> that are needed to prepare this dish</li>'+
+      '    <li>When you will be setting a prepare time make sure that you summary <b>all activities</b> that are needed to make it from alpha to omega</li>'+
+      "    <li>If you don't know which <b>cuisine</b> is that recipe belongs to choose option <b>unknown</b>. Same thing do for <b>meal_time_category</b></li>"+
+      '    <li>When you face to set what <b>difficulty</b> and <b>spiciness</b> of this recipe is keep in mind that should be defined for average person(not experienced one)</li>'+
+      '    <li>Set <b>per serving</b> number which says: How many servings you end up with.</li>'+
+      '  </ol>'+
+      '</p>'+
+      '<p class="centered">'+
+      '  If you follow this quick tutorial you will end with solid recipe which one will be growing in popularity before you know it.'+
+      '</p>',
+    width: '45em',
+    showCloseButton: true,
+    showCancelButton: false,
+    showConfirmButton: false,
+    focusConfirm: false,
   })
+})
 </script>
 {% endblock %} 

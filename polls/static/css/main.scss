@@ -69,10 +69,11 @@ footer {
     width: 100%;
     background-color: $idea-color3;
     border-radius: 25px 25px 0px 0px;
+    padding-top: 15px;
     img{
       margin-left: auto;
       margin-right: auto;
-      padding-top: 12px;
+      // padding-top: 12px;
       display: block;
     }
   }
@@ -109,7 +110,7 @@ footer {
         display: block;
         text-align: center;
         gap: 10px;
-        height: 30px;
+        height: 40px;
         width: 100%;
         border: none;
         border-radius: 5px;
@@ -843,7 +844,7 @@ footer {
   border-radius: 45px;
   box-shadow: 0px 4px 18px #4d4d4d;
   .back_button_img{
-    background-image: url(/static/img/back-button.png);
+    background-image: url('/static/img/back-button.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -856,6 +857,19 @@ footer {
     z-index: 5;
     filter: drop-shadow(0 0 0.75rem $idea-color7);
   }
+  #page_title{
+    height: 55px;
+    width: 500px;
+    position: absolute;
+    top: -55px;
+    left: 50%;
+    transform: translate(-50%);
+    border-top-right-radius: 45px;
+    border-top-left-radius: 45px;
+    box-shadow: 0px 4px 18px #4d4d4d;
+    background: rgba(77, 77, 77, 0.85);
+    text-align: center;
+  }
   .add_recipe_left, .add_recipe_right{
     width: 550px;
     position: relative;
@@ -863,48 +877,139 @@ footer {
     height: 750px;
     padding: 15px;
     background: rgba(77, 77, 77, .85);
+    .old-form{
+      width: 80%;
+      margin: auto;
+      #img-preview{
+        height: 150px;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        padding: 5px;
+        width: 150px;
+        border: 2px dashed black;
+        #img_preview__img{
+          max-height: 135px;
+          min-height: 130px;
+        }
+      }
+      input, select,textarea{
+        float: right;
+        height: 35px;
+        line-height: 25px;
+        width: 250px;
+        border: 2px solid $idea-color3;
+      }
+      textarea{
+        height: auto !important;
+      }
+      label{
+        margin-bottom: 20px;
+        font-weight: bold;
+        vertical-align: sub;
+      }
+      // .submit_center{
+      //   position: absolute;
+      //   left: 50%;
+      //   transform: translate(-50%);
+      //   text-align: center;
+      //   margin-top: -7px;
+      //   #submit_recipe{
+      //     width: 125px;
+      //     border: none;
+      //     background: $idea-color2;
+      //     color: $idea-color6;
+      //     // margin-top: 10px;
+      //     padding: 5px;
+      //     &:hover{
+      //       background-color: $idea-color6;
+      //       color: $idea-color2;
+      //       cursor: pointer;
+      //     }
+      //   }
+      // }    
+    }
+    .form-i_block{
+      label{
+        margin-bottom: 0.5rem;
+      }
+      input, select,textarea{
+        float: none;
+        display: block;
+        height: auto;
+        width: 415px;
+        margin-top: 2px;
+        border: 2px solid $idea-color3;
+      }
+    }
   }
   .add_recipe_left{
     border-top-left-radius: 45px;
     border-bottom-left-radius: 45px;
+    & #short_description{
+      height: 30px;
+    }
   }
   .add_recipe_right{
     border-left: 1px solid black ;
     border-top-right-radius: 45px;
     border-bottom-right-radius: 45px;
-    h1{
-      text-align: center;
-      margin-bottom: 15px;
-    }
-    #add_recipe_form{
-      width: 75%;
-      margin: auto;
-      input, select{
-        float: right;
-        height: 30px;
-        width: 225px;
-        border: 2px solid $idea-color3;
-      }
-      label{
-        margin-bottom: 1rem;
-        font-weight: bold;
-      }
-      .submit_center{
-        text-align: center;
-        #submit_recipe{
-          width: 125px;
-          border: none;
-          background: $idea-color2;
-          color: $idea-color6;
-          margin-top: 10px;
-          padding: 5px;
-          &:hover{
-            background-color: $idea-color6;
-            color: $idea-color2;
-            cursor: pointer;
-          }
-        }
-      }    
-    }
   }
 }
+
+#recipe_helper{
+  background-image: url('/static/img/icons8-puzzled-30.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  filter: drop-shadow(0 0 0.25rem #89abc6);
+  height: 30px !important;
+  width: 30px !important;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.input-holder i {
+  position: absolute;
+}
+
+.input_icon {
+  padding: 11px;
+  color: black;
+  min-width: 40px;
+  text-align: center;
+}
+.submit_center{
+  height: 55px;
+  width: 250px;
+  position: absolute;
+  bottom: -55px;
+  left: 50%;
+  transform: translate(-50%);
+  border-bottom-right-radius: 45px;
+  border-bottom-left-radius: 45px;
+  box-shadow: 0px 4px 18px #4d4d4d;
+  background: rgba(77, 77, 77, 0.85);
+  padding: 11px;
+  text-align: center;
+  #submit_recipe{
+    width: 125px;
+    font-weight: bold;
+    border: none;
+    background: $idea-color2;
+    color: $idea-color6;
+    // margin-top: 10px;
+    padding: 5px;
+    &:hover{
+      background-color: $idea-color6;
+      color: $idea-color2;
+      cursor: pointer;
+    }
+  }
+}   
+
+
+

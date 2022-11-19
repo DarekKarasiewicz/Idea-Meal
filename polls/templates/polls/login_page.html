@@ -12,9 +12,15 @@
       <p>Login Page</p>
       <form method="post">
         <label for="auth_login">Login: </label>
-        <input type="text" name="auth_login" id="auth_login" required/><br>
+        <div class="input-holder">
+          <i class="fa fa-user input_icon"></i>
+          <input type="text" name="auth_login" id="auth_login" class="input-field" required/><br>
+        </div>
         <label for="auth_password">Password: </label>
-        <input type="password" name="auth_password" id="auth_password" required/><br>
+        <div class="input-holder">
+          <i class="fa fa-lock input_icon"></i>
+          <input type="password" name="auth_password" id="auth_password" class="input-field" required/><br>
+        </div>
         {% for message in messages %}
           <button id="error_trigger" onclick="errorMessage()">Wrong password!</button>
         {% endfor %}
@@ -25,5 +31,5 @@
     <div class="form_holder__footer">
       <a href="{% url 'register'%}">Don't have an account yet? Sign Up!</a>
     </div>
-  </div> 
+  </div>
 {% endblock %} 
