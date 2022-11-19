@@ -71,7 +71,7 @@ $('#theme_switcher').on('change',function(){
   }
 })
 
-//helper
+//main page helper
 $('.nav_recipe_helper').on('click',function(){
   Swal.fire({
     title: '<strong>Results explanation</strong>',
