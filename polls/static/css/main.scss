@@ -970,3 +970,99 @@ footer {
     filter: drop-shadow(0 0 0.75rem $idea-color7);
   }
 }
+
+//product box styles
+.products{
+  width: 600px;
+  height: 350px;
+}
+
+.product_box{
+  width: 190px;
+  height: 75px;
+  background-color: $idea-color3;
+  border-radius: 15px;
+  float: left;
+  margin: 5px;
+  &__name{
+    float: left;
+    width: 140px;
+    height: 75px;
+    padding: 5px 2px 5px 5px;
+    display: flex;
+        &__img{
+      width: 40px;
+      height: 65px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img{
+        width: 40px;
+        height: 40px;
+      }
+    }
+    
+    &__text{
+      width: 90px;
+      height: 65px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-left: 3px;
+      p{
+        width: 90px;
+        height: 40px;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+    }
+
+  }
+  &__quantity{
+    float: left;
+    width: 50px;
+    height: 75px;
+
+    p{
+      width: 50px;
+      height: 25px;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .plus_btn{
+      width: 50px;
+      height: 25px;
+      border: none;
+      border-radius: 0px 15px 0px 0px;
+      background-color: $idea-color1;
+    }
+    .plus_btn:active{
+      background-color: $idea-color2;
+    }
+
+    .minus_btn{
+      width: 50px;
+      height: 25px;
+      border: none;
+      border-radius: 0px 0px 15px 0px;
+      background-color: $idea-color1;
+    }
+    .minus_btn:active{
+      background-color: $idea-color2;
+    }
+  }
+  
+  .submit_changes{
+    display: flex;
+    float: left;
+  }
+}

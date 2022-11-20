@@ -10,13 +10,13 @@
   {% csrf_token %}
   <label for="product_name">product_name: </label>
   <input type="text" name="product_name" id="product_name" required/><br>
-  <label for="product_name">product_category: </label>
-  <select name="product_category" id="product_category" required>
-    <option value="opt1">option1</option>
-    <option value="opt2">option2</option>
-    <option value="opt3">option3</option>
-  </select><br>
-  <label for="product_name">product_quantity: </label>
+  <label for="product_category">product_category: </label>
+  <select name="product_category" id="product_category">
+     {% for product_category in product_categories %}
+         <option value="{{product_category}}">{{product_category}}</option>
+     {% endfor %}
+  </select><br/>
+  <label for="product_quantity">product_quantity: </label>
   <input type="number" name="product_quantity" id="product_quantity" placeholder="pcs" min=0 required/><br>
   <div class="submit_center">
     <button id="submit_product">ADD</button>

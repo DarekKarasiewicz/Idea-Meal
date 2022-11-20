@@ -62,9 +62,47 @@
     <a href ="/recipe/{{x.id}}"></a><br>
     {% endfor %} -->
     <h3>Products:</h3>
+    <form>
+    <div class="products">
     {%for x in products%}
-    {{x}}<br>
+    <div class="product_box">
+      <div class="product_box__name">
+        <div class="product_box__name__img">
+        <img src="{% static 'img/icon_meat_beef.png' %}" alt="beef icon"/>
+        </div>
+        <div class="product_box__name__text">
+        <p>{{x.name}}</p>
+        </div>
+      </div>
+      <div class="product_box__quantity">
+        <button class="plus_btn" onClick="addFunction({{x.id}})">+</button>
+        <p id="{{x.id}}b">{{x.unit}}</p>
+        <button class="minus_btn" onClick="minusFunction({{x.id}})">-</button>
+      </div>
+    </div>
     {% endfor %}
+  </div>
+    <button type="submit" class="submit_changes">Submit changes</button>
+  </form>
+  <script>
+    //dummy function for adding existing products
+    function addFunction(id){
+      let unit = document.getElementById(id+"b").innerHTML
+      unit++;
+      console.log(unit);
+      document.getElementById(id+"b").innerHTML = unit;
+    }
+
+    //dummy function for removing existing products
+    function minusFunction(id){
+      let unit = document.getElementById(id+"b").innerHTML
+      if(unit > 0){
+      --unit;
+      console.log(unit);
+      document.getElementById(id+"b").innerHTML = unit;
+    }
+    }
+  </script>
   </div>
 
   <div id="nav_reciper_show"></div>

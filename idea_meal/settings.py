@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-80yy8&@bm7ysomrybw9@3zjszu7!y&m$$y)5@a--863=x^3-^b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 #Login url
 LOGIN_URL =''
@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'idea_meal.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'miki',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 

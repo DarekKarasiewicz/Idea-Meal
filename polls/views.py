@@ -1,3 +1,7 @@
+from strenum import StrEnum #Python 3.11 = from enum
+from enum import auto
+
+#DJANGO IMPORTS
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.views.decorators.csrf import csrf_exempt
@@ -8,28 +12,62 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import time
 
-from .models import Cuisine_category,Meal_time_category,Products_category,Product,Comment,Recipes,Fridge,Fridge_products_counts,Comments_to_Recipes
+#MODELS IMPORTS
+from .models import Product,Comment,Recipes,Fridge,Fridge_products_counts,Comments_to_Recipes
 
+#Here puts all cuisine category
+class Cuisine_category(StrEnum):
+    POLAND = auto()
+    AMERICAN = auto()
+    ASIAN = auto()
+
+#Here puts all Meal_time_category
+class Meal_time_category(StrEnum):
+    BREAKFAST = auto()
+    DINER = auto()
+    SUPPER = auto()
+
+#Here puts all Products_category
+class Product_category(StrEnum):
+    MEAT = auto()
+    FISH = auto()
+    DAIRY = auto()
+    FRUIT = auto()
+    VEGETABLES = auto()
+
+class Product_category(StrEnum):
+    ML = auto()
+    GRAMS = auto()
+    UNIT = auto()
 
 def welcome_page(request):
-    return HttpResponseRedirect('login')
+    pass
+    # return HttpResponseRedirect('login')
 
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('login')
 
-#we should create new fridge for user add user to someone fridge
 def register_page(request):
     if request.method == "POST":
         login = request.POST["login"]
         password = request.POST["password"]
         if User.objects.filter(username=login).exists() == False:
-            User.objects.create_user(login, None, password).save()
+            user = User.objects.create_user(login, None, password)
+            user.save()
+            Fridge(user=user).save()
             return HttpResponseRedirect(reverse("login"))
         else:
             return HttpResponse("400")
 
     return render(request, "polls/register_page.html")
+
+def find_recipe_base_on_products(product: dict) -> Recipes:
+    pass
+
+def create_shopping_list(list_of_recipes: list) -> list:
+    dict_of_products = {}
+    return list_of_products
 
 @csrf_exempt
 def login_page(request):
@@ -64,13 +102,23 @@ def add_recipes(request):
         name = request.POST["recipe_name"]
         description = request.POST["description"]
         difficulty = request.POST["difficulty"]
-        # cuisine_category = request.POST["cuisine_category"]
-        # meal_time_category = request.POST["meal_time_category"]
+        cuisine_category = request.POST["cuisine_category"]
+        meal_time_category = request.POST["meal_time_category"]
         prepare_time_post = request.POST["prepare_time"].split(":")
         prepare_time = int(prepare_time_post[0])*60 + int(prepare_time_post[1])
         spiciness = request.POST["spiciness"]
         per_serving = request.POST["per_serving"]
         is_verificated = False
+
+        #YES I KNOW IT WILL WORK DIFRENTLY
+        enum_cuisine_category= [e.value for e in Cuisine_category if
+                                str(e.value).lower()
+                                ==cuisine_category.lower()]
+        enum_meal_time_category= [e.value for e in Meal_time_category if
+                                str(e.value).lower()
+                                  ==meal_time_category.lower()]
+        if(len(enum_meal_time_category) == 0 and len(enum_cuisine_category) == 0):
+            raise Http404
 
         match difficulty:
             case "easy":
@@ -88,6 +136,8 @@ def add_recipes(request):
                           , prepare_time = prepare_time
                           , spiciness= spiciness
                           , is_verificated = is_verificated
+                          , cuisine_category = enum_cuisine_category[0]
+                          , meal_time_category = enum_meal_time_category[0]
                           , per_serving = per_serving
                           )
         recipes.save()
@@ -124,14 +174,20 @@ def recipes_page(request,recipe_id):
 @login_required
 def product_page(request):
     session_user = get_object_or_404(User, pk=int(request.session['_auth_user_id']))
+    product_category = [e.value for e in Product_category]
+    print(product_category)
     if request.method == "POST":
         name = request.POST["product_name"]
-        product = Product(name = name)
+        product_category_post = request.POST["product_category"]
+        product_quantity = request.POST["product_quantity"]
+
+        product = Product(name = name, product_category = product_category_post, unit = product_quantity)
         product.save()
         return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
 
     return render(request, "polls/product_page.html", {'user_id':
-                                                       session_user.id})
+                                                       session_user.id,
+                                                       'product_categories':product_category})
 
 @login_required
 def user_fridge(request,user_id):
@@ -139,7 +195,6 @@ def user_fridge(request,user_id):
     fridge = get_object_or_404(Fridge, user=session_user)
     all_products = Product.objects.all()
     product_in_fridge = Fridge_products_counts.objects.all()
-    # product_in_fridge = ["DUPa"]
     if request.method == "POST":
         product_name = request.POST["product_name"]
         product = get_object_or_404(Product, name=product_name)
@@ -153,3 +208,4 @@ def user_fridge(request,user_id):
                                                  'products': all_products,
                                                  'product_in_fridge':product_in_fridge,
                                                  })
+
