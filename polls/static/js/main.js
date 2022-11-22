@@ -58,18 +58,33 @@ $('.navbar__toggle_btn').on('click',function(){
   }
 })
 
+
 //theme switcher controller
-$('#theme_switcher').on('change',function(){
-  if($(this).find('input').is(':checked')){
+$(document).ready(function(){
+  if(localStorage.getItem('current_theme') == 'dark'){
+    $('html').attr('data-theme', 'dark')
+    $("#theme_switcher").find('input').prop("checked",true);
     $('#checkbox_sun').hide('fast');
     $('#checkbox_moon').show('fast');
-    console.log('checked true');
   }else{
+    $('html').attr('data-theme', 'light');
     $('#checkbox_moon').hide('fast');
     $('#checkbox_sun').show('fast');
-    console.log('checked false');
   }
 })
+  $('#theme_switcher').on('change',function(){
+    if($('html').attr('data-theme') == 'dark'){
+      localStorage.setItem('current_theme', 'light');
+      $('#checkbox_moon').hide('fast');
+      $('#checkbox_sun').show('fast');
+      $('html').attr('data-theme', 'light');
+    }else{
+      localStorage.setItem('current_theme', 'dark');
+      $('#checkbox_sun').hide('fast');
+      $('#checkbox_moon').show('fast');
+      $('html').attr('data-theme', 'dark');
+    }
+  })
 
 //main page helper
 $('.nav_recipe_helper').on('click',function(){
@@ -77,6 +92,7 @@ $('.nav_recipe_helper').on('click',function(){
     title: '<strong>Results explanation</strong>',
     icon: 'info',
     html:
+      '<div id="nav_helper_color">'+
       '<p>On the right side of the recipe name is colored block that determines difficulty level of recipe:</p>' +
       '<p class="text_visibility"><span style="color:green;">green</span> - easy , <span style="color:yellow;";>yellow</span> - medium , <span style="color:red";>red</span> - hard</p>' +
       '<ul>'+
@@ -89,7 +105,8 @@ $('.nav_recipe_helper').on('click',function(){
       '<li class="result_helper_li"><div class="time_img"></div><div class="img_info">Tells about time prepare time of recipe</div></li>'+
       '<li class="result_helper_li"><div class="people_img"></div><div class="img_info">Tells how many portion you receive</div></li>'+
       '<li class="result_helper_li"><div class="cuisine_img"></div><div class="img_info">Tells about cuisine origin of that recipe</div></li>'+
-      '</ul>',
+      '</ul>'+
+      '<div>',
     showCloseButton: true,
     showCancelButton: false,
     showConfirmButton: false,
