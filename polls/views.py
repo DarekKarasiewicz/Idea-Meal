@@ -50,32 +50,25 @@ class Product_unit(StrEnum):
     UNIT = auto()
 
 
-def welcome_page(request):
-    return HttpResponseRedirect("login")
+def find_recipe_base_on_products(products) -> list:
+    list_of_recipes = []
+    all_recipes = Recipe.objects.all()
+    fridge_products = {}
+    for product in products:
+        fridge_products[product.product.name] = product.ammount
 
+    for recipe in all_recipes:
+        products_in_recipe = Recipe_products_counts.objects.filter(recipe=recipe.id)
+        for product in products_in_recipe:
+            # print(f"Recipe {recipe.name} product:{product.product.name}")
+            if (
+                product.product.name in fridge_products
+                and recipe not in list_of_recipes
+            ):
+                list_of_recipes.append(recipe)
 
-def logout_view(request):
-    logout(request)
-    return HttpResponseRedirect("login")
-
-
-def register_page(request):
-    if request.method == "POST":
-        login = request.POST["login"]
-        password = request.POST["password"]
-        if User.objects.filter(username=login).exists() == False:
-            user = User.objects.create_user(login, None, password)
-            user.save()
-            Fridge(user=user).save()
-            return HttpResponseRedirect(reverse("login"))
-        else:
-            return HttpResponse("400")
-
-    return render(request, "polls/register_page.html")
-
-
-def find_recipe_base_on_products(product: dict) -> Recipe:
-    pass
+    # print(list_of_recipes)
+    return list_of_recipes
 
 
 def create_shopping_list(list_of_recipes: list) -> list:
@@ -103,6 +96,30 @@ def create_shopping_list(list_of_recipes: list) -> list:
     return dict_of_products
 
 
+def welcome_page(request):
+    return HttpResponseRedirect("login")
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect("login")
+
+
+def register_page(request):
+    if request.method == "POST":
+        login = request.POST["login"]
+        password = request.POST["password"]
+        if User.objects.filter(username=login).exists() == False:
+            user = User.objects.create_user(login, None, password)
+            user.save()
+            Fridge(user=user).save()
+            return HttpResponseRedirect(reverse("login"))
+        else:
+            return HttpResponse("400")
+
+    return render(request, "polls/register_page.html")
+
+
 @csrf_exempt
 def login_page(request):
     if request.method == "POST":
@@ -123,7 +140,7 @@ def main_page(request, user_id):
         get_object_or_404(Recipe, pk=2),
         get_object_or_404(Recipe, pk=3),
     ]
-    print(create_shopping_list(tmp))
+    # print(create_shopping_list(tmp))
     if int(request.session["_auth_user_id"]) != int(user_id):
         raise Http404
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
@@ -244,6 +261,8 @@ def user_fridge(request, user_id):
     fridge = get_object_or_404(Fridge, user=session_user)
     all_products = Product.objects.all()
     product_in_fridge = Fridge_products_counts.objects.all()
+    find_recipe_base_on_products(product_in_fridge)
+
     if request.method == "POST":
         product_name = request.POST["product_name"]
         product = get_object_or_404(Product, name=product_name)
