@@ -10,7 +10,18 @@ $(document).ready(()=>{
     $('#nav_recipe_res_div').show("fast");
     $('#nav_reciper_show').hide("fast");
   })
+
+  $('#comments_display_btn').on('click',()=>{
+    $("#recipe_comment_section").toggle("fast");
+    console.log($('#comments_display_btn').css('left'));
+    if($('#comments_display_btn').css('left') == '0px'){
+      $('#comments_display_btn').css('left','300px');
+    }else{
+      $('#comments_display_btn').css('left','0px');
+    }
+  })
 })
+
 
 $('.recipe_box_simple').on('click',function(){
   if($(this).siblings('.recipe_box_extended').hasClass('showclass')){
@@ -35,20 +46,23 @@ $("#navBtn").on("click",() => {
   document.getElementById("nav").classList.toggle("short");
 })
 
-//function for buttons
-let btnContainer = document.getElementById("links");
-let btns = btnContainer.getElementsByClassName("link");
+//if given element even exists
+if ($('.links').length > 0) {
+  //function for buttons
+  let btnContainer = document.getElementById("links");
+  let btns = btnContainer.getElementsByClassName("link");
 
-for (let i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function() {
-    let current = document.getElementsByClassName("active");
+  for (let i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function() {
+      let current = document.getElementsByClassName("active");
 
-    if (current.length > 0) {
-      current[0].className = current[0].className.replace(" active", "");
-    }
+      if (current.length > 0) {
+        current[0].className = current[0].className.replace(" active", "");
+      }
 
-    this.className += " active";
-  });
+      this.className += " active";
+    });
+  }
 }
 $('.navbar__toggle_btn').on('click',function(){
   if($('#nav').hasClass('short')){
