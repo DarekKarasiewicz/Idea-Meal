@@ -90,6 +90,8 @@ def main_page(request,user_id):
                                      pk=int(request.session['_auth_user_id']))
     all_recipes = Recipes.objects.all()
     all_products = Product.objects.all()
+        
+
     return render(request,"polls/main_page.html",{'user':session_user
                                                  ,'recipes': all_recipes
                                                  ,'products': all_products

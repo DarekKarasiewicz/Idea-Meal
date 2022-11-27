@@ -62,35 +62,38 @@
     <a href ="/recipe/{{x.id}}"></a><br>
     {% endfor %} -->
     <h3>Products:</h3>
-    <form>
     <div class="products">
-    {%for x in products%}
+    {%for product in products%}
     <div class="product_box">
       <div class="product_box__name">
         <div class="product_box__name__img">
         <img src="{% static 'img/icon_meat_beef.png' %}" alt="beef icon"/>
         </div>
         <div class="product_box__name__text">
-        <p>{{x.name}}</p>
+        <p>{{product.name}}</p>
         </div>
       </div>
       <div class="product_box__quantity">
-        <button class="plus_btn" onClick="addFunction({{x.id}})">+</button>
-        <p id="{{x.id}}b">{{x.unit}}</p>
-        <button class="minus_btn" onClick="minusFunction({{x.id}})">-</button>
+        <button type="button" class="plus_btn" onClick="addFunction({{product.id}})">+</button>
+        <p id="{{product.id}}b">{{product.unit}}</p>
+        <button type="button" class="minus_btn" onClick="minusFunction({{product.id}})">-</button>
       </div>
     </div>
     {% endfor %}
   </div>
-    <button type="submit" class="submit_changes">Submit changes</button>
-  </form>
+    <button type="button" onClick = "postingChanges()" class="submit_changes">Submit changes</button>
   <script>
+    let changedProducts = {};
+
     //dummy function for adding existing products
     function addFunction(id){
       let unit = document.getElementById(id+"b").innerHTML
       unit++;
-      console.log(unit);
       document.getElementById(id+"b").innerHTML = unit;
+
+      changedProducts[id] = unit;
+      console.log(changedProducts);
+
     }
 
     //dummy function for removing existing products
@@ -98,9 +101,22 @@
       let unit = document.getElementById(id+"b").innerHTML
       if(unit > 0){
       --unit;
-      console.log(unit);
       document.getElementById(id+"b").innerHTML = unit;
+
+      changedProducts[id] = unit;
+      console.log(changedProducts);
+
     }
+    }
+
+    function postingChanges(){
+      {% comment %} $.ajax({
+        type: "POST",
+        url: {%'main_page'%},
+        data: changedProducts,
+      }) {% endcomment %}
+      changedProducts = {}
+      console.log(changedProducts);
     }
   </script>
   </div>
