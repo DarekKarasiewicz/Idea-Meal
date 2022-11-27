@@ -74,11 +74,13 @@ footer {
   padding-right: 25px;
   height: 2.5rem;
   margin: 0;
-  div{
-    color: var(--idea-color-first_plan);
+  span{
+    color: var(--idea-color-text);
+    filter: drop-shadow(0 0 0.75rem $idea-color7);
   }
   a{
-    color: var(--idea-color-first_plan);
+    color: var(--idea-color-text);
+    filter: drop-shadow(0 0 0.75rem $idea-color7);
     font-size: 16px;
     &:hover{
       color: var(--idea-color-second_plan);
@@ -469,14 +471,19 @@ footer {
       width: 30px;
       height: 30px;
       background-color: var(--idea-color-first_plan);
-      background-image: url('/static/img/icons8-chevron-left-50.png');
-      transform: rotate(-180deg);
-      background-repeat: no-repeat;
-      background-size: contain;
       position: absolute;
       left: -30px;
       cursor: pointer;
       pointer-events: all;
+      div{
+        background-image: url('/static/img/icons8-chevron-left-50.png');
+        transform: rotate(-180deg);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 28px;
+        height: 28px;
+        filter: var(--idea_img_filter);
+      }
     }
     p{
       display: flex;
@@ -685,7 +692,7 @@ footer {
             p:hover{
               filter: brightness(50%);
               cursor: pointer;
-              
+
             }
           }
         }
@@ -716,15 +723,20 @@ footer {
   // display: none;
   width: 30px;
   height: 30px;
-  background-color: var(--idea-color-first_plan);
-  background-image: url('/static/img/icons8-chevron-left-50.png');
-  background-repeat: no-repeat;
-  background-size: contain;
   position: absolute;
   top: 0;
   right: 0;
   cursor: pointer;
   pointer-events: all;
+  background-color: var(--idea-color-first_plan);
+  div{
+    background-image: url('/static/img/icons8-chevron-left-50.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 28px;
+    height: 28px;
+    filter: var(--idea_img_filter);
+  }
 }
 .nav_recipe_h {
   text-align: center;
@@ -1054,4 +1066,172 @@ footer {
   color: var(--idea-color-text);
 }
 
-
+//recipe_info
+#comments_display_btn{
+  // display: none;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  pointer-events: all;
+  background-color: var(--idea-color-first_plan);
+  div{
+    background-image: url('/static/img/icons8-comments_with_star.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 38px;
+    height: 38px;
+  }
+}
+#recipe_comment_section {
+  background-color: var(--idea-color-first_plan);
+  height: 100%;
+  width: 300px;
+  position: absolute;
+  top: 0;
+  right: left;
+  .recipe__user_comment_add{
+    height: 30vh;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    border-bottom: 1px solid var(--idea-color-text);
+    p{
+      color: var(--idea-color-text);
+      font-size: 32px;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .comment_form{
+      label{
+        color: var(--idea-color-text);
+      }
+      .raiting_section{
+        width: 180px;
+        unicode-bidi: bidi-override;
+        direction: rtl;
+        text-align: center;
+        position: relative;
+        margin-bottom: 15px;
+        .txt-center {
+          text-align: center;
+        }
+        .hide {
+          display: none;
+        }
+        .clear {
+          float: none;
+          clear: both;
+        }
+        label {
+            float: right;
+            display: inline;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            width: 1.1em;
+            cursor: pointer;
+            color: var(--idea-color-text);
+            font-size: 32px;
+        }
+        label:hover,
+        label:hover ~ label,
+        input.radio-btn:checked ~ label {
+            color: transparent;
+        }
+        label:hover:before,
+        label:hover ~ label:before,
+        input.radio-btn:checked ~ label:before,
+        input.radio-btn:checked ~ label:before {
+            content: "\2605";
+            position: absolute;
+            left: 0;
+            color: #FFD700;
+        }
+      }
+      input, textarea{
+        height: 35px;
+        line-height: 25px;
+        width: 250px;
+        border: 2px solid var(--idea-color-second_plan);
+        margin-bottom: 10px;
+      }
+      textarea {
+        resize: none;
+        min-height: 35px;
+        max-height: 70px;
+      }
+      .submit_comment{
+        width: 125px;
+        font-weight: bold;
+        border: none;
+        background: var(--idea-color-bg);
+        color: var(--idea-color-text);
+        padding: 5px;
+      }
+      .submit_comment:hover {
+        filter: brightness(50%);
+        cursor: pointer;
+    }
+    } 
+  }
+  .recipe__users_comments{
+    height: 65vh;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    overflow-y: scroll;
+    .recipe_comment{
+      min-height: 75px;
+      width: 100%;
+      margin-bottom: 15px;
+      .top{
+        height: 50px;
+        width: 100%;
+        .avatar{
+          height: 50px;
+          width: 20%;
+          float: left;
+          img{
+            width: 50px;
+            border-radius: 25px;
+          }
+        }
+        .user_name{
+          height: 50px;
+          width: 65%;
+          float: left;
+          color: white;
+          text-align: center;
+          line-height: 50px;
+        }
+        .user_rating{
+          height: 50px;
+          background-image: url('/static/img/icons8-star-32-yellow.png');
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center;
+          width: 15%;
+          float: left;
+          div{
+            text-align: center;
+            height: 50px;
+            color: black;
+            line-height: 50px;
+          }
+        }
+      }
+      .bottom{
+        min-height: 25px;
+        width: 100%;
+        padding-left: 5px;
+        padding-top: 5px;
+        color: white;
+        font-size: 12px;
+      }
+    }
+  }
+}

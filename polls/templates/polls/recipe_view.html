@@ -1,12 +1,71 @@
-{{recipe}}
-<h1>Put Comment here:<h1><br>
-<form method="post">
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}
+  Idea-Meal || Recipe info
+{% endblock %}
+{% block body %}
+  <div id="comments_display_btn">
+    <div></div>
+  </div>  
+  <div id="recipe_comment_section" style="display: none;">
     {% csrf_token %}
-    <input type="number" name="raiting" id="raiting"><br>
-    <input type="text" name="comment" id="comment"><br>
-    <button type="submit">ADD</button>
-</form>
-<br>
-{% for x in all_comments %}
-    {{x}}<br>
-{% endfor %}
+    <div class="recipe__user_comment_add">
+        <p>Write a comment:</p>
+        <form method="post" class="comment_form">
+            {% csrf_token %}
+            <label>Your Rating:</label>
+            <div class="raiting_section">
+              <input type="radio" id="star5" name="raiting" value="5" class="radio-btn hide" />
+              <label for="star5">☆</label>
+              <input type="radio" id="star4" name="raiting" value="4" class="radio-btn hide" />
+              <label for="star4">☆</label>
+              <input type="radio" id="star3" name="raiting" value="3" class="radio-btn hide" />
+              <label for="star3">☆</label>
+              <input type="radio" id="star2" name="raiting" value="2" class="radio-btn hide" />
+              <label for="star2">☆</label>
+              <input type="radio" id="star1" name="raiting" value="1" class="radio-btn hide" />
+              <label for="star1">☆</label>
+              <div class="clear"></div>
+            </div>
+            <!-- <input type="number" name="raiting" id="raiting"><br> -->
+            <textarea type="text" name="comment" id="comment" placeholder="Add comment" oninput="auto_grow(this)" required></textarea><br>
+            <button type="submit" class="submit_comment">ADD</button>
+        </form>
+    </div>
+    <div class="recipe__users_comments">
+        {% for x in all_comments %}
+            <div class="recipe_comment">
+              <div class="top">
+                <div class="avatar">
+                  <img src="{% static 'img/default_avatar.jpg' %}" alt="settings_img" title="Settings"/>
+                </div>
+                <div class="user_name">Simple user name</div>
+                <div class="user_rating">
+                  <div>5</div>
+                </div>
+              </div>
+              <div class="bottom">
+                {{x}}
+              </div>
+            </div>
+        {% endfor %}
+    </div>
+  </div>
+  <div class="add_recipe_holder">
+    <div id="page_title">
+      <h1>Recipe info</h1>
+    </div>
+    <a href="/main_page/{{user_id}}"><div class="back_button_img"></div></a>
+    <div class="add_recipe_left"></div>
+    <div class="add_recipe_right"></div>
+  </div> 
+{% endblock %}
+{% block page_js%}
+<script>
+  function auto_grow(element) {
+    element.style.height = "5px";
+    element.style.height = (element.scrollHeight)+"px";
+  }
+</script>
+{% endblock %} 
+
