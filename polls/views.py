@@ -27,13 +27,11 @@ class Cuisine_category(StrEnum):
     AMERICAN = auto()
     ASIAN = auto()
 
-
 # Here puts all Meal_time_category
 class Meal_time_category(StrEnum):
     BREAKFAST = auto()
     DINER = auto()
     SUPPER = auto()
-
 
 # Here puts all Products_category
 class Product_category(StrEnum):
@@ -43,15 +41,14 @@ class Product_category(StrEnum):
     FRUIT = auto()
     VEGETABLES = auto()
 
-
 class Product_unit(StrEnum):
     ML = auto()
     GRAMS = auto()
     UNIT = auto()
 
-
-def find_recipe_base_on_products(products) -> list:
-    list_of_recipes = []
+def find_recipe_base_on_products(products) -> dict:
+    dict_of_recipes = {}
+    list_of_recipes =[]
     all_recipes = Recipe.objects.all()
     fridge_products = {}
     for product in products:
@@ -61,14 +58,18 @@ def find_recipe_base_on_products(products) -> list:
         products_in_recipe = Recipe_products_counts.objects.filter(recipe=recipe.id)
         for product in products_in_recipe:
             # print(f"Recipe {recipe.name} product:{product.product.name}")
-            if (
-                product.product.name in fridge_products
-                and recipe not in list_of_recipes
-            ):
+            if product.product.name in fridge_products and recipe not in list_of_recipes:
                 list_of_recipes.append(recipe)
-
     # print(list_of_recipes)
-    return list_of_recipes
+
+    for l_recipe in list_of_recipes:
+        products_in_recipe = Recipe_products_counts.objects.filter(recipe=l_recipe.id)
+        for x_product in products_in_recipe:
+            if (x_product.product.name not in fridge_products.keys()):
+                dict_of_recipes.setdefault(l_recipe,[]).append(x_product.product.name)
+
+    print(dict_of_recipes)
+    return dict_of_recipes
 
 
 def create_shopping_list(list_of_recipes: list) -> list:
