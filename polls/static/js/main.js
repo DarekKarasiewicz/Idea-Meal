@@ -11,17 +11,17 @@ $(document).ready(()=>{
     $('#nav_reciper_show').hide("fast");
   })
 
-  $('#comments_display_btn').on('click',()=>{
-    $("#recipe_comment_section").toggle("fast");
-    console.log($('#comments_display_btn').css('left'));
-    if($('#comments_display_btn').css('left') == '0px'){
-      $('#comments_display_btn').css('left','300px');
-    }else{
-      $('#comments_display_btn').css('left','0px');
-    }
-  })
 })
 
+function comment_section_toggle(){
+  $("#recipe_comment_section").toggle("fast");
+  console.log($('#comments_display_btn').css('left'));
+  if($('#comments_display_btn').css('left') == '0px'){
+    $('#comments_display_btn').css('left','300px');
+  }else{
+    $('#comments_display_btn').css('left','0px');
+  }
+}
 
 $('.recipe_box_simple').on('click',function(){
   if($(this).siblings('.recipe_box_extended').hasClass('showclass')){

@@ -1235,3 +1235,142 @@ footer {
     }
   }
 }
+.add_recipe_holder{
+  .add_recipe_left{
+    .top_section{
+      height: 175px;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      border-bottom: 1px solid black;
+      .recipe_photo{
+        height: 175px;
+        width: 35%;
+        float: left;
+        background-image: url('https://via.placeholder.com/175/09f/fff.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+      }
+      .recipe_name{
+        height: 175px;
+        width: 65%;
+        float: left;
+        padding: 5px;
+        .name{
+          font-size: 24px;
+          color: white;
+        }
+        .author{
+          color: white;
+          font-size: 16px;
+        }
+      }
+    }
+    .middle_section{
+      height: 540px;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      .middle_section_left{
+        height: 540px;
+        width: 35%;
+        .item{
+          width: 100%;
+          height: 60px;
+          text-align: center;
+          line-height: 60px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .difficulty_ico{
+            background-image: url('/static/img/icons8-effort-50.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            height: 35px;
+            width: 35px;
+          }
+          .cuisine_ico{
+            background-image: url('/static/img/icons8-earth-globe-64.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            height: 35px;
+            width: 35px;
+          }
+          .per_serving_ico{
+            background-image: url('/static/img/icons8-user-groups-32.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            height: 35px;
+            width: 35px;
+          }
+          .spiciness_ico{
+            background-image: url('/static/img/icons8-chili-pepper-30.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            height: 35px;
+            width: 35px;
+          }
+          .time_ico{
+            background-image: url('/static/img/icons8-wall-clock-32.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            height: 35px;
+            width: 35px;
+          }
+          .raiting_ico{
+            background-image: url('/static/img/icons8-star-32-yellow.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            height: 35px;
+            width: 35px;
+          }
+          .item_text{
+            font-size: 28px;
+            padding-left: 5px;
+          }
+        }
+        .star_raiting_redirect{
+          cursor: pointer;
+          text-decoration: underline;
+        }
+        .star_raiting_redirect:hover{
+          filter: brightness(75%);
+          color: white;
+        }
+      }
+      .middle_section_right{
+        height: 540px;
+        width: 65%;
+        display: flex;
+        flex-direction: column;
+        .short_desc_sec{
+          height: 140px;
+          width: 100%;
+          border-left: 1px solid black;
+          padding: 5px;
+        }
+        .ingredients_sec{
+          min-height: 200px;
+          max-height: 400px;
+          width: 100%;
+          border-left: 1px solid black;
+          border-top: 1px solid black;
+          padding: 5px;
+        }
+      }
+    }
+  }
+  .add_recipe_right{
+
+  }
+}
