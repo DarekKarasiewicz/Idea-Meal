@@ -146,7 +146,7 @@ footer {
         color: var(--idea-color-text);
         font-weight: bold;
       }
-      input{
+      input:not([type='checkbox']){
         display: block;
         text-align: center;
         gap: 10px;
@@ -196,11 +196,19 @@ footer {
     }
   }
 }
-
-#test{
-  display: none;
+.register_page_holder{
+  height: 870px;
+  .form_holder__content{
+    height: 620px;
+    form{
+      margin-top: 10px;
+      .terms_style{
+        color: var(--idea-color-text);
+        padding-left: 5px;
+      }
+    }
+  }
 }
-
 
 //sweetalert2 replaced base styles
 .swal2-styled.swal2-confirm {
@@ -1033,6 +1041,9 @@ footer {
   color: black;
   min-width: 40px;
   text-align: center;
+}
+.fa_icon_right{
+  right: 0;
 }
 .submit_center{
   height: 55px;

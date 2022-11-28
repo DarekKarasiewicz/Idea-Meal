@@ -10,7 +10,6 @@ $(document).ready(()=>{
     $('#nav_recipe_res_div').show("fast");
     $('#nav_reciper_show').hide("fast");
   })
-
 })
 
 function comment_section_toggle(){
