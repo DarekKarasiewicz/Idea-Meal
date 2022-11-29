@@ -12,6 +12,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import time
 
+#################################################################################
+#                                   FIXME
+#       We should refactor all this code and start to write clean code eg:
+#       `def create_shopping_list(list_of_recipes: list) -> list:`
+#       That make our cleaner and easier to read also in futhure refactoring it
+#       easier to understend what author thinking.
+#
+#################################################################################
 # MODELS IMPORTS
 from .models import (
     Product,
@@ -139,6 +147,7 @@ def login_page(request):
 
 @login_required
 def main_page(request, user_id):
+    # TEST
     # tmp = [
     #     get_object_or_404(Recipe, pk=1),
     #     get_object_or_404(Recipe, pk=2),
