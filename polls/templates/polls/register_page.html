@@ -10,10 +10,10 @@
   </div>
   <div class="form_holder__content">
     <p>Register Page</p>
-    <form method="post">                                                                             
+    <form method="post" id="register_form">                                                                             
       {% csrf_token %}
       <label for="auth_email">Email: </label>
-      <input type="email" name="email"  id="auth_email" disabled><br>
+      <input type="email" name="email"  id="auth_email"><br>
       <label for="auth_login">Login: </label>
       <input type="text" name="login"  id="auth_login"><br>
       <label for="auth_password">Password: </label>
@@ -23,10 +23,10 @@
         <input type="password" name="password" id="auth_password"><br> 
       </div>
       <label for="confirm_password">Confirm password: </label>
-      <input type="password" name="confirm_password" id="confirm_password" disabled><br> 
-      <input type="checkbox" name="terms_check" id="terms_check" disabled>
+      <input type="password" name="confirm_password" id="confirm_password"><br> 
+      <input type="checkbox" name="terms_check" id="terms_check">
       <span class="terms_style">I agree with <a href=""><strong>Terms and conditions</strong></a> and the <a href=""><strong>privacy policy</strong></a></span>
-      <button type="submit">Log In</button>                  
+      <button type="submit" id="register_submit" disabled>Create account</button>                  
     </form>
     <br/>
   </div>
@@ -47,13 +47,66 @@
       $('.fa-eye').show();
       $('#auth_password').attr('type','text');
     })
-    $('#auth_password, #confirm_password').on('keyup', function(){
-      if($('#auth_password').val() === $('#confirm_password').val()){
-        console.log("passwords matches");
-      }else{
-        console.log("diffrent passwords");
+    // $('#auth_password, #confirm_password').on('keyup', function(){
+    //   if($('#auth_password').val() === $('#confirm_password').val()){
+    //     console.log("passwords matches");
+    //   }else{
+    //     console.log("diffrent passwords");
+    //   }
+    // })
+    $(document).ready(function() {
+      $("#register_form").validate({
+        rules: {
+          email: {
+            required: true,
+            email: true
+          },
+          login: {
+            required: true
+          },
+          terms_check: {
+            required: true
+          },
+          password: {
+            required: true,
+            minlength: 8
+          },
+          confirm_password: {
+              required: true,
+              minlength: 8,
+              equalTo: '[name="password"]'
+          }
+        },
+        messages: {
+          email: {
+            required: '<span class="validation_error_icon">'+'<span style="padding-left:25px">Please enter your email address</span>'+'</span>',
+            email: '<span class="validation_error_icon">'+'<span style="padding-left:25px">Incorrect format!(ex: someone@example.com)</span>'+'</span>'
+          },
+          login: {
+            required: '<span class="validation_error_icon">'+'<span style="padding-left:25px">Please enter your login</span>'+'</span>'
+          },
+          terms_check: {
+            required: '<span class="validation_error_icon">'+'<span style="padding-left:25px">Please accept our terms</span>'+'</span>'
+          },
+          password: {
+            required: '<span class="validation_error_icon">'+'<span style="padding-left:25px">Please enter your password</span>'+'</span>',
+            minlength: '<span class="validation_error_icon">'+'<span style="padding-left:25px">Password must have atleast 8 characters</span>'+'</span>'
+          },
+          confirm_password:{
+            required: '<span class="validation_error_icon">'+'<span style="padding-left:25px">Please enter your repeated password</span>'+'</span>',
+            minlength: '<span class="validation_error_icon">'+'<span style="padding-left:25px">Password must have atleast 8 characters</span>'+'</span>',
+            equalTo: '<span class="validation_error_icon">'+'<span style="padding-left:25px">Your passwords are not the same</span>'+'</span>'
+          }
+        }
+      });
+    });
+    $("#register_form").on("blur", "input", function(){
+      if ( $("#register_form").valid()) {
+        $("#register_submit").removeAttr("disabled");   
+      } else {
+        $("#register_submit").attr("disabled", "disabled");
       }
-    })
+    });
   </script>
 {% endblock %} 
 

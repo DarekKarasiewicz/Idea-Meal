@@ -202,6 +202,10 @@ footer {
     height: 620px;
     form{
       margin-top: 10px;
+      width: 325px;
+      button{
+        margin-top: 20px;
+      }
       .terms_style{
         color: var(--idea-color-text);
         padding-left: 5px;
@@ -1384,4 +1388,15 @@ footer {
   .add_recipe_right{
 
   }
+}
+
+.validation_error_icon{
+  background-image: url('/static/img/icons8-box-important-48.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left;
+  height: 30px;
+  width: 30px;
+  color: red;
+  font-size: 13px;
 }

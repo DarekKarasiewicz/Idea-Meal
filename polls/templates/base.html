@@ -25,6 +25,7 @@
     {# Globaljavascript #} 
     {% block site_js %}
       <script type="text/javascript" src="{{ STATIC_URL }} /static/js/jquery-3.6.1.js"></script> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
       <script src="{% static 'js/main.js' %}" defer></script>  
       <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {% endblock %} 
