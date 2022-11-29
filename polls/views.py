@@ -1,3 +1,4 @@
+import json
 from strenum import StrEnum #Python 3.11 = from enum
 from enum import auto
 
@@ -90,7 +91,10 @@ def main_page(request,user_id):
                                      pk=int(request.session['_auth_user_id']))
     all_recipes = Recipes.objects.all()
     all_products = Product.objects.all()
-        
+
+    if request.method == "POST":
+        dictionary = request.POST.get("changedProducts")
+        print(dictionary)
 
     return render(request,"polls/main_page.html",{'user':session_user
                                                  ,'recipes': all_recipes

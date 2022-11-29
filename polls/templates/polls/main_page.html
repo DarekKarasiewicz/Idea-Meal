@@ -82,7 +82,7 @@
     {% endfor %}
   </div>
     <button type="button" onClick = "postingChanges()" class="submit_changes">Submit changes</button>
-  <script>
+    <script>
     let changedProducts = {};
 
     //dummy function for adding existing products
@@ -109,14 +109,18 @@
     }
     }
 
+    const url =""
+
     function postingChanges(){
-      {% comment %} $.ajax({
+      jQuery.ajax({
         type: "POST",
-        url: {%'main_page'%},
-        data: changedProducts,
-      }) {% endcomment %}
+        url: url,
+        data: {
+          'csrfmiddlewaretoken': '{{ csrf_token }}',
+          changedProducts,
+        },
+      })
       changedProducts = {}
-      console.log(changedProducts);
     }
   </script>
   </div>
