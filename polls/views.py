@@ -139,12 +139,11 @@ def login_page(request):
 
 @login_required
 def main_page(request, user_id):
-    tmp = [
-        get_object_or_404(Recipe, pk=1),
-        get_object_or_404(Recipe, pk=2),
-        get_object_or_404(Recipe, pk=3),
-    ]
-    # print(create_shopping_list(tmp))
+    # tmp = [
+    #     get_object_or_404(Recipe, pk=1),
+    #     get_object_or_404(Recipe, pk=2),
+    #     get_object_or_404(Recipe, pk=3),
+    # ]
     if int(request.session["_auth_user_id"]) != int(user_id):
         raise Http404
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
@@ -265,7 +264,7 @@ def user_fridge(request, user_id):
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
     fridge = get_object_or_404(Fridge, user=session_user)
     all_products = Product.objects.all()
-    product_in_fridge = Fridge_products_counts.objects.all()
+    # product_in_fridge = Fridge_products_counts.objects.all()
     # find_recipe_base_on_products(product_in_fridge)
 
     if request.method == "POST":

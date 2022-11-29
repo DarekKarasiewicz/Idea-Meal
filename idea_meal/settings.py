@@ -81,10 +81,10 @@ WSGI_APPLICATION = 'idea_meal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'karas',
-        'USER': 'karas',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
+        'NAME': 'mbbdvmhu',
+        'USER': 'mbbdvmhu',
+        'PASSWORD': 'Os3wA7JMVXYleQEA-ZPKSAvxzITnJ-xN',
+        'HOST': 'lucky.db.elephantsql.com',
         'PORT': '5432',
     }
 }
