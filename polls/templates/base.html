@@ -1,0 +1,38 @@
+{% load static %}
+{% load sass_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="{% static 'img/first_logo.png' %}" type="image/icon type">
+    {# Global styles #} 
+    {% block site_css %}
+    <link href="{% sass_src 'css/main.scss' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% sass_src 'bootstrap/bootstrap.scss' %}" rel="stylesheet" type="text/css"/>
+    {% endblock %} 
+    {# Page-specific styles #}
+    {% autoescape off %} 
+    {% block page_css %}{% endblock %} 
+    {% endautoescape %}
+    <title>{% block page_title %}{% endblock %}</title>
+  </head>
+  <body>
+    {% block body %}
+    {# Page content will go here #} 
+    {% endblock %} 
+    {# Globaljavascript #} 
+    {% block site_js %}
+      <script type="text/javascript" src="{{ STATIC_URL }} /static/js/jquery-3.6.1.js"></script> 
+      <script src="{% static 'js/main.js' %}" defer></script>  
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% endblock %} 
+    {# Page javascript #} 
+    {% autoescape off %} 
+    {% block page_js%} {% endblock %} 
+    {% endautoescape %}
+  </body>
+  <footer>
+    <span>All icons are provided by <a href="https://icons8.com" target="_blank">icons8</a></span>
+  <footer>
+</html>

@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+import time
 
 # MODELS IMPORTS
 from .models import (
@@ -130,7 +132,8 @@ def login_page(request):
             login(request, user)
             return HttpResponseRedirect(reverse("main", args=(user.id,)))
         else:
-            return HttpResponse("Sorry ale coś ci chyba nie poszło !")
+            messages.info(request, 'Wrong password')
+            # return render(request, "polls/login_page.html", {'incorrect_password':True})
     return render(request, "polls/login_page.html")
 
 
@@ -205,6 +208,7 @@ def add_recipes(request):
             per_serving=per_serving,
         )
         recipes.save()
+        time.sleep(2)
         return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
     return render(request, "polls/recipes_page.html", {"user_id": session_user.id})
 
@@ -262,7 +266,7 @@ def user_fridge(request, user_id):
     fridge = get_object_or_404(Fridge, user=session_user)
     all_products = Product.objects.all()
     product_in_fridge = Fridge_products_counts.objects.all()
-    find_recipe_base_on_products(product_in_fridge)
+    # find_recipe_base_on_products(product_in_fridge)
 
     if request.method == "POST":
         product_name = request.POST["product_name"]

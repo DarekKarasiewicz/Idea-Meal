@@ -1,8 +1,29 @@
-<form method="post">                                                                             
-    <input type = "text" name="auth_login"  id="auth_login"> 
-    <input type = "text" name="auth_password" id="auth_password">    
-    <button type="submit">Log In</button>                  
-</form>
-<br>
-
-<a href="{% url 'register'%}">Register</a>
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}
+  Idea-Meal || Login Page
+{% endblock %}
+{% block body %}
+  <div class="form_holder">  
+    <div class="form_holder__logo">
+      <img src="{% static 'img/first_logo.png' %}" alt="" height="128" width="128">
+    </div>
+    <div class="form_holder__content">
+      <p>Login Page</p>
+      <form method="post">
+        <label for="auth_login">Login: </label>
+        <input type="text" name="auth_login" id="auth_login" required/><br>
+        <label for="auth_password">Password: </label>
+        <input type="password" name="auth_password" id="auth_password" required/><br>
+        {% for message in messages %}
+          <button id="error_trigger" onclick="errorMessage()">Wrong password!</button>
+        {% endfor %}
+        <button type="submit">Log In</button><br>
+      </form>
+      <br />
+    </div>
+    <div class="form_holder__footer">
+      <a href="{% url 'register'%}">Don't have an account yet? Sign Up!</a>
+    </div>
+  </div> 
+{% endblock %} 

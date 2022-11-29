@@ -1,15 +1,164 @@
-<h1>Hello World !</h1>
-<h2>Welcome {{user.username}}, you are on Main Page</h2>
-<h3>Work in progres</h3>
-<h1><a href="{% url 'logout'%}">Logout</a></h1>
-<h1><a href="{% url 'recipes_add'%}">Add Recipes</a></h1>
-<h1><a href="{% url 'product_page'%}">Add Product</a></h1>
-<h1><a href="/fridge/{{user.id}}">Fridge</a></h1>
-<h3>Recipes:</h3>
-{%for x in recipes%}
-<a href ="/recipe/{{x.id}}">{{x}}</a><br>
-{% endfor %}
-<h3>Products:</h3>
-{%for x in products%}
-{{x}}<br>
-{% endfor %}
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}
+  Idea-Meal || Main Page
+{% endblock %}
+{% block body %}
+  {%block navbar %}
+  <div class="navbar" id="nav">
+    <div class="navbar__logo"><img src="{% static 'img/first_logo.png' %}" alt="testLogo"/></div>
+    <div class="navbar__links">
+      <ul id="links">
+        <li class="link"><a href="{% url 'recipes_add'%}"><img src="{% static 'img/icon_add.png' %}" alt="add"/><p>Add Recipes</p></a></li>
+        <li class="link">link</li>
+        <li class="link">link</li>
+        <li class="link"><a href="{% url 'logout'%}"><img src="{% static 'img/icon_logout.png' %}" alt="logout"/><p>Logout</p></a></li>
+      </ul>
+    </div>
+    <div class="navbar__toggle_btn" >
+      <img src="{% static 'img/icon_arrow.png' %}" alt="arrow" id="navBtn"/>
+    </div>
+    <div class="navbar__blank_space"></div>
+    <div class="navbar__user">
+      <div class="user_info">
+        <div class="user_img"><img src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg" alt="userIcon"/></div>
+        <div class="user_name"><p>{{user.username}}</p></div>
+      </div>
+      <!-- <div class="settings"><img src="{% static 'img/icon_gear.png' %}" /><p>Settings</p></div> -->
+      <div class="user_panel">
+        <div class="user_panel__option">
+          <img src="{% static 'img/icon_gear.png' %}" alt="settings_img" title="Settings"/>
+        </div>
+        <div class="user_panel__option">
+          <a href="{% url 'logout'%}">
+            <img src="{% static 'img/icon_logout.png' %}" alt="logout" title="logout"/>
+          </a>
+        </div>
+        <div class="switch-box_wrapper">
+          <div class="switch_box box_1" id="theme_switcher">
+            <input type="checkbox" class="switch_1">
+            <div id="checkbox_sun">
+              <img src="{% static 'img/icons8-sun-30.png' %}" alt="sun_icon" title="sun_icon"/>
+            </div>
+            <div id="checkbox_moon">
+              <img src="{% static 'img/icons8-moon-and-stars-30.png' %}" alt="moon_icon" title="moon_icon"/>
+            </div>
+          </div>	
+        </div>
+      </div>
+    </div>
+  </div>
+  {%endblock%}
+  <div class="fridge_holder">
+    <h1>Hello World !</h1>
+    <h2>Welcome {{user.username}}, you are on Main Page</h2>
+    <h3>Work in progres</h3>
+    <h1><a href="{% url 'logout'%}">Logout</a></h1>
+    <h1><a href="{% url 'recipes_add'%}">Add Recipes</a></h1>
+    <h1><a href="{% url 'product_page'%}">Add Product</a></h1>
+    <h1><a href="/fridge/{{user.id}}">Fridge</a></h1>
+    <!-- <h3>Recipes:</h3>
+    {%for x in recipes%}
+    <a href ="/recipe/{{x.id}}"></a><br>
+    {% endfor %} -->
+    <h3>Products:</h3>
+    {%for x in products%}
+    {{x}}<br>
+    {% endfor %}
+  </div>
+
+  <div id="nav_reciper_show"></div>
+  <div id="nav_recipe_res_div" style="display: none;">
+    <div class="nav_title">
+      <div id="nav_reciper_hidder"></div>
+      <p>Recipes</p>
+    </div>
+    <div class="nav_filters">
+      <p class="nav_recipe_h">Filters</p>
+      <form>
+        <input type="checkbox" id="filter1" name="filter1" value="difficulty">
+        <label for="filter1" title="difficulty"> difficulty</label>
+        <input type="checkbox" id="filter2" name="filter2" value="Car">
+        <label for="filter2" title="prepare time">prepare time</label><br>
+        <input type="checkbox" id="filter3" name="filter3" value="Boat">
+        <label for="filter3" title="raiting">raiting</label>
+        <input type="checkbox" id="filter4" name="filter4" value="Bike">
+        <label for="filter4" title="per serving"> per serving</label><br>
+        <input type="checkbox" id="filter5" name="filter5" value="Car">
+        <label for="filter5" title="verificated"> verificated</label><br>
+        <input type="submit" value="Apply">
+      </form>     
+    </div>
+    <div class="nav_results">
+      <div class="nav_recipe_helper" title="results explanation"></div>
+      <p class="nav_recipe_h">Results</p>
+      {%for x in recipes%}
+      <div class="recipe_box">
+        <div class="recipe_box_simple">
+          {%if x.is_verificated == True %}
+            <div class="verificated"></div>
+          {% endif %}
+          <div class="name"><p>{{x.name}}</p></div>
+          {%if x.difficulty == 1 %}
+            <div style="background-color: green !important"></div>
+          {% elif x.difficulty == 2 %}
+            <div style="background-color: orange !important"></div>
+          {% else %}
+            <div style="background-color: red !important"></div>
+          {% endif %}
+        </div>
+        <div class="recipe_box_extended" style="display: none;">
+          <div>
+            <div>{{x.description}}</div>
+            <div>
+              {%if x.spiciness == 1 %}
+                <div class="spicy_img green_filter"></div>
+              {% elif x.spiciness == 2 %}
+                <div class="spicy_img yellow_filter"></div>
+              {% elif x.spiciness == 3 %}
+                <div class="spicy_img orange_filter"></div>
+              {% else %}
+                <div class="spicy_img red_filter"></div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="small-div">
+            <div class="three-seg">
+              <div class="time_img"></div>
+              <div class="info">{{x.prepare_time}}</div>
+            </div>
+            <div class="three-seg">
+              <div class="people_img"></div>
+              <div class="info">{{x.per_serving}}</div>
+            </div>
+            <div class="three-seg">
+              <div class="cuisine_img"></div>
+              <div class="info">
+                {%if x.cuisine_category_id != None %}
+                  {{x.cuisine_category_id}}
+                {% else %}
+                  ---
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="small-div">
+            <div class="two-seg-one">
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="counter">(15)</div>
+            </div>
+            <div class="two-seg-two"><p><a href ="/recipe/{{x.id}}">See more</a></p></div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div id="result-explanation">
+    <p>Explanation</p>
+  </div>
+{% endblock %} 
