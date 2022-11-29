@@ -1,0 +1,17 @@
+<h1>Fridge<h1>
+<form method="POST">
+    {% csrf_token %}
+    <select name="product_name" id="product_name">
+    {% for product in products %}
+        <option value="{{product}}">{{product}}</option>
+    {% endfor %}
+    </select>
+    <input type="number" name="product_number" id="product_number">
+    <button type="submit">ADD</button>
+</form>
+
+<h3>Products in Fridge<h3>
+<!-- <h4>{{product_in_fridge}}<h4> -->
+{% for x in product_in_fridge %}
+    <h4>{{x.product.name}} : {{x.ammount}}<h4>
+{% endfor %}
