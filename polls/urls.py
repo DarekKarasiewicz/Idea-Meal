@@ -12,4 +12,5 @@ urlpatterns = [
     path('product', views.product_page, name='product_page'),
     path('recipe/<int:recipe_id>', views.recipes_page, name='recipe_page'),
     path('main_page/<int:user_id>', views.main_page, name='main'),
+    path('all_recipes', views.all_recipes, name='all_recipes'),
     ]

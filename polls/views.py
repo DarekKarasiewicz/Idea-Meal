@@ -81,7 +81,6 @@ def find_recipe_base_on_products(products) -> dict:
     print(dict_of_recipes)
     return dict_of_recipes
 
-
 def create_shopping_list(list_of_recipes: list) -> list:
     dict_of_products = {}
     fridge_products = Fridge_products_counts.objects.all()
@@ -106,15 +105,12 @@ def create_shopping_list(list_of_recipes: list) -> list:
 
     return dict_of_products
 
-
 def welcome_page(request):
     return HttpResponseRedirect("login")
-
 
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect("login")
-
 
 def register_page(request):
     if request.method == "POST":
@@ -130,7 +126,6 @@ def register_page(request):
 
     return render(request, "polls/register_page.html")
 
-
 @csrf_exempt
 def login_page(request):
     if request.method == "POST":
@@ -143,7 +138,6 @@ def login_page(request):
             messages.info(request, 'Wrong password')
             # return render(request, "polls/login_page.html", {'incorrect_password':True})
     return render(request, "polls/login_page.html")
-
 
 @login_required
 def main_page(request, user_id):
@@ -163,7 +157,6 @@ def main_page(request, user_id):
         "polls/main_page.html",
         {"user": session_user, "recipes": all_recipes, "products": all_products},
     )
-
 
 @login_required
 def add_recipes(request):
@@ -220,7 +213,6 @@ def add_recipes(request):
         return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
     return render(request, "polls/recipes_page.html", {"user_id": session_user.id})
 
-
 @login_required
 def recipes_page(request, recipe_id):
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
@@ -247,7 +239,6 @@ def recipes_page(request, recipe_id):
         {"recipe": test_show, "all_comments": all_comments},
     )
 
-
 @login_required
 def product_page(request):
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
@@ -266,7 +257,6 @@ def product_page(request):
         "polls/product_page.html",
         {"user_id": session_user.id, "product_categories": product_category},
     )
-
 
 @login_required
 def user_fridge(request, user_id):
@@ -294,3 +284,17 @@ def user_fridge(request, user_id):
             "product_in_fridge": product_in_fridge,
         },
     )
+
+@login_required
+def all_recipes(request):
+    session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
+    all_recipes = Recipe.objects.all()
+    print(all_recipes)
+    return render(
+            request,
+            "polls/all_recipes_page.html",
+            {
+                "all_recipes":all_recipes
+            },
+            )
+
