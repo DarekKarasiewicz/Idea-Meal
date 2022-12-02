@@ -1,76 +1,51 @@
-{% extends 'base.html' %} {% load static %} {% block page_title %} Idea-Meal ||
-Main Page {% endblock %} {% block body %} {%block navbar %}
-<div class="navbar" id="nav">
-  <div class="navbar__logo">
-    <img src="{% static 'img/first_logo.png' %}" alt="testLogo" />
-  </div>
-  <div class="navbar__links">
-    <ul id="links">
-      <li class="link">
-        <a href="{% url 'recipes_add'%}"
-          ><img src="{% static 'img/icon_add.png' %}" alt="add" />
-          <p>Add Recipes</p></a
-        >
-      </li>
-      <li class="link">link</li>
-      <li class="link">link</li>
-      <li class="link">
-        <a href="{% url 'logout'%}"
-          ><img src="{% static 'img/icon_logout.png' %}" alt="logout" />
-          <p>Logout</p></a
-        >
-      </li>
-    </ul>
-  </div>
-  <div class="navbar__toggle_btn">
-    <img src="{% static 'img/icon_arrow.png' %}" alt="arrow" id="navBtn" />
-  </div>
-  <div class="navbar__blank_space"></div>
-  <div class="navbar__user">
-    <div class="user_info">
-      <div class="user_img">
-        <img
-          src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg"
-          alt="userIcon"
-        />
-      </div>
-      <div class="user_name"><p>{{user.username}}</p></div>
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}
+  Idea-Meal || Main Page
+{% endblock %}
+{% block body %}
+  {%block navbar %}
+  <div class="navbar" id="nav">
+    <div class="navbar__logo"><img src="{% static 'img/first_logo.png' %}" alt="testLogo"/></div>
+    <div class="navbar__links">
+      <ul id="links">
+        <li class="link"><a href="{% url 'recipes_add'%}"><img src="{% static 'img/icon_add.png' %}" alt="add"/><p>Add Recipes</p></a></li>
+        <li class="link">link</li>
+        <li class="link">link</li>
+        <li class="link"><a href="{% url 'logout'%}"><img src="{% static 'img/icon_logout.png' %}" alt="logout"/><p>Logout</p></a></li>
+      </ul>
     </div>
-    <!-- <div class="settings"><img src="{% static 'img/icon_gear.png' %}" /><p>Settings</p></div> -->
-    <div class="user_panel">
-      <div class="user_panel__option">
-        <img
-          src="{% static 'img/icon_gear.png' %}"
-          alt="settings_img"
-          title="Settings"
-        />
+    <div class="navbar__toggle_btn" >
+      <img src="{% static 'img/icon_arrow.png' %}" alt="arrow" id="navBtn"/>
+    </div>
+    <div class="navbar__blank_space" id="blank_space"></div>
+    <div class="navbar__user">
+      <div class="user_info">
+        <div class="user_img"><img src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg" alt="userIcon"/></div>
+        <div class="user_name"><p>{{user.username}}</p></div>
       </div>
-      <div class="user_panel__option">
-        <a href="{% url 'logout'%}">
-          <img
-            src="{% static 'img/icon_logout.png' %}"
-            alt="logout"
-            title="logout"
-          />
-        </a>
-      </div>
-      <div class="switch-box_wrapper">
-        <div class="switch_box box_1" id="theme_switcher">
-          <input type="checkbox" class="switch_1" />
-          <div id="checkbox_sun">
-            <img
-              src="{% static 'img/icons8-sun-30.png' %}"
-              alt="sun_icon"
-              title="sun_icon"
-            />
-          </div>
-          <div id="checkbox_moon">
-            <img
-              src="{% static 'img/icons8-moon-and-stars-30.png' %}"
-              alt="moon_icon"
-              title="moon_icon"
-            />
-          </div>
+      <!-- <div class="settings"><img src="{% static 'img/icon_gear.png' %}" /><p>Settings</p></div> -->
+      <div class="user_panel" id="user_panel">
+        <div class="setting_links" id="setting_links">
+          <ul>
+            <li>link</li>
+            <li>link</li>
+            <li class="link"><a href="{% url 'logout'%}"><img src="{% static 'img/icon_logout.png' %}" alt="logout"/><p>Logout</p></a></li>
+          </ul>
+        </div>
+        <div class="switch-box_wrapper">
+          <div class="switch_box box_1" id="theme_switcher">
+            <input type="checkbox" class="switch_1">
+            <div id="checkbox_sun">
+              <img src="{% static 'img/icons8-sun-30.png' %}" alt="sun_icon" title="sun_icon" id="sun"/>
+            </div>
+            <div id="checkbox_moon">
+              <img src="{% static 'img/icons8-moon-and-stars-30.png' %}" alt="moon_icon" title="moon_icon" id="moon"/>
+            </div>
+          </div>	
+        </div>
+        <div class="user_panel__option">
+          <img src="{% static 'img/icon_gear.png' %}" alt="settings_img" title="Settings" id="gear-btn"/>
         </div>
       </div>
     </div>
@@ -101,7 +76,7 @@ Main Page {% endblock %} {% block body %} {%block navbar %}
         <button
           type="button"
           class="plus_btn"
-          onClick="addFunction({{product.id}})"
+          onclick="addFunction({{product.id}})"
         >
           +
         </button>
@@ -109,7 +84,7 @@ Main Page {% endblock %} {% block body %} {%block navbar %}
         <button
           type="button"
           class="minus_btn"
-          onClick="minusFunction({{product.id}})"
+          onclick="minusFunction({{product.id}})"
         >
           -
         </button>
@@ -120,7 +95,7 @@ Main Page {% endblock %} {% block body %} {%block navbar %}
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <button
-      type="button"
+      type="submit"
       class="submit_changes"
       id="submit_changes"
     >
@@ -137,7 +112,7 @@ Main Page {% endblock %} {% block body %} {%block navbar %}
       document.getElementById(id + "b").innerHTML = unit;
 
       changedProducts[id] = unit;
-      <!-- console.log(changedProducts); -->
+      console.log(changedProducts);
       return changedProducts;
     }
 
@@ -149,7 +124,7 @@ Main Page {% endblock %} {% block body %} {%block navbar %}
         document.getElementById(id + "b").innerHTML = unit;
 
         changedProducts[id] = unit;
-        <!-- console.log(changedProducts); -->
+        console.log(changedProducts);
         return changedProducts;
       }
     }
@@ -157,10 +132,23 @@ Main Page {% endblock %} {% block body %} {%block navbar %}
     console.log(changedProducts);
     let temp = changedProducts;
     const url = "";
-//
-    //$("#submit_changes").on("submit", (event) => {
+
+    //$("#submit_changes").on("submit", function(event) {
     //  event.preventDefault();
     //  jQuery.ajax({
+    //    url: '{% url "main" user_id=user.id %}',
+    //    data: {
+    //      csrfmiddlewaretoken: "{{ csrf_token }}",
+    //      changedProducts: temp,
+    //    },
+    //    dataType: "json",
+    //  });
+    //});
+
+    //function postingChanges(changedProducts) {
+    //  var csrfToken = $("input[name='csrfmiddlewaretoken']");
+    //  jQuery.ajax({
+    //    type: "POST",
     //    url: '{% url "main" user_id=user.id %}',
     //    headers: {
     //      csrfmiddlewaretoken: "{% csrf_token %}",
@@ -170,32 +158,16 @@ Main Page {% endblock %} {% block body %} {%block navbar %}
     //      changedProducts: temp,
     //    },
     //    dataType: "json",
+    //    success: function (json) {
+    //      console.log("OK");
+    //    },
+    //    error: function (error) {
+    //      console.log(changedProducts);
+    //      console.log("Błąd");
+    //    },
     //  });
-    //});
-
-    function postingChanges(changedProducts) {
-      var csrfToken = $("input[name='csrfmiddlewaretoken']");
-      jQuery.ajax({
-        type: "POST",
-        url: url,
-        headers: {
-          csrfmiddlewaretoken: "{% csrf_token %}",
-        },
-        data: {
-          csrfmiddlewaretoken: "{{ csrf_token }}",
-          changedProducts: temp,
-        },
-        dataType: "json",
-        success: function (json) {
-          console.log("OK");
-        },
-        error: function (error) {
-          console.log(changedProducts);
-          console.log("Błąd");
-        },
-      });
-      changedProducts = {};
-    }
+    //  changedProducts = {};
+    //}
   </script>
 </div>
 

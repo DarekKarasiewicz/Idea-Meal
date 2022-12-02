@@ -58,6 +58,13 @@ $("#navBtn").on("click",() => {
 //   }
 // })
 
+$("#gear-btn").on("click",() => {
+  document.getElementById("user_panel").classList.toggle("open");
+  document.getElementById("blank_space").classList.toggle("open");
+  document.getElementById("sun").classList.toggle("open");
+  document.getElementById("moon").classList.toggle("open");
+})
+
 //theme switcher controller
 $('#theme_switcher').on('change',function(){
   if($(this).find('input').is(':checked')){

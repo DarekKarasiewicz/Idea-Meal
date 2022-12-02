@@ -212,7 +212,6 @@ footer {
   &__links{
     position: relative;
     height: 26.5vh;
-    // transition: .25s;
     ul{
       list-style-type: none;
       padding: 0;
@@ -279,13 +278,16 @@ footer {
       float: right;
       height: 5vh;
       transform: rotate(180deg);
-      transition: 0.25s;
+      transition: 0.05s;
       cursor: pointer;
     }
   }
   &__blank_space{
     height: 37.5vh;
   }  
+  &__blank_space.open{
+    height: 17.5vh;
+  }
   &__user{
     position: relative;
     height:10vh;
@@ -322,44 +324,99 @@ footer {
       margin: 0;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       appearance: none;
       background-color: $idea-color4;
       border-width: 0;
-      box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,$idea-color5 0 -3px 0 inset;
-      box-sizing: border-box;
       color: black;
-      cursor: pointer;
-      font-family: "JetBrains Mono",monospace;
-      line-height: 1;
       overflow: hidden;
       position: relative;
-      text-decoration: none;
-      transition: box-shadow .25s,transform .25s, width .25s;
-      user-select: none;
-      -webkit-user-select: none;
-      touch-action: manipulation;
-      white-space: nowrap;
-      will-change: box-shadow,transform;
-      font-size: 18px;
       border-radius: 0px 0px 10px 0px;
+      transition: width .25s;
+      .setting_links{
+        display: none;
+        float: left;
+      }
       .user_panel__option{
         width: 50px;
         height: 5vh;
         display: flex;
+        margin: 0;
         img{
           height: 4vh;
           display: flex;
           margin: 5px;
+          cursor: pointer;
         }
       }
     }
-    .user_panel:hover{
-      box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, $idea-color5 0 -3px 0 inset;
-        transform: translateY(-2px); 
-    }
-    .user_panel:active{
-      box-shadow: $idea-color5 0 3px 7px inset;
+
+    .user_panel.open{
+      height: 25vh;
+      display: block;
+      transition: width .25s;
+
+      .setting_links{
+        display: block;
+        height: 20vh;
+        width: 200px;
+
+        ul{
+          list-style-type: none;
+          padding: 0;
+          margin: 0;
+          li{
+            appearance: none;
+            background-color: $idea-color5;
+            border-width: 0;
+            margin-top: 1vh ;
+            box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,$idea-color6 0 -3px 0 inset;
+            box-sizing: border-box;
+            color: black;
+            cursor: pointer;
+            font-family: "JetBrains Mono",monospace;
+            height: 48px;
+            line-height: 1;
+            overflow: hidden;
+            position: relative;
+            text-decoration: none;
+            transition: box-shadow .15s,transform .15s;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            white-space: nowrap;
+            will-change: box-shadow,transform;
+            font-size: 18px;
+
+            a{
+              display: block;
+              height: 48px;
+              width: 200px;
+              color: black;
+              img{
+                display: block;
+                float: left;
+                height: 45px;
+                padding: 5px;
+                margin-left: 3px;
+              }
+              p{ 
+                display: block;
+                float: left;
+                padding-left: 5px;
+                padding-top: 13px;
+                margin: 0;
+              }
+            }
+          }
+        }
+      }
+
+      .user_panel__option{
+        width: 50px;
+        float: right;
+
+      }
     }
   }
 }
@@ -390,6 +447,10 @@ footer {
     height: 37.5vh;
   }
 
+  .navbar__blank_space.open{
+    height: 17.5vh;
+  }
+
   .navbar__user{
     .user_info{
       width: 50px;
@@ -405,6 +466,30 @@ footer {
       justify-content: flex-start;
       img{
         padding-left: 3.06px;
+      }
+
+      .switch-box_wrapper{
+        display: none;
+      }
+    }
+
+    .user_panel.open{
+      height: 25vh;
+      display: block;
+      align-items: 0;
+      justify-content: 0;
+      transition: width .25s;
+
+      .setting_links{
+        height: 20vh;
+        width: 50px;
+        float: left;
+        transition: .25s;
+      }
+
+      .user_panel__option{
+        display: flex;
+        float: right;
       }
     }
   }
@@ -689,6 +774,7 @@ footer {
   width: 100px;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  float: left;
 }
 
 .switch_box{
@@ -714,7 +800,10 @@ footer {
       height: 2vh;
       position: absolute;
       top: 14px;
-      right: 53px;
+      left: 27px;
+    }
+    img.open{
+      top: 21.5vh;
     }
   }
   #checkbox_sun{
@@ -724,7 +813,10 @@ footer {
       height: 2vh;
       position: absolute;
       top: 13px;
-      right: 27px;
+      left: 53px;      
+    }
+    img.open{
+      top:21.5vh;
     }
   }
   input[type="checkbox"].switch_1{
