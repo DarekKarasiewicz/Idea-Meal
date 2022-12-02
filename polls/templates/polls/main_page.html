@@ -57,10 +57,6 @@
     <h1><a href="{% url 'recipes_add'%}">Add Recipes</a></h1>
     <h1><a href="{% url 'product_page'%}">Add Product</a></h1>
     <h1><a href="/fridge/{{user.id}}">Fridge</a></h1>
-    <!-- <h3>Recipes:</h3>
-    {%for x in recipes%}
-    <a href ="/recipe/{{x.id}}"></a><br>
-    {% endfor %} -->
     <h3>Products:</h3>
     <div class="products">
     {%for product in products%}
@@ -81,7 +77,10 @@
     </div>
     {% endfor %}
   </div>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
     <button type="button" onClick = "postingChanges()" class="submit_changes">Submit changes</button>
+    </form>
     <script>
     let changedProducts = {};
 
@@ -92,7 +91,8 @@
       document.getElementById(id+"b").innerHTML = unit;
 
       changedProducts[id] = unit;
-      console.log(changedProducts);
+      <!-- console.log(changedProducts); -->
+      return changedProducts;
 
     }
 
@@ -104,21 +104,37 @@
       document.getElementById(id+"b").innerHTML = unit;
 
       changedProducts[id] = unit;
-      console.log(changedProducts);
+      <!-- console.log(changedProducts); -->
+      return changedProducts;
 
     }
     }
 
     const url =""
+    console.log(changedProducts);
+    let temp = changedProducts;
 
-    function postingChanges(){
+    function postingChanges(changedProducts){
+      var csrfToken = $("input[name='csrfmiddlewaretoken']");
       jQuery.ajax({
         type: "POST",
-        url: url,
+        url:'{% url "main" user_id=user.id %}',
+          headers: {
+              'csrfmiddlewaretoken': '{% csrf_token %}'
+          },
         data: {
-          'csrfmiddlewaretoken': '{{ csrf_token }}',
-          changedProducts,
+          csrfmiddlewaretoken: '{{ csrf_token }}' ,
+          'changedProducts':temp,
         },
+        dataType: 'json',
+        success: function (json) {
+               console.log("OK")
+            },
+        error: function(error) {
+
+           console.log(changedProducts)
+           console.log("Błąd")
+        }
       })
       changedProducts = {}
     }
@@ -150,70 +166,6 @@
     <div class="nav_results">
       <div class="nav_recipe_helper" title="results explanation"></div>
       <p class="nav_recipe_h">Results</p>
-      {%for x in recipes%}
-      <div class="recipe_box">
-        <div class="recipe_box_simple">
-          {%if x.is_verificated == True %}
-            <div class="verificated"></div>
-          {% endif %}
-          <div class="name"><p>{{x.name}}</p></div>
-          {%if x.difficulty == 1 %}
-            <div style="background-color: green !important"></div>
-          {% elif x.difficulty == 2 %}
-            <div style="background-color: orange !important"></div>
-          {% else %}
-            <div style="background-color: red !important"></div>
-          {% endif %}
-        </div>
-        <div class="recipe_box_extended" style="display: none;">
-          <div>
-            <div>{{x.description}}</div>
-            <div>
-              {%if x.spiciness == 1 %}
-                <div class="spicy_img green_filter"></div>
-              {% elif x.spiciness == 2 %}
-                <div class="spicy_img yellow_filter"></div>
-              {% elif x.spiciness == 3 %}
-                <div class="spicy_img orange_filter"></div>
-              {% else %}
-                <div class="spicy_img red_filter"></div>
-              {% endif %}
-            </div>
-          </div>
-          <div class="small-div">
-            <div class="three-seg">
-              <div class="time_img"></div>
-              <div class="info">{{x.prepare_time}}</div>
-            </div>
-            <div class="three-seg">
-              <div class="people_img"></div>
-              <div class="info">{{x.per_serving}}</div>
-            </div>
-            <div class="three-seg">
-              <div class="cuisine_img"></div>
-              <div class="info">
-                {%if x.cuisine_category_id != None %}
-                  {{x.cuisine_category_id}}
-                {% else %}
-                  ---
-                {% endif %}
-              </div>
-            </div>
-          </div>
-          <div class="small-div">
-            <div class="two-seg-one">
-              <div class="star"></div>
-              <div class="star"></div>
-              <div class="star"></div>
-              <div class="star"></div>
-              <div class="star"></div>
-              <div class="counter">(15)</div>
-            </div>
-            <div class="two-seg-two"><p><a href ="/recipe/{{x.id}}">See more</a></p></div>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
     </div>
   </div>
   <div id="result-explanation">

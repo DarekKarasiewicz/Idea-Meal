@@ -79,15 +79,15 @@ WSGI_APPLICATION = 'idea_meal.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'miki',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql',
+         'NAME': 'mbbdvmhu',
+         'USER': 'mbbdvmhu',
+         'PASSWORD': 'Os3wA7JMVXYleQEA-ZPKSAvxzITnJ-xN',
+         'HOST': 'lucky.db.elephantsql.com',
+         'PORT': '5432',
+     }
+ }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
