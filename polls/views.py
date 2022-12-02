@@ -226,6 +226,7 @@ def recipes_page(request, recipe_id):
         comment.save()
         tmf = Comments_to_Recipe(recipe=recipe, comment=comment)
         tmf.save()
+        return HttpResponseRedirect(reverse('recipe_page', args=[recipe_id]))
 
     test_show = recipe.__dict__
     test_show1 = Comments_to_Recipe.objects.all()
