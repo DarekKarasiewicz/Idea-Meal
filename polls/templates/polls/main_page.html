@@ -1,174 +1,232 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block page_title %}
-  Idea-Meal || Main Page
-{% endblock %}
-{% block body %}
-  {%block navbar %}
-  <div class="navbar" id="nav">
-    <div class="navbar__logo"><img src="{% static 'img/first_logo.png' %}" alt="testLogo"/></div>
-    <div class="navbar__links">
-      <ul id="links">
-        <li class="link"><a href="{% url 'recipes_add'%}"><img src="{% static 'img/icon_add.png' %}" alt="add"/><p>Add Recipes</p></a></li>
-        <li class="link">link</li>
-        <li class="link">link</li>
-        <li class="link"><a href="{% url 'logout'%}"><img src="{% static 'img/icon_logout.png' %}" alt="logout"/><p>Logout</p></a></li>
-      </ul>
-    </div>
-    <div class="navbar__toggle_btn" >
-      <img src="{% static 'img/icon_arrow.png' %}" alt="arrow" id="navBtn"/>
-    </div>
-    <div class="navbar__blank_space"></div>
-    <div class="navbar__user">
-      <div class="user_info">
-        <div class="user_img"><img src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg" alt="userIcon"/></div>
-        <div class="user_name"><p>{{user.username}}</p></div>
+{% extends 'base.html' %} {% load static %} {% block page_title %} Idea-Meal ||
+Main Page {% endblock %} {% block body %} {%block navbar %}
+<div class="navbar" id="nav">
+  <div class="navbar__logo">
+    <img src="{% static 'img/first_logo.png' %}" alt="testLogo" />
+  </div>
+  <div class="navbar__links">
+    <ul id="links">
+      <li class="link">
+        <a href="{% url 'recipes_add'%}"
+          ><img src="{% static 'img/icon_add.png' %}" alt="add" />
+          <p>Add Recipes</p></a
+        >
+      </li>
+      <li class="link">link</li>
+      <li class="link">link</li>
+      <li class="link">
+        <a href="{% url 'logout'%}"
+          ><img src="{% static 'img/icon_logout.png' %}" alt="logout" />
+          <p>Logout</p></a
+        >
+      </li>
+    </ul>
+  </div>
+  <div class="navbar__toggle_btn">
+    <img src="{% static 'img/icon_arrow.png' %}" alt="arrow" id="navBtn" />
+  </div>
+  <div class="navbar__blank_space"></div>
+  <div class="navbar__user">
+    <div class="user_info">
+      <div class="user_img">
+        <img
+          src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg"
+          alt="userIcon"
+        />
       </div>
-      <!-- <div class="settings"><img src="{% static 'img/icon_gear.png' %}" /><p>Settings</p></div> -->
-      <div class="user_panel">
-        <div class="user_panel__option">
-          <img src="{% static 'img/icon_gear.png' %}" alt="settings_img" title="Settings"/>
-        </div>
-        <div class="user_panel__option">
-          <a href="{% url 'logout'%}">
-            <img src="{% static 'img/icon_logout.png' %}" alt="logout" title="logout"/>
-          </a>
-        </div>
-        <div class="switch-box_wrapper">
-          <div class="switch_box box_1" id="theme_switcher">
-            <input type="checkbox" class="switch_1">
-            <div id="checkbox_sun">
-              <img src="{% static 'img/icons8-sun-30.png' %}" alt="sun_icon" title="sun_icon"/>
-            </div>
-            <div id="checkbox_moon">
-              <img src="{% static 'img/icons8-moon-and-stars-30.png' %}" alt="moon_icon" title="moon_icon"/>
-            </div>
-          </div>	
+      <div class="user_name"><p>{{user.username}}</p></div>
+    </div>
+    <!-- <div class="settings"><img src="{% static 'img/icon_gear.png' %}" /><p>Settings</p></div> -->
+    <div class="user_panel">
+      <div class="user_panel__option">
+        <img
+          src="{% static 'img/icon_gear.png' %}"
+          alt="settings_img"
+          title="Settings"
+        />
+      </div>
+      <div class="user_panel__option">
+        <a href="{% url 'logout'%}">
+          <img
+            src="{% static 'img/icon_logout.png' %}"
+            alt="logout"
+            title="logout"
+          />
+        </a>
+      </div>
+      <div class="switch-box_wrapper">
+        <div class="switch_box box_1" id="theme_switcher">
+          <input type="checkbox" class="switch_1" />
+          <div id="checkbox_sun">
+            <img
+              src="{% static 'img/icons8-sun-30.png' %}"
+              alt="sun_icon"
+              title="sun_icon"
+            />
+          </div>
+          <div id="checkbox_moon">
+            <img
+              src="{% static 'img/icons8-moon-and-stars-30.png' %}"
+              alt="moon_icon"
+              title="moon_icon"
+            />
+          </div>
         </div>
       </div>
     </div>
   </div>
-  {%endblock%}
-  <div class="fridge_holder">
-    <h1>Hello World !</h1>
-    <h2>Welcome {{user.username}}, you are on Main Page</h2>
-    <h3>Work in progres</h3>
-    <h1><a href="{% url 'logout'%}">Logout</a></h1>
-    <h1><a href="{% url 'recipes_add'%}">Add Recipes</a></h1>
-    <h1><a href="{% url 'product_page'%}">Add Product</a></h1>
-    <h1><a href="/fridge/{{user.id}}">Fridge</a></h1>
-    <h3>Products:</h3>
-    <div class="products">
+</div>
+{%endblock%}
+<div class="fridge_holder">
+  <h1>Hello World !</h1>
+  <h2>Welcome {{user.username}}, you are on Main Page</h2>
+  <h3>Work in progres</h3>
+  <h1><a href="{% url 'logout'%}">Logout</a></h1>
+  <h1><a href="{% url 'recipes_add'%}">Add Recipes</a></h1>
+  <h1><a href="{% url 'product_page'%}">Add Product</a></h1>
+  <h1><a href="/fridge/{{user.id}}">Fridge</a></h1>
+  <h3>Products:</h3>
+  <div class="products">
     {%for product in products%}
     <div class="product_box">
       <div class="product_box__name">
         <div class="product_box__name__img">
-        <img src="{% static 'img/icon_meat_beef.png' %}" alt="beef icon"/>
+          <img src="{% static 'img/icon_meat_beef.png' %}" alt="beef icon" />
         </div>
         <div class="product_box__name__text">
-        <p>{{product.name}}</p>
+          <p>{{product.name}}</p>
         </div>
       </div>
       <div class="product_box__quantity">
-        <button type="button" class="plus_btn" onClick="addFunction({{product.id}})">+</button>
+        <button
+          type="button"
+          class="plus_btn"
+          onClick="addFunction({{product.id}})"
+        >
+          +
+        </button>
         <p id="{{product.id}}b">{{product.unit}}</p>
-        <button type="button" class="minus_btn" onClick="minusFunction({{product.id}})">-</button>
+        <button
+          type="button"
+          class="minus_btn"
+          onClick="minusFunction({{product.id}})"
+        >
+          -
+        </button>
       </div>
     </div>
     {% endfor %}
   </div>
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-    <button type="button" onClick = "postingChanges()" class="submit_changes">Submit changes</button>
-    </form>
-    <script>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <button
+      type="button"
+      class="submit_changes"
+      id="submit_changes"
+    >
+      Submit changes
+    </button>
+  </form>
+  <script>
     let changedProducts = {};
 
     //dummy function for adding existing products
-    function addFunction(id){
-      let unit = document.getElementById(id+"b").innerHTML
+    function addFunction(id) {
+      let unit = document.getElementById(id + "b").innerHTML;
       unit++;
-      document.getElementById(id+"b").innerHTML = unit;
+      document.getElementById(id + "b").innerHTML = unit;
 
       changedProducts[id] = unit;
       <!-- console.log(changedProducts); -->
       return changedProducts;
-
     }
 
     //dummy function for removing existing products
-    function minusFunction(id){
-      let unit = document.getElementById(id+"b").innerHTML
-      if(unit > 0){
-      --unit;
-      document.getElementById(id+"b").innerHTML = unit;
+    function minusFunction(id) {
+      let unit = document.getElementById(id + "b").innerHTML;
+      if (unit > 0) {
+        --unit;
+        document.getElementById(id + "b").innerHTML = unit;
 
-      changedProducts[id] = unit;
-      <!-- console.log(changedProducts); -->
-      return changedProducts;
-
+        changedProducts[id] = unit;
+        <!-- console.log(changedProducts); -->
+        return changedProducts;
+      }
     }
-    }
 
-    const url =""
     console.log(changedProducts);
     let temp = changedProducts;
+    const url = "";
+//
+    //$("#submit_changes").on("submit", (event) => {
+    //  event.preventDefault();
+    //  jQuery.ajax({
+    //    url: '{% url "main" user_id=user.id %}',
+    //    headers: {
+    //      csrfmiddlewaretoken: "{% csrf_token %}",
+    //    },
+    //    data: {
+    //      csrfmiddlewaretoken: "{{ csrf_token }}",
+    //      changedProducts: temp,
+    //    },
+    //    dataType: "json",
+    //  });
+    //});
 
-    function postingChanges(changedProducts){
+    function postingChanges(changedProducts) {
       var csrfToken = $("input[name='csrfmiddlewaretoken']");
       jQuery.ajax({
         type: "POST",
-        url:'{% url "main" user_id=user.id %}',
-          headers: {
-              'csrfmiddlewaretoken': '{% csrf_token %}'
-          },
-        data: {
-          csrfmiddlewaretoken: '{{ csrf_token }}' ,
-          'changedProducts':temp,
+        url: url,
+        headers: {
+          csrfmiddlewaretoken: "{% csrf_token %}",
         },
-        dataType: 'json',
+        data: {
+          csrfmiddlewaretoken: "{{ csrf_token }}",
+          changedProducts: temp,
+        },
+        dataType: "json",
         success: function (json) {
-               console.log("OK")
-            },
-        error: function(error) {
-
-           console.log(changedProducts)
-           console.log("Błąd")
-        }
-      })
-      changedProducts = {}
+          console.log("OK");
+        },
+        error: function (error) {
+          console.log(changedProducts);
+          console.log("Błąd");
+        },
+      });
+      changedProducts = {};
     }
   </script>
-  </div>
+</div>
 
-  <div id="nav_reciper_show"></div>
-  <div id="nav_recipe_res_div" style="display: none;">
-    <div class="nav_title">
-      <div id="nav_reciper_hidder"></div>
-      <p>Recipes</p>
-    </div>
-    <div class="nav_filters">
-      <p class="nav_recipe_h">Filters</p>
-      <form>
-        <input type="checkbox" id="filter1" name="filter1" value="difficulty">
-        <label for="filter1" title="difficulty"> difficulty</label>
-        <input type="checkbox" id="filter2" name="filter2" value="Car">
-        <label for="filter2" title="prepare time">prepare time</label><br>
-        <input type="checkbox" id="filter3" name="filter3" value="Boat">
-        <label for="filter3" title="raiting">raiting</label>
-        <input type="checkbox" id="filter4" name="filter4" value="Bike">
-        <label for="filter4" title="per serving"> per serving</label><br>
-        <input type="checkbox" id="filter5" name="filter5" value="Car">
-        <label for="filter5" title="verificated"> verificated</label><br>
-        <input type="submit" value="Apply">
-      </form>     
-    </div>
-    <div class="nav_results">
-      <div class="nav_recipe_helper" title="results explanation"></div>
-      <p class="nav_recipe_h">Results</p>
-    </div>
+<div id="nav_reciper_show"></div>
+<div id="nav_recipe_res_div" style="display: none">
+  <div class="nav_title">
+    <div id="nav_reciper_hidder"></div>
+    <p>Recipes</p>
   </div>
-  <div id="result-explanation">
-    <p>Explanation</p>
+  <div class="nav_filters">
+    <p class="nav_recipe_h">Filters</p>
+    <form>
+      <input type="checkbox" id="filter1" name="filter1" value="difficulty" />
+      <label for="filter1" title="difficulty"> difficulty</label>
+      <input type="checkbox" id="filter2" name="filter2" value="Car" />
+      <label for="filter2" title="prepare time">prepare time</label><br />
+      <input type="checkbox" id="filter3" name="filter3" value="Boat" />
+      <label for="filter3" title="raiting">raiting</label>
+      <input type="checkbox" id="filter4" name="filter4" value="Bike" />
+      <label for="filter4" title="per serving"> per serving</label><br />
+      <input type="checkbox" id="filter5" name="filter5" value="Car" />
+      <label for="filter5" title="verificated"> verificated</label><br />
+      <input type="submit" value="Apply" />
+    </form>
   </div>
-{% endblock %} 
+  <div class="nav_results">
+    <div class="nav_recipe_helper" title="results explanation"></div>
+    <p class="nav_recipe_h">Results</p>
+  </div>
+</div>
+<div id="result-explanation">
+  <p>Explanation</p>
+</div>
+{% endblock %}
