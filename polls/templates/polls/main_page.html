@@ -11,8 +11,8 @@
       <ul id="links">
         <li class="link"><a href="{% url 'recipes_add'%}"><img src="{% static 'img/icon_add.png' %}" alt="add_recipe_icon"/><p>Add Recipes</p></a></li>
         <li class="link"><a href="{% url 'product_page'%}"><img src="{% static 'img/icons8-food-bar-add_50.png' %}" alt="add_product_icon"/><p>Add Product</p></a></li>
+        <li class="link"><a href="{% url 'all_recipes'%}"><img src="{% static 'img/icons8-repository-50.png' %}" alt="all_recipes_icon"/><p>All Recipes</p></a></li>
         <li class="link"><a href="/fridge/{{user.id}}"><img src="{% static 'img/icons8-fridge-with-open-freezer-64.png' %}" alt="fridge_icon"/><p>Fridge</p></a></li>
-        <li class="link"><a href="{% url 'logout'%}"><img src="{% static 'img/icon_logout.png' %}" alt="logout"/><p>Logout</p></a></li>
       </ul>
     </div>
     <div class="navbar__toggle_btn" >

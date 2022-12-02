@@ -14,11 +14,19 @@ $(document).ready(()=>{
 
 function comment_section_toggle(){
   $("#recipe_comment_section").toggle("fast");
-  console.log($('#comments_display_btn').css('left'));
   if($('#comments_display_btn').css('left') == '0px'){
     $('#comments_display_btn').css('left','300px');
   }else{
     $('#comments_display_btn').css('left','0px');
+  }
+}
+
+function all_recipes_filter_section_toggle(){
+  $("#all_recipe_filters_section").toggle("fast");
+  if($('#all_recipe_filters_display_btn').css('left') == '0px'){
+    $('#all_recipe_filters_display_btn').css('left','300px');
+  }else{
+    $('#all_recipe_filters_display_btn').css('left','0px');
   }
 }
 
