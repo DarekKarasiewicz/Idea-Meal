@@ -19,13 +19,15 @@ class Comment(models.Model):
         return self.description
 
 class Recipe(models.Model):
+    author = models.ForeignKey(User,
+                               on_delete=models.CASCADE,null=True,default=None)
     name = models.CharField(max_length = 32, default=None)
     description = models.TextField(default=None)
     guidance = models.TextField(default=None)
     difficulty = models.IntegerField(default=None)
     cuisine_category = models.CharField(max_length = 32, default=None)
     meal_time_category = models.CharField(max_length = 32, default=None)
-    prepare_time = models.DateTimeField(default=None, null=True)
+    prepare_time = models.IntegerField(default=None, null=True)
     spiciness = models.IntegerField(null=True, default=None)
     per_serving = models.IntegerField(null=True, default=None)
     is_verificated = models.BooleanField(default=None)
