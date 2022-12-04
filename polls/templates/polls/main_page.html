@@ -66,7 +66,7 @@
     <div class="product_box">
       <div class="product_box__name">
         <div class="product_box__name__img">
-          <img src="{% static 'img/icon_meat_beef.png' %}" alt="beef icon" />
+          <img src="../static/img/{{product.product_category}}.png" alt="{{product.product_category}} icon" />
         </div>
         <div class="product_box__name__text">
           <p>{{product.name}}</p>
@@ -95,15 +95,19 @@
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <button
-      type="submit"
+      type="button"
       class="submit_changes"
       id="submit_changes"
+      onclick="postingChanges()"
     >
       Submit changes
     </button>
   </form>
   <script>
     let changedProducts = {};
+    let productId = [];
+    document.getElementById("submit_changes").style.display = "none";
+
 
     //dummy function for adding existing products
     function addFunction(id) {
@@ -112,8 +116,9 @@
       document.getElementById(id + "b").innerHTML = unit;
 
       changedProducts[id] = unit;
-      console.log(changedProducts);
-      return changedProducts;
+      productId.push(id);
+      document.getElementById("submit_changes").style.display = "block";
+      //return changedProducts;
     }
 
     //dummy function for removing existing products
@@ -124,50 +129,40 @@
         document.getElementById(id + "b").innerHTML = unit;
 
         changedProducts[id] = unit;
-        console.log(changedProducts);
-        return changedProducts;
+        productId.push(id);
+        document.getElementById("submit_changes").style.display = "block";
+        // return changedProducts;
       }
     }
 
-    console.log(changedProducts);
-    let temp = changedProducts;
-    const url = "";
+    
 
-    //$("#submit_changes").on("submit", function(event) {
-    //  event.preventDefault();
-    //  jQuery.ajax({
-    //    url: '{% url "main" user_id=user.id %}',
-    //    data: {
-    //      csrfmiddlewaretoken: "{{ csrf_token }}",
-    //      changedProducts: temp,
-    //    },
-    //    dataType: "json",
-    //  });
-    //});
-
-    //function postingChanges(changedProducts) {
-    //  var csrfToken = $("input[name='csrfmiddlewaretoken']");
-    //  jQuery.ajax({
-    //    type: "POST",
-    //    url: '{% url "main" user_id=user.id %}',
-    //    headers: {
-    //      csrfmiddlewaretoken: "{% csrf_token %}",
-    //    },
-    //    data: {
-    //      csrfmiddlewaretoken: "{{ csrf_token }}",
-    //      changedProducts: temp,
-    //    },
-    //    dataType: "json",
-    //    success: function (json) {
-    //      console.log("OK");
-    //    },
-    //    error: function (error) {
-    //      console.log(changedProducts);
-    //      console.log("Błąd");
-    //    },
-    //  });
-    //  changedProducts = {};
-    //}
+    function postingChanges(){
+      let uniqueProductIds = [...new Set(productId)];
+      console.log("post")
+      console.log(uniqueProductIds);
+      console.log(changedProducts)
+      jQuery.ajax({
+        type: "POST",
+        url: '{% url "main" user_id=user.id %}',
+        data: {
+          "productId": uniqueProductIds,
+          "changedProducts": changedProducts,
+          "csrfmiddlewaretoken": "{{ csrf_token }}",
+        },
+        success: function (data) {
+          console.log("success");
+        },
+        failure: function (data) {
+          console.log("failure");
+          alert("bruh");
+        },
+      })
+      changedProducts = {};
+      productId = [];    
+      uniqueProductIds =[];
+      document.getElementById("submit_changes").style.display = "none";
+    }
   </script>
 </div>
 

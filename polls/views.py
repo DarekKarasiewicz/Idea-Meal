@@ -36,7 +36,7 @@ class Product_category(StrEnum):
     FRUIT = auto()
     VEGETABLES = auto()
 
-class Product_category(StrEnum):
+class Product_categor(StrEnum):
     ML = auto()
     GRAMS = auto()
     UNIT = auto()
@@ -92,9 +92,22 @@ def main_page(request,user_id):
     all_recipes = Recipes.objects.all()
     all_products = Product.objects.all()
 
+    dictionary = {}
+    productIds = []
+
     if request.method == "POST":
-        dictionary = request.POST.get("changedProducts")
-        print(dictionary)
+        productIds = request.POST.getlist("productId[]")
+        for id in productIds:
+            dictionary[id] = request.POST.get("changedProducts["+ id +"]",None) 
+        
+    print(productIds)
+    print(dictionary)
+    if len(productIds) > 0:
+        for id in productIds:
+            product_update = Product.objects.get(id = id)
+            product_update.unit = dictionary[id]
+            product_update.save()
+
 
     return render(request,"polls/main_page.html",{'user':session_user
                                                  ,'recipes': all_recipes
