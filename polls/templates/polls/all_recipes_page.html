@@ -8,74 +8,244 @@
         <div></div>
     </div>  
     <div id="all_recipe_filters_section" style="display: none;">
-        <p>HERE WILL BE SOME FILTERS</p>
-        <input type="text" placeholder="search for recipe...">
-        <br>
-        <form>      
-            <fieldset>      
-                <legend>Meal time:</legend>    
-                <input type="checkbox" name="meal_time" value="any">Any<br>    
-                <input type="checkbox" name="meal_time" value="breakfast">Breakfast<br>      
-                <input type="checkbox" name="meal_time" value="lunch">Lunch<br>      
-                <input type="checkbox" name="meal_time" value="dinner">Dinner<br>         
-                <input type="checkbox" name="meal_time" value="dessert">Dessert<br> 
-                <input type="checkbox" name="meal_time" value="supper">Supper<br>
-            </fieldset>      
-        </form>
+        <div class="container" style="text-align: center;">
+            <div class="basic_filters">
+            <p style="
+            font-size: 33px;
+            margin: 15px;
+            font-weight: bold;
+            ">Recipes filters</p>
+            <input class="form-control" type="text" placeholder="search for recipe...">
+            <br>
+            <fieldset style="margin-bottom: 25px;">      
+                <legend style="font-size: 28px;font-weight: 100;">Order By:</legend>   
+                <select class="form-select" name="recipe_order_by" id="recipe_order_by">
+                    <option value="name">Name</option>
+                    <option value="spiciness_ASC">spiciness ASC</option>
+                    <option value="spiciness_DESC">spiciness DESC</option>
+                    <option value="popularity">popularity</option>
+                    <option value="prepare_time ASC">prepare time ASC</option>
+                    <option value="prepare_time DESC">prepare time DESC</option>
+                </select> 
+            </fieldset>
+            </div>
+            <div class="advanced_filters">
+                <fieldset>      
+                    <legend class="clickable_legend">Meal time:<span class="toggle_category_arrow"></span></legend>   
+                    <div class="form-check filters_centered">
+                        <label class="form-check-label" for="meal_time_filter_1">Breakfast</label>
+                        <input id="meal_time_filter_1" class="form-check-input" type="checkbox" name="meal_time" value="breakfast"><br>
+                        <label class="form-check-label" for="meal_time_filter_2">Lunch</label>   
+                        <input id="meal_time_filter_2" class="form-check-input" type="checkbox" name="meal_time" value="lunch"><br>
+                        <label class="form-check-label" for="meal_time_filter_3">Dinner</label>  
+                        <input id="meal_time_filter_3" class="form-check-input" type="checkbox" name="meal_time" value="dinner"><br>
+                        <label class="form-check-label" for="meal_time_filter_4">Dessert</label>     
+                        <input id="meal_time_filter_4" class="form-check-input" type="checkbox" name="meal_time" value="dessert"><br>
+                        <label class="form-check-label" for="meal_time_filter_5">Supper</label>
+                        <input id="meal_time_filter_5" class="form-check-input" type="checkbox" name="meal_time" value="supper"><br>
+                    </div>  
+                </fieldset> 
+                <fieldset>      
+                    <legend class="clickable_legend">Prepare time:<span class="toggle_category_arrow"></span></legend>   
+                    <div class="form-check filters_centered">
+                        <label class="form-check-label" for="prepare_time_filter_1"><span>&#60;</span> 15 min</label>
+                        <input id="prepare_time_filter_1" class="form-check-input" type="checkbox" name="prepare_time" value="1"><br>
+                        <label class="form-check-label" for="prepare_time_filter_2">15 min - 30 min</label>
+                        <input id="prepare_time_filter_2" class="form-check-input" type="checkbox" name="prepare_time" value="2"><br>
+                        <label class="form-check-label" for="prepare_time_filter_3">30 min - 60 min</label>   
+                        <input id="prepare_time_filter_3" class="form-check-input" type="checkbox" name="prepare_time" value="3"><br>
+                        <label class="form-check-label" for="prepare_time_filter_4">1 hour +</label>  
+                        <input id="prepare_time_filter_4" class="form-check-input" type="checkbox" name="prepare_time" value="4"><br>
+                    </div>  
+                </fieldset> 
+                <fieldset>      
+                    <legend class="clickable_legend">Spiciness:<span class="toggle_category_arrow"></span></legend>   
+                    <div class="form-check filters_centered">
+                        <label class="form-check-label" for="spiciness_filter_1">mild</label>
+                        <input id="spiciness_filter_1" class="form-check-input" type="checkbox" name="spiciness" value="1"><br>
+                        <label class="form-check-label" for="spiciness_filter_2">slightly spicy</label>
+                        <input id="spiciness_filter_2" class="form-check-input" type="checkbox" name="spiciness" value="2"><br>
+                        <label class="form-check-label" for="spiciness_filter_3">medium spicy</label>   
+                        <input id="spiciness_filter_3" class="form-check-input" type="checkbox" name="spiciness" value="3"><br>
+                        <label class="form-check-label" for="spiciness_filter_4">very spicy</label>  
+                        <input id="spiciness_filter_4" class="form-check-input" type="checkbox" name="spiciness" value="4"><br>
+                    </div>  
+                </fieldset> 
+                <fieldset>      
+                    <legend class="clickable_legend">Difficulty:<span class="toggle_category_arrow"></span></legend>   
+                    <div class="form-check filters_centered">
+                        <label class="form-check-label" for="difficulty_filter_1">easy</label>
+                        <input id="difficulty_filter_1" class="form-check-input" type="checkbox" name="difficulty" value="1"><br>
+                        <label class="form-check-label" for="difficulty_filter_21">medium</label>
+                        <input id="difficulty_filter_2" class="form-check-input" type="checkbox" name="difficulty" value="2"><br>
+                        <label class="form-check-label" for="difficulty_filter_3">hard</label>   
+                        <input id="difficulty_filter_3" class="form-check-input" type="checkbox" name="difficulty" value="3"><br>
+                    </div>  
+                </fieldset> 
+                <fieldset>      
+                    <legend class="clickable_legend">Cuisine:<span class="toggle_category_arrow"></span></legend>   
+                    <div class="form-check filters_centered">
+                        <label class="form-check-label" for="cuisine_filter_1">Asian cusine</label>
+                        <input id="cuisine_filter_1" class="form-check-input" type="checkbox" name="cuisine" value="asian"><br>
+                        <label class="form-check-label" for="cuisine_filter_2">Chinese cusine</label>
+                        <input id="cuisine_filter_2" class="form-check-input" type="checkbox" name="cuisine" value="chinese"><br>
+                        <label class="form-check-label" for="cuisine_filter_3">Polish cuisine</label>
+                        <input id="cuisine_filter_3" class="form-check-input" type="checkbox" name="cuisine" value="polish"><br>
+                        <label class="form-check-label" for="cuisine_filter_4">Greek cuisine</label>
+                        <input id="cuisine_filter_4" class="form-check-input" type="checkbox" name="cuisine" value="greek"><br>
+                        <label class="form-check-label" for="cuisine_filter_5">Italian cuisine</label>
+                        <input id="cuisine_filter_5" class="form-check-input" type="checkbox" name="cuisine" value="italian"><br>
+                        <label class="form-check-label" for="cuisine_filter_6">Turkish cuisine</label>
+                        <input id="cuisine_filter_6" class="form-check-input" type="checkbox" name="cuisine" value="turkish"><br>
+                    </div>  
+                </fieldset> 
+                <fieldset>      
+                    <legend class="clickable_legend">Portions:<span class="toggle_category_arrow"></span></legend>   
+                    <div class="form-check filters_centered">
+                        <label class="form-check-label" for="portions_filter_1"><span>&#60;</span> 5</label>
+                        <input id="portions_filter_1" class="form-check-input" type="checkbox" name="portions" value="1"><br>
+                        <label class="form-check-label" for="portions_filter_2">5 - 10</label>
+                        <input id="portions_filter_2" class="form-check-input" type="checkbox" name="portions" value="2"><br>
+                        <label class="form-check-label" for="portions_filter_3">10 - 15</label>
+                        <input id="portions_filter_3" class="form-check-input" type="checkbox" name="portions" value="3"><br>
+                        <label class="form-check-label" for="portions_filter_4">15 +</label>
+                        <input id="portions_filter_4" class="form-check-input" type="checkbox" name="portions" value="4"><br>
+                    </div>  
+                </fieldset>
+                <fieldset>      
+                    <legend class="clickable_legend">Verficiated:<span class="toggle_category_arrow"></span></legend>   
+                    <div class="form-check filters_centered">
+                        <label class="form-check-label" for="verficiated_filter_1">yes</label>
+                        <input id="verficiated_filter_1" class="form-check-input" type="checkbox" name="verficiated" value="yes"><br>
+                        <label class="form-check-label" for="verficiated_filter_2">no</label>
+                        <input id="verficiated_filter_2" class="form-check-input" type="checkbox" name="verficiated" value="no"><br>     
+                    </div>  
+                </fieldset>
+                <button type="button" class="btn btn-primary idea_meal_button_color">Filtruj</button>     
+            </div>
+        </div>
     </div>
     <div class="all_recipes_holder">
         <div id="page_title">
           <h1>Recipes</h1>
         </div>
-        <a href="/main_page/{{user_id}}"><div class="back_button_img"></div></a>
+        <a href={% url 'main' user_id=user.id%}><div class="back_button_img"></div></a>
         <div class="all_recipes_content_holder">
             <div class="container">
-                <div class="recipe_item">
-                    <div class="text"></div>
+                {%for x in all_recipes%}
+                    <!-- <a href ="/recipe/{{x.id}}">{{x}}</a><br> -->
+                    <div class="recipe_item">
+                        <div class="img"></div>
+                        <div class="text">
+                            <div class="name">{{x.name}}</div>
+                            <div>
+                                <button type="button" class="btn btn-primary idea_meal_button_color">Add to list</button> 
+                                <a href ="/recipe/{{x.id}}"><button type="button" class="btn btn-primary idea_meal_button_color">See more</button></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <!-- <div class="recipe_item">
+                    <div class="img"></div>
+                    <div class="text">
+                        <div class="name">name of recipe</div>
+                        <div>
+                            <button type="button" class="btn btn-primary idea_meal_button_color">Add to list</button> 
+                            <button type="button" class="btn btn-primary idea_meal_button_color">See more</button> 
+                        </div>
+                    </div>
                 </div>
                 <div class="recipe_item">
-                    <div class="text"></div>
+                    <div class="img"></div>
+                    <div class="text">
+                        <div class="name">name of recipe</div>
+                        <div>
+                            <button type="button" class="btn btn-primary idea_meal_button_color">Add to list</button> 
+                            <button type="button" class="btn btn-primary idea_meal_button_color">See more</button> 
+                        </div>
+                    </div>
                 </div>
                 <div class="recipe_item">
-                    <div class="text"></div>
+                    <div class="img"></div>
+                    <div class="text">
+                        <div class="name">name of recipe</div>
+                        <div>
+                            <button type="button" class="btn btn-primary idea_meal_button_color">Add to list</button> 
+                            <button type="button" class="btn btn-primary idea_meal_button_color">See more</button> 
+                        </div>
+                    </div>
                 </div>
                 <div class="recipe_item">
-                    <div class="text"></div>
+                    <div class="img"></div>
+                    <div class="text">
+                        <div class="name">name of recipe</div>
+                        <div>
+                            <button type="button" class="btn btn-primary idea_meal_button_color">Add to list</button> 
+                            <button type="button" class="btn btn-primary idea_meal_button_color">See more</button> 
+                        </div>
+                    </div>
                 </div>
                 <div class="recipe_item">
-                    <div class="text"></div>
+                    <div class="img"></div>
+                    <div class="text">
+                        <div class="name">name of recipe</div>
+                        <div>
+                            <button type="button" class="btn btn-primary idea_meal_button_color">Add to list</button> 
+                            <button type="button" class="btn btn-primary idea_meal_button_color">See more</button> 
+                        </div>
+                    </div>
                 </div>
                 <div class="recipe_item">
-                    <div class="text"></div>
+                    <div class="img"></div>
+                    <div class="text">
+                        <div class="name">name of recipe</div>
+                        <div>
+                            <button type="button" class="btn btn-primary idea_meal_button_color">Add to list</button> 
+                            <button type="button" class="btn btn-primary idea_meal_button_color">See more</button> 
+                        </div>
+                    </div>
                 </div>
                 <div class="recipe_item">
-                    <div class="text"></div>
+                    <div class="img"></div>
+                    <div class="text">
+                        <div class="name">name of recipe</div>
+                        <div>
+                            <button type="button" class="btn btn-primary idea_meal_button_color">Add to list</button> 
+                            <button type="button" class="btn btn-primary idea_meal_button_color">See more</button> 
+                        </div>
+                    </div>
                 </div>
                 <div class="recipe_item">
-                    <div class="text"></div>
+                    <div class="img"></div>
+                    <div class="text">
+                        <div class="name">name of recipe</div>
+                        <div>
+                            <button type="button" class="btn btn-primary idea_meal_button_color">Add to list</button> 
+                            <button type="button" class="btn btn-primary idea_meal_button_color">See more</button> 
+                        </div>
+                    </div>
                 </div>
                 <div class="recipe_item">
-                    <div class="text"></div>
+                    <div class="img"></div>
+                    <div class="text">
+                        <div class="name">name of recipe</div>
+                        <div>
+                            <button type="button" class="btn btn-primary idea_meal_button_color">Add to list</button> 
+                            <button type="button" class="btn btn-primary idea_meal_button_color">See more</button> 
+                        </div>
+                    </div>
                 </div>
                 <div class="recipe_item">
-                    <div class="text"></div>
-                </div>
-                <div class="recipe_item">
-                    <div class="text"></div>
-                </div>
-                <div class="recipe_item">
-                    <div class="text"></div>
-                </div>
-                <div class="recipe_item">
-                    <div class="text"></div>
-                </div>
-                <div class="recipe_item">
-                    <div class="text"></div>
-                </div>
+                    <div class="img"></div>
+                    <div class="text">
+                        <div class="name">name of recipe</div>
+                        <div>
+                            <button type="button" class="btn btn-primary idea_meal_button_color">Add to list</button> 
+                            <button type="button" class="btn btn-primary idea_meal_button_color">See more</button> 
+                        </div>
+                    </div>
+                </div> -->
             </div>
-            <!-- {%for x in all_recipes%}
-            <a href ="/recipe/{{x.id}}">{{x}}</a><br>
-            {% endfor %} -->
         </div>
     </div>
     

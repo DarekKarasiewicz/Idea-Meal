@@ -134,3 +134,12 @@ $('.nav_recipe_helper').on('click',function(){
     focusConfirm: false,
   })
 })
+
+$('.clickable_legend').on('click',function(){
+  if($(this).find('.toggle_category_arrow').hasClass("arrow_rotate")){
+    $(this).find('.toggle_category_arrow').removeClass('arrow_rotate');
+  }else{
+    $(this).find('.toggle_category_arrow').addClass('arrow_rotate');
+  }
+  $(this).parent().find('.form-check.filters_centered').toggle("fast")
+})
