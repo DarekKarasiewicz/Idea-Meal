@@ -116,8 +116,9 @@ def register_page(request):
     if request.method == "POST":
         login = request.POST["login"]
         password = request.POST["password"]
+        email = request.POST["email"]
         if User.objects.filter(username=login).exists() == False:
-            user = User.objects.create_user(login, None, password)
+            user = User.objects.create_user(login, email, password)
             user.save()
             Fridge(user=user).save()
             return HttpResponseRedirect(reverse("login"))
@@ -225,6 +226,7 @@ def recipes_page(request, recipe_id):
         comment.save()
         tmf = Comments_to_Recipe(recipe=recipe, comment=comment)
         tmf.save()
+        return HttpResponseRedirect(reverse('recipe_page', args=[recipe_id]))
 
     test_show = recipe.__dict__
     test_show1 = Comments_to_Recipe.objects.all()
@@ -236,7 +238,7 @@ def recipes_page(request, recipe_id):
     return render(
         request,
         "polls/recipe_view.html",
-        {"recipe": test_show, "all_comments": all_comments},
+        {"recipe": test_show, "all_comments": all_comments, "user":session_user},
     )
 
 @login_required
