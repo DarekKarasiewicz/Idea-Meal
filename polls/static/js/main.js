@@ -120,8 +120,8 @@ $('.nav_recipe_helper').on('click',function(){
       '<li class="result_helper_li"><div class="verificated_helper_img"></div><div class="img_info">Tells if recipe was accepted by moderators</div></li>'+
       '<li class="result_helper_li"><div class="spicy_helper_img"></div><div class="img_info">Tells about spiciness of recipe</div></li>'+
       '<li class="result_helper_li"><ul>'+
-      '<li class="result_helper_li text_visibility"><span style="color:green;">green</span> - mild , <span style="color:yellow; text-shadow: 0 0 1px black, 0 0 1px black;";>yellow</span> - slightly spicy</li>'+
-      '<li class="result_helper_li text_visibility"><span style="color:orange";>orange</span> - medium spicy , <span style="color:red";>red</span> - very spicy</li>'+
+      '<li class="result_helper_li text_visibility"><span style="color:green;">green</span> - mild , <span style="color:yellow; text-shadow: 0 0 1px black, 0 0 1px black;";>yellow</span> - medium, <span style="color:orange";>orange</span> - hot ,</li>'+
+      '<li class="result_helper_li text_visibility"><span style="color:red";>red</span> - extra hot</li>'+
       '</ul></li>'+
       '<li class="result_helper_li"><div class="time_img"></div><div class="img_info">Tells about time prepare time of recipe</div></li>'+
       '<li class="result_helper_li"><div class="people_img"></div><div class="img_info">Tells how many portion you receive</div></li>'+

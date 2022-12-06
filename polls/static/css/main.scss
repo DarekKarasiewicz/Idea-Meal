@@ -561,6 +561,7 @@ footer {
           height: 20px !important;
           width: 20px !important;
           position: absolute;
+          filter: var(--idea_img_filter);
           top: -9px;
           left: -9px;
         }
@@ -595,8 +596,8 @@ footer {
             float: left;
             overflow: hidden;
             font-size: 11px;
-            padding-left: 10px;
-            padding-top: 2px;
+            padding-left: 5px;
+            padding-top: 5px;
           }
           div:last-child{
             width: 20%;
@@ -1006,18 +1007,28 @@ footer {
 }
 
 #recipe_helper{
-  background-image: url('/static/img/icons8-puzzled-30.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
+  background-color: var(--idea-color-first_plan);
   filter: drop-shadow(0 0 0.25rem #89abc6);
-  height: 30px !important;
-  width: 30px !important;
+  height: 45px !important;
+  width: 45px !important;
   position: absolute;
   top: 15px;
   right: 15px;
-  cursor: pointer;
-  pointer-events: all;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .img{
+    background-image: url('/static/img/icons8-puzzled-30.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    cursor: pointer;
+    pointer-events: all;
+    height: 30px !important;
+    width: 30px !important;
+    filter: var(--idea_img_filter);
+  }
 }
 
 .input-holder i {
@@ -1234,19 +1245,24 @@ footer {
     }
   }
 }
-.add_recipe_holder{
+.add_recipe_holder.correct_holder{
+  height: 825px;
+  top: 52%;
+  .add_recipe_left, .add_recipe_right{
+    height: 825px;
+  }
   .add_recipe_left{
     .top_section{
       height: 175px;
-      width: 90%;
+      width: 100%;
+      position: relative;
       margin-left: auto;
       margin-right: auto;
-      border-bottom: 1px solid black;
       .recipe_photo{
-        height: 175px;
+        height: 170px;
         width: 35%;
         float: left;
-        background-image: url('https://via.placeholder.com/175/09f/fff.png');
+        background-image: url('/static/img/temp_recipe_img_holder.jfif');
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
@@ -1263,28 +1279,50 @@ footer {
         .author{
           color: white;
           font-size: 16px;
+          .verify{
+            float: right;
+            margin-right: 15px;
+            .verificated_recipe{
+              background-image: url('/static/img/icons8-checkmark-30.png');
+              background-repeat: no-repeat;
+              background-size: contain;
+              background-position: center;
+              position: absolute;
+              height: 20px !important;
+              width: 20px !important;
+              filter: var(--idea_img_filter);
+            }
+          }
         }
       }
     }
+    .top_section::before{
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 0;
+      width: 80%;
+      left: 10%;
+      border-bottom: 1px solid black;
+    }
     .middle_section{
       height: 540px;
-      width: 90%;
+      width: 100%;
       margin-left: auto;
       margin-right: auto;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       flex-wrap: wrap;
-      .middle_section_left{
-        height: 540px;
-        width: 35%;
+      .middle_section_top{
+        height: 65px;
+        width: 100%;
+        display: flex;
+        margin: 8px 0px;
         .item{
-          width: 100%;
-          height: 60px;
+          width: calc(100%/6);
+          height: 35px;
           text-align: center;
-          line-height: 60px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+          display: block;
           .difficulty_ico{
             background-image: url('/static/img/icons8-effort-50.png');
             background-repeat: no-repeat;
@@ -1292,6 +1330,7 @@ footer {
             background-position: center;
             height: 35px;
             width: 35px;
+            margin: auto;
           }
           .cuisine_ico{
             background-image: url('/static/img/icons8-earth-globe-64.png');
@@ -1300,6 +1339,7 @@ footer {
             background-position: center;
             height: 35px;
             width: 35px;
+            margin: auto;
           }
           .per_serving_ico{
             background-image: url('/static/img/icons8-user-groups-32.png');
@@ -1308,6 +1348,7 @@ footer {
             background-position: center;
             height: 35px;
             width: 35px;
+            margin: auto;
           }
           .spiciness_ico{
             background-image: url('/static/img/icons8-chili-pepper-30.png');
@@ -1316,6 +1357,7 @@ footer {
             background-position: center;
             height: 35px;
             width: 35px;
+            margin: auto;
           }
           .time_ico{
             background-image: url('/static/img/icons8-wall-clock-32.png');
@@ -1324,6 +1366,7 @@ footer {
             background-position: center;
             height: 35px;
             width: 35px;
+            margin: auto;
           }
           .raiting_ico{
             background-image: url('/static/img/icons8-star-32-yellow.png');
@@ -1332,10 +1375,19 @@ footer {
             background-position: center;
             height: 35px;
             width: 35px;
+            margin: auto;
+          }
+          .meal_time_ico{
+            background-image: url('/static/img/icons8-dining-room-50.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            height: 35px;
+            width: 35px;
+            margin: auto;
           }
           .item_text{
-            font-size: 28px;
-            padding-left: 5px;
+            font-size: 20px;
           }
         }
         .star_raiting_redirect{
@@ -1349,27 +1401,59 @@ footer {
       }
       .middle_section_right{
         height: 540px;
-        width: 65%;
+        width: 100%;
         display: flex;
         flex-direction: column;
         .short_desc_sec{
-          height: 140px;
+          min-height: 100px;
           width: 100%;
-          border-left: 1px solid black;
+          position: relative;
           padding: 5px;
+          text-align: center;
+        }
+        .short_desc_sec::before{
+          content: '';
+          display: block;
+          position: absolute;
+          top: 0;
+          width: 80%;
+          left: 10%;
+          border-top: 1px solid black;
         }
         .ingredients_sec{
           min-height: 200px;
           max-height: 400px;
           width: 100%;
-          border-left: 1px solid black;
-          border-top: 1px solid black;
+          // border-top: 1px solid black;
+          position: relative;
           padding: 5px;
+          p:first-child{
+            font-size: 26px;
+            font-weight: 500;
+            color: white;
+            text-align: center;
+          }
+        }
+        .ingredients_sec::before{
+          content: '';
+          display: block;
+          position: absolute;
+          top: 0;
+          width: 80%;
+          left: 10%;
+          border-top: 1px solid black;
         }
       }
     }
   }
-  .add_recipe_right{}
+  .add_recipe_right{
+    p:first-child{
+      font-size: 26px;
+      font-weight: 500;
+      color: white;
+      text-align: center;
+    }
+  }
 }
 
 .validation_error_icon{
@@ -1399,6 +1483,7 @@ footer {
     background-size: contain;
     width: 38px;
     height: 38px;
+    filter: var(--idea_img_filter);
   }
 }
 #all_recipe_filters_section {

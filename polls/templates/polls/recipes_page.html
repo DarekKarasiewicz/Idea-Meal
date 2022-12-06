@@ -4,7 +4,9 @@
   Idea-Meal || Adding Recipe
 {% endblock %}
 {% block body %}
-  <div id="recipe_helper" title="How to fill Add recipe form?"></div>  
+  <div id="recipe_helper" title="How to fill Add recipe form?">
+    <div class="img"></div>
+  </div>  
   <div class="add_recipe_holder">
     <div id="page_title">
       <h1>Add recipe</h1>
@@ -94,6 +96,7 @@ $('#recipe_helper').on('click',function(){
     title: '<strong>How to create good recipe?</strong>',
     icon: 'info',
     html:
+      '<div id="nav_helper_color">'+
       '<p class="centered">'+
       '  In this section I want to tell you more about in which way fill form on the right side to create clear and legible recipe that maybe some day will be the most popular on this site.'+
       '<p>'+
@@ -109,7 +112,8 @@ $('#recipe_helper').on('click',function(){
       '</p>'+
       '<p class="centered">'+
       '  If you follow this quick tutorial you will end with solid recipe which one will be growing in popularity before you know it.'+
-      '</p>',
+      '</p>'+
+      '<div>',
     width: '45em',
     showCloseButton: true,
     showCancelButton: false,

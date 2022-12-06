@@ -55,14 +55,6 @@
       <h2>Welcome {{user.username}}, you are on Main Page</h2>
       <h3>Work in progres</h3>
     </div>
-    <!-- <h1><a href="{% url 'logout'%}">Logout</a></h1>
-    <h1><a href="{% url 'recipes_add'%}">Add Recipes</a></h1>
-    <h1><a href="{% url 'product_page'%}">Add Product</a></h1>
-    <h1><a href="/fridge/{{user.id}}">Fridge</a></h1> -->
-    <!-- <h3>Recipes:</h3>
-    {%for x in recipes%}
-    <a href ="/recipe/{{x.id}}"></a><br>
-    {% endfor %} -->
     <h3>Products:</h3>
     {%for x in products%}
     {{x}}<br>
@@ -102,7 +94,7 @@
       <div class="recipe_box">
         <div class="recipe_box_simple">
           {%if x.is_verificated == True %}
-            <div class="verificated"></div>
+            <span class="verificated_recipe"></span>
           {% endif %}
           <div class="name"><p>{{x.name}}</p></div>
           {%if x.difficulty == 1 %}
@@ -140,8 +132,8 @@
             <div class="three-seg">
               <div class="cuisine_img"></div>
               <div class="info">
-                {%if x.cuisine_category_id != None %}
-                  {{x.cuisine_category_id}}
+                {%if x.cuisine_category != None %}
+                  {{x.cuisine_category}}
                 {% else %}
                   ---
                 {% endif %}
@@ -155,7 +147,7 @@
               <div class="star"></div>
               <div class="star"></div>
               <div class="star"></div>
-              <div class="counter">(15)</div>
+              <div class="counter">({{x.comment_id}})</div>
             </div>
             <div class="two-seg-two"><p><a href ="/recipe/{{x.id}}">See more</a></p></div>
           </div>
