@@ -12,6 +12,16 @@ $(document).ready(()=>{
   })
 })
 
+function comment_section_toggle(){
+  $("#recipe_comment_section").toggle("fast");
+  console.log($('#comments_display_btn').css('left'));
+  if($('#comments_display_btn').css('left') == '0px'){
+    $('#comments_display_btn').css('left','300px');
+  }else{
+    $('#comments_display_btn').css('left','0px');
+  }
+}
+
 $('.recipe_box_simple').on('click',function(){
   if($(this).siblings('.recipe_box_extended').hasClass('showclass')){
     $(this).siblings('.recipe_box_extended').removeClass('showclass');
@@ -35,29 +45,21 @@ $("#navBtn").on("click",() => {
   document.getElementById("nav").classList.toggle("short");
 })
 
-//function for buttons
-// let btnContainer = document.getElementById("links");
-// let btns = btnContainer.getElementsByClassName("link");
+//if given element even exists
+if ($('.links').length > 0) {
+  //function for buttons
+  let btnContainer = document.getElementById("links");
+  let btns = btnContainer.getElementsByClassName("link");
 
-// for (let i = 0; i < btns.length; i++) {
-//   btns[i].addEventListener("click", function() {
-//     let current = document.getElementsByClassName("active");
+  for (let i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function() {
+      let current = document.getElementsByClassName("active");
 
-//     if (current.length > 0) {
-//       current[0].className = current[0].className.replace(" active", "");
-//     }
-
-//     this.className += " active";
-//   });
-// }
-// $('.navbar__toggle_btn').on('click',function(){
-//   if($('#nav').hasClass('short')){
-//     $('.switch-box_wrapper').hide();
-//   }else{
-//     $('.switch-box_wrapper').show();
-//   }
-// })
-
+      if (current.length > 0) {
+        current[0].className = current[0].className.replace(" active", "");
+      }
+    })}
+  }
 $("#gear-btn").on("click",() => {
   document.getElementById("user_panel").classList.toggle("open");
   document.getElementById("blank_space").classList.toggle("open");
@@ -65,25 +67,49 @@ $("#gear-btn").on("click",() => {
   document.getElementById("moon").classList.toggle("open");
 })
 
-//theme switcher controller
-$('#theme_switcher').on('change',function(){
-  if($(this).find('input').is(':checked')){
-    $('#checkbox_sun').hide('fast');
-    $('#checkbox_moon').show('fast');
-    console.log('checked true');
+$('.navbar__toggle_btn').on('click',function(){
+  if($('#nav').hasClass('short')){
+    $('.switch-box_wrapper').hide();
   }else{
-    $('#checkbox_moon').hide('fast');
-    $('#checkbox_sun').show('fast');
-    console.log('checked false');
+    $('.switch-box_wrapper').show();
   }
 })
 
-//helper
+
+//theme switcher controller
+$(document).ready(function(){
+  if(localStorage.getItem('current_theme') == 'dark'){
+    $('html').attr('data-theme', 'dark')
+    $("#theme_switcher").find('input').prop("checked",true);
+    $('#checkbox_sun').hide('fast');
+    $('#checkbox_moon').show('fast');
+  }else{
+    $('html').attr('data-theme', 'light');
+    $('#checkbox_moon').hide('fast');
+    $('#checkbox_sun').show('fast');
+  }
+})
+  $('#theme_switcher').on('change',function(){
+    if($('html').attr('data-theme') == 'dark'){
+      localStorage.setItem('current_theme', 'light');
+      $('#checkbox_moon').hide('fast');
+      $('#checkbox_sun').show('fast');
+      $('html').attr('data-theme', 'light');
+    }else{
+      localStorage.setItem('current_theme', 'dark');
+      $('#checkbox_sun').hide('fast');
+      $('#checkbox_moon').show('fast');
+      $('html').attr('data-theme', 'dark');
+    }
+  })
+
+//main page helper
 $('.nav_recipe_helper').on('click',function(){
   Swal.fire({
     title: '<strong>Results explanation</strong>',
     icon: 'info',
     html:
+      '<div id="nav_helper_color">'+
       '<p>On the right side of the recipe name is colored block that determines difficulty level of recipe:</p>' +
       '<p class="text_visibility"><span style="color:green;">green</span> - easy , <span style="color:yellow;";>yellow</span> - medium , <span style="color:red";>red</span> - hard</p>' +
       '<ul>'+
@@ -96,7 +122,8 @@ $('.nav_recipe_helper').on('click',function(){
       '<li class="result_helper_li"><div class="time_img"></div><div class="img_info">Tells about time prepare time of recipe</div></li>'+
       '<li class="result_helper_li"><div class="people_img"></div><div class="img_info">Tells how many portion you receive</div></li>'+
       '<li class="result_helper_li"><div class="cuisine_img"></div><div class="img_info">Tells about cuisine origin of that recipe</div></li>'+
-      '</ul>',
+      '</ul>'+
+      '<div>',
     showCloseButton: true,
     showCancelButton: false,
     showConfirmButton: false,
