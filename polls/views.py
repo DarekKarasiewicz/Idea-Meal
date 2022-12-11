@@ -75,11 +75,33 @@ def find_recipe_base_on_products(products) -> dict:
     for l_recipe in list_of_recipes:
         products_in_recipe = Recipe_products_counts.objects.filter(recipe=l_recipe.id)
         for x_product in products_in_recipe:
-            if (x_product.product.name not in fridge_products.keys()):
+            if (x_product.product.name in fridge_products.keys()):
                 dict_of_recipes.setdefault(l_recipe,[]).append(x_product.product.name)
 
-    print(dict_of_recipes)
     return dict_of_recipes
+
+def filter_by_product_count(products) -> list:
+    base_dict = find_recipe_base_on_products(products)
+    return_dict={}
+
+    #FIXME REMOVE recipes with None products
+    all_recipes = Recipe.objects.all()
+    for x_recipe in all_recipes:
+        x_products = list(Recipe_products_counts.objects.filter(recipe=x_recipe.id))
+        return_dict[x_recipe]=[None,1]
+
+    for recipe, products in base_dict.items():
+        ammount_of_products =len(Recipe_products_counts.objects.filter(recipe=recipe.id))
+        if len(products) != ammount_of_products:
+            return_dict[recipe]=[products,2]
+        else:
+            return_dict[recipe]=[products,3]
+
+
+    print(return_dict)
+    return return_dict
+
+
 
 def create_shopping_list(list_of_recipes: list) -> list:
     dict_of_products = {}
@@ -152,11 +174,14 @@ def main_page(request, user_id):
         raise Http404
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
     all_recipes = Recipe.objects.all()
-    all_products = Product.objects.all()
+    fridge = get_object_or_404(Fridge, user=session_user.id)
+    all_products = list(Fridge_products_counts.objects.filter(fridge=fridge.id))
+    # print(all_products)
+    filter_by_product_count(all_products)
     return render(
         request,
         "polls/main_page.html",
-        {"user": session_user, "recipes": all_recipes, "products": all_products},
+        {"user": session_user, "recipes":(all_recipes), "products": all_products},
     )
 
 @login_required
@@ -265,7 +290,7 @@ def user_fridge(request, user_id):
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
     fridge = get_object_or_404(Fridge, user=session_user)
     all_products = Product.objects.all()
-    # product_in_fridge = Fridge_products_counts.objects.all()
+    product_in_fridge = Fridge_products_counts.objects.all()
     # find_recipe_base_on_products(product_in_fridge)
 
     if request.method == "POST":
