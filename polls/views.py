@@ -97,11 +97,7 @@ def filter_by_product_count(products) -> list:
         else:
             return_dict[recipe]=[products,3]
 
-
-    print(return_dict)
     return return_dict
-
-
 
 def create_shopping_list(list_of_recipes: list) -> list:
     dict_of_products = {}
@@ -176,12 +172,17 @@ def main_page(request, user_id):
     all_recipes = Recipe.objects.all()
     fridge = get_object_or_404(Fridge, user=session_user.id)
     all_products = list(Fridge_products_counts.objects.filter(fridge=fridge.id))
-    # print(all_products)
-    filter_by_product_count(all_products)
+    sorted_recipes = filter_by_product_count(all_products)
+    sorted_recipes = ({recipe: items_in for recipe, items_in in sorted(sorted_recipes.items(), key=lambda
+                                   item:item[1][1],reverse=True)})
+    final_list_recipes=[]
+    for recipe , items in sorted_recipes.items():
+        final_list_recipes.append(recipe)
+
     return render(
         request,
         "polls/main_page.html",
-        {"user": session_user, "recipes":(all_recipes), "products": all_products},
+        {"user": session_user, "recipes":final_list_recipes, "products": all_products},
     )
 
 @login_required
