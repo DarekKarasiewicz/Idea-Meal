@@ -11,8 +11,8 @@
       <ul id="links">
         <li class="link"><a href="{% url 'recipes_add'%}"><img src="{% static 'img/icon_add.png' %}" alt="add_recipe_icon"/><p>Add Recipes</p></a></li>
         <li class="link"><a href="{% url 'product_page'%}"><img src="{% static 'img/icons8-food-bar-add_50.png' %}" alt="add_product_icon"/><p>Add Product</p></a></li>
+        <li class="link"><a href="{% url 'all_recipes'%}"><img src="{% static 'img/icons8-repository-50.png' %}" alt="all_recipes_icon"/><p>All Recipes</p></a></li>
         <li class="link"><a href="/fridge/{{user.id}}"><img src="{% static 'img/icons8-fridge-with-open-freezer-64.png' %}" alt="fridge_icon"/><p>Fridge</p></a></li>
-        <li class="link"><a href="{% url 'logout'%}"><img src="{% static 'img/icon_logout.png' %}" alt="logout"/><p>Logout</p></a></li>
       </ul>
     </div>
     <div class="navbar__toggle_btn" >
@@ -55,14 +55,6 @@
       <h2>Welcome {{user.username}}, you are on Main Page</h2>
       <h3>Work in progres</h3>
     </div>
-    <!-- <h1><a href="{% url 'logout'%}">Logout</a></h1>
-    <h1><a href="{% url 'recipes_add'%}">Add Recipes</a></h1>
-    <h1><a href="{% url 'product_page'%}">Add Product</a></h1>
-    <h1><a href="/fridge/{{user.id}}">Fridge</a></h1> -->
-    <!-- <h3>Recipes:</h3>
-    {%for x in recipes%}
-    <a href ="/recipe/{{x.id}}"></a><br>
-    {% endfor %} -->
     <h3>Products:</h3>
     {%for x in products%}
     {{x}}<br>
@@ -102,7 +94,7 @@
       <div class="recipe_box">
         <div class="recipe_box_simple">
           {%if x.is_verificated == True %}
-            <div class="verificated"></div>
+            <span class="verificated_recipe"></span>
           {% endif %}
           <div class="name"><p>{{x.name}}</p></div>
           {%if x.difficulty == 1 %}
@@ -140,8 +132,8 @@
             <div class="three-seg">
               <div class="cuisine_img"></div>
               <div class="info">
-                {%if x.cuisine_category_id != None %}
-                  {{x.cuisine_category_id}}
+                {%if x.cuisine_category != None %}
+                  {{x.cuisine_category}}
                 {% else %}
                   ---
                 {% endif %}
@@ -155,7 +147,7 @@
               <div class="star"></div>
               <div class="star"></div>
               <div class="star"></div>
-              <div class="counter">(15)</div>
+              <div class="counter">({{x.comment_id}})</div>
             </div>
             <div class="two-seg-two"><p><a href ="/recipe/{{x.id}}">See more</a></p></div>
           </div>

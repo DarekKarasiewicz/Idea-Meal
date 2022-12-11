@@ -6,7 +6,7 @@
 {% block body %}
   <div id="comments_display_btn" onclick="comment_section_toggle()">
     <div></div>
-  </div>  
+  </div>
   <div id="recipe_comment_section" style="display: none;">
     {% csrf_token %}
     <div class="recipe__user_comment_add">
@@ -51,7 +51,7 @@
         {% endfor %}
     </div>
   </div>
-  <div class="add_recipe_holder">
+  <div class="add_recipe_holder correct_holder">
     <div id="page_title">
       <h1>Recipe info</h1>
     </div>
@@ -60,29 +60,58 @@
       <div class="top_section">
         <div class="recipe_photo"></div>
         <div class="recipe_name">
-          <p class="author">AUTOR: NO SET</p>
+          <p class="author">AUTOR: {{recipe.author_id}} 
+            <span class="verify">verificated
+              {%if recipe.is_verificated == True %}
+                <span class="verificated_recipe"></span>
+              {% endif %}
+            </span>
+          </p>
           <p class="name">{{recipe.name}}</p>
         </div>
       </div>
       <div class="middle_section">
-        <div class="middle_section_left">
+        <div class="middle_section_top">
           <div class="item">
-            <div class="difficulty_ico"></div><div class="item_text">{{recipe.difficulty}}</div>
+            <div class="difficulty_ico" title="Difficulty"></div>
+            <div class="item_text">
+              {%if recipe.difficulty == 1 %}
+                <span>Easy</span>
+              {% elif recipe.difficulty == 2 %}
+                <span>Medium</span>
+              {% else %}
+                <span>Hard</span>
+              {% endif %}
+            </div>
           </div>
           <div class="item">
-            <div class="cuisine_ico"></div><div class="item_text">{{recipe.cuisine_category_id}}</div>
+            <div class="cuisine_ico" title="Cuisine"></div><div class="item_text">{{recipe.cuisine_category}}</div>
           </div>
           <div class="item">
-            <div class="per_serving_ico"></div><div class="item_text">{{recipe.per_serving}}</div>
+            <div class="per_serving_ico" title="Portions"></div><div class="item_text">{{recipe.per_serving}}</div>
           </div>
           <div class="item">
-            <div class="spiciness_ico"></div><div class="item_text">{{recipe.spiciness}}</div>
+            <div class="spiciness_ico" title="Spiciness"></div>
+            <div class="item_text">
+              {%if recipe.spiciness == 1 %}
+                <span>Mild</span>
+              {% elif recipe.spiciness == 2 %}
+                <span>Medium</span>
+              {% elif recipe.spiciness == 3 %}
+                <span>Hot</span>
+              {% else %}
+                <span>Extra hot</span>
+              {% endif %}
+            </div>
           </div>
           <div class="item">
-            <div class="time_ico"></div><div class="item_text">{{recipe.prepare_time}}</div>
+            <div class="time_ico" title="Prepare time"></div><div class="item_text">{{recipe.prepare_time}} min</div>
+          </div>
+          <div class="item">
+            <div class="meal_time_ico" title="Meal time"></div><div class="item_text">{{recipe.meal_time_category}}</div>
           </div>
           <div class="item star_raiting_redirect" onclick="comment_section_toggle()">
-            <div class="raiting_ico"></div><div class="item_text">{{recipe.comment_id}}</div>
+            <div class="raiting_ico" title="Raiting"></div><div class="item_text">{{recipe.comment_id}}</div>
           </div>
         </div>
         <div class="middle_section_right">
@@ -93,24 +122,21 @@
           </div>
           <div class="ingredients_sec">
             <p>Ingredients</p>
-            <p>
-              <ul>
-                <li>chleb</li>
-                <li>ziemniaki</li>
-                <li>marchewki</li>
-                <li>ogorki</li>
-                <li>sol</li>
-                <li>pieprz</li>
-              </ul>
-            </p>
+            <ul>
+              <li>chleb</li>
+              <li>ziemniaki</li>
+              <li>marchewki</li>
+              <li>ogorki</li>
+              <li>sol</li>
+              <li>pieprz</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
     <div class="add_recipe_right">
       <p>Preparation</p>
-      <p>THERE WILL BE PREPARATION PART.</p>
-      {{recipe}}
+      <p>{{recipe.guidance}}</p>
     </div>
   </div> 
 {% endblock %}

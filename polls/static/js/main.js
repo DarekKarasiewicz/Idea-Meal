@@ -14,11 +14,19 @@ $(document).ready(()=>{
 
 function comment_section_toggle(){
   $("#recipe_comment_section").toggle("fast");
-  console.log($('#comments_display_btn').css('left'));
   if($('#comments_display_btn').css('left') == '0px'){
     $('#comments_display_btn').css('left','300px');
   }else{
     $('#comments_display_btn').css('left','0px');
+  }
+}
+
+function all_recipes_filter_section_toggle(){
+  $("#all_recipe_filters_section").toggle("fast");
+  if($('#all_recipe_filters_display_btn').css('left') == '0px'){
+    $('#all_recipe_filters_display_btn').css('left','300px');
+  }else{
+    $('#all_recipe_filters_display_btn').css('left','0px');
   }
 }
 
@@ -112,8 +120,8 @@ $('.nav_recipe_helper').on('click',function(){
       '<li class="result_helper_li"><div class="verificated_helper_img"></div><div class="img_info">Tells if recipe was accepted by moderators</div></li>'+
       '<li class="result_helper_li"><div class="spicy_helper_img"></div><div class="img_info">Tells about spiciness of recipe</div></li>'+
       '<li class="result_helper_li"><ul>'+
-      '<li class="result_helper_li text_visibility"><span style="color:green;">green</span> - mild , <span style="color:yellow; text-shadow: 0 0 1px black, 0 0 1px black;";>yellow</span> - slightly spicy</li>'+
-      '<li class="result_helper_li text_visibility"><span style="color:orange";>orange</span> - medium spicy , <span style="color:red";>red</span> - very spicy</li>'+
+      '<li class="result_helper_li text_visibility"><span style="color:green;">green</span> - mild , <span style="color:yellow; text-shadow: 0 0 1px black, 0 0 1px black;";>yellow</span> - medium, <span style="color:orange";>orange</span> - hot ,</li>'+
+      '<li class="result_helper_li text_visibility"><span style="color:red";>red</span> - extra hot</li>'+
       '</ul></li>'+
       '<li class="result_helper_li"><div class="time_img"></div><div class="img_info">Tells about time prepare time of recipe</div></li>'+
       '<li class="result_helper_li"><div class="people_img"></div><div class="img_info">Tells how many portion you receive</div></li>'+
@@ -125,4 +133,13 @@ $('.nav_recipe_helper').on('click',function(){
     showConfirmButton: false,
     focusConfirm: false,
   })
+})
+
+$('.clickable_legend').on('click',function(){
+  if($(this).find('.toggle_category_arrow').hasClass("arrow_rotate")){
+    $(this).find('.toggle_category_arrow').removeClass('arrow_rotate');
+  }else{
+    $(this).find('.toggle_category_arrow').addClass('arrow_rotate');
+  }
+  $(this).parent().find('.form-check.filters_centered').toggle("fast")
 })
