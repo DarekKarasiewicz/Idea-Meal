@@ -228,3 +228,6 @@ def user_fridge(request,user_id):
                                                  'product_in_fridge':product_in_fridge,
                                                  })
 
+@login_required
+def my_recipes(request,user_id):
+    return render(request, 'polls/my_recipes.html',{})
