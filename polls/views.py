@@ -127,8 +127,8 @@ def register_page(request):
 
     return render(request, "polls/register_page.html")
 
-def find_recipe_base_on_products(product: dict) -> Recipes:
-    pass
+# def find_recipe_base_on_products(product: dict) -> Recipes:
+#     pass
 
 def create_shopping_list(list_of_recipes: list) -> list:
     dict_of_products = {}
@@ -326,4 +326,8 @@ def all_recipes(request):
 
 @login_required
 def my_recipes(request,user_id):
+    if int(request.session["_auth_user_id"]) != int(user_id):
+        raise Http404
+    session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
+    all_recipes = Recipe.objects.all()
     return render(request, 'polls/my_recipes.html',{})

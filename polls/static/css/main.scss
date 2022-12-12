@@ -1950,7 +1950,7 @@ footer {
 
 //my recipes page
 .my_recipes_holder{
-  height: 850px;
+  height: 800px;
   width: 850px;
   position: absolute;
   top: 50%;
@@ -1961,7 +1961,17 @@ footer {
   background: rgba(77, 77, 77, .85);
   padding: 15px;
 
-  h1{
+  #page_title{
+    height: 55px;
+    width: 500px;
+    position: absolute;
+    top: -55px;
+    left: 50%;
+    transform: translate(-50%);
+    border-top-right-radius: 45px;
+    border-top-left-radius: 45px;
+    box-shadow: 0px 4px 18px #4d4d4d;
+    background: var(--idea_opacity_panel);
     text-align: center;
   }
 }
