@@ -1959,7 +1959,7 @@ footer {
   border-radius: 45px;
   box-shadow: 0px 4px 18px #4d4d4d;
   background: rgba(77, 77, 77, .85);
-  padding: 15px;
+  padding: 20px;
 
   #page_title{
     height: 55px;
@@ -1973,5 +1973,99 @@ footer {
     box-shadow: 0px 4px 18px #4d4d4d;
     background: var(--idea_opacity_panel);
     text-align: center;
+  }
+  .recipes_holder{
+    height: 750px;
+    width: 811px;
+    margin: 0px;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 11px;
+    }
+  
+    &::-webkit-scrollbar-track {
+      background: #707070;
+      border-radius: 10px;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color: #4d4d4d;
+      border-radius: 10px;
+      border: 3px none #707070;
+    }
+  }
+  .recipe_box{
+    height: 175px;
+    width: 791px;
+    display: flex;
+    // box-shadow: 0px 4px 18px #4d4d4d;
+    background: rgba(77, 77, 77,100);
+    border-radius: 45px;
+    margin-top: 10px;
+    position: relative;
+
+    .recipe_photo{
+      height: 175px;
+      width: 175px;
+      float: left;
+      background-image: url('https://via.placeholder.com/175/09f/fff.png');
+      background-repeat: no-repeat;
+      border-top-left-radius: 45px;
+      border-bottom-left-radius: 45px;
+      margin: 0px;
+    }
+    .recipe_name{
+      display: flex;
+      float: left;
+      width: 546px;
+      font-size: 32px;
+      margin: 0px;
+      padding: 10px;
+    }
+
+    div[class^="update-"]{
+      position: absolute;
+      display: flex;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--idea-color-first_plan);
+      border-radius: 100%;
+      img{
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+      }
+      a{
+        display: none;
+      }
+    }
+
+    div[class^="update-"].open{
+      width: 300px;
+      border-radius: 40px;
+      display: flex;
+      justify-content:flex-start;
+      align-items: center;
+      img{
+        float: left;
+        margin: 0px 10px 0px 10px;
+      }
+      a{
+        display: block;
+        float: left;
+        margin: 0px 10px 0px 10px;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 18px;
+        color: black;
+      }
+      a:hover{
+        color:#707070;
+      }
+    }
   }
 }

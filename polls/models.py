@@ -19,6 +19,7 @@ class Comment(models.Model):
         return self.description
 
 class Recipe(models.Model):
+    author = models.ForeignKey(User,on_delete=models.CASCADE,null=True,default=None)
     name = models.CharField(max_length = 32, default=None)
     description = models.TextField(default=None)
     guidance = models.TextField(default=None)

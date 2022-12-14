@@ -67,6 +67,11 @@ $("#gear-btn").on("click",() => {
   document.getElementById("moon").classList.toggle("open");
 })
 
+//recipe tools button function
+function openTools(id){
+  document.getElementById("recipe_update"+id).classList.toggle("open");
+}
+
 $('.navbar__toggle_btn').on('click',function(){
   if($('#nav').hasClass('short')){
     $('.switch-box_wrapper').hide();

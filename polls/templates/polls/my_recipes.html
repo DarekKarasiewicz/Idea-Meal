@@ -8,5 +8,19 @@
     <div id="page_title">
         <h1>My recipes</h1>
     </div>
+    <div class="recipes_holder">
+    {%for recipe in recipes%}
+    <div class="recipe_box">
+        <div class="recipe_photo"></div>
+        <p class="recipe_name">{{recipe.name}}</p>
+        <div class="update-{{recipe.id}}" id="recipe_update{{recipe.id}}" onclick="openTools({{recipe.id}})">
+            <img id="recipe_tools" src="{% static 'img/tools.png' %}" alt="tools image">
+            <a href="/recipe/{{recipe.id}}">Preview</a>
+            <a href="/recipe_update/{{recipe.id}}">Update</a>
+            <a>Delete</a>
+        </div>
+    </div>
+    {%endfor%}
+</div>
 </div>
 {% endblock %}

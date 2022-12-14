@@ -330,4 +330,10 @@ def my_recipes(request,user_id):
         raise Http404
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
     all_recipes = Recipe.objects.all()
-    return render(request, 'polls/my_recipes.html',{})
+    print(user_id)
+    return render(request, 'polls/my_recipes.html',{"user_id": session_user.id,'recipes': all_recipes})
+
+@login_required
+def recipe_update(request,recipe_id):
+
+    return render(request, 'polls/recipe_update.html',{})
