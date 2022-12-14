@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}
+  Idea-Meal || Shopping List
+{% endblock %}
+{% block body %}
+<button onclick="removeShoppingList()">Clean shopping list</button>
+    <div class="all_recipes_holder">
+        <div id="page_title">
+            <h1>Shopping List</h1>
+        </div>
+        <a href={% url 'main' user_id=user.id%}><div class="back_button_img"></div></a>
+        <div class="all_recipes_content_holder"></div>
+    </div>
+{% endblock %}
+{% block page_js%}
+<script>
+    $(document).ready(function(){
+        let shopping_list = JSON.parse(localStorage.getItem("user_shopping_list"))
+        // console.log(localStorage.getItem("user_shopping_list"));
+        if(shopping_list){
+            for (var i = 0; i < shopping_list.length; i++){
+                $('.all_recipes_content_holder').append('<div>RECIPE ID'+shopping_list[i]["id"]+'</div>');
+                console.log(shopping_list[i]["id"]);
+            }
+        }else{
+            var html = '<div>THERE IS NO ELEMENTS IN SHOPPING LIST!</div>';
+            $('.all_recipes_content_holder').append(html);
+        }
+    });
+</script>  
+{% endblock %} 

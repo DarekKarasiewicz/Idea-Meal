@@ -181,7 +181,7 @@ def main_page(request, user_id):
     return render(
         request,
         "polls/main_page.html",
-        {"user": session_user, "recipes":(all_recipes), "products": all_products},
+        {"user": session_user, "recipes":filter_by_product_count(all_products), "products": all_products},
     )
 
 @login_required
@@ -325,3 +325,10 @@ def all_recipes(request):
             },
             )
 
+@login_required
+def shopping_list(request):
+   session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"])) 
+   return render(request,
+            "polls/shopping_list.html",
+            {"user":session_user},
+            )

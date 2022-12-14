@@ -926,6 +926,23 @@ footer {
     z-index: 5;
     filter: drop-shadow(0 0 0.75rem $idea-color7);
   }
+  .adding_to_list_btn{
+      background-image: url('/static/img/icons8-shopping-basket-60.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      height: 50px;
+      width: 50px;
+      position: absolute;
+      bottom: -15px;
+      right: -15px;
+      cursor: pointer;
+      z-index: 5;
+      filter: drop-shadow(0 0 0.75rem #89abc6);
+  }
+  .adding_to_list_btn:hover {
+    filter: drop-shadow(0 0 0.75rem red);
+  }
   #page_title{
     height: 55px;
     width: 500px;

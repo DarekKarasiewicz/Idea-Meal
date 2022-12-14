@@ -10,6 +10,7 @@ $(document).ready(()=>{
     $('#nav_recipe_res_div').show("fast");
     $('#nav_reciper_show').hide("fast");
   })
+
 })
 
 function comment_section_toggle(){
@@ -143,3 +144,38 @@ $('.clickable_legend').on('click',function(){
   }
   $(this).parent().find('.form-check.filters_centered').toggle("fast")
 })
+
+//TO DO:
+//For now you can add the same recipe over and over again to your shopping list
+function addToShoppingList(recipe_id){
+  var array = JSON.parse(localStorage.getItem("user_shopping_list"));
+  var parser = parseInt(recipe_id);
+  if (array) { 
+    array.push({id: parser}); 
+    localStorage.setItem("user_shopping_list", JSON.stringify(array));
+  } else {
+    var created_array = [];
+    created_array.push({id: parser});
+    localStorage.setItem("user_shopping_list", JSON.stringify(created_array));
+  }
+  Swal.fire({
+    position: 'top-end',
+    icon: 'success',
+    title: 'Recipe added to shopping list',
+    showConfirmButton: false,
+    timer: 1500
+  })
+}
+function removeShoppingList(){
+  localStorage.removeItem("user_shopping_list");
+  Swal.fire({
+    position: 'top-end',
+    icon: 'success',
+    title: 'Shopping list cleared',
+    showConfirmButton: false,
+    timer: 1500
+  })
+  setTimeout(function() {
+    location.reload();
+}, 1500);
+}
