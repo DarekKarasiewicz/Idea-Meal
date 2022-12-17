@@ -167,15 +167,28 @@ function addToShoppingList(recipe_id){
   })
 }
 function removeShoppingList(){
-  localStorage.removeItem("user_shopping_list");
-  Swal.fire({
-    position: 'top-end',
-    icon: 'success',
-    title: 'Shopping list cleared',
-    showConfirmButton: false,
-    timer: 1500
+  if(localStorage.getItem("user_shopping_list")){
+    localStorage.removeItem("user_shopping_list");
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Shopping list cleared',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    setTimeout(function() {
+      location.reload();
+  }, 1500);
+  }else{
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      html: '' + 
+          '<div id="nav_helper_color">'+
+          '<p>There is nothing to clear of the list!</p>'+
+          '</div>',
+      showConfirmButton: false,
+      timer: 2000
   })
-  setTimeout(function() {
-    location.reload();
-}, 1500);
+  }
 }

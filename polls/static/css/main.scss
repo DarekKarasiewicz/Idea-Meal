@@ -1666,3 +1666,37 @@ button:hover{
 .back_button_img:hover{
   filter: drop-shadow(0 0 0.75rem red);
 }
+
+.clean_shop_list {
+  background-image: url('/static/img/icons8-broom-60.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  height: 50px !important;
+  width: 50px !important;
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  cursor: pointer;
+  z-index: 5;
+  filter: drop-shadow(0 0 0.75rem #89abc6);
+}
+
+.convert_to_pdf{
+  background-image: url('/static/img/icons8-pdf-50.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  height: 50px !important;
+  width: 50px !important;
+  position: absolute;
+  bottom: -15px;
+  right: -15px;
+  cursor: pointer;
+  z-index: 5;
+  filter: drop-shadow(0 0 0.75rem #89abc6);
+}
