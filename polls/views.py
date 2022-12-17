@@ -1,5 +1,7 @@
 from strenum import StrEnum  # Python 3.11 = from enum
 from enum import auto
+from datetime import datetime
+from datetime import timedelta
 
 # DJANGO IMPORTS
 from django.shortcuts import render, get_object_or_404
@@ -10,7 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-import time
+from django.utils import timezone
 
 #################################################################################
 #                                   FIXME
@@ -160,15 +162,16 @@ def login_page(request):
 
 @login_required
 def main_page(request, user_id):
-    # TEST
-    # tmp = [
-    #     get_object_or_404(Recipe, pk=1),
-    #     get_object_or_404(Recipe, pk=2),
-    #     get_object_or_404(Recipe, pk=3),
-    # ]
     if int(request.session["_auth_user_id"]) != int(user_id):
         raise Http404
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
+
+    check_products = Product.objects.filter(user=session_user.id)
+    sebus_to_ta_lista = []
+    for product in check_products:
+        if (timezone.now() > (product.date_of_consumtion + timedelta(days=7))):
+            # product.delete()
+            sebus_to_ta_lista.append(product)
     all_recipes = Recipe.objects.all()
     fridge = get_object_or_404(Fridge, user=session_user.id)
     all_products = list(Fridge_products_counts.objects.filter(fridge=fridge.id))
