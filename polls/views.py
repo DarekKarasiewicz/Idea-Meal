@@ -101,7 +101,7 @@ def filter_by_product_count(products) -> list:
 
     return return_dict
 
-def create_shopping_list(list_of_recipes: list) -> list:
+def create_shopping_list(list_of_recipes: list, session_user_id: int ) -> list:
     dict_of_products = {}
     fridge_products = Fridge_products_counts.objects.all()
     for recipe in list_of_recipes:
@@ -247,6 +247,7 @@ def add_recipes(request):
 def recipes_page(request, recipe_id):
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
     recipe = get_object_or_404(Recipe, pk=recipe_id)
+    list_of_products = list(Recipe_products_counts.objects.filter(recipe=recipe.id))
 
     if request.method == "POST":
         raiting = request.POST["raiting"]
@@ -267,7 +268,8 @@ def recipes_page(request, recipe_id):
     return render(
         request,
         "polls/recipe_view.html",
-        {"recipe": test_show, "all_comments": all_comments, "user":session_user},
+        {"recipe": test_show, "all_comments": all_comments, "user":session_user,
+         "list_of_products":list_of_products},
     )
 
 @login_required

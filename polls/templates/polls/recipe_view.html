@@ -124,12 +124,9 @@
           <div class="ingredients_sec">
             <p>Ingredients</p>
             <ul>
-              <li>chleb</li>
-              <li>ziemniaki</li>
-              <li>marchewki</li>
-              <li>ogorki</li>
-              <li>sol</li>
-              <li>pieprz</li>
+            {%for product in list_of_products%}
+                <li>{{product.product.name}}</li>
+            {%endfor%}
             </ul>
           </div>
         </div>
