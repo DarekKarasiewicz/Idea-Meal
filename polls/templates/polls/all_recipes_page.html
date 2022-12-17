@@ -21,12 +21,14 @@
             <fieldset style="margin-bottom: 25px;">      
                 <legend style="font-size: 28px;font-weight: 100;">Order By:</legend>   
                 <select class="form-select" name="recipe_order_by" id="recipe_order_by">
-                    <option value="name">Name</option>
+                    <option value="name">Choose option</option>
+                    <option value="name_ASC">Name ASC</option>
+                    <option value="name_DESC">Name DESC</option>
                     <option value="spiciness_ASC">spiciness ASC</option>
                     <option value="spiciness_DESC">spiciness DESC</option>
-                    <option value="popularity">popularity</option>
-                    <option value="prepare_time ASC">prepare time ASC</option>
-                    <option value="prepare_time DESC">prepare time DESC</option>
+                    <option value="popularity">most popular</option>
+                    <option value="prepare_time_ASC">prepare time ASC</option>
+                    <option value="prepare_time_DESC">prepare time DESC</option>
                 </select> 
             </fieldset>
             </div>
@@ -133,15 +135,14 @@
         </div>
         <a href={% url 'main' user_id=user.id%}><div class="back_button_img"></div></a>
         <div class="all_recipes_content_holder">
-            <div class="container">
+            <div class="container" id="recipe_items_show">
                 {%for x in all_recipes%}
-                    <!-- <a href ="/recipe/{{x.id}}">{{x}}</a><br> -->
-                    <div class="recipe_item">
+                    <div class="recipe_item" data-spiciness="{{x.spiciness}}" data-prepare_time="{{x.prepare_time}}" data-raiting="{{x.comment_id}}" data-name="{{x.name}}">
                         <div class="img"></div>
                         <div class="text">
                             <div class="name each_recipe_name">{{x.name}}</div>
                             <div>
-                                <button type="button" class="btn btn-primary idea_meal_button_color">Add to list</button> 
+                                <button type="button" class="btn btn-primary idea_meal_button_color" onclick="addToShoppingList('{{x.id}}')">Add to list</button> 
                                 <a href ="/recipe/{{x.id}}"><button type="button" class="btn btn-primary idea_meal_button_color">See more</button></a>
                             </div>
                         </div>
@@ -155,13 +156,13 @@
 {% block page_js%}
 <script>
 $(document).ready(function(){
-    $('.each_recipe_name').parent().parent().hide();
-
     $('#searchbar').on('keyup', function(){
+        var searchbar_val = $(this).val().toLowerCase();
+        $('.each_recipe_name').parent().parent().hide();
+        
         $('.each_recipe_name').each(function(){
-            var searchbar_val = $(this).val().toLowerCase();
-            console.log(searchbar_val);
-            if(searchbar_val.indexOf(val) != -1){
+            var recipe_name = $(this).text().toLowerCase();
+            if(recipe_name.indexOf(searchbar_val) != -1){
                 $(this).parent().parent().show();
             }
         });
@@ -200,6 +201,55 @@ $("#filter_all_recipes").on('click', function(){
         tab_verficiated.push({'verficiated': $(this).val()});
     });
   });
+
+$('#recipe_order_by').on('change', function (e) {
+    var optionSelected = $("option:selected", this);
+    var valueSelected = this.value;
+    console.log(valueSelected);
+    if(valueSelected == 'spiciness_ASC'){
+        $("#recipe_items_show").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return $(a).attr("data-spiciness") - $(b).attr("data-spiciness");
+            })
+        })
+    }else if(valueSelected == 'spiciness_DESC'){
+        $("#recipe_items_show").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return $(b).attr("data-spiciness") - $(a).attr("data-spiciness");
+            })
+        })
+    }else if(valueSelected == 'popularity'){
+        $("#recipe_items_show").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return $(b).attr("data-raiting") - $(a).attr("data-raiting");
+            })
+        })
+    }else if(valueSelected == 'prepare_time_ASC'){
+        $("#recipe_items_show").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return $(a).attr("data-prepare_time") - $(b).attr("data-prepare_time");
+            })
+        })
+    }else if(valueSelected == 'prepare_time_DESC'){
+        $("#recipe_items_show").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return $(b).attr("data-prepare_time") - $(a).attr("data-prepare_time");
+            })
+        })
+    }else if(valueSelected == 'name_ASC'){
+        $("#recipe_items_show").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return ($(b).attr("data-name")) < ($(a).attr("data-name")) ? 1 : -1;    
+            })
+        })
+    }else if(valueSelected == 'name_DESC'){
+        $("#recipe_items_show").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return ($(b).attr("data-name")) > ($(a).attr("data-name")) ? 1 : -1;    
+            })
+        })
+    }
+});
 </script>
 {% endblock %} 
 

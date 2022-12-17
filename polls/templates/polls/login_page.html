@@ -22,7 +22,7 @@
           <input type="password" name="auth_password" id="auth_password" class="input-field" required/><br>
         </div>
         {% for message in messages %}
-          <button id="error_trigger" onclick="errorMessage()">Wrong password!</button>
+          <p style="display: none;" id="error_trigger" onclick="errorMessage()"></p>
         {% endfor %}
         <button type="submit">Log In</button><br>
       </form>

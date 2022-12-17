@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}
+  Idea-Meal || Shopping List
+{% endblock %}
+{% block body %}
+    <div class="all_recipes_holder">
+        <button class="clean_shop_list" title="Clean shopping list" onclick="removeShoppingList()"></button>
+        <div id="page_title">
+            <h1>Shopping List</h1>
+        </div>
+        <a href={% url 'main' user_id=user.id%}><div class="back_button_img" title="Back"></div></a>
+        <div class="all_recipes_content_holder">
+            <div id="contentToPrint">
+                <h1 style="text-align: center;">Your shopping list</h1>
+                <p style="text-align: center;">
+                    Down below you have all ingredients that are needed to create your chosen dishes.
+                </p>
+            </div>
+        </div>
+        <button class="convert_to_pdf" title="Convert to PDF"></button>
+    </div>
+{% endblock %}
+{% block page_js%}
+<script>
+    $(document).ready(function(){
+        let shopping_list = JSON.parse(localStorage.getItem("user_shopping_list"))
+
+        if(shopping_list){
+            for (var i = 0; i < shopping_list.length; i++){
+                $('#contentToPrint').append('<div>RECIPE ID'+shopping_list[i]["id"]+'</div>');
+                console.log(shopping_list[i]["id"]);
+            }
+        }else{
+            var html = '<div style="text-align:center">THERE IS NO ELEMENTS IN SHOPPING LIST!</div>';
+            $('.all_recipes_content_holder').append(html);
+        }
+    });       
+
+//pdf creating stuff
+window.jsPDF = window.jspdf.jsPDF;
+
+$('.convert_to_pdf').on('click',function(){
+    if(localStorage.getItem("user_shopping_list")){
+        var doc = new jsPDF();
+
+        var elementHTML = document.querySelector("#contentToPrint");
+
+        doc.html(elementHTML, {
+            callback: function(doc) {
+                doc.save('IdeaMeal_shopping-list.pdf');
+            },
+            margin: [10, 10, 10, 10],
+            autoPaging: 'text',
+            x: 0,
+            y: 0,
+            width: 190, //target width in the PDF document
+            windowWidth: 675 //window width in CSS pixels
+        });
+    }else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            html: '' + 
+                '<div id="nav_helper_color">'+
+                '<p>Your shopping list is empty. There is nothing to convert!</p>'+
+                '</div>',
+            showConfirmButton: false,
+            timer: 2000
+        })
+    }
+})
+
+
+</script>  
+{% endblock %} 
