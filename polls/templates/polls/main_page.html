@@ -9,11 +9,11 @@
     <div class="navbar__logo"><img src="{% static 'img/first_logo.png' %}" alt="testLogo"/></div>
     <div class="navbar__links">
       <ul id="links">
-        <li class="link"><a href="{% url 'recipes_add'%}"><img src="{% static 'img/icon_add.png' %}" alt="add_recipe_icon"/><p>Add Recipes</p></a></li>
-        <li class="link"><a href="{% url 'product_page'%}"><img src="{% static 'img/icons8-food-bar-add_50.png' %}" alt="add_product_icon"/><p>Add Product</p></a></li>
-        <li class="link"><a href="{% url 'all_recipes'%}"><img src="{% static 'img/icons8-repository-50.png' %}" alt="all_recipes_icon"/><p>All Recipes</p></a></li>
-        <li class="link"><a href="/fridge/{{user.id}}"><img src="{% static 'img/icons8-fridge-with-open-freezer-64.png' %}" alt="fridge_icon"/><p>Fridge</p></a></li>
-        <li class="link"><a href="{% url 'shopping_list'%}"><img src="{% static 'img/icons8-shopping-basket-60.png' %}" alt="shopping_cart_icon"/><p>Shopping List</p></a></li>
+        <li class="link"><a href="{% url 'recipes_add'%}"><img src="{% static 'img/icon_add.png' %}" alt="add_recipe_icon" title="Add recipe"/><p>Add Recipes</p></a></li>
+        <li class="link"><a href="{% url 'product_page'%}"><img src="{% static 'img/icons8-food-bar-add_50.png' %}" alt="add_product_icon" title="Add product"/><p>Add Product</p></a></li>
+        <li class="link"><a href="{% url 'all_recipes'%}"><img src="{% static 'img/icons8-repository-50.png' %}" alt="all_recipes_icon" title="Show all recipes"/><p>All Recipes</p></a></li>
+        <li class="link"><a href="/fridge/{{user.id}}"><img src="{% static 'img/icons8-fridge-with-open-freezer-64.png' %}" alt="fridge_icon" title="Your fridge"/><p>Fridge</p></a></li>
+        <li class="link"><a href="{% url 'shopping_list'%}"><img src="{% static 'img/icons8-shopping-basket-60.png' %}" alt="shopping_cart_icon" title="Show shopping list"/><p>Shopping List</p></a></li>
       </ul>
     </div>
     <div class="navbar__toggle_btn" >
@@ -32,7 +32,7 @@
         </div>
         <div class="user_panel__option">
           <a href="{% url 'logout'%}">
-            <img src="{% static 'img/icon_logout.png' %}" alt="logout" title="logout"/>
+            <img src="{% static 'img/icon_logout.png' %}" alt="logout" title="Logout"/>
           </a>
         </div>
         <div class="switch-box_wrapper">
@@ -53,7 +53,7 @@
   <div class="fridge_holder">
     <div style="text-align: center;">
       <h1>Hello World !</h1>
-      <h2>Welcome {{user.username}}, you are on Main Page</h2>
+      <h2>Welcome <strong>{{user.username}}</strong>, you are on Main Page</h2>
       <h3>Work in progres</h3>
     </div>
     <h3>Products:</h3>
@@ -73,7 +73,7 @@
       <p>Recipes</p>
     </div>
     <div class="nav_filters">
-      <p class="nav_recipe_h">Filters</p>
+      <!-- <p class="nav_recipe_h">Filters</p>
       <form>
         <input type="checkbox" id="filter1" name="filter1" value="difficulty">
         <label for="filter1" title="difficulty"> difficulty</label>
@@ -86,78 +86,179 @@
         <input type="checkbox" id="filter5" name="filter5" value="Car">
         <label for="filter5" title="verificated"> verificated</label><br>
         <input type="submit" value="Apply">
-      </form>     
+      </form>      -->
+      <div class="basic_filters">
+        <fieldset style="margin-bottom: 10px;">
+          <p style="font-size: 28px; margin: 15px; text-align: center;">Filters</p>
+          <input class="form-control" type="text" placeholder="search for recipe..." id="searchbar_mainpage" style="width: 85%; margin: auto;">
+        </fieldset>
+        <fieldset style="margin-bottom: 25px;">      
+            <legend style="font-size: 28px;font-weight: 100; text-align: center;">Order By:</legend>   
+            <select class="form-select" name="recipe_order_by" id="main_page-recipe_order_by" style="width: 85%; margin: auto;">
+                <option value="name" disabled selected="selected">Choose option</option>
+                <option value="name_ASC">Name ASC</option>
+                <option value="name_DESC">Name DESC</option>
+                <option value="spiciness_ASC">spiciness ASC</option>
+                <option value="spiciness_DESC">spiciness DESC</option>
+                <option value="popularity">most popular</option>
+                <option value="prepare_time_ASC">prepare time ASC</option>
+                <option value="prepare_time_DESC">prepare time DESC</option>
+                <option value="per_serving_ASC">per serving ASC</option>
+                <option value="per_serving_DESC">per serving DESC</option>
+            </select> 
+        </fieldset>
+        </div>
     </div>
     <div class="nav_results">
-      <div class="nav_recipe_helper" title="results explanation"></div>
+      <div class="nav_recipe_helper" title="Results explanation"></div>
       <p class="nav_recipe_h">Results</p>
-      {%for x in recipes%}
-      <div class="recipe_box">
-        <div class="recipe_box_simple">
-          {%if x.is_verificated == True %}
-            <span class="verificated_recipe"></span>
-          {% endif %}
-          <div class="name"><p>{{x.name}}</p></div>
-          {%if x.difficulty == 1 %}
-            <div style="background-color: green !important"></div>
-          {% elif x.difficulty == 2 %}
-            <div style="background-color: orange !important"></div>
-          {% else %}
-            <div style="background-color: red !important"></div>
-          {% endif %}
-        </div>
-        <div class="recipe_box_extended" style="display: none;">
-          <div>
-            <div>{{x.description}}</div>
-            <div>
-              {%if x.spiciness == 1 %}
-                <div class="spicy_img green_filter"></div>
-              {% elif x.spiciness == 2 %}
-                <div class="spicy_img yellow_filter"></div>
-              {% elif x.spiciness == 3 %}
-                <div class="spicy_img orange_filter"></div>
-              {% else %}
-                <div class="spicy_img red_filter"></div>
-              {% endif %}
-            </div>
+      <div class="nav_recipe_boxes">
+        {%for x in recipes%}
+        <div class="recipe_box" data-spiciness="{{x.spiciness}}" data-raiting="{{x.comment_id}}" data-prepare_time="{{x.prepare_time}}" data-name="{{x.name}}" data-serving="{{x.per_serving}}">
+          <div class="recipe_box_simple">
+            {%if x.is_verificated == True %}
+              <span class="verificated_recipe"></span>
+            {% endif %}
+            <div class="name main_recipes_name">{{x.name}}</div>
+            {%if x.difficulty == 1 %}
+              <div style="background-color: green !important"></div>
+            {% elif x.difficulty == 2 %}
+              <div style="background-color: orange !important"></div>
+            {% else %}
+              <div style="background-color: red !important"></div>
+            {% endif %}
           </div>
-          <div class="small-div">
-            <div class="three-seg">
-              <div class="time_img"></div>
-              <div class="info">{{x.prepare_time}}</div>
-            </div>
-            <div class="three-seg">
-              <div class="people_img"></div>
-              <div class="info">{{x.per_serving}}</div>
-            </div>
-            <div class="three-seg">
-              <div class="cuisine_img"></div>
-              <div class="info">
-                {%if x.cuisine_category != None %}
-                  {{x.cuisine_category}}
+          <div class="recipe_box_extended" style="display: none;">
+            <div>
+              <div>{{x.description}}</div>
+              <div>
+                {%if x.spiciness == 1 %}
+                  <div class="spicy_img green_filter" title="Spiciness"></div>
+                {% elif x.spiciness == 2 %}
+                  <div class="spicy_img yellow_filter" title="Spiciness"></div>
+                {% elif x.spiciness == 3 %}
+                  <div class="spicy_img orange_filter" title="Spiciness"></div>
                 {% else %}
-                  ---
+                  <div class="spicy_img red_filter" title="Spiciness"></div>
                 {% endif %}
               </div>
             </div>
-          </div>
-          <div class="small-div">
-            <div class="two-seg-one">
-              <div class="star"></div>
-              <div class="star"></div>
-              <div class="star"></div>
-              <div class="star"></div>
-              <div class="star"></div>
-              <div class="counter">({{x.comment_id}})</div>
+            <div class="small-div">
+              <div class="three-seg">
+                <div class="time_img" title="Prepare time"></div>
+                <div class="info">{{x.prepare_time}}</div>
+              </div>
+              <div class="three-seg">
+                <div class="people_img" title="Per serving"></div>
+                <div class="info">{{x.per_serving}}</div>
+              </div>
+              <div class="three-seg">
+                <div class="cuisine_img" title="Cuisine"></div>
+                <div class="info">
+                  {%if x.cuisine_category != None %}
+                    {{x.cuisine_category}}
+                  {% else %}
+                    ---
+                  {% endif %}
+                </div>
+              </div>
             </div>
-            <div class="two-seg-two"><p><a href ="/recipe/{{x.id}}">See more</a></p></div>
+            <div class="small-div">
+              <div class="two-seg-one">
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="counter">({{x.comment_id}})</div>
+              </div>
+              <div class="two-seg-two"><p><a href ="/recipe/{{x.id}}">See more</a></p></div>
+            </div>
           </div>
         </div>
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
   </div>
   <div id="result-explanation">
     <p>Explanation</p>
   </div>
+{% endblock %} 
+{% block page_js%}
+<script>
+$(document).ready(function(){
+    $('#searchbar_mainpage').on('keyup', function(){
+      console.log('keyup');
+        var searchbar_val = $(this).val().toLowerCase();
+        $('.main_recipes_name').parent().parent().hide();
+        
+        $('.main_recipes_name').each(function(){
+            var recipe_name = $(this).text().toLowerCase();
+            if(recipe_name.indexOf(searchbar_val) != -1){
+                $(this).parent().parent().show();
+            }
+        });
+    })
+})
+$('#main_page-recipe_order_by').on('change', function (e) {
+    var optionSelected = $("option:selected", this);
+    var valueSelected = this.value;
+    console.log(valueSelected);
+    if(valueSelected == 'spiciness_ASC'){
+        $(".nav_recipe_boxes").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return $(a).attr("data-spiciness") - $(b).attr("data-spiciness");
+            })
+        })
+    }else if(valueSelected == 'spiciness_DESC'){
+        $(".nav_recipe_boxes").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return $(b).attr("data-spiciness") - $(a).attr("data-spiciness");
+            })
+        })
+    }else if(valueSelected == 'popularity'){
+        $(".nav_recipe_boxes").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return $(b).attr("data-raiting") - $(a).attr("data-raiting");
+            })
+        })
+    }else if(valueSelected == 'prepare_time_ASC'){
+        $(".nav_recipe_boxes").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return $(a).attr("data-prepare_time") - $(b).attr("data-prepare_time");
+            })
+        })
+    }else if(valueSelected == 'prepare_time_DESC'){
+        $(".nav_recipe_boxes").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return $(b).attr("data-prepare_time") - $(a).attr("data-prepare_time");
+            })
+        })
+    }else if(valueSelected == 'name_ASC'){
+        $(".nav_recipe_boxes").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return ($(b).attr("data-name")) < ($(a).attr("data-name")) ? 1 : -1;    
+            })
+        })
+    }else if(valueSelected == 'name_DESC'){
+        $(".nav_recipe_boxes").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return ($(b).attr("data-name")) > ($(a).attr("data-name")) ? 1 : -1;    
+            })
+        })
+    }else if(valueSelected == 'per_serving_ASC'){
+        $(".nav_recipe_boxes").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return ($(b).attr("data-serving")) < ($(a).attr("data-serving")) ? 1 : -1;    
+            })
+        })
+    }else if(valueSelected == 'per_serving_DESC'){
+        $(".nav_recipe_boxes").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return ($(b).attr("data-serving")) > ($(a).attr("data-serving")) ? 1 : -1;    
+            })
+        })
+    }
+});
+</script>
 {% endblock %} 
