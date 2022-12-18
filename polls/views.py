@@ -326,14 +326,84 @@ def all_recipes(request):
 
 @login_required
 def my_recipes(request,user_id):
+    user_recipes =[]
     if int(request.session["_auth_user_id"]) != int(user_id):
         raise Http404
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
     all_recipes = Recipe.objects.all()
-    print(user_id)
-    return render(request, 'polls/my_recipes.html',{"user_id": session_user.id,'recipes': all_recipes})
+
+    for recipe in all_recipes:
+        if recipe.author.id == user_id:
+            user_recipes.append(recipe)
+
+    if request.method == "POST":
+        recipe_id = request.POST["recipeId"]
+        recipe_to_delete = Recipe.objects.get(id = recipe_id)
+        recipe_to_delete.delete()
+
+
+    return render(request, 'polls/my_recipes.html',{"user_id": session_user.id,'recipes': user_recipes})
 
 @login_required
 def recipe_update(request,recipe_id):
+    # session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
 
-    return render(request, 'polls/recipe_update.html',{})
+    update_recipe = Recipe.objects.get(pk = recipe_id)
+    
+    if request.method == "POST":
+        name = request.POST["recipe_name"]
+        description = request.POST["description"]
+        difficulty = request.POST["difficulty"]
+        cuisine_category = request.POST["cuisine_category"]
+        meal_time_category = request.POST["meal_time_category"]
+        prepare_time_post = request.POST["prepare_time"].split(":")
+        prepare_time = int(prepare_time_post[0]) * 60 + int(prepare_time_post[1])
+        spiciness = request.POST["spiciness"]
+        per_serving = request.POST["per_serving"]
+
+        enum_cuisine_category = [
+            e.value
+            for e in Cuisine_category
+            if str(e.value).lower() == cuisine_category.lower()
+        ]
+        enum_meal_time_category = [
+            e.value
+            for e in Meal_time_category
+            if str(e.value).lower() == meal_time_category.lower()
+        ]
+        if len(enum_meal_time_category) == 0 and len(enum_cuisine_category) == 0:
+            raise Http404
+        match difficulty:
+            case "easy":
+                difficulty = 1
+            case "medium":
+                difficulty = 2
+            case "hard":
+                difficulty = 3
+            case _:
+                raise Http404
+        
+        update_recipe.name = name
+        update_recipe.description = description
+        update_recipe.difficulty = difficulty
+        update_recipe.cuisine_category = cuisine_category
+        update_recipe.meal_time_category = meal_time_category
+        update_recipe.prepare_time = prepare_time
+        update_recipe.spiciness = spiciness
+        update_recipe.per_serving = per_serving
+
+        print(name)
+        print(description)
+        print(difficulty)
+        print(cuisine_category)
+        print(meal_time_category)
+        print(prepare_time)
+        print(spiciness)
+        print(per_serving)
+
+
+        update_recipe.save()
+        time.sleep(2)
+        # return HttpResponseRedirect(reverse("my_recipes", args=(session_user.id,)))
+    
+    return render(request, 'polls/recipe_update.html',{"recipe": update_recipe})

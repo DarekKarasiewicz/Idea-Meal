@@ -1046,7 +1046,7 @@ footer {
     background: var(--idea_opacity_panel);
     text-align: center;
   }
-  .add_recipe_left, .add_recipe_right{
+  .add_recipe_left,.update_recipe_left, .add_recipe_right{
     width: 550px;
     position: relative;
     float: left;
@@ -1102,6 +1102,14 @@ footer {
   .add_recipe_left{
     border-top-left-radius: 45px;
     border-bottom-left-radius: 45px;
+    & #short_description{
+      height: 30px;
+    }
+  }
+  .update_recipe_left{
+    border-top-left-radius: 45px;
+    border-bottom-left-radius: 45px;
+    padding-top: 125px;
     & #short_description{
       height: 30px;
     }
@@ -1994,7 +2002,7 @@ footer {
       border: 3px none #707070;
     }
   }
-  .recipe_box{
+  div[class^="recipe_box-"]{
     height: 175px;
     width: 791px;
     display: flex;
@@ -2065,6 +2073,12 @@ footer {
       }
       a:hover{
         color:#707070;
+      }
+      #delete_recipe{
+        color: red
+      }
+      #delete_recipe:hover{
+        color: rgb(185, 50, 50)
       }
     }
   }
