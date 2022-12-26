@@ -1,3 +1,82 @@
-{%for x in all_recipes%}
-    <a href ="/recipe/{{x.id}}">{{x}}</a><br>
-{% endfor %}
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}
+  Idea-Meal || All recipes
+{% endblock %}
+{% block body %}
+    <div id="all_recipe_filters_display_btn" onclick="all_recipes_filter_section_toggle()">
+        <div></div>
+    </div>  
+    <div id="all_recipe_filters_section" style="display: none;">
+        <p>HERE WILL BE SOME FILTERS</p>
+        <input type="text" placeholder="search for recipe...">
+        <br>
+        <form>      
+            <fieldset>      
+                <legend>Meal time:</legend>    
+                <input type="checkbox" name="meal_time" value="any">Any<br>    
+                <input type="checkbox" name="meal_time" value="breakfast">Breakfast<br>      
+                <input type="checkbox" name="meal_time" value="lunch">Lunch<br>      
+                <input type="checkbox" name="meal_time" value="dinner">Dinner<br>         
+                <input type="checkbox" name="meal_time" value="dessert">Dessert<br> 
+                <input type="checkbox" name="meal_time" value="supper">Supper<br>
+            </fieldset>      
+        </form>
+    </div>
+    <div class="all_recipes_holder">
+        <div id="page_title">
+          <h1>Recipes</h1>
+        </div>
+        <a href="/main_page/{{user_id}}"><div class="back_button_img"></div></a>
+        <div class="all_recipes_content_holder">
+            <div class="container">
+                <div class="recipe_item">
+                    <div class="text"></div>
+                </div>
+                <div class="recipe_item">
+                    <div class="text"></div>
+                </div>
+                <div class="recipe_item">
+                    <div class="text"></div>
+                </div>
+                <div class="recipe_item">
+                    <div class="text"></div>
+                </div>
+                <div class="recipe_item">
+                    <div class="text"></div>
+                </div>
+                <div class="recipe_item">
+                    <div class="text"></div>
+                </div>
+                <div class="recipe_item">
+                    <div class="text"></div>
+                </div>
+                <div class="recipe_item">
+                    <div class="text"></div>
+                </div>
+                <div class="recipe_item">
+                    <div class="text"></div>
+                </div>
+                <div class="recipe_item">
+                    <div class="text"></div>
+                </div>
+                <div class="recipe_item">
+                    <div class="text"></div>
+                </div>
+                <div class="recipe_item">
+                    <div class="text"></div>
+                </div>
+                <div class="recipe_item">
+                    <div class="text"></div>
+                </div>
+                <div class="recipe_item">
+                    <div class="text"></div>
+                </div>
+            </div>
+            <!-- {%for x in all_recipes%}
+            <a href ="/recipe/{{x.id}}">{{x}}</a><br>
+            {% endfor %} -->
+        </div>
+    </div>
+    
+{% endblock %}
