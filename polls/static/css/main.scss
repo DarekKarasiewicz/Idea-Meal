@@ -330,16 +330,56 @@ footer {
   }
   &__toggle_btn{
     height: 5vh;
-    img{
-      display: flex;
-      float: right;
-      height: 5vh;
-      transform: rotate(180deg);
-      transition: 0.05s;
-      cursor: pointer;
-      filter: var(--idea_img_filter);
+    position: relative;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    cursor: pointer;
+    .navbar_burger{
+      margin-left: 5px;
+      width: 100px;
+      height: 4px;
+      background-color: var(--idea_opacity_panel);
+      border-radius: 3px;
+      transition: .25s;
+    }
+    .navbar_burger::before{
+      content: '';
+      position: absolute;
+      width: 175px;
+      height: 4px;
+      background-color: var(--idea_opacity_panel);
+      border-radius: 3px;
+      transition: .25s;
+      transform: translateY(-10px);
+    }
+    .navbar_burger::after{
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 4px;
+      background-color: var(--idea_opacity_panel);
+      border-radius: 3px;
+      transition: .25s;
+      transform: translateY(10px);
     }
   }
+
+  // after click on burger
+
+  &__toggle_btn.open .navbar_burger{
+    width: 40px;
+  }
+
+  &__toggle_btn.open .navbar_burger::after{
+    width: 40px;
+  }
+
+  &__toggle_btn.open .navbar_burger::before{
+    width: 40px;
+  }
+
+
   &__blank_space{
     height: 37.5vh;
   }  
@@ -492,13 +532,6 @@ footer {
 
   .navbar__links{
     height: 41.5vh;
-  }
-
-  .navbar__toggle_btn{
-    img{
-      transform: rotate(0deg);
-      transition: 0.25s;
-    }
   }
   
   .navbar__blank_space{

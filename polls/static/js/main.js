@@ -50,7 +50,22 @@ function errorMessage(){
 
 //function for hiding navbar
 $("#navBtn").on("click",() => {
-  document.getElementById("nav").classList.toggle("short");
+})
+
+const navBtn = document.querySelector('.navbar__toggle_btn');
+const navbar = document.getElementById("nav");
+let navOpen = false;
+
+navBtn.addEventListener('click',() => {
+  if(!navOpen){
+    navBtn.classList.add("open")
+    navbar.classList.add("short");
+    navOpen = true;
+  }else{
+    navBtn.classList.remove('open');
+    navbar.classList.remove("short");
+    navOpen = false;
+  }
 })
 
 //if given element even exists

@@ -6,6 +6,9 @@
 {% block body %}
   {%block navbar %}
   <div class="navbar" id="nav">
+    <div class="navbar__toggle_btn" >
+      <div class="navbar_burger"></div>
+    </div>
     <div class="navbar__logo"><img src="{% static 'img/first_logo.png' %}" alt="testLogo"/></div>
     <div class="navbar__links">
       <ul id="links">
@@ -15,9 +18,6 @@
         <li class="link"><a href="/fridge/{{user.id}}"><img src="{% static 'img/icons8-fridge-with-open-freezer-64.png' %}" alt="fridge_icon"/><p>Fridge</p></a></li>
         <li class="link"><a href="/my_recipes/{{user.id}}"><img src="{% static 'img/my_recipe.png' %}" alt="logout"/><p>My recipes</p></a></li>
       </ul>
-    </div>
-    <div class="navbar__toggle_btn" >
-      <img src="{% static 'img/icon_arrow.png' %}" alt="arrow" id="navBtn"/>
     </div>
     <div class="navbar__blank_space" id="blank_space"></div>
     <div class="navbar__user">
@@ -108,7 +108,6 @@
     let changedProducts = {};
     let productId = [];
     document.getElementById("submit_changes").style.display = "none";
-
 
     //dummy function for adding existing products
     function addFunction(id) {
