@@ -17,15 +17,22 @@ class UserTestCase(TestCase):
         user = User.objects.create_user(username="Forbiden_name",
                             email="notyourbuisnes@oo.com",
                             password = "Fantasy123!")
-        user_fridge = Fridge(user = user.id)
-        product = Product(user=user.id, name =
-                                         "test_product")
+        Fridge.objects.create(user = user)
+        Product.objects.create(user=user,
+                               name ="test_product",
+                               product_category = "Test",
+                               unit = "test",)
 
 
     def test_user_fridge_test(self):
-        self.assertIsNotNone(user_fridge.objects.filter(user = user.id))
+        user = User.objects.filter(username = "Forbiden_name")[0]
+        self.assertIsNotNone(Fridge.objects.filter(user = user.id))
 
     def test_user_can_add_product(self):
-        test_product_in_fridge = Fridge_products_counts(product= product, ammount=1, fridge=
-                               user_fridge.id)
-        self.assertEqual(Fridge_products_counts.objects.filter(fridge.user_fridge.id).id,test_product_in_fridge.id)
+        user = User.objects.filter(username = "Forbiden_name")[0]
+        user_fridge = Fridge.objects.filter(user = user.id)[0]
+        product = Product.objects.filter(name= "test_product")[0]
+        test_product_in_fridge = Fridge_products_counts.objects.create(product= product, ammount=2, fridge=
+                               user_fridge)
+        tested = Fridge_products_counts.objects.filter(fridge=user_fridge.id)[0]
+        self.assertEqual(tested.id,test_product_in_fridge.id)
