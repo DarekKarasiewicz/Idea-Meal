@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}
+  Idea-Meal || Help
+{% endblock %}
+{% block body %}
+
+
+<div class="help_holder">
+  <div id="page_title">
+    <h1>FAQ</h1>
+  </div>
+  <div class="all_FAQ">
+  <div class="FAQ_1" id="FAQ_1">
+    <div class="question">How to cook good?</div>
+    <div class="answear">Learn how to cook!</div>
+    <div class="toggle_arrow"><img id="arrow_1" src="{% static 'img/icon_arrow.png' %}" alt="toggle arrow" onclick="toggleFAQ(1)"/></div>
+  </div>
+  <div class="FAQ_2" id="FAQ_2">
+    <div class="question">How to cook good?</div>
+    <div class="answear">Learn how to cook!</div>
+    <div class="toggle_arrow"><img id="arrow_2" src="{% static 'img/icon_arrow.png' %}" alt="toggle arrow" onclick="toggleFAQ(2)"/></div>
+  </div>
+</div>
+</div>
+<script>
+  function toggleFAQ(id){
+    document.getElementById("FAQ_"+id).classList.toggle("open");
+  }
+</script>
+{%endblock%}
+

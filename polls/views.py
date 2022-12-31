@@ -407,3 +407,16 @@ def recipe_update(request,recipe_id):
         # return HttpResponseRedirect(reverse("my_recipes", args=(session_user.id,)))
     
     return render(request, 'polls/recipe_update.html',{"recipe": update_recipe})
+
+@login_required
+def help(request):
+
+    return render(request, 'polls/help.html',{})
+
+@login_required
+def contact(request,user_id):
+    if int(request.session["_auth_user_id"]) != int(user_id):
+        raise Http404
+    session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
+    
+    return render(request, 'polls/contact.html',{"user_id": session_user.id})

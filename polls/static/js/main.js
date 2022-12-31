@@ -158,3 +158,4 @@ $('.nav_recipe_helper').on('click',function(){
     focusConfirm: false,
   })
 })
+
