@@ -10,6 +10,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 import time
 
 #################################################################################
@@ -418,5 +420,22 @@ def contact(request,user_id):
     if int(request.session["_auth_user_id"]) != int(user_id):
         raise Http404
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
+
+    if request.method == "POST":
+        message_cause = request.POST["message_cause"]
+        message_title = request.POST["message_title"]
+        message = request.POST["message"]
+        user_email = request.POST["user_email"]
+        user_name = request.POST["user_name"]
+
+        title = message_cause + " from user "+ user_name
+        email_message = render_to_string('email/email_template.html',{
+            'username': user_name,
+            'email': user_email,
+            'message': message,
+            'message_title': message_title,
+        })
+
+        send_mail( title ,"",'idea.meal@gmail.com',['mikolajk558@gmail.com'],fail_silently=False,html_message=email_message)
     
     return render(request, 'polls/contact.html',{"user_id": session_user.id})

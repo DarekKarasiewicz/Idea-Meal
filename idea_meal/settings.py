@@ -30,6 +30,13 @@ ALLOWED_HOSTS = ['127.0.0.1']
 #Login url
 LOGIN_URL =''
 
+#https://docs.djangoproject.com/en/4.1/topics/email/
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'idea.meal@gmail.com'
+EMAIL_HOST_PASSWORD = 'smhgmteypsbkpcfm'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -149,3 +156,4 @@ COMPRESS_PRECOMPILERS = (
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

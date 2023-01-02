@@ -1,22 +1,68 @@
-{% extends 'base.html' %}
-{% block page_title %}
-  Idea-Meal || Contact
-{% endblock %}
+{% extends 'base.html' %} 
+{% block page_title %} Idea-Meal || Contact 
+{%endblock %} 
 {% block body %}
 <div class="contact_holder">
   <div id="page_title">
     <h1>Contact Us</h1>
   </div>
-  <form>
-    <select>
-      <option>Opinion</option>   
-      <option>Report Bug</option>   
+  <form class="contact_form" id="contact_form">
+    <label for="cause">Choose cause</label>
+    <select name="cause" id="cause">
+      <option value="Opinion">Opinion</option>
+      <option value="Bug report">Report Bug</option>
     </select>
-    <label>Title</label>
-    <input type="text"/>
+    <label for="title">Title</label>
+    <input
+      type="text"
+      name="title"
+      id="title"
+      placeholder="Type your title here..."
+    />
 
-    <label>Message</label>
-    <input type="text"/>
+    <label for="message">Message</label>
+    <textarea
+      type="text"
+      name="message"
+      id="message"
+      rows="15"
+      placeholder="Type your message here..."
+    ></textarea>
+
   </form>
+  <button class="mess_submit" id="mess_submit" onclick="sendMessage()">Send</button>
 </div>
 {%endblock%}
+{% block page_js%} 
+<script>
+  function sendMessage() {
+    let cause = document.getElementById("cause").value;
+    let title = document.getElementById("title").value;
+    let message = document.getElementById("message").value;
+    const userEmail = "{{user.email}}"
+    const userName = "{{user.username}}"
+
+    jQuery.ajax({
+      type: "POST",
+      url: '{% url "contact" user_id=user.id %}',
+      data: {
+        "message_cause": cause, 
+        "message_title": title, 
+        "message": message, 
+        "user_name": userName, 
+        "user_email": userEmail, 
+        "csrfmiddlewaretoken": "{{ csrf_token }}",
+      },
+      success: function (data) {
+        console.log("success");
+        document.getElementById("title").defaultValue = ""
+      },
+      failure: function (data) {
+        console.log("failure");
+        alert("Fail");
+      },
+    })
+  }
+</script>
+{%endblock%}
+
