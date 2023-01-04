@@ -17,4 +17,5 @@ urlpatterns = [
     path('recipe_update/<int:recipe_id>', views.recipe_update, name='recipe_update'),
     path('help', views.help, name='help'),
     path('contact/<int:user_id>', views.contact, name='contact'),
+    path('contact/succes', views.contact_succes, name='contact_succes'),
     ]

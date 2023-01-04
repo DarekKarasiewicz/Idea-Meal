@@ -2408,3 +2408,41 @@ footer {
     }
   }
 }
+
+
+.succes_holder{
+  height: 750px;
+  width: 700px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 45px;
+  box-shadow: 0px 4px 18px #4d4d4d;
+  background: rgba(77, 77, 77, .85);
+  padding: 35px;
+  display: flex;
+  justify-content: center;
+
+  #page_title{
+    height: 55px;
+    width: 400px;
+    position: absolute;
+    top: -55px;
+    left: 50%;
+    transform: translate(-50%);
+    border-top-right-radius: 45px;
+    border-top-left-radius: 45px;
+    box-shadow: 0px 4px 18px #4d4d4d;
+    background: var(--idea_opacity_panel);
+    text-align: center;
+  }
+
+  .mess_box{
+    margin-top: 250px;
+
+    #progressBar{
+      border-radius: 5px;
+    }
+  }
+}

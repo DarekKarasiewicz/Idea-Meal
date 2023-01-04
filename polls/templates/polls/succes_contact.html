@@ -1,0 +1,30 @@
+{% extends 'base.html' %} 
+{% block page_title %} Idea-Meal || Contact 
+{%endblock %} 
+{% block body %}
+<div class="succes_holder">
+  <div id="page_title">
+    <h1>Contact Us</h1>
+    <div class="mess_box">
+        <h1>Thank You!</h1>
+        <p>Thank you for your message, you will be automaticly redirected to your frigde after 10s</p>
+        <progress value="0" max="10" id="progressBar"></progress>
+    </div>
+  </div>
+</div>
+{%endblock%}
+{% block page_js%} 
+<script>
+    let timeleft = 10;
+    let downloadTimer = setInterval(function(){
+      if(timeleft <= 0){
+        clearInterval(downloadTimer);
+      }
+      document.getElementById("progressBar").value = 10 - timeleft;
+      timeleft -= 1;
+      if(timeleft == 0){
+        window.location.href = "http://127.0.0.1:8000/main_page/{{user_id}}";
+      }
+    }, 1000);
+</script>
+{%endblock%}

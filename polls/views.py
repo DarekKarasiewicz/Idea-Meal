@@ -2,7 +2,7 @@ from strenum import StrEnum  # Python 3.11 = from enum
 from enum import auto
 
 # DJANGO IMPORTS
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
@@ -435,7 +435,14 @@ def contact(request,user_id):
             'message': message,
             'message_title': message_title,
         })
+        # ,'s22615@pjwstk.edu.pl','s22624@pjwstk.edu.pl'
+        send_mail( title ,"",'idea.meal@gmail.com',['s23202@pjwstk.edu.pl'],fail_silently=False,html_message=email_message)
+        
 
-        send_mail( title ,"",'idea.meal@gmail.com',['mikolajk558@gmail.com'],fail_silently=False,html_message=email_message)
-    
     return render(request, 'polls/contact.html',{"user_id": session_user.id})
+
+@login_required
+def contact_succes(request):
+    session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
+
+    return render(request, 'polls/succes_contact.html',{"user_id": session_user.id})
