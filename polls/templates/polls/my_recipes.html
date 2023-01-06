@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}
+  Idea-Meal || My Recipes
+{% endblock %}
+{% block body %}
+<div class="my_recipes_holder">
+    <div id="page_title">
+        <h1>My recipes</h1>
+    </div>
+    <div class="recipes_holder">
+    {%for recipe in recipes%}
+    <div class="recipe_box-{{recipe.id}}" id="{{recipe.id}}">
+        <div class="recipe_photo" ></div>
+        <p class="recipe_name">{{recipe.name}}</p>
+        <div class="update-{{recipe.id}}" id="recipe_update{{recipe.id}}" onclick="openTools({{recipe.id}})">
+            <img id="recipe_tools" src="{% static 'img/tools.png' %}" alt="tools image">
+            <a href="/recipe/{{recipe.id}}">Preview</a>
+            <a href="/recipe_update/{{recipe.id}}">Update</a>
+            <a id="delete_recipe" onclick="deleteRecipe({{recipe.id}})">Delete</a>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+</div>
+<script>
+    function deleteRecipe(recipeId){
+        jQuery.ajax({
+            type: "POST",
+            url: '{% url "my_recipes" user_id=user.id %}',
+            data: {
+              "recipeId": recipeId,
+              "csrfmiddlewaretoken": "{{ csrf_token }}",
+            },
+            success: function (data) {
+              console.log("success");
+            },
+            failure: function (data) {
+              console.log("failure");
+              alert("bruh");
+            },
+          })
+        
+        document.getElementById(recipeId).style.display = "none";
+    }
+</script>
+{% endblock %}

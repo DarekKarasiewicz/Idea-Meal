@@ -1,16 +1,49 @@
-<div class="form_holder">
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}
+  Idea-Meal || Adding 
+{% endblock %}
+{% block body %}  
+<div class="add_product_holder">
 <h1>Add product</h1>
-<form method="post">
+<form class="input_form" method="post">
   {% csrf_token %}
   <label for="product_name">product_name: </label>
   <input type="text" name="product_name" id="product_name" required/><br>
+  <label for="product_category">product_category: </label>
   <select name="product_category" id="product_category">
      {% for product_category in product_categories %}
          <option value="{{product_category}}">{{product_category}}</option>
      {% endfor %}
-  </select>
-
-  <button type="submit">ADD</button>
+  </select><br/>
+  <label for="product_quantity">product_quantity: </label>
+  <input type="number" name="product_quantity" id="product_quantity" placeholder="pcs" min=0 required/><br>
+    <button id="submit_product">ADD</button>
 </form>
-<a href="/main_page/{{user_id}}">Back</a>
+<a href="/main_page/{{user_id}}"><div class="back_button_img"></div></a>
 </div> 
+{% endblock %}
+{% block page_js%} 
+<script>  
+// quantity logic in product page
+$('#product_category').on('click',function(){
+   switch($('#product_category').val()){
+     case "opt1":
+     $('#product_quantity').replaceWith("<input type='number' name='product_quantity' id='product_quantity' placeholder='pcs' min=0 required/>");
+      console.log($('#product_category').val());
+      break;
+
+     case "opt2":
+     $('#product_quantity').replaceWith("<input type='number' name='product_quantity' id='product_quantity' placeholder='ml' step='5' min=0 required/>");
+      console.log($('#product_category').val());
+      break;
+
+     case "opt3":
+     $('#product_quantity').replaceWith("<input type='number' name='product_quantity' id='product_quantity' placeholder='g' step='10' min=0 required/>");
+      console.log($('#product_category').val());
+      break;
+   }
+  })
+</script>
+{% endblock %} 
+

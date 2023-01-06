@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}
+  Idea-Meal || Help
+{% endblock %}
+{% block body %}
+
+
+<div class="help_holder">
+  <div id="page_title">
+    <h1>FAQ</h1>
+  </div>
+  <div class="all_FAQ">
+  <div class="FAQ_1" id="FAQ_1">
+    <div class="question">How to create good recipe?</div>
+    <div class="answear">
+      <ol>
+        <li>First of all, <b>Give simple as possible title</b>  of your recipe that attract people</li>
+        <li><b>Write easy to follow instructions.</b> No one wants to read block of complex text, <b>don't you?</b></li>
+        <li><b>Give your readers clear list of ingredients</b> that are needed to prepare this dish</li>
+        <li>When you will be setting a prepare time make sure that you summary <b>all activities</b> that are needed to make it from alpha to omega</li>
+        <li>If you don't know which <b>cuisine</b> is that recipe belongs to choose option <b>unknown</b>. Same thing do for <b>meal_time_category</b></li>
+        <li>When you face to set what <b>difficulty</b> and <b>spiciness</b> of this recipe is keep in mind that should be defined for average person(not experienced one)</li>
+        <li>Set <b>per serving</b> number which says: How many servings you end up with.</li>
+      </ol>
+    </div>
+    <div class="toggle_arrow"><img id="arrow_1" src="{% static 'img/icon_arrow.png' %}" alt="toggle arrow" onclick="toggleFAQ(1)"/></div>
+  </div>
+  <div class="FAQ_2" id="FAQ_2">
+    <div class="question">How to cook good?</div>
+    <div class="answear">Learn how to cook!</div>
+    <div class="toggle_arrow"><img id="arrow_2" src="{% static 'img/icon_arrow.png' %}" alt="toggle arrow" onclick="toggleFAQ(2)"/></div>
+  </div>
+</div>
+</div>
+{%endblock%}
+{% block page_js%} 
+<script>
+  function toggleFAQ(id){
+    document.getElementById("FAQ_"+id).classList.toggle("open");
+  }
+</script>
+{%endblock%}
+
+

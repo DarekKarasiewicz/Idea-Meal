@@ -2,7 +2,7 @@ from strenum import StrEnum  # Python 3.11 = from enum
 from enum import auto
 
 # DJANGO IMPORTS
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
@@ -10,6 +10,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 import time
 
 #################################################################################
@@ -149,6 +151,13 @@ def register_page(request):
 
     return render(request, "polls/register_page.html")
 
+# def find_recipe_base_on_products(product: dict) -> Recipes:
+#     pass
+
+def create_shopping_list(list_of_recipes: list) -> list:
+    dict_of_products = {}
+    return list_of_products
+
 @csrf_exempt
 def login_page(request):
     if request.method == "POST":
@@ -174,15 +183,29 @@ def main_page(request, user_id):
         raise Http404
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
     all_recipes = Recipe.objects.all()
-    fridge = get_object_or_404(Fridge, user=session_user.id)
-    all_products = list(Fridge_products_counts.objects.filter(fridge=fridge.id))
-    # print(all_products)
-    filter_by_product_count(all_products)
-    return render(
-        request,
-        "polls/main_page.html",
-        {"user": session_user, "recipes":filter_by_product_count(all_products), "products": all_products},
-    )
+    all_products = Product.objects.all()
+
+    dictionary = {}
+    productIds = []
+
+    if request.method == "POST":
+        productIds = request.POST.getlist("productId[]")
+        for id in productIds:
+            dictionary[id] = request.POST.get("changedProducts["+ id +"]",None) 
+        
+    print(productIds)
+    print(dictionary)
+    if len(productIds) > 0:
+        for id in productIds:
+            product_update = Product.objects.get(id = id)
+            product_update.unit = dictionary[id]
+            product_update.save()
+
+
+    return render(request,"polls/main_page.html",{'user':session_user
+                                                 ,'recipes': all_recipes
+                                                 ,'products': all_products
+                                                  })
 
 @login_required
 def add_recipes(request):
@@ -273,9 +296,10 @@ def product_page(request):
     print(product_category)
     if request.method == "POST":
         name = request.POST["product_name"]
-        product_category_post = request.POST["product_name"]
+        product_category_post = request.POST["product_category"]
+        product_quantity = request.POST["product_quantity"]
 
-        product = Product(name=name, product_category=product_category_post)
+        product = Product(name = name, product_category = product_category_post, unit = product_quantity)
         product.save()
         return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
 
@@ -326,9 +350,129 @@ def all_recipes(request):
             )
 
 @login_required
+def my_recipes(request,user_id):
+    user_recipes =[]
+    if int(request.session["_auth_user_id"]) != int(user_id):
+        raise Http404
+    session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
+    all_recipes = Recipe.objects.all()
+
+    for recipe in all_recipes:
+        if recipe.author.id == user_id:
+            user_recipes.append(recipe)
+
+    if request.method == "POST":
+        recipe_id = request.POST["recipeId"]
+        recipe_to_delete = Recipe.objects.get(id = recipe_id)
+        recipe_to_delete.delete()
+
+
+    return render(request, 'polls/my_recipes.html',{"user_id": session_user.id,'recipes': user_recipes})
+
+@login_required
+def recipe_update(request,recipe_id):
+    # session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
+
+    update_recipe = Recipe.objects.get(pk = recipe_id)
+    
+    if request.method == "POST":
+        name = request.POST["recipe_name"]
+        description = request.POST["description"]
+        difficulty = request.POST["difficulty"]
+        cuisine_category = request.POST["cuisine_category"]
+        meal_time_category = request.POST["meal_time_category"]
+        prepare_time_post = request.POST["prepare_time"].split(":")
+        prepare_time = int(prepare_time_post[0]) * 60 + int(prepare_time_post[1])
+        spiciness = request.POST["spiciness"]
+        per_serving = request.POST["per_serving"]
+
+        enum_cuisine_category = [
+            e.value
+            for e in Cuisine_category
+            if str(e.value).lower() == cuisine_category.lower()
+        ]
+        enum_meal_time_category = [
+            e.value
+            for e in Meal_time_category
+            if str(e.value).lower() == meal_time_category.lower()
+        ]
+        if len(enum_meal_time_category) == 0 and len(enum_cuisine_category) == 0:
+            raise Http404
+        match difficulty:
+            case "easy":
+                difficulty = 1
+            case "medium":
+                difficulty = 2
+            case "hard":
+                difficulty = 3
+            case _:
+                raise Http404
+        
+        update_recipe.name = name
+        update_recipe.description = description
+        update_recipe.difficulty = difficulty
+        update_recipe.cuisine_category = cuisine_category
+        update_recipe.meal_time_category = meal_time_category
+        update_recipe.prepare_time = prepare_time
+        update_recipe.spiciness = spiciness
+        update_recipe.per_serving = per_serving
+
+        print(name)
+        print(description)
+        print(difficulty)
+        print(cuisine_category)
+        print(meal_time_category)
+        print(prepare_time)
+        print(spiciness)
+        print(per_serving)
+
+
+        update_recipe.save()
+        time.sleep(2)
+        # return HttpResponseRedirect(reverse("my_recipes", args=(session_user.id,)))
+    
+    return render(request, 'polls/recipe_update.html',{"recipe": update_recipe})
+
+@login_required
+def help(request):
+
+    return render(request, 'polls/help.html',{})
+
+@login_required
+def contact(request,user_id):
+    if int(request.session["_auth_user_id"]) != int(user_id):
+        raise Http404
+    session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
+
+    if request.method == "POST":
+        message_cause = request.POST["message_cause"]
+        message_title = request.POST["message_title"]
+        message = request.POST["message"]
+        user_email = request.POST["user_email"]
+        user_name = request.POST["user_name"]
+
+        title = message_cause + " from user "+ user_name
+        email_message = render_to_string('email/email_template.html',{
+            'username': user_name,
+            'email': user_email,
+            'message': message,
+            'message_title': message_title,
+        })
+        # ,'s22615@pjwstk.edu.pl','s22624@pjwstk.edu.pl'
+        send_mail( title ,"",'idea.meal@gmail.com',['s23202@pjwstk.edu.pl'],fail_silently=False,html_message=email_message)
+@login_required
 def shopping_list(request):
    session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"])) 
    return render(request,
             "polls/shopping_list.html",
             {"user":session_user},
-            )
+            )        
+
+
+    return render(request, 'polls/contact.html',{"user_id": session_user.id})
+
+@login_required
+def contact_succes(request):
+    session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
+
+    return render(request, 'polls/succes_contact.html',{"user_id": session_user.id})

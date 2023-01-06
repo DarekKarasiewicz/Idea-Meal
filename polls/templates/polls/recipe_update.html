@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}
+  Idea-Meal || Update Recipe
+{% endblock %}
+{% block body %}
+<div class="add_recipe_holder">
+    <div id="page_title">
+      <h1>Update Recipe</h1>
+    </div>
+    <a href="/main_page/{{user_id}}"><div class="back_button_img"></div></a>
+    <form id="add_recipe_form" method="post">
+      <div class="update_recipe_left">
+        {% csrf_token %}
+        <div class="old-form">
+          <label for="recipe_name">Recipe_name: </label>
+          <input type="text" name="recipe_name" id="recipe_name" required/><br>
+          <label for="short_description" style="height: 100px;">Short description: </label>
+          <textarea type="text" name="short_description" id="short_description" rows="4" required disabled></textarea><br>
+          <label for="difficulty">Difficulty: </label>
+          <select name="difficulty" id="difficulty">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+          </select><br>
+          <label for="cuisine_category">Cuisine_category: </label>
+          <input type="text" name="cuisine_category" id="cuisine_category" required/><br>
+          <label for="meal_time_category">Meal_time_category: </label>
+          <input type="text" name="meal_time_category" id="meal_time_category" required/><br>
+          <label for="prepare_time">Prepare_time: </label>
+          <input type="time" name="prepare_time" id="prepare_time" min="00:00" max="24:00" required/><br>
+          <label for="spiciness">Spiciness: </label>
+          <input type="number" name="spiciness" id="spiciness" min="1" max="4" required/><br>
+          <label for="per_serving">Per_serving: </label>
+          <input type="number" name="per_serving" id="per_serving" min="1" max="20" required/><br>
+        </div>
+      </div>
+      <div class="add_recipe_right">
+        <div class="old-form form-i_block">
+          <label for="description">Description: </label>
+          <textarea type="text" name="description" id="description" rows="25" placeholder="Enter a description..." required></textarea><br>
+        </div>
+      </div>
+      <div class="submit_center">
+        <button id="submit_recipe">UPDATE</button>
+      </div>
+    </form>
+  </div> 
+{%endblock%}
+{% block page_js%} 
+<script>
+    window.onload = function(){
+        document.getElementById("description").defaultValue = "{{recipe.description}}";
+        document.getElementById("recipe_name").defaultValue = "{{recipe.name}}";
+        document.getElementById("difficulty").defaultValue = "{{recipe.difficulty}}";
+        document.getElementById("cuisine_category").defaultValue = "{{recipe.cuisine_category}}";
+        document.getElementById("meal_time_category").defaultValue = "{{recipe.meal_time_category}}";
+        if({{recipe.prepare_time}}<10){
+          document.getElementById("prepare_time").defaultValue = "0{{recipe.prepare_time}}:00";
+        }else{
+          document.getElementById("prepare_time").defaultValue = "{{recipe.prepare_time}}:00";
+
+        }
+        document.getElementById("spiciness").defaultValue = "{{recipe.spiciness}}";
+        document.getElementById("per_serving").defaultValue = "{{recipe.per_serving}}";
+
+        switch({{recipe.difficulty}}){
+          case 1:
+            $("#difficulty").val("easy");
+            break;
+          case 2:
+            $("#difficulty").val("medium");
+            break;
+          case 3:
+            $("#difficulty").val("hard");
+            break;
+        }
+    }
+</script>
+{%endblock%}
