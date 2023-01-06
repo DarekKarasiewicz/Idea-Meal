@@ -468,9 +468,6 @@ def shopping_list(request):
             {"user":session_user},
             )        
 
-
-    return render(request, 'polls/contact.html',{"user_id": session_user.id})
-
 @login_required
 def contact_succes(request):
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))

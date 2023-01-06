@@ -55,9 +55,7 @@
 </div>
 {%endblock%}
 <div class="fridge_holder">
-  <h1>Hello World !</h1>
-  <h2>Welcome {{user.username}}, you are on Main Page</h2>
-  <h3>Work in progres</h3>
+  <h2>Welcome {{user.username}}</h2>
   {% comment %} <h1><a href="{% url 'logout'%}">Logout</a></h1>
   <h1><a href="{% url 'recipes_add'%}">Add Recipes</a></h1>
   <h1><a href="{% url 'product_page'%}">Add Product</a></h1>
@@ -167,10 +165,14 @@
   </script>
 </div>
 
-<div id="nav_reciper_show"></div>
+<div id="nav_reciper_show">
+  <div></div>
+</div>
 <div id="nav_recipe_res_div" style="display: none">
   <div class="nav_title">
-    <div id="nav_reciper_hidder"></div>
+    <div id="nav_reciper_hidder">
+      <div></div>
+    </div>
     <p>Recipes</p>
   </div>
   <div class="nav_filters">
@@ -192,9 +194,73 @@
   <div class="nav_results">
     <div class="nav_recipe_helper" title="results explanation"></div>
     <p class="nav_recipe_h">Results</p>
+    {%for x in recipes%}
+    <div class="recipe_box">
+      <div class="recipe_box_simple">
+        {%if x.is_verificated == True %}
+          <span class="verificated_recipe"></span>
+        {% endif %}
+        <div class="name"><p>{{x.name}}</p></div>
+        {%if x.difficulty == 1 %}
+          <div style="background-color: green !important"></div>
+        {% elif x.difficulty == 2 %}
+          <div style="background-color: orange !important"></div>
+        {% else %}
+          <div style="background-color: red !important"></div>
+        {% endif %}
+      </div>
+      <div class="recipe_box_extended" style="display: none;">
+        <div>
+          <div>{{x.description}}</div>
+          <div>
+            {%if x.spiciness == 1 %}
+              <div class="spicy_img green_filter"></div>
+            {% elif x.spiciness == 2 %}
+              <div class="spicy_img yellow_filter"></div>
+            {% elif x.spiciness == 3 %}
+              <div class="spicy_img orange_filter"></div>
+            {% else %}
+              <div class="spicy_img red_filter"></div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="small-div">
+          <div class="three-seg">
+            <div class="time_img"></div>
+            <div class="info">{{x.prepare_time}}</div>
+          </div>
+          <div class="three-seg">
+            <div class="people_img"></div>
+            <div class="info">{{x.per_serving}}</div>
+          </div>
+          <div class="three-seg">
+            <div class="cuisine_img"></div>
+            <div class="info">
+              {%if x.cuisine_category != None %}
+                {{x.cuisine_category}}
+              {% else %}
+                ---
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="small-div">
+          <div class="two-seg-one">
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="counter">({{x.comment_id}})</div>
+          </div>
+          <div class="two-seg-two"><p><a href ="/recipe/{{x.id}}">See more</a></p></div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
   </div>
 </div>
 <div id="result-explanation">
   <p>Explanation</p>
 </div>
-{% endblock %}
+{% endblock %} 

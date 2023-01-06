@@ -53,21 +53,24 @@ function errorMessage(){
 $("#navBtn").on("click",() => {
 })
 
-const navBtn = document.querySelector('.navbar__toggle_btn');
-const navbar = document.getElementById("nav");
-let navOpen = false;
+if ($('.navbar__toggle_btn').length > 0) {
+  const navBtn = document.querySelector('.navbar__toggle_btn');
+  const navbar = document.getElementById("nav");
+  let navOpen = false;
 
-navBtn.addEventListener('click',() => {
-  if(!navOpen){
-    navBtn.classList.add("open")
-    navbar.classList.add("short");
-    navOpen = true;
-  }else{
-    navBtn.classList.remove('open');
-    navbar.classList.remove("short");
-    navOpen = false;
-  }
-})
+
+  navBtn.addEventListener('click',() => {
+    if(!navOpen){
+      navBtn.classList.add("open")
+      navbar.classList.add("short");
+      navOpen = true;
+    }else{
+      navBtn.classList.remove('open');
+      navbar.classList.remove("short");
+      navOpen = false;
+    }
+  })
+}
 
 //if given element even exists
 if ($('.links').length > 0) {
@@ -159,3 +162,60 @@ $('.nav_recipe_helper').on('click',function(){
     focusConfirm: false,
   })
 })
+
+$('.clickable_legend').on('click',function(){
+  if($(this).find('.toggle_category_arrow').hasClass("arrow_rotate")){
+    $(this).find('.toggle_category_arrow').removeClass('arrow_rotate');
+  }else{
+    $(this).find('.toggle_category_arrow').addClass('arrow_rotate');
+  }
+  $(this).parent().find('.form-check.filters_centered').toggle("fast")
+})
+
+//TO DO:
+//For now you can add the same recipe over and over again to your shopping list
+function addToShoppingList(recipe_id){
+  var array = JSON.parse(localStorage.getItem("user_shopping_list"));
+  var parser = parseInt(recipe_id);
+  if (array) { 
+    array.push({id: parser}); 
+    localStorage.setItem("user_shopping_list", JSON.stringify(array));
+  } else {
+    var created_array = [];
+    created_array.push({id: parser});
+    localStorage.setItem("user_shopping_list", JSON.stringify(created_array));
+  }
+  Swal.fire({
+    position: 'top-end',
+    icon: 'success',
+    title: 'Recipe added to shopping list',
+    showConfirmButton: false,
+    timer: 1500
+  })
+}
+function removeShoppingList(){
+  if(localStorage.getItem("user_shopping_list")){
+    localStorage.removeItem("user_shopping_list");
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Shopping list cleared',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    setTimeout(function() {
+      location.reload();
+  }, 1500);
+  }else{
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      html: '' + 
+          '<div id="nav_helper_color">'+
+          '<p>There is nothing to clear of the list!</p>'+
+          '</div>',
+      showConfirmButton: false,
+      timer: 2000
+  })
+  }
+}
