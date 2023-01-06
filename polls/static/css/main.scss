@@ -2312,17 +2312,16 @@ footer {
       }
   
       .answear{
+        display: none;
         width: 100%;
         padding-top: 5px;
         font-size: 18px;
-        opacity: 0;
-        transition: opacity .25s;
+
       }
     }
   
     div[class^="FAQ_"].open{
-      height: 200px;
-  
+      height: auto;
       .question{
         display: flex;
         width: 100%;
@@ -2337,8 +2336,7 @@ footer {
       }
   
       .answear{
-      opacity: 1;
-      transition: opacity .25s;
+      display: block;
       }
     }
   }
