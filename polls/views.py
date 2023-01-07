@@ -465,14 +465,19 @@ def contact(request,user_id):
 
 @login_required
 def shopping_list(request):
-   session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"])) 
-   return render(request,
-            "polls/shopping_list.html",
-            {"user":session_user},
-            )        
+    session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
+
+    if request.method == "POST":
+        recipes_ids = request.POST.getlist('recipes_ids[]')
+        for rec_id in recipes_ids:
+            products = Recipe_products_counts.objects.filter(recipe = rec_id)
+            print(products)
+
+
+    return render(request,"polls/shopping_list.html",{"user":session_user.id})        
 
 @login_required
 def contact_succes(request):
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
 
-    return render(request, 'polls/succes_contact.html',{"user_id": session_user.id})
+    return render(request, 'polls/succes_contact.html',{"user_id": session_user})

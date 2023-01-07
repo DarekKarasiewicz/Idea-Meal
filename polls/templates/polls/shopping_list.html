@@ -9,7 +9,7 @@
         <div id="page_title">
             <h1>Shopping List</h1>
         </div>
-        <a href={% url 'main' user_id=user.id%}><div class="back_button_img" title="Back"></div></a>
+        <a ><div class="back_button_img" title="Back"></div></a>
         <div class="all_recipes_content_holder">
             <div id="contentToPrint">
                 <h1 style="text-align: center;">Your shopping list</h1>
@@ -23,6 +23,36 @@
 {% endblock %}
 {% block page_js%}
 <script>
+
+    window.onload = function(){
+
+        let recipes_list = JSON.parse(localStorage.getItem("user_shopping_list"))
+
+        const recipes_ids = [];
+
+        for (var i = 0; i < recipes_list.length; i++){
+            recipes_ids.push(recipes_list[i]["id"]);
+        }
+
+        console.log(recipes_ids);
+
+        jQuery.ajax({
+            type: "POST",
+            url: '{% url "shopping_list" %}',
+            data: {
+                "recipes_ids": recipes_ids,
+                "csrfmiddlewaretoken": "{{ csrf_token }}",
+            },
+            success: function (data) {
+              console.log("success");
+            },
+            failure: function (data) {
+              console.log("failure");
+              alert("Fail");
+            },
+          })
+    }
+
     $(document).ready(function(){
         let shopping_list = JSON.parse(localStorage.getItem("user_shopping_list"))
 
