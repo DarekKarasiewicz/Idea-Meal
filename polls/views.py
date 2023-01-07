@@ -460,6 +460,9 @@ def contact(request,user_id):
         })
         # ,'s22615@pjwstk.edu.pl','s22624@pjwstk.edu.pl'
         send_mail( title ,"",'idea.meal@gmail.com',['s23202@pjwstk.edu.pl'],fail_silently=False,html_message=email_message)
+
+    return render(request, 'polls/contact.html',{"user_id": session_user.id})
+
 @login_required
 def shopping_list(request):
    session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"])) 
