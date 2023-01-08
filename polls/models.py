@@ -11,7 +11,7 @@ class Product(models.Model):
     date_of_consumtion = models.DateTimeField(default=None,null=True)
 
     def __str__(self):
-        return f"{self.user}:{self.name}"
+        return f"{self.name}"
 
 class Comment(models.Model):
     raiting = models.IntegerField(default=None)
