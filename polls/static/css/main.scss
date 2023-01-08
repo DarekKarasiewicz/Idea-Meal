@@ -75,6 +75,9 @@ footer {
   height: 2.5rem;
   margin: 0;
   span{
+    background-color: var(--idea-color-bg);
+    border-radius: 45px;
+    padding: 5px 10px;
     color: var(--idea-color-text);
     filter: drop-shadow(0 0 0.75rem $idea-color7);
   }
@@ -259,10 +262,13 @@ footer {
   &__logo{
     position: relative;
     height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     img{
       border-radius: 0px 10px 0px 0px;
-      height: 20vh;
-      width: 200px;
+      height: 17vh;
+      width: 175px;
       transition: .15s;
       filter: var(--idea_img_filter);
     }
@@ -1266,7 +1272,7 @@ footer {
   top: 0;
   left: 0;
   .recipe__user_comment_add{
-    height: 30vh;
+    min-height: 30vh;
     width: 85%;
     margin-left: auto;
     margin-right: auto;
@@ -1339,7 +1345,7 @@ footer {
     } 
   }
   .recipe__users_comments{
-    height: 65vh;
+    height: 60vh;
     width: 85%;
     margin-left: auto;
     margin-right: auto;

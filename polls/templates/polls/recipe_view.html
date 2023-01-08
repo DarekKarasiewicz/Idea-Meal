@@ -11,7 +11,7 @@
     {% csrf_token %}
     <div class="recipe__user_comment_add">
         <p>Write a comment:</p>
-        <form method="post" class="comment_form">
+        <form method="post" class="comment_form" style="margin-bottom: 25px">
             {% csrf_token %}
             <label>Your Rating:</label>
             <div class="raiting_section">
@@ -37,7 +37,7 @@
             <div class="recipe_comment">
               <div class="top">
                 <div class="avatar">
-                  <img src="{% static 'img/default_avatar.jpg' %}" alt="settings_img" title="Settings"/>
+                  <img src="{% static 'img/default_avatar.jpg' %}" alt="user_avatar_img" title="User avatar"/>
                 </div>
                 <div class="user_name">Simple user name</div>
                 <div class="user_rating">
@@ -124,12 +124,9 @@
           <div class="ingredients_sec">
             <p>Ingredients</p>
             <ul>
-              <li>chleb</li>
-              <li>ziemniaki</li>
-              <li>marchewki</li>
-              <li>ogorki</li>
-              <li>sol</li>
-              <li>pieprz</li>
+            {%for product in list_of_products%}
+                <li>{{product.product.name}}</li>
+            {%endfor%}
             </ul>
           </div>
         </div>
