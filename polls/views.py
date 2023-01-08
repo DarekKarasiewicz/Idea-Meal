@@ -1,5 +1,7 @@
 from strenum import StrEnum  # Python 3.11 = from enum
 from enum import auto
+from datetime import datetime
+from datetime import timedelta
 
 # DJANGO IMPORTS
 from django.shortcuts import render, get_object_or_404, redirect
@@ -12,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-import time
+from django.utils import timezone
 
 #################################################################################
 #                                   FIXME
@@ -99,13 +101,9 @@ def filter_by_product_count(products) -> list:
         else:
             return_dict[recipe]=[products,3]
 
-
-    print(return_dict)
     return return_dict
 
-
-
-def create_shopping_list(list_of_recipes: list) -> list:
+def create_shopping_list(list_of_recipes: list, session_user_id: int ) -> list:
     dict_of_products = {}
     fridge_products = Fridge_products_counts.objects.all()
     for recipe in list_of_recipes:
@@ -173,15 +171,16 @@ def login_page(request):
 
 @login_required
 def main_page(request, user_id):
-    # TEST
-    # tmp = [
-    #     get_object_or_404(Recipe, pk=1),
-    #     get_object_or_404(Recipe, pk=2),
-    #     get_object_or_404(Recipe, pk=3),
-    # ]
     if int(request.session["_auth_user_id"]) != int(user_id):
         raise Http404
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
+
+    check_products = Product.objects.filter(user=session_user.id)
+    sebus_to_ta_lista = []
+    for product in check_products:
+        if (timezone.now() > (product.date_of_consumtion + timedelta(days=7))):
+            # product.delete()
+            sebus_to_ta_lista.append(product)
     all_recipes = Recipe.objects.all()
     all_products = Product.objects.all()
 
@@ -266,6 +265,7 @@ def add_recipes(request):
 def recipes_page(request, recipe_id):
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
     recipe = get_object_or_404(Recipe, pk=recipe_id)
+    list_of_products = list(Recipe_products_counts.objects.filter(recipe=recipe.id))
 
     if request.method == "POST":
         raiting = request.POST["raiting"]
@@ -286,7 +286,8 @@ def recipes_page(request, recipe_id):
     return render(
         request,
         "polls/recipe_view.html",
-        {"recipe": test_show, "all_comments": all_comments, "user":session_user},
+        {"recipe": test_show, "all_comments": all_comments, "user":session_user,
+         "list_of_products":list_of_products},
     )
 
 @login_required

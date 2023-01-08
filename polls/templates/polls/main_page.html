@@ -259,6 +259,7 @@
           </div>
           <div class="two-seg-two"><p><a href ="/recipe/{{x.id}}">See more</a></p></div>
         </div>
+        {% endfor %}
       </div>
     </div>
     {% endfor %}
@@ -267,4 +268,82 @@
 <div id="result-explanation">
   <p>Explanation</p>
 </div>
+{% endblock %} 
+{% block page_js%}
+<script>
+$(document).ready(function(){
+    $('#searchbar_mainpage').on('keyup', function(){
+      console.log('keyup');
+        var searchbar_val = $(this).val().toLowerCase();
+        $('.main_recipes_name').parent().parent().hide();
+        
+        $('.main_recipes_name').each(function(){
+            var recipe_name = $(this).text().toLowerCase();
+            if(recipe_name.indexOf(searchbar_val) != -1){
+                $(this).parent().parent().show();
+            }
+        });
+    })
+})
+$('#main_page-recipe_order_by').on('change', function (e) {
+    var optionSelected = $("option:selected", this);
+    var valueSelected = this.value;
+    console.log(valueSelected);
+    if(valueSelected == 'spiciness_ASC'){
+        $(".nav_recipe_boxes").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return $(a).attr("data-spiciness") - $(b).attr("data-spiciness");
+            })
+        })
+    }else if(valueSelected == 'spiciness_DESC'){
+        $(".nav_recipe_boxes").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return $(b).attr("data-spiciness") - $(a).attr("data-spiciness");
+            })
+        })
+    }else if(valueSelected == 'popularity'){
+        $(".nav_recipe_boxes").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return $(b).attr("data-raiting") - $(a).attr("data-raiting");
+            })
+        })
+    }else if(valueSelected == 'prepare_time_ASC'){
+        $(".nav_recipe_boxes").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return $(a).attr("data-prepare_time") - $(b).attr("data-prepare_time");
+            })
+        })
+    }else if(valueSelected == 'prepare_time_DESC'){
+        $(".nav_recipe_boxes").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return $(b).attr("data-prepare_time") - $(a).attr("data-prepare_time");
+            })
+        })
+    }else if(valueSelected == 'name_ASC'){
+        $(".nav_recipe_boxes").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return ($(b).attr("data-name")) < ($(a).attr("data-name")) ? 1 : -1;    
+            })
+        })
+    }else if(valueSelected == 'name_DESC'){
+        $(".nav_recipe_boxes").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return ($(b).attr("data-name")) > ($(a).attr("data-name")) ? 1 : -1;    
+            })
+        })
+    }else if(valueSelected == 'per_serving_ASC'){
+        $(".nav_recipe_boxes").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return ($(b).attr("data-serving")) < ($(a).attr("data-serving")) ? 1 : -1;    
+            })
+        })
+    }else if(valueSelected == 'per_serving_DESC'){
+        $(".nav_recipe_boxes").append(function() {
+            return $(this).children().sort(function(a, b) {
+                return ($(b).attr("data-serving")) > ($(a).attr("data-serving")) ? 1 : -1;    
+            })
+        })
+    }
+});
+</script>
 {% endblock %} 
