@@ -466,12 +466,54 @@ def contact(request,user_id):
 @login_required
 def shopping_list(request):
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
-
+    user_products = []
+    
     if request.method == "POST":
+        recipe_products = dict()
+        user_products = dict()
+        all_products = dict()
         recipes_ids = request.POST.getlist('recipes_ids[]')
         for rec_id in recipes_ids:
-            products = Recipe_products_counts.objects.filter(recipe = rec_id)
-            print(products)
+            i = 0
+            products = Recipe_products_counts.objects.filter(recipe = rec_id).values_list('product', flat=True)
+            product_amount = Recipe_products_counts.objects.filter(recipe = rec_id).values_list('ammount', flat=True)
+            products = list(products)
+            product_amount = list(product_amount)
+
+            for p in products:
+                some_product = get_object_or_404(Product, id = p).name
+                recipe_products.update({some_product: product_amount[i]})
+                i = i + 1
+        
+        print(recipe_products)
+        j = 0
+        fridge = get_object_or_404(Fridge, user=int(request.session["_auth_user_id"]))
+        f_products = Fridge_products_counts.objects.filter(fridge = fridge).values_list('product', flat=True)
+        f_amount = Fridge_products_counts.objects.filter(fridge = fridge).values_list('ammount', flat=True)
+        f_products = list(f_products)
+        f_amount = list(f_amount)
+        for f_p in f_products:
+            user_product = get_object_or_404(Product, id = f_p).name
+            user_products.update({user_product: f_amount[j]})
+            j = j + 1
+    
+        print(user_products)
+
+        for r_key, r_value in recipe_products.items():
+            for u_key, u_value in user_products.items():
+                if r_key == u_key:
+                    if r_value - u_value > 0:
+                        new_amount = r_value - u_value
+                        all_products.update({r_key: new_amount})
+                    else:
+                        break
+                else: 
+                    all_products.update({r_key: r_value})
+
+            
+        print(all_products)
+
+                
 
 
     return render(request,"polls/shopping_list.html",{"user":session_user.id})        
