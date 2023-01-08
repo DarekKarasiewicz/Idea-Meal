@@ -47,13 +47,6 @@
       $('.fa-eye').show();
       $('#auth_password').attr('type','text');
     })
-    // $('#auth_password, #confirm_password').on('keyup', function(){
-    //   if($('#auth_password').val() === $('#confirm_password').val()){
-    //     console.log("passwords matches");
-    //   }else{
-    //     console.log("diffrent passwords");
-    //   }
-    // })
     $(document).ready(function() {
       $("#register_form").validate({
         rules: {
@@ -102,9 +95,11 @@
     });
     $("#register_form").on("blur", "input", function(){
       if ( $("#register_form").valid()) {
+        $("#register_submit").removeClass("disabled_btn");
         $("#register_submit").removeAttr("disabled");   
       } else {
-        $("#register_submit").attr("disabled", "disabled");
+        $("#register_submit").addClass("disabled_btn");
+        $("#register_submit").attr("disabled");
       }
     });
   </script>

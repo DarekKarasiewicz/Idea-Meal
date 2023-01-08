@@ -2261,6 +2261,9 @@ button:hover{
   z-index: 5;
   filter: drop-shadow(0 0 0.75rem #89abc6);
 }
+.clean_shop_list:hover {
+  filter: drop-shadow(0 0 0.75rem red) !important;
+}
 
 .convert_to_pdf{
   background-image: url('/static/img/icons8-pdf-50.png');
@@ -2277,6 +2280,9 @@ button:hover{
   cursor: pointer;
   z-index: 5;
   filter: drop-shadow(0 0 0.75rem #89abc6);
+}
+.convert_to_pdf:hover{
+  filter: drop-shadow(0 0 0.75rem red) !important;
 }
 
 .all_recipes_content_holder::-webkit-scrollbar {
@@ -2416,8 +2422,7 @@ button:hover{
       transition: opacity .25s;
       }
     }
-  }
-  
+  } 
 }
 
 .contact_holder{
@@ -2465,10 +2470,6 @@ button:hover{
     width: 90%;
     display:flex;
     flex-direction: column;
-    // input,textarea,select{
-    //   margin: 0;
-    //   border: 2px solid var(--idea-color-first_plan);
-    // }
     input, select{
       float: right;
       height: 35px;
@@ -2480,31 +2481,12 @@ button:hover{
       border: 2px solid var(--idea-color-first_plan);
     }
 
-
-    label{
+    .contact_label{
       margin-top: 15px;
       margin-bottom: 0;
       font-size: 18px;
     }
   }
-
-  // .mess_submit{
-  //   width: 125px;
-  //   border: none;
-  //   background: $idea-color2;
-  //   color: black;
-  //   padding: 5px;
-  //   position: absolute;
-  //   top:85%;
-  //   left: 50%;
-  //   transform: translate(-50%);
-  
-
-  //   &:hover{
-  //     background-color: var(--idea-color-first_plan);
-  //     cursor: pointer;
-  //   }
-  // }
 }
 
 .succes_holder{
@@ -2556,4 +2538,11 @@ button:hover{
     filter: brightness(50%);
     cursor: pointer;
   }
+}
+
+.disabled_btn{
+  cursor: none;
+  pointer-events: none;
+  background: lightgrey !important;
+  color: white !important;
 }

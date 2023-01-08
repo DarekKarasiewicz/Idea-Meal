@@ -3,40 +3,78 @@
 {%endblock %} 
 {% block body %}
 <div class="contact_holder">
-  <a href={% url 'main' user_id=user.id%}><div class="back_button_img"></div></a>
+  <a href={% url 'main' user_id=user.id%} ><div id="contact_back_btn" class="back_button_img"></div></a>
   <div id="page_title">
     <h1>Contact Us</h1>
   </div>
   <form class="contact_form" id="contact_form">
-    <label for="cause">Choose cause</label>
+    <label for="cause" class="contact_label">Choose cause</label>
     <select name="cause" id="cause">
       <option value="Opinion">Opinion</option>
       <option value="Bug report">Report Bug</option>
     </select>
-    <label for="title">Title</label>
+    <label for="title" class="contact_label">Title</label>
     <input
       type="text"
       name="title"
+      class="test_input"
       id="title"
       placeholder="Type your title here..."
     />
 
-    <label for="message">Message</label>
+    <label for="message" class="contact_label">Message</label>
     <textarea
       type="text"
       name="message"
+      class="test_input"
       id="message"
       rows="15"
       placeholder="Type your message here..."
     ></textarea>
     <div style="text-align: center; margin-top: 25px;">
-      <button class="idea_btn" id="mess_submit" onclick="sendMessage()">Send</button>
+      <button type="submit" class="idea_btn disabled_btn" id="mess_submit" onclick="sendMessage()">Send</button>
     </div>
   </form>
 </div>
 {%endblock%}
 {% block page_js%} 
 <script>
+  $(document).ready(function() {
+      $("#contact_form").validate({
+        rules: {
+          title: {
+            required: true
+          },
+          message: {
+            required: true,
+            minlength: 30,
+          },
+        },
+        messages: {
+          title: {
+            required: '<span class="validation_error_icon">'+'<span style="padding-left:25px">Title field cannot be blank</span>'+'</span>',
+          },
+          message: {
+            required: '<span class="validation_error_icon">'+'<span style="padding-left:25px">Message field cannot be blank</span>'+'</span>',
+            minlength: '<span class="validation_error_icon">'+'<span style="padding-left:25px">Message field should have atleast 30 characters</span>'+'</span>',
+          },
+        }
+      });
+    });
+    $("#contact_form").on("blur", ".test_input", function(){
+      if ( $("#contact_form").valid()){
+        $("#mess_submit").removeClass("disabled_btn");
+        $("#mess_submit").removeAttr("disabled");
+      }else{
+        $("#mess_submit").addClass("disabled_btn");
+        $("#mess_submit").attr("disabled");
+      }
+    });
+
+  $("#mess_submit").on('click', function(e) {
+    e.preventDefault();
+  });
+
   function sendMessage() {
     let cause = document.getElementById("cause").value;
     let title = document.getElementById("title").value;
@@ -56,12 +94,27 @@
         "csrfmiddlewaretoken": "{{ csrf_token }}",
       },
       success: function (data) {
-        console.log("success");
-        window.location.href = "http://127.0.0.1:8000/contact/succes";
+        // console.log("success");
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'All changes has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        setTimeout(()=>{
+          $('#contact_back_btn').trigger('click');
+        }, 1500)
       },
       failure: function (data) {
-        console.log("failure");
-        alert("Fail");
+        // console.log("failure");
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Something went wrong! Try again.',
+          showConfirmButton: false,
+          timer: 1500
+        })
       },
     })
   }

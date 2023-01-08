@@ -487,7 +487,7 @@ def shopping_list(request):
             print(products)
 
 
-    return render(request,"polls/shopping_list.html",{"user":session_user.id})        
+    return render(request,"polls/shopping_list.html",{"user_id": session_user.id})        
 
 @login_required
 def contact_succes(request):
