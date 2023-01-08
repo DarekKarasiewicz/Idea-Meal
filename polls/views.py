@@ -524,14 +524,7 @@ def shopping_list(request):
                 else: 
                     all_products.update({r_key: r_value})
                     
-        
         print(all_products)
-
-            
-        
-
-                
-
 
     return render(request,"polls/shopping_list.html",{"user_id": session_user.id})        
 

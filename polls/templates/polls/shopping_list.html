@@ -27,7 +27,7 @@
     window.onload = function(){
         let recipes_list = JSON.parse(localStorage.getItem("user_shopping_list"))
 
-        if (recipes_list > 0) {
+        if (recipes_list.length > 0) {
             const recipes_ids = [];
 
             for (var i = 0; i < recipes_list.length; i++){
