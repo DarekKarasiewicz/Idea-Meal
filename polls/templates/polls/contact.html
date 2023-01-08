@@ -3,6 +3,7 @@
 {%endblock %} 
 {% block body %}
 <div class="contact_holder">
+  <a href={% url 'main' user_id=user.id%}><div class="back_button_img"></div></a>
   <div id="page_title">
     <h1>Contact Us</h1>
   </div>
@@ -28,8 +29,10 @@
       rows="15"
       placeholder="Type your message here..."
     ></textarea>
+    <div style="text-align: center; margin-top: 25px;">
+      <button class="idea_btn" id="mess_submit" onclick="sendMessage()">Send</button>
+    </div>
   </form>
-  <button class="mess_submit" id="mess_submit" onclick="sendMessage()">Send</button>
 </div>
 {%endblock%}
 {% block page_js%} 

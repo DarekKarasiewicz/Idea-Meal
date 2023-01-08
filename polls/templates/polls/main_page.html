@@ -92,11 +92,11 @@
     </div>
     {% endfor %}
   </div>
-  <form method="POST" enctype="multipart/form-data">
+  <form method="POST" enctype="multipart/form-data" style="display: flex; justify-content: center;">
     {% csrf_token %}
     <button
       type="button"
-      class="submit_changes"
+      class="idea_btn"
       id="submit_changes"
       onclick="postingChanges()"
     >
@@ -117,6 +117,8 @@
       changedProducts[id] = unit;
       productId.push(id);
       document.getElementById("submit_changes").style.display = "block";
+      document.getElementById("submit_changes").style.marginTop = "15px";
+      document.getElementById("submit_changes").style.width = "150px";
       //return changedProducts;
     }
 
@@ -130,6 +132,8 @@
         changedProducts[id] = unit;
         productId.push(id);
         document.getElementById("submit_changes").style.display = "block";
+        document.getElementById("submit_changes").style.marginTop = "15px";
+        document.getElementById("submit_changes").style.width = "150px";
         // return changedProducts;
       }
     }

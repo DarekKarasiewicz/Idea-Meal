@@ -414,6 +414,7 @@ footer {
         // align-items: center;
         justify-content: center;
         transition: .25s;
+        font-weight: 700;
       }
     }
     .user_panel{
@@ -459,14 +460,14 @@ footer {
         display: block;
         height: 20vh;
         width: 200px;
-
+        background-color: var(--idea-color-first_plan);
         ul{
           list-style-type: none;
           padding: 0;
           margin: 0;
           li{
             appearance: none;
-            background-color: $idea-color5;
+            background-color: var(--idea_nav_items);
             border-width: 0;
             margin-top: 1vh ;
             box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,--idea-color-bg 0 -3px 0 inset;
@@ -1186,6 +1187,10 @@ footer {
     height: 30px !important;
     width: 30px !important;
     filter: var(--idea_img_filter);
+    
+  }
+  &:hover{
+    filter: drop-shadow(0 0 0.75rem red);
   }
 }
 
@@ -1331,18 +1336,6 @@ footer {
         min-height: 35px;
         max-height: 70px;
       }
-      .submit_comment{
-        width: 125px;
-        font-weight: bold;
-        border: none;
-        background: var(--idea-color-bg);
-        color: var(--idea-color-text);
-        padding: 5px;
-      }
-      .submit_comment:hover {
-        filter: brightness(50%);
-        cursor: pointer;
-    }
     } 
   }
   .recipe__users_comments{
@@ -1635,23 +1628,18 @@ footer {
   transform: translate(-50%, -50%);
   border-radius: 45px;
   box-shadow: 0px 4px 18px #4d4d4d;
-  background: rgba(77, 77, 77, .85);
+  background: var(--idea_opacity_panel);
   padding: 15px;
   .input_form{
     width: 75%;
     margin: auto;
-      #submit_product{
-        width: 125px;
-        border: none;
-        background: $idea-color2;
-        color: black;
-        padding: 5px;
-        &:hover{
-          background-color: --idea-color-first_plan;
-          cursor: pointer;
-        }
-      }
+    input, select{
+      height: 35px;
+      line-height: 25px;
+      width: 250px;
+      border: 2px solid var(--idea-color-first_plan);
     }
+}
 
   input, select{
     float: right;
@@ -1662,13 +1650,14 @@ footer {
   label{
     margin-bottom: 1rem;
     font-weight: bold;
+    line-height: 35px;
   }
   h1{
     text-align: center;
   }
  
   .back_button_img{
-    background-image: url(/static/img/back-button.png);
+    background-image: url('/static/img/back-button.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -1701,156 +1690,6 @@ footer {
     background-color: #4d4d4d;
     border-radius: 10px;
     border: 3px none #707070;
-  }
-}
-#recipe_comment_section {
-  background-color: var(--idea-color-first_plan);
-  height: 100%;
-  width: 300px;
-  position: absolute;
-  top: 0;
-  right: left;
-  .recipe__user_comment_add{
-    height: 30vh;
-    width: 85%;
-    margin-left: auto;
-    margin-right: auto;
-    border-bottom: 1px solid var(--idea-color-text);
-    p{
-      color: var(--idea-color-text);
-      font-size: 32px;
-      margin-top: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .comment_form{
-      label{
-        color: var(--idea-color-text);
-      }
-      .raiting_section{
-        width: 180px;
-        unicode-bidi: bidi-override;
-        direction: rtl;
-        text-align: center;
-        position: relative;
-        margin-bottom: 15px;
-        .txt-center {
-          text-align: center;
-        }
-        .hide {
-          display: none;
-        }
-        .clear {
-          float: none;
-          clear: both;
-        }
-        label {
-            float: right;
-            display: inline;
-            padding: 0;
-            margin: 0;
-            position: relative;
-            width: 1.1em;
-            cursor: pointer;
-            color: var(--idea-color-text);
-            font-size: 32px;
-        }
-        label:hover,
-        label:hover ~ label,
-        input.radio-btn:checked ~ label {
-            color: transparent;
-        }
-        label:hover:before,
-        label:hover ~ label:before,
-        input.radio-btn:checked ~ label:before,
-        input.radio-btn:checked ~ label:before {
-            content: "\2605";
-            position: absolute;
-            left: 0;
-            color: #FFD700;
-        }
-      }
-      input, textarea{
-        height: 35px;
-        line-height: 25px;
-        width: 250px;
-        border: 2px solid var(--idea-color-second_plan);
-        margin-bottom: 10px;
-      }
-      textarea {
-        resize: none;
-        min-height: 35px;
-        max-height: 70px;
-      }
-      .submit_comment{
-        width: 125px;
-        font-weight: bold;
-        border: none;
-        background: var(--idea-color-bg);
-        color: var(--idea-color-text);
-        padding: 5px;
-      }
-      .submit_comment:hover {
-        filter: brightness(50%);
-        cursor: pointer;
-    }
-    } 
-  }
-  .recipe__users_comments{
-    height: 65vh;
-    width: 85%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 15px;
-    overflow-y: scroll;
-    .recipe_comment{
-      min-height: 75px;
-      width: 100%;
-      margin-bottom: 15px;
-      .top{
-        height: 50px;
-        width: 100%;
-        .avatar{
-          height: 50px;
-          width: 20%;
-          float: left;
-          img{
-            width: 50px;
-            border-radius: 25px;
-          }
-        }
-        .user_name{
-          height: 50px;
-          width: 65%;
-          float: left;
-          color: white;
-          text-align: center;
-          line-height: 50px;
-        }
-        .user_rating{
-          height: 50px;
-          background-image: url('/static/img/icons8-star-32-yellow.png');
-          background-repeat: no-repeat;
-          background-size: contain;
-          background-position: center;
-          width: 15%;
-          float: left;
-          div{
-            text-align: center;
-            height: 50px;
-            color: black;
-            line-height: 50px;
-          }
-        }
-      }
-      .bottom{
-        min-height: 25px;
-        width: 100%;
-        padding-left: 5px;
-        padding-top: 5px;
-        color: white;
-        font-size: 12px;
-      }
-    }
   }
 }
 .add_recipe_holder{
@@ -2071,10 +1910,6 @@ footer {
       background-color: $idea-color2;
     }
   }
-  
-  .submit_changes{
-    display: block;
-  }
 }
 
 //my recipes page
@@ -2087,9 +1922,22 @@ footer {
   transform: translate(-50%, -50%);
   border-radius: 45px;
   box-shadow: 0px 4px 18px #4d4d4d;
-  background: rgba(77, 77, 77, .85);
+  background: var(--idea_opacity_panel);
   padding: 20px;
-
+  .back_button_img{
+    background-image: url('/static/img/back-button.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 50px !important;
+    width: 50px !important;
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    cursor: pointer;
+    z-index: 5;
+    filter: drop-shadow(0 0 0.75rem $idea-color7);
+  }
   #page_title{
     height: 55px;
     width: 500px;
@@ -2099,7 +1947,7 @@ footer {
     transform: translate(-50%);
     border-top-right-radius: 45px;
     border-top-left-radius: 45px;
-    box-shadow: 0px 4px 18px #4d4d4d;
+    // box-shadow: 0px 4px 18px #4d4d4d;
     background: var(--idea_opacity_panel);
     text-align: center;
   }
@@ -2128,7 +1976,7 @@ footer {
     width: 791px;
     display: flex;
     // box-shadow: 0px 4px 18px #4d4d4d;
-    background: rgba(77, 77, 77,100);
+    background: var(--idea-color-first_plan);
     border-radius: 45px;
     margin-top: 10px;
     position: relative;
@@ -2150,6 +1998,7 @@ footer {
       font-size: 32px;
       margin: 0px;
       padding: 10px;
+      color: var(--idea-color-text);
     }
 
     div[class^="update-"]{
@@ -2161,7 +2010,7 @@ footer {
       height: 50px;
       justify-content: center;
       align-items: center;
-      background-color: var(--idea-color-first_plan);
+      background-color: var(--idea-color-second_plan);
       border-radius: 100%;
       img{
         width: 40px;
@@ -2191,6 +2040,7 @@ footer {
         text-decoration: none;
         font-size: 18px;
         color: black;
+        font-weight: 500;
       }
       a:hover{
         color:#707070;
@@ -2381,11 +2231,12 @@ footer {
 }
 
 button:hover{
-  filter: brightness(75%) drop-shadow(0 0 0.25rem red);
-  
+  filter: brightness(50%);
+  cursor: pointer;
 }
+
 .back_button_img:hover{
-  filter: drop-shadow(0 0 0.75rem red);
+  filter: drop-shadow(0 0 0.75rem red) !important;
 }
 
 .clean_shop_list {
@@ -2442,9 +2293,22 @@ button:hover{
   transform: translate(-50%, -50%);
   border-radius: 45px;
   box-shadow: 0px 4px 18px #4d4d4d;
-  background: rgba(77, 77, 77, .85);
+  background: var(--idea_opacity_panel);
   padding: 15px;
-
+  .back_button_img{
+    background-image: url('/static/img/back-button.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 50px !important;
+    width: 50px !important;
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    cursor: pointer;
+    z-index: 5;
+    filter: drop-shadow(0 0 0.75rem $idea-color7);
+  }
   #page_title{
     height: 55px;
     width: 300px;
@@ -2454,7 +2318,7 @@ button:hover{
     transform: translate(-50%);
     border-top-right-radius: 45px;
     border-top-left-radius: 45px;
-    box-shadow: 0px 4px 18px #4d4d4d;
+    // box-shadow: 0px 4px 18px #4d4d4d;
     background: var(--idea_opacity_panel);
     text-align: center;
   }
@@ -2490,13 +2354,14 @@ button:hover{
       position: relative;
       transition: .25s;
       margin-top: 20px;
-  
+      color: var(--idea-color-text);
       .question{
         display: flex;
         font-size: 28px;
         width: 100%;
         height: 42px;
         overflow: wrap;
+        padding-left: 5px;
       }
       
       .toggle_arrow{
@@ -2558,11 +2423,24 @@ button:hover{
   transform: translate(-50%, -50%);
   border-radius: 45px;
   box-shadow: 0px 4px 18px #4d4d4d;
-  background: rgba(77, 77, 77, .85);
+  background: var(--idea_opacity_panel);
   padding: 35px;
   display: flex;
   justify-content: center;
-
+  .back_button_img{
+    background-image: url('/static/img/back-button.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 50px !important;
+    width: 50px !important;
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    cursor: pointer;
+    z-index: 5;
+    filter: drop-shadow(0 0 0.75rem $idea-color7);
+  }
   #page_title{
     height: 55px;
     width: 400px;
@@ -2572,7 +2450,7 @@ button:hover{
     transform: translate(-50%);
     border-top-right-radius: 45px;
     border-top-left-radius: 45px;
-    box-shadow: 0px 4px 18px #4d4d4d;
+    // box-shadow: 0px 4px 18px #4d4d4d;
     background: var(--idea_opacity_panel);
     text-align: center;
   }
@@ -2581,8 +2459,18 @@ button:hover{
     width: 90%;
     display:flex;
     flex-direction: column;
-    input,textarea,select{
-      margin: 0;
+    // input,textarea,select{
+    //   margin: 0;
+    //   border: 2px solid var(--idea-color-first_plan);
+    // }
+    input, select{
+      float: right;
+      height: 35px;
+      line-height: 25px;
+      width: auto;
+      border: 2px solid var(--idea-color-first_plan);
+    }
+    textarea{
       border: 2px solid var(--idea-color-first_plan);
     }
 
@@ -2594,23 +2482,23 @@ button:hover{
     }
   }
 
-  .mess_submit{
-    width: 125px;
-    border: none;
-    background: $idea-color2;
-    color: black;
-    padding: 5px;
-    position: absolute;
-    top:85%;
-    left: 50%;
-    transform: translate(-50%);
+  // .mess_submit{
+  //   width: 125px;
+  //   border: none;
+  //   background: $idea-color2;
+  //   color: black;
+  //   padding: 5px;
+  //   position: absolute;
+  //   top:85%;
+  //   left: 50%;
+  //   transform: translate(-50%);
   
 
-    &:hover{
-      background-color: var(--idea-color-first_plan);
-      cursor: pointer;
-    }
-  }
+  //   &:hover{
+  //     background-color: var(--idea-color-first_plan);
+  //     cursor: pointer;
+  //   }
+  // }
 }
 
 .succes_holder{
@@ -2647,5 +2535,19 @@ button:hover{
     #progressBar{
       border-radius: 5px;
     }
+  }
+}
+
+.idea_btn{
+  width: 125px;
+  font-weight: bold;
+  border: none;
+  background: var(--idea-color-bg);
+  color: var(--idea-color-text);
+  // margin-top: 10px;
+  padding: 5px;
+  &:hover{
+    filter: brightness(50%);
+    cursor: pointer;
   }
 }
