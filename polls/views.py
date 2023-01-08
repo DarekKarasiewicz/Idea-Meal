@@ -174,15 +174,9 @@ def main_page(request, user_id):
     if int(request.session["_auth_user_id"]) != int(user_id):
         raise Http404
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
-
-    check_products = Product.objects.filter(user=session_user.id)
-    sebus_to_ta_lista = []
-    for product in check_products:
-        if (timezone.now() > (product.date_of_consumtion + timedelta(days=7))):
-            # product.delete()
-            sebus_to_ta_lista.append(product)
+    fridge = get_object_or_404(Fridge, user=int(request.session["_auth_user_id"]))
+    fridge_products = Fridge_products_counts.objects.filter(fridge = fridge)
     all_recipes = Recipe.objects.all()
-    all_products = Product.objects.all()
 
     dictionary = {}
     productIds = []
@@ -215,7 +209,7 @@ def main_page(request, user_id):
 
     return render(request,"polls/main_page.html",{'user':session_user
                                                  ,'recipes': all_recipes
-                                                 ,'products': all_products
+                                                 ,'products': fridge_products
                                                   })
 
 @login_required
@@ -306,20 +300,26 @@ def recipes_page(request, recipe_id):
 def product_page(request):
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
     product_category = [e.value for e in Product_category]
-    print(product_category)
+    product_unit = [e.value for e in Product_unit]
+    all_products = Fridge_products_counts.objects.all()
+
     if request.method == "POST":
         name = request.POST["product_name"]
         product_category_post = request.POST["product_category"]
         product_quantity = request.POST["product_quantity"]
+        product_unit = request.POST["product_unit"]
 
-        product = Product(name = name, product_category = product_category_post, unit = product_quantity)
-        product.save()
+        for product in all_products:
+            if product.product.name != name:
+                product = Product(name = name, product_category = product_category_post, unit = product_unit)
+                product.save()
+
         return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
 
     return render(
         request,
         "polls/product_page.html",
-        {"user_id": session_user.id, "product_categories": product_category},
+        {"user_id": session_user.id, "product_categories": product_category, "product_units": product_unit},
     )
 
 @login_required
@@ -516,15 +516,19 @@ def shopping_list(request):
             for u_key, u_value in user_products.items():
                 if r_key == u_key:
                     if r_value - u_value > 0:
-                        new_amount = r_value - u_value
+                        new_amount = r_value - u_value                    
                         all_products.update({r_key: new_amount})
+                        break
                     else:
                         break
                 else: 
                     all_products.update({r_key: r_value})
+                    
+        
+        print(all_products)
 
             
-        print(all_products)
+        
 
                 
 
