@@ -200,6 +200,18 @@ def main_page(request, user_id):
             product_update.unit = dictionary[id]
             product_update.save()
 
+    # sorted_recipes = filter_by_product_count(all_products)
+    #     sorted_recipes = ({recipe: items_in for recipe, items_in in sorted(sorted_recipes.items(), key=lambda
+    #                                 item:item[1][1],reverse=True)})
+    #     final_list_recipes=[]
+    #     for recipe , items in sorted_recipes.items():
+    #         final_list_recipes.append(recipe)
+
+    #     return render(
+    #         request,
+    #         "polls/main_page.html",
+    #         {"user": session_user, "recipes":filter_by_product_count(all_products), "products": all_products},
+    #     )
 
     return render(request,"polls/main_page.html",{'user':session_user
                                                  ,'recipes': all_recipes

@@ -180,7 +180,7 @@
     <p>Recipes</p>
   </div>
   <div class="nav_filters">
-    <p class="nav_recipe_h">Filters</p>
+    <!-- <p class="nav_recipe_h">Filters</p>
     <form>
       <input type="checkbox" id="filter1" name="filter1" value="difficulty" />
       <label for="filter1" title="difficulty"> difficulty</label>
@@ -193,7 +193,28 @@
       <input type="checkbox" id="filter5" name="filter5" value="Car" />
       <label for="filter5" title="verificated"> verificated</label><br />
       <input type="submit" value="Apply" />
-    </form>
+    </form> -->
+    <div class="basic_filters">
+      <fieldset style="margin-bottom: 10px;">
+        <p style="font-size: 28px; margin: 15px; text-align: center;">Filters</p>
+        <input class="form-control" type="text" placeholder="search for recipe..." id="searchbar_mainpage" style="width: 85%; margin: auto;">
+      </fieldset>
+      <fieldset style="margin-bottom: 25px;">      
+          <legend style="font-size: 28px;font-weight: 100; text-align: center;">Order By:</legend>   
+          <select class="form-select" name="recipe_order_by" id="main_page-recipe_order_by" style="width: 85%; margin: auto;">
+              <option value="name" disabled selected="selected">Choose option</option>
+              <option value="name_ASC">Name ASC</option>
+              <option value="name_DESC">Name DESC</option>
+              <option value="spiciness_ASC">spiciness ASC</option>
+              <option value="spiciness_DESC">spiciness DESC</option>
+              <option value="popularity">most popular</option>
+              <option value="prepare_time_ASC">prepare time ASC</option>
+              <option value="prepare_time_DESC">prepare time DESC</option>
+              <option value="per_serving_ASC">per serving ASC</option>
+              <option value="per_serving_DESC">per serving DESC</option>
+          </select> 
+      </fieldset>
+    </div>
   </div>
   <div class="nav_results">
     <div class="nav_recipe_helper" title="results explanation"></div>
@@ -259,7 +280,6 @@
           </div>
           <div class="two-seg-two"><p><a href ="/recipe/{{x.id}}">See more</a></p></div>
         </div>
-        {% endfor %}
       </div>
     </div>
     {% endfor %}
