@@ -16,8 +16,14 @@
          <option value="{{product_category}}">{{product_category}}</option>
      {% endfor %}
   </select><br/>
+  <label for="product_unit">Unit: </label>
+  <select name="product_unit" id="product_unit">
+     {% for product_unit in product_units %}
+         <option value="{{product_unit}}">{{product_unit}}</option>
+     {% endfor %}
+  </select><br/>
   <label for="product_quantity">Quantity: </label>
-  <input type="number" name="product_quantity" id="product_quantity" placeholder="pcs" min=0 required/><br>
+  <input type="number" name="product_quantity" id="product_quantity" placeholder="ml" min=0 required/><br>
   <div style="text-align: center;">
     <button id="submit_product" class="idea_btn">ADD</button>
   </div>
@@ -28,21 +34,18 @@
 {% block page_js%} 
 <script>  
 // quantity logic in product page
-$('#product_category').on('click',function(){
-   switch($('#product_category').val()){
-     case "opt1":
+$('#product_unit').on('click',function(){
+   switch($('#product_unit').val()){
+     case "UNIT":
      $('#product_quantity').replaceWith("<input type='number' name='product_quantity' id='product_quantity' placeholder='pcs' min=0 required/>");
-      console.log($('#product_category').val());
       break;
 
-     case "opt2":
+     case "ML":
      $('#product_quantity').replaceWith("<input type='number' name='product_quantity' id='product_quantity' placeholder='ml' step='5' min=0 required/>");
-      console.log($('#product_category').val());
       break;
 
-     case "opt3":
+     case "GRAMS":
      $('#product_quantity').replaceWith("<input type='number' name='product_quantity' id='product_quantity' placeholder='g' step='10' min=0 required/>");
-      console.log($('#product_category').val());
       break;
    }
   })

@@ -66,25 +66,25 @@
     <div class="product_box">
       <div class="product_box__name">
         <div class="product_box__name__img">
-          <img src="../static/img/{{product.product_category}}.png" alt="{{product.product_category}} icon" />
+          <img src="../static/img/{{product.product.product_category}}.png" alt="{{product.product.product_category}} icon" />
         </div>
         <div class="product_box__name__text">
-          <p>{{product.name}}</p>
+          <p>{{product.product.name}}</p>
         </div>
       </div>
       <div class="product_box__quantity">
         <button
           type="button"
           class="plus_btn"
-          onclick="addFunction({{product.id}})"
+          onclick="addFunction({{product.product.id}})"
         >
           +
         </button>
-        <p id="{{product.id}}b">{{product.unit}}</p>
+        <p id="{{product.id}}b">{{product.ammount}}</p>
         <button
           type="button"
           class="minus_btn"
-          onclick="minusFunction({{product.id}})"
+          onclick="minusFunction({{product.product.id}})"
         >
           -
         </button>
