@@ -200,9 +200,15 @@ def main_page(request, user_id):
     #         {"user": session_user, "recipes":filter_by_product_count(all_products), "products": all_products},
     #     )
 
+    all_comments = Comments_to_Recipe.objects.all();
+    all_comments_filtred ={}
+    for comments in all_comments:
+            all_comments_filtred.setdefault(comments.recipe,[]).append(comments.comment)
+
     return render(request,"polls/main_page.html",{'user':session_user
                                                  ,'recipes': all_recipes
                                                  ,'products': fridge_products
+                                                 ,'recipes_all_comments': all_comments_filtred
                                                   })
 
 @login_required
