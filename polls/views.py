@@ -103,11 +103,11 @@ def filter_by_product_count(products) -> list:
 
     return return_dict
 
-def create_shopping_list(list_of_recipes: list, session_user_id: int ) -> list:
+def create_shopping_list(list_of_recipes_id: list, session_user_id: int ) -> list:
     dict_of_products = {}
     fridge_products = Fridge_products_counts.objects.all()
-    for recipe in list_of_recipes:
-        products = Recipe_products_counts.objects.filter(recipe=recipe.id)
+    for recipe_id in list_of_recipes:
+        products = Recipe_products_counts.objects.filter(recipe=recipe_id)
         if len(products) < 1:
             raise Http404
         for product in products:
@@ -149,13 +149,6 @@ def register_page(request):
 
     return render(request, "polls/register_page.html")
 
-# def find_recipe_base_on_products(product: dict) -> Recipes:
-#     pass
-
-def create_shopping_list(list_of_recipes: list) -> list:
-    dict_of_products = {}
-    return list_of_products
-
 @csrf_exempt
 def login_page(request):
     if request.method == "POST":
@@ -184,8 +177,8 @@ def main_page(request, user_id):
     if request.method == "POST":
         productIds = request.POST.getlist("productId[]")
         for id in productIds:
-            dictionary[id] = request.POST.get("changedProducts["+ id +"]",None) 
-        
+            dictionary[id] = request.POST.get("changedProducts["+ id +"]",None)
+
     print(productIds)
     print(dictionary)
     if len(productIds) > 0:
@@ -387,7 +380,7 @@ def recipe_update(request,recipe_id):
     # session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
 
     update_recipe = Recipe.objects.get(pk = recipe_id)
-    
+
     if request.method == "POST":
         name = request.POST["recipe_name"]
         description = request.POST["description"]
@@ -420,7 +413,7 @@ def recipe_update(request,recipe_id):
                 difficulty = 3
             case _:
                 raise Http404
-        
+
         update_recipe.name = name
         update_recipe.description = description
         update_recipe.difficulty = difficulty
@@ -443,7 +436,7 @@ def recipe_update(request,recipe_id):
         update_recipe.save()
         time.sleep(2)
         # return HttpResponseRedirect(reverse("my_recipes", args=(session_user.id,)))
-    
+
     return render(request, 'polls/recipe_update.html',{"recipe": update_recipe})
 
 @login_required
@@ -480,7 +473,7 @@ def contact(request,user_id):
 def shopping_list(request):
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
     user_products = []
-    
+
     if request.method == "POST":
         recipe_products = dict()
         user_products = dict()
@@ -497,7 +490,7 @@ def shopping_list(request):
                 some_product = get_object_or_404(Product, id = p).name
                 recipe_products.update({some_product: product_amount[i]})
                 i = i + 1
-        
+
         print(recipe_products)
         j = 0
         fridge = get_object_or_404(Fridge, user=int(request.session["_auth_user_id"]))
@@ -509,24 +502,24 @@ def shopping_list(request):
             user_product = get_object_or_404(Product, id = f_p).name
             user_products.update({user_product: f_amount[j]})
             j = j + 1
-    
+
         print(user_products)
 
         for r_key, r_value in recipe_products.items():
             for u_key, u_value in user_products.items():
                 if r_key == u_key:
                     if r_value - u_value > 0:
-                        new_amount = r_value - u_value                    
+                        new_amount = r_value - u_value
                         all_products.update({r_key: new_amount})
                         break
                     else:
                         break
-                else: 
+                else:
                     all_products.update({r_key: r_value})
-                    
+
         print(all_products)
 
-    return render(request,"polls/shopping_list.html",{"user_id": session_user.id})        
+    return render(request,"polls/shopping_list.html",{"user_id": session_user.id})
 
 @login_required
 def contact_succes(request):
