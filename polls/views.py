@@ -308,10 +308,38 @@ def product_page(request):
         product_quantity = request.POST["product_quantity"]
         product_unit = request.POST["product_unit"]
 
+        print("1")
+        product_exits = False
         for product in all_products:
-            if product.product.name != name:
-                product = Product(name = name, product_category = product_category_post, unit = product_unit)
-                product.save()
+            if product.product.name.lower() == name.lower():
+                print("2")
+                product_exits = True
+        if not product_exits:
+            print("3")
+            print(product.product.name.lower())
+            print(name.lower())
+            new_product = Product(user= session_user,name = name, product_category = product_category_post, unit = product_unit)
+            new_product.save()
+            fridge = get_object_or_404(Fridge,user = session_user.id)
+            new_product_fridge = Fridge_products_counts(product =new_product
+                                                        , ammount=
+                                                        int(product_quantity)
+                                                        , fridge =fridge
+                                                        )
+            new_product_fridge.save()
+
+        else:
+            print("HELLO")
+
+            for product in all_products:
+                if product.product.name.lower() == name.lower():
+                    print(name)
+                    print(product.product.name)
+                    looking_product = product.product
+                    print(looking_product)
+            new_product = get_object_or_404(Fridge_products_counts,product=looking_product.id)
+            new_product.ammount += int(product_quantity)
+            new_product.save()
 
         return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
 
