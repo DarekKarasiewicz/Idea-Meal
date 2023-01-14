@@ -181,11 +181,16 @@ def main_page(request, user_id):
 
     print(productIds)
     print(dictionary)
-    if len(productIds) > 0:
+    for pr in fridge_products:
         for id in productIds:
-            product_update = Product.objects.get(id = id)
-            product_update.unit = dictionary[id]
-            product_update.save()
+            if pr.id == int(id):
+                pr.ammount = dictionary[id]
+                pr.save()
+    
+    
+            # product_update = Product.objects.get(id = id)
+            # product_update.unit = dictionary[id]
+            # product_update.save()
 
     # sorted_recipes = filter_by_product_count(all_products)
     #     sorted_recipes = ({recipe: items_in for recipe, items_in in sorted(sorted_recipes.items(), key=lambda
@@ -200,7 +205,7 @@ def main_page(request, user_id):
     #         {"user": session_user, "recipes":filter_by_product_count(all_products), "products": all_products},
     #     )
 
-    all_comments = Comments_to_Recipe.objects.all();
+    all_comments = Comments_to_Recipe.objects.all()
     all_comments_filtred ={}
     for comments in all_comments:
             all_comments_filtred.setdefault(comments.recipe,[]).append(comments.comment)
