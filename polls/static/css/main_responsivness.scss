@@ -1,0 +1,26 @@
+//login and register page
+@media(max-width:1500px){
+    .register_page_holder {
+        height: 650px;
+        width: 550px;
+        position: relative;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    .register_page_holder .form_holder__content form {
+        transform: translate(-50%, -13%);
+    }
+}
+
+@media(max-width:1150px){
+    footer{
+        display:none;
+    }
+}
+
+@media(max-width:600px){
+    body{
+        overflow-x: hidden;
+    }
+}
