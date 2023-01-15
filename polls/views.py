@@ -186,8 +186,8 @@ def main_page(request, user_id):
             if pr.id == int(id):
                 pr.ammount = dictionary[id]
                 pr.save()
-    
-    
+
+
             # product_update = Product.objects.get(id = id)
             # product_update.unit = dictionary[id]
             # product_update.save()
@@ -305,7 +305,8 @@ def product_page(request):
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
     product_category = [e.value for e in Product_category]
     product_unit = [e.value for e in Product_unit]
-    all_products = Fridge_products_counts.objects.all()
+    fridge_u = get_object_or_404(Fridge, user= session_user.id)
+    all_products = Fridge_products_counts.objects.filter(fridge=fridge_u.id)
 
     if request.method == "POST":
         name = request.POST["product_name"]
