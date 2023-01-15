@@ -44,7 +44,27 @@
         </div>
       </div>
       <div class="add_recipe_right">
-        <div></div>
+        <div class="add_product_recipe">
+          <label for="product_name">Name: </label>
+          <input type="text" name="product_name" id="product_name" required/><br>
+          <label for="product_unit">Unit: </label>
+          <select name="product_unit" id="product_unit">
+             {% for product_unit in product_units %}
+                 <option value="{{product_unit}}">{{product_unit}}</option>
+             {% endfor %}
+          </select><br/>
+          <label for="product_quantity">Quantity: </label>
+          <input type="number" name="product_quantity" id="product_quantity" placeholder="quantity" min=0 max=9999 required/><br>
+          <button
+          type="button"
+          class="idea_btn"
+          id="submit_changes"
+          onclick="addProduct()"
+        >
+          Add product
+        </button><br/>
+        <p id="display_products"></p>
+        </div>
         <div class="old-form form-i_block">
           <label for="description">Description: </label>
           <textarea type="text" name="description" id="description" rows="15" placeholder="Enter a description..." required></textarea><br>
@@ -63,6 +83,49 @@ imgInp.onchange = evt => {
   if (file) {
     img_preview__img.src = URL.createObjectURL(file)
   }
+}
+
+let recipe_products = {};
+
+
+function addProduct(){
+  let product_unit = {};
+  pr_name = document.getElementById("product_name").value
+  pr_unit = document.getElementById("product_unit").value
+  pr_quantity = document.getElementById("product_quantity").value
+
+  product_unit[pr_unit] = pr_quantity
+  recipe_products[pr_name] = product_unit
+  console.log(recipe_products)
+
+  jQuery.ajax({
+    type: "POST",
+    url: '{% url "recipes_add" %}',
+    data: {
+      "recipe_products": recipe_products,
+      "csrfmiddlewaretoken": "{{ csrf_token }}",
+    },
+    success: function (data) {
+      console.log("success");
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'All changes has been saved',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    },
+    failure: function (data) {
+      console.log("failure");
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong! Try again.',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    },
+  })
 }
 
 $('#submit_recipe').on('click',function(){

@@ -1104,6 +1104,21 @@ footer {
     height: 750px;
     padding: 15px;
     background: var(--idea_opacity_panel);
+
+    .add_product_recipe{
+      label{
+        margin-bottom: 20px;
+        font-weight: bold;
+        vertical-align: sub;
+      }  
+      input, select{
+        height: 35px;
+        line-height: 25px;
+        width: 250px;
+        border: 2px solid var(--idea-color-first_plan);
+      }
+    }
+
     .old-form{
       width: 80%;
       margin: auto;
@@ -1681,8 +1696,8 @@ footer {
 
 //product box styles
 .products{
-  width: 600px;
-  height: 500px;
+  width: 615px;
+  height: 650px;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     width: 11px;
@@ -1835,7 +1850,7 @@ footer {
 }
 
 .product_box{
-  width: 190px;
+  width: 195px;
   height: 75px;
   background-color: $idea-color3;
   border-radius: 15px;
@@ -1843,7 +1858,7 @@ footer {
   margin: 3px;
   &__name{
     float: left;
-    width: 140px;
+    width: 130px;
     height: 75px;
     padding: 5px 2px 5px 5px;
     display: flex;
@@ -1860,14 +1875,14 @@ footer {
     }
     
     &__text{
-      width: 90px;
+      width: 80px;
       height: 65px;
       display: flex;
       justify-content: center;
       align-items: center;
       padding-left: 3px;
       p{
-        width: 90px;
+        width: 80px;
         height: 40px;
         padding: 0;
         margin: 0;
@@ -1884,37 +1899,49 @@ footer {
   }
   &__quantity{
     float: left;
-    width: 50px;
+    width: 65px;
     height: 75px;
-
-    p{
-      width: 50px;
-      height: 25px;
-      margin: 0;
-      padding: 0;
-      text-align: center;
+    .quantity_info{
+      display: flex;
+      justify-content: center;
+      p[id^="b"]{
+        width: auto;
+        height: 25px;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
+  
+      p[id^="p_unit_"]{
+        width: auto;
+        height: 25px;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        float: left;
+      }
     }
 
     .plus_btn{
-      width: 50px;
+      width: 65px;
       height: 25px;
       border: none;
       border-radius: 0px 15px 0px 0px;
-      background-color: --idea_helper_bg_panel;
+      background-color: var(--idea-color-bg);
     }
     .plus_btn:active{
-      background-color: $idea-color2;
+      background-color: var(--idea_helper_bg_panel);
     }
 
     .minus_btn{
-      width: 50px;
+      width: 65px;
       height: 25px;
       border: none;
       border-radius: 0px 0px 15px 0px;
-      background-color: --idea_helper_bg_panel;
+      background-color: var(--idea-color-bg);
     }
     .minus_btn:active{
-      background-color: $idea-color2;
+      background-color: var(--idea_helper_bg_panel);
     }
   }
 }
@@ -2547,3 +2574,4 @@ button:hover{
   background: lightgrey !important;
   color: white !important;
 }
+
