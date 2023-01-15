@@ -44,26 +44,28 @@
         </div>
       </div>
       <div class="add_recipe_right">
-        <div class="add_product_recipe">
-          <label for="product_name">Name: </label>
-          <input type="text" name="product_name" id="product_name" required/><br>
-          <label for="product_unit">Unit: </label>
-          <select name="product_unit" id="product_unit">
-             {% for product_unit in product_units %}
-                 <option value="{{product_unit}}">{{product_unit}}</option>
-             {% endfor %}
-          </select><br/>
-          <label for="product_quantity">Quantity: </label>
-          <input type="number" name="product_quantity" id="product_quantity" placeholder="quantity" min=0 max=9999 required/><br>
-          <button
-          type="button"
-          class="idea_btn"
-          id="submit_changes"
-          onclick="addProduct()"
-        >
-          Add product
-        </button><br/>
-        <p id="display_products"></p>
+        <div class="old-form">
+          <div class="add_product_recipe">
+            <label for="product_name">Name: </label>
+            <input type="text" name="product_name" id="product_name" required/><br>
+            <label for="product_unit">Unit: </label>
+            <select name="product_unit" id="product_unit">
+              {% for product_unit in product_units %}
+                  <option value="{{product_unit}}">{{product_unit}}</option>
+              {% endfor %}
+            </select><br/>
+            <label for="product_quantity">Quantity: </label>
+            <input type="number" name="product_quantity" id="product_quantity" placeholder="quantity" min=0 max=9999 required/><br>
+            <button
+              type="button"
+              class="idea_btn"
+              id="submit_changes"
+              onclick="addProduct()"
+            >
+            Add product
+          </button><br/>
+          <p id="display_products"></p>
+          </div>
         </div>
         <div class="old-form form-i_block">
           <label for="description">Description: </label>

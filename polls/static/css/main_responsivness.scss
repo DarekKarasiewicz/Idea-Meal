@@ -123,9 +123,35 @@
         width: 180px;
     }
     .product_box__name {
-        width: 130px;
+        width: 115px;
     }
     .product_box__name__text {
         width: 85px;
+    }
+}
+
+//contact page
+@media(max-width: 1000px){
+    .contact_holder #page_title {
+        height: 55px;
+        width: 400px;
+        top: -55px;
+        padding-top: 10px;
+    }
+}
+@media(max-width: 725px){
+    .contact_holder {
+        width: 600px;
+    }
+}
+@media(max-width: 625px){
+    .contact_holder {
+        width: 500px;
+    } 
+}
+@media(max-width: 500px){
+    .contact_holder {
+        width: 450px;
+        border-radius: 15px;
     }
 }
