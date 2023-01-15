@@ -179,8 +179,8 @@ def main_page(request, user_id):
         for id in productIds:
             dictionary[id] = request.POST.get("changedProducts["+ id +"]",None)
 
-    print(productIds)
-    print(dictionary)
+    # print(productIds)
+    # print(dictionary)
     for pr in fridge_products:
         for id in productIds:
             if pr.id == int(id):
@@ -243,6 +243,7 @@ def add_recipes(request):
             case _:
                 raise Http404
 
+
         recipes = Recipe(
             author=session_user,
             name=name,
@@ -257,6 +258,14 @@ def add_recipes(request):
             per_serving=per_serving,
         )
         recipes.save()
+       # for product_name, product_list in product_to_recipe.items():
+       #     new_product = Product(user=session_user, name= product_name, unit=
+       #                           product_list[0])
+       #     new_product.save()
+       #     recipe_product = Recipe_products_counts(product= new_product,
+                                                   # recipe=recipes,
+                                                   # ammount=product_list[1])
+
         return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
     return render(request, "polls/recipes_page.html", {"user_id": session_user.id})
 
