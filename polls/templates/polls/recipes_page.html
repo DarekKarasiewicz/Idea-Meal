@@ -11,7 +11,7 @@
     <div id="page_title">
       <h1>Add recipe</h1>
     </div>
-    <a href={% url 'main' user_id=user.id%}><div class="back_button_img" title="Back"></div></a>
+    <a href={% url 'main' user_id=user.id%}><div class="back_button_img" title="Home"></div></a>
     <form id="add_recipe_form" method="post">
       <div class="add_recipe_left">
         {% csrf_token %}
@@ -24,7 +24,7 @@
           <label for="recipe_name">Recipe_name: </label>
           <input type="text" name="recipe_name" id="recipe_name" required/><br>
           <label for="short_description" style="height: 100px;">Short description: </label>
-          <textarea type="text" name="short_description" id="short_description" rows="4" required disabled></textarea><br>
+          <textarea type="text" name="short_description" id="short_description" rows="4" required></textarea><br>
           <label for="difficulty">Difficulty: </label>
           <select name="difficulty" id="difficulty">
               <option value="easy">Easy</option>
@@ -44,9 +44,10 @@
         </div>
       </div>
       <div class="add_recipe_right">
+        <div></div>
         <div class="old-form form-i_block">
           <label for="description">Description: </label>
-          <textarea type="text" name="description" id="description" rows="25" placeholder="Enter a description..." required></textarea><br>
+          <textarea type="text" name="description" id="description" rows="15" placeholder="Enter a description..." required></textarea><br>
         </div>
       </div>
       <div class="submit_center">

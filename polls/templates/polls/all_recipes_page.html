@@ -133,7 +133,7 @@
         <div id="page_title">
           <h1>Recipes</h1>
         </div>
-        <a href={% url 'main' user_id=user.id%}><div class="back_button_img"></div></a>
+        <a href={% url 'main' user_id=user.id%}><div class="back_button_img" title="Home"></div></a>
         <div class="all_recipes_content_holder">
             <div class="container" id="recipe_items_show">
                 {%for x in all_recipes%}

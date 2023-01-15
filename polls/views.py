@@ -179,15 +179,15 @@ def main_page(request, user_id):
         for id in productIds:
             dictionary[id] = request.POST.get("changedProducts["+ id +"]",None)
 
-    print(productIds)
-    print(dictionary)
+    # print(productIds)
+    # print(dictionary)
     for pr in fridge_products:
         for id in productIds:
             if pr.id == int(id):
                 pr.ammount = dictionary[id]
                 pr.save()
-    
-    
+
+
             # product_update = Product.objects.get(id = id)
             # product_update.unit = dictionary[id]
             # product_update.save()
@@ -222,6 +222,7 @@ def add_recipes(request):
     if request.method == "POST":
         name = request.POST["recipe_name"]
         description = request.POST["description"]
+        short_description = request.POST["short_description"]
         difficulty = request.POST["difficulty"]
         cuisine_category = request.POST["cuisine_category"]
         meal_time_category = request.POST["meal_time_category"]
@@ -232,19 +233,6 @@ def add_recipes(request):
         is_verificated = False
 
         # YES I KNOW IT WILL WORK DIFRENTLY
-        enum_cuisine_category = [
-            e.value
-            for e in Cuisine_category
-            if str(e.value).lower() == cuisine_category.lower()
-        ]
-        enum_meal_time_category = [
-            e.value
-            for e in Meal_time_category
-            if str(e.value).lower() == meal_time_category.lower()
-        ]
-        if len(enum_meal_time_category) == 0 and len(enum_cuisine_category) == 0:
-            raise Http404
-
         match difficulty:
             case "easy":
                 difficulty = 1
@@ -255,19 +243,29 @@ def add_recipes(request):
             case _:
                 raise Http404
 
+
         recipes = Recipe(
+            author=session_user,
             name=name,
             description=description,
             difficulty=difficulty,
+            guidance=short_description,
             prepare_time=prepare_time,
             spiciness=spiciness,
             is_verificated=is_verificated,
-            cuisine_category=enum_cuisine_category[0],
-            meal_time_category=enum_meal_time_category[0],
+            cuisine_category=cuisine_category,
+            meal_time_category=meal_time_category,
             per_serving=per_serving,
         )
         recipes.save()
-        time.sleep(2)
+       # for product_name, product_list in product_to_recipe.items():
+       #     new_product = Product(user=session_user, name= product_name, unit=
+       #                           product_list[0])
+       #     new_product.save()
+       #     recipe_product = Recipe_products_counts(product= new_product,
+                                                   # recipe=recipes,
+                                                   # ammount=product_list[1])
+
         return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
     return render(request, "polls/recipes_page.html", {"user_id": session_user.id})
 
@@ -305,7 +303,8 @@ def product_page(request):
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
     product_category = [e.value for e in Product_category]
     product_unit = [e.value for e in Product_unit]
-    all_products = Fridge_products_counts.objects.all()
+    fridge_u = get_object_or_404(Fridge, user= session_user.id)
+    all_products = Fridge_products_counts.objects.filter(fridge=fridge_u.id)
 
     if request.method == "POST":
         name = request.POST["product_name"]
@@ -313,14 +312,11 @@ def product_page(request):
         product_quantity = request.POST["product_quantity"]
         product_unit = request.POST["product_unit"]
 
-        print("1")
         product_exits = False
         for product in all_products:
             if product.product.name.lower() == name.lower():
-                print("2")
                 product_exits = True
         if not product_exits:
-            print("3")
             print(product.product.name.lower())
             print(name.lower())
             new_product = Product(user= session_user,name = name, product_category = product_category_post, unit = product_unit)
@@ -334,8 +330,6 @@ def product_page(request):
             new_product_fridge.save()
 
         else:
-            print("HELLO")
-
             for product in all_products:
                 if product.product.name.lower() == name.lower():
                     print(name)
@@ -403,7 +397,7 @@ def my_recipes(request,user_id):
     all_recipes = Recipe.objects.all()
 
     for recipe in all_recipes:
-        if recipe.author.id == user_id:
+        if recipe.author.id == session_user.id :
             user_recipes.append(recipe)
 
     if request.method == "POST":
@@ -474,7 +468,7 @@ def recipe_update(request,recipe_id):
 
         update_recipe.save()
         time.sleep(2)
-        # return HttpResponseRedirect(reverse("my_recipes", args=(session_user.id,)))
+        return HttpResponseRedirect(reverse("my_recipes", args=(session_user.id,)))
 
     return render(request, 'polls/recipe_update.html',{"recipe": update_recipe})
 
