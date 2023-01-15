@@ -282,10 +282,22 @@ def recipes_page(request, recipe_id):
         if x.recipe.id == recipe.id:
             all_comments.append(x)
 
+
+    all_comments_filtred = {}
+    all_comments_to_recipe = Comments_to_Recipe.objects.filter(pk=recipe_id)
+    for comments in all_comments_to_recipe:
+            all_comments_filtred.setdefault(comments.recipe,[]).append(comments.comment)
+    
+    print(all_comments_filtred)
+    # for x, z in all_comments_filtred.items:
+    #     print(z.raiting)
+    #     # for y in z:
+    #     #     print(y.raiting)
+
     return render(
         request,
         "polls/recipe_view.html",
-        {"recipe": test_show, "all_comments": all_comments, "user":session_user,
+        {"recipe": test_show, "all_comments_to_recipe": all_comments_to_recipe, "user":session_user,
          "list_of_products":list_of_products},
     )
 

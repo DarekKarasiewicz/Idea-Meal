@@ -33,7 +33,7 @@
         </form>
     </div>
     <div class="recipe__users_comments">
-        {% for x in all_comments %}
+        {% for x in all_comments_to_recipe %}
             <div class="recipe_comment">
               <div class="top">
                 <div class="avatar">
@@ -45,7 +45,7 @@
                 </div>
               </div>
               <div class="bottom">
-                {{x}}
+                {{x.raiting}}
               </div>
             </div>
         {% endfor %}
