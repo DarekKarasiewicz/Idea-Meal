@@ -76,15 +76,17 @@
         <button
           type="button"
           class="plus_btn"
-          onclick="addFunction({{product.id}})"
+          onclick="addFunction({{product.id}},'{{product.product.unit}}')"
         >
           +
         </button>
-        <p id="{{product.id}}b">{{product.ammount}}</p>
+        <div class="quantity_info" >
+        <p id="b{{product.id}}">{{product.ammount}}</p><p id="p_unit_{{product.id}}"></p>
+        </div>
         <button
           type="button"
           class="minus_btn"
-          onclick="minusFunction({{product.id}})"
+          onclick="minusFunction({{product.id}},'{{product.product.unit}}')"
         >
           -
         </button>
@@ -291,15 +293,39 @@ $('#main_page-recipe_order_by').on('change', function (e) {
 <script>
   let changedProducts = {};
   let productId = [];
+
+  window.addEventListener("load", function() {
+    var unit;
+    {%for product in products%}
+      unit = "{{product.product.unit}}";
+      switch(unit){
+        case "GRAMS":
+          document.getElementById("p_unit_{{product.id}}").innerHTML = " g";
+          break;
+        case "ML":
+          document.getElementById("p_unit_{{product.id}}").innerHTML = " ml";
+          break;
+        case "UNIT":
+          document.getElementById("p_unit_{{product.id}}").innerHTML = " pcs";
+          break;
+      }
+    {% endfor %}
+  })
+
   document.getElementById("submit_changes").style.display = "none";
 
   //dummy function for adding existing products
-  function addFunction(id) {
-    let unit = document.getElementById(id + "b").innerHTML;
-    unit++;
-    document.getElementById(id + "b").innerHTML = unit;
+  function addFunction(id, unt) {
+    let amount = document.getElementById("b" + id).innerHTML;
+    if (unt == "UNIT"){
+      amount++;
+    }else{
+      amount = parseInt(amount)
+      amount = amount + 10;
+    }
+    document.getElementById("b" + id).innerHTML = amount;
 
-    changedProducts[id] = unit;
+    changedProducts[id] = amount;
     productId.push(id);
     document.getElementById("submit_changes").style.display = "block";
     document.getElementById("submit_changes").style.marginTop = "15px";
@@ -309,13 +335,19 @@ $('#main_page-recipe_order_by').on('change', function (e) {
   }
 
   //dummy function for removing existing products
-  function minusFunction(id) {
-    let unit = document.getElementById(id + "b").innerHTML;
-    if (unit > 0) {
-      --unit;
-      document.getElementById(id + "b").innerHTML = unit;
+  function minusFunction(id, unt) {
+    let amount = document.getElementById("b" + id).innerHTML;
+    if (amount > 0) {
+      if (unt == "UNIT"){
+        --amount;
+      }else{
+        amount = parseInt(amount)
+        amount = amount - 10;
+      }
+      
+      document.getElementById("b" + id).innerHTML = amount;
 
-      changedProducts[id] = unit;
+      changedProducts[id] = amount;
       productId.push(id);
       document.getElementById("submit_changes").style.display = "block";
       document.getElementById("submit_changes").style.marginTop = "15px";
