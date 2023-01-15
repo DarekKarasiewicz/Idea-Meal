@@ -219,55 +219,61 @@ def main_page(request, user_id):
 @login_required
 def add_recipes(request):
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
+    product_unit = [e.value for e in Product_unit]
+
     if request.method == "POST":
-        name = request.POST["recipe_name"]
-        description = request.POST["description"]
-        short_description = request.POST["short_description"]
-        difficulty = request.POST["difficulty"]
-        cuisine_category = request.POST["cuisine_category"]
-        meal_time_category = request.POST["meal_time_category"]
-        prepare_time_post = request.POST["prepare_time"].split(":")
-        prepare_time = int(prepare_time_post[0]) * 60 + int(prepare_time_post[1])
-        spiciness = request.POST["spiciness"]
-        per_serving = request.POST["per_serving"]
-        is_verificated = False
-
-        # YES I KNOW IT WILL WORK DIFRENTLY
-        match difficulty:
-            case "easy":
-                difficulty = 1
-            case "medium":
-                difficulty = 2
-            case "hard":
-                difficulty = 3
-            case _:
-                raise Http404
+        recipe_products = request.POST.getlist("recipe_products[][]")
 
 
-        recipes = Recipe(
-            author=session_user,
-            name=name,
-            description=description,
-            difficulty=difficulty,
-            guidance=short_description,
-            prepare_time=prepare_time,
-            spiciness=spiciness,
-            is_verificated=is_verificated,
-            cuisine_category=cuisine_category,
-            meal_time_category=meal_time_category,
-            per_serving=per_serving,
-        )
-        recipes.save()
-       # for product_name, product_list in product_to_recipe.items():
-       #     new_product = Product(user=session_user, name= product_name, unit=
-       #                           product_list[0])
-       #     new_product.save()
-       #     recipe_product = Recipe_products_counts(product= new_product,
-                                                   # recipe=recipes,
-                                                   # ammount=product_list[1])
+    # if request.method == "POST":
+    #     name = request.POST["recipe_name"]
+    #     description = request.POST["description"]
+    #     short_description = request.POST["short_description"]
+    #     difficulty = request.POST["difficulty"]
+    #     cuisine_category = request.POST["cuisine_category"]
+    #     meal_time_category = request.POST["meal_time_category"]
+    #     prepare_time_post = request.POST["prepare_time"].split(":")
+    #     prepare_time = int(prepare_time_post[0]) * 60 + int(prepare_time_post[1])
+    #     spiciness = request.POST["spiciness"]
+    #     per_serving = request.POST["per_serving"]
+    #     is_verificated = False
 
-        return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
-    return render(request, "polls/recipes_page.html", {"user_id": session_user.id})
+    #     # YES I KNOW IT WILL WORK DIFRENTLY
+    #     match difficulty:
+    #         case "easy":
+    #             difficulty = 1
+    #         case "medium":
+    #             difficulty = 2
+    #         case "hard":
+    #             difficulty = 3
+    #         case _:
+    #             raise Http404
+
+
+    #     recipes = Recipe(
+    #         author=session_user,
+    #         name=name,
+    #         description=description,
+    #         difficulty=difficulty,
+    #         guidance=short_description,
+    #         prepare_time=prepare_time,
+    #         spiciness=spiciness,
+    #         is_verificated=is_verificated,
+    #         cuisine_category=cuisine_category,
+    #         meal_time_category=meal_time_category,
+    #         per_serving=per_serving,
+    #     )
+    #     recipes.save()
+    #    # for product_name, product_list in product_to_recipe.items():
+    #    #     new_product = Product(user=session_user, name= product_name, unit=
+    #    #                           product_list[0])
+    #    #     new_product.save()
+    #    #     recipe_product = Recipe_products_counts(product= new_product,
+    #                                                # recipe=recipes,
+    #                                                # ammount=product_list[1])
+
+    #     return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
+    return render(request, "polls/recipes_page.html", {"user_id": session_user.id,"product_units": product_unit})
 
 @login_required
 def recipes_page(request, recipe_id):

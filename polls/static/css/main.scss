@@ -1104,6 +1104,21 @@ footer {
     height: 750px;
     padding: 15px;
     background: var(--idea_opacity_panel);
+
+    .add_product_recipe{
+      label{
+        margin-bottom: 20px;
+        font-weight: bold;
+        vertical-align: sub;
+      }  
+      input, select{
+        height: 35px;
+        line-height: 25px;
+        width: 250px;
+        border: 2px solid var(--idea-color-first_plan);
+      }
+    }
+
     .old-form{
       width: 80%;
       margin: auto;
@@ -2559,3 +2574,4 @@ button:hover{
   background: lightgrey !important;
   color: white !important;
 }
+
