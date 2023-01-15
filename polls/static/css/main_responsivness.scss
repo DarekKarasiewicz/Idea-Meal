@@ -1,3 +1,9 @@
+@media(max-width:1300px){
+    footer{
+        display: none;
+    }
+}
+
 //login and register page
 @media(max-width:1500px){
     .register_page_holder {
@@ -13,14 +19,74 @@
     }
 }
 
-@media(max-width:1150px){
-    footer{
-        display:none;
-    }
-}
-
 @media(max-width:600px){
     body{
         overflow-x: hidden;
+    }
+}
+
+//add recipe
+@media(max-width:1150px){
+    .add_recipe_holder #page_title {
+        height: 55px;
+        width: 500px;
+        position: relative;
+        left: 50%;
+        top: 0px;
+        transform: translate(-50%);
+        padding-top: 5px;
+    }
+    .add_recipe_holder {
+        height: 750px;
+        width: 1100px;
+        position: relative;
+        left: 50%;
+        top: 0;
+        transform: translate(-50%);
+        border-radius: 0;
+        box-shadow: none;
+
+    }
+    .submit_center {
+        height: 55px;
+        width: 250px;
+        position: relative;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    .add_recipe_holder .add_recipe_left, .add_recipe_holder .update_recipe_left, .add_recipe_holder .add_recipe_right {
+        width: 550px;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%);
+        float: none;
+        height: 750px;
+        padding: 15px;
+        background: var(--idea_opacity_panel);
+    }
+    .add_recipe_holder .add_recipe_left {
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 15px;
+    }
+    .add_recipe_holder .add_recipe_right {
+        border-left: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    body{
+        overflow-x: hidden;
+    }
+    .add_recipe_holder .back_button_img {
+        position: absolute;
+        left: 23%;
+        bottom: -111%;
+    }
+}
+
+@media(max-width:675px){
+    #recipe_helper{
+        display: none;
     }
 }
