@@ -33,21 +33,23 @@
         </form>
     </div>
     <div class="recipe__users_comments">
-        {% for x in all_comments %}
+        {% for x, z in all_comments_to_recipe.items %}
+          {% for y in z %}
             <div class="recipe_comment">
               <div class="top">
                 <div class="avatar">
                   <img src="{% static 'img/default_avatar.jpg' %}" alt="user_avatar_img" title="User avatar"/>
                 </div>
-                <div class="user_name">Simple user name</div>
+                <div class="user_name">{{y.user}}</div>
                 <div class="user_rating">
-                  <div>5</div>
+                  <div>{{y.raiting}}</div>
                 </div>
               </div>
               <div class="bottom">
-                {{x}}
+                {{x.comment}}
               </div>
             </div>
+          {% endfor %}
         {% endfor %}
     </div>
   </div>
