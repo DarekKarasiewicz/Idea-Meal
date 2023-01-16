@@ -605,7 +605,7 @@ footer {
 #nav_recipe_res_div{
   background-color: var(--idea-color-first_plan);
   height: 100%;
-  width: 15%;
+  width: 275px;
   position: absolute;
   top: 0;
   right: 0;
@@ -1642,8 +1642,8 @@ footer {
 
 // Product Page
 .add_product_holder{
-  height: 850px;
-  width: 650px;
+  height: 550px;
+  width: 550px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1652,16 +1652,22 @@ footer {
   box-shadow: 0px 4px 18px #4d4d4d;
   background: var(--idea_opacity_panel);
   padding: 15px;
-  .input_form{
-    width: 75%;
-    margin: auto;
-    input, select{
-      height: 35px;
-      line-height: 25px;
-      width: 250px;
-      border: 2px solid var(--idea-color-first_plan);
+  .center_content{
+    top: 50%;
+    height: 550px;
+    position: relative;
+    transform: translateY(-30%);
+    .input_form{
+      width: 75%;
+      margin: auto;
+      input, select{
+        height: 35px;
+        line-height: 25px;
+        width: 250px;
+        border: 2px solid var(--idea-color-first_plan);
+      }
     }
-}
+  }
 
   input, select{
     float: right;
@@ -2454,7 +2460,7 @@ button:hover{
 }
 
 .contact_holder{
-  height: 750px;
+  height: 550px;
   width: 700px;
   position: absolute;
   top: 50%;
