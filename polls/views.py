@@ -234,8 +234,6 @@ def add_recipes(request):
         per_serving = request.POST["per_serving"]
         is_verificated = False
 
-        recipe_products = request.POST
-        print(recipe_products)
 
         # YES I KNOW IT WILL WORK DIFRENTLY
         match difficulty:
@@ -264,22 +262,21 @@ def add_recipes(request):
         )
         recipes.save()
 
-        # recipe_products = request.POST
-        # print(recipe_products)
-        # for product_dict, key_list in dict(recipe_products).items():
-        #     print(product_dict)
-        #     if "data_dict" in product_dict:
-        #         print("coś")
-        #         new_product = Product(user=session_user, name= key_list[0], unit=
-        #                              key_list[1])
-        #         new_product.save()
-        #         recipe_product = Recipe_products_counts(product= new_product,
-        #                                                recipe=recipes,
-        #                                                ammount=key_list[2])
-        #         recipe_product.save()
-        #         print("udałosie")
+        recipe_products = request.POST
+        print(recipe_products)
+        for product_dict, key_list in dict(recipe_products).items():
+            if "data_dict" in product_dict:
+                print("coś")
+                new_product = Product(user=session_user, name= key_list[0], unit=
+                                     key_list[1],
+                                      product_category=f"to_recipe_{name}")
+                new_product.save()
+                recipe_product = Recipe_products_counts(product= new_product,
+                                                       recipe=recipes,
+                                                       ammount=key_list[2])
+                recipe_product.save()
 
-        # return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
+        return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
     return render(request, "polls/recipes_page.html", {"user_id": session_user.id,"product_units": product_unit})
 
 @login_required
