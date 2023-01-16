@@ -127,7 +127,7 @@
         z-index: 1;
     }
     .fridge_holder {
-        height: 850px;
+        height: 780px;
         width: 650px;
         position: relative !important;
         top: 50%;
@@ -139,6 +139,9 @@
         background: var(--idea_opacity_panel);
         text-align: center;
     }
+    #nav_recipe_res_div .nav_results {
+        max-height: 60vh;
+    }
 }
 
 @media(max-width: 700px){  
@@ -146,7 +149,8 @@
         width: 385px;
         height: 500px;
         overflow-y: scroll;
-        margin: auto;
+        margin-right: auto;
+        margin-left: 123px;
     }
     .product_box {
         width: 180px;
@@ -182,5 +186,54 @@
     .contact_holder {
         width: 450px;
         border-radius: 15px;
+    }
+}
+
+//all_recipes page
+@media(max-width: 1125px){
+    .all_recipes_holder .all_recipes_content_holder {
+        width:900px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        float: left;
+        height: 750px;
+        padding: 15px;
+        background: var(--idea_opacity_panel);
+        border-radius: 45px;
+        overflow: auto;
+    }
+}
+@media(max-width: 925px){
+    .all_recipes_holder .all_recipes_content_holder {
+        width:700px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        float: left;
+        height: 750px;
+        padding: 15px;
+        background: var(--idea_opacity_panel);
+        border-radius: 45px;
+        overflow: auto;
+    }
+}
+@media(max-width: 725px){
+    .all_recipes_holder .all_recipes_content_holder {
+        width: 425px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        float: left;
+        height: 750px;
+        padding: 15px;
+        background: var(--idea_opacity_panel);
+        border-radius: 45px;
+        overflow: auto;
+    }
+}
+@media (max-width: 576px){
+    .container-sm, .container {
+        max-width: 540px;
     }
 }

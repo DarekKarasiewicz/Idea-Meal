@@ -2145,6 +2145,7 @@ footer {
   cursor: pointer;
   pointer-events: all;
   background-color: var(--idea-color-first_plan);
+  z-index: 1;
   div{
     background-image: url('/static/img/icons8-slider-48.png');
     background-repeat: no-repeat;
@@ -2156,12 +2157,14 @@ footer {
 }
 #all_recipe_filters_section {
   background-color: var(--idea-color-first_plan);
-  height: 100%;
+  height: 265px;
   width: 300px;
   position: absolute;
   top: 0;
   left: 0;
   color: var(--idea-color-text);
+  z-index: 1;
+  border-bottom-right-radius: 15px;
   .form-select:focus, .form-control:focus{
     border-color: var(--idea-color-second_plan);
     outline: 0;
