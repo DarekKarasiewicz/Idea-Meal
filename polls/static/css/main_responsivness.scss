@@ -92,7 +92,66 @@
 }
 
 // main page
+@media(max-width: 1000px){
+    .navbar {
+        position: absolute !important;
+        z-index: 1;
+    }
+    .fridge_holder {
+        height: 850px;
+        width: 650px;
+        position: relative !important;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 45px;
+        box-shadow: 0px 4px 18px #4d4d4d;
+        padding: 25px;
+        background: var(--idea_opacity_panel);
+        text-align: center;
+    }
+}
 
-@media(max-width: 770px){
-    
+@media(max-width: 700px){  
+    .products {
+        width: 385px;
+        height: 500px;
+        overflow-y: scroll;
+        margin: auto;
+    }
+    .product_box {
+        width: 180px;
+    }
+    .product_box__name {
+        width: 115px;
+    }
+    .product_box__name__text {
+        width: 85px;
+    }
+}
+
+//contact page
+@media(max-width: 1000px){
+    .contact_holder #page_title {
+        height: 55px;
+        width: 400px;
+        top: -55px;
+        padding-top: 10px;
+    }
+}
+@media(max-width: 725px){
+    .contact_holder {
+        width: 600px;
+    }
+}
+@media(max-width: 625px){
+    .contact_holder {
+        width: 500px;
+    } 
+}
+@media(max-width: 500px){
+    .contact_holder {
+        width: 450px;
+        border-radius: 15px;
+    }
 }

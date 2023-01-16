@@ -5,29 +5,31 @@
 {% endblock %}
 {% block body %}  
 <div class="add_product_holder">
-<h1>Add product</h1>
-<form class="input_form" method="post">
-  {% csrf_token %}
-  <label for="product_name">Name: </label>
-  <input type="text" name="product_name" id="product_name" required/><br>
-  <label for="product_category">Category: </label>
-  <select name="product_category" id="product_category">
-     {% for product_category in product_categories %}
-         <option value="{{product_category}}">{{product_category}}</option>
-     {% endfor %}
-  </select><br/>
-  <label for="product_unit">Unit: </label>
-  <select name="product_unit" id="product_unit">
-     {% for product_unit in product_units %}
-         <option value="{{product_unit}}">{{product_unit}}</option>
-     {% endfor %}
-  </select><br/>
-  <label for="product_quantity">Quantity: </label>
-  <input type="number" name="product_quantity" id="product_quantity" placeholder="ml" min=0 max=9999 required/><br>
-  <div style="text-align: center;">
-    <button id="submit_product" class="idea_btn">ADD</button>
+  <div class="center_content">
+    <h1>Add product</h1>
+    <form class="input_form" method="post">
+      {% csrf_token %}
+      <label for="product_name">Name: </label>
+      <input type="text" name="product_name" id="product_name" required/><br>
+      <label for="product_category">Category: </label>
+      <select name="product_category" id="product_category">
+        {% for product_category in product_categories %}
+            <option value="{{product_category}}">{{product_category}}</option>
+        {% endfor %}
+      </select><br/>
+      <label for="product_unit">Unit: </label>
+      <select name="product_unit" id="product_unit">
+        {% for product_unit in product_units %}
+            <option value="{{product_unit}}">{{product_unit}}</option>
+        {% endfor %}
+      </select><br/>
+      <label for="product_quantity">Quantity: </label>
+      <input type="number" name="product_quantity" id="product_quantity" placeholder="ml" min=0 max=9999 required/><br>
+      <div style="text-align: center;">
+        <button id="submit_product" class="idea_btn">ADD</button>
+      </div>
+    </form>
   </div>
-</form>
 <a href="/main_page/{{user_id}}"><div class="back_button_img" title="Home"></div></a>
 </div> 
 {% endblock %}
