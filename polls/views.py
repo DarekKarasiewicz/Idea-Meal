@@ -222,47 +222,47 @@ def add_recipes(request):
     product_unit = [e.value for e in Product_unit]
 
     if request.method == "POST":
-        # name = request.POST["recipe_name"]
-        # description = request.POST["description"]
-        # short_description = request.POST["short_description"]
-        # difficulty = request.POST["difficulty"]
-        # cuisine_category = request.POST["cuisine_category"]
-        # meal_time_category = request.POST["meal_time_category"]
-        # prepare_time_post = request.POST["prepare_time"].split(":")
-        # prepare_time = int(prepare_time_post[0]) * 60 + int(prepare_time_post[1])
-        # spiciness = request.POST["spiciness"]
-        # per_serving = request.POST["per_serving"]
-        # is_verificated = False
+        name = request.POST["recipe_name"]
+        description = request.POST["description"]
+        short_description = request.POST["short_description"]
+        difficulty = request.POST["difficulty"]
+        cuisine_category = request.POST["cuisine_category"]
+        meal_time_category = request.POST["meal_time_category"]
+        prepare_time_post = request.POST["prepare_time"].split(":")
+        prepare_time = int(prepare_time_post[0]) * 60 + int(prepare_time_post[1])
+        spiciness = request.POST["spiciness"]
+        per_serving = request.POST["per_serving"]
+        is_verificated = False
 
         recipe_products = request.POST
         print(recipe_products)
 
-        # # YES I KNOW IT WILL WORK DIFRENTLY
-        # match difficulty:
-        #     case "easy":
-        #         difficulty = 1
-        #     case "medium":
-        #         difficulty = 2
-        #     case "hard":
-        #         difficulty = 3
-        #     case _:
-        #         raise Http404
+        # YES I KNOW IT WILL WORK DIFRENTLY
+        match difficulty:
+            case "easy":
+                difficulty = 1
+            case "medium":
+                difficulty = 2
+            case "hard":
+                difficulty = 3
+            case _:
+                raise Http404
 
 
-        # recipes = Recipe(
-        #     author=session_user,
-        #     name=name,
-        #     description=description,
-        #     difficulty=difficulty,
-        #     guidance=short_description,
-        #     prepare_time=prepare_time,
-        #     spiciness=spiciness,
-        #     is_verificated=is_verificated,
-        #     cuisine_category=cuisine_category,
-        #     meal_time_category=meal_time_category,
-        #     per_serving=per_serving,
-        # )
-        # recipes.save()
+        recipes = Recipe(
+            author=session_user,
+            name=name,
+            description=description,
+            difficulty=difficulty,
+            guidance=short_description,
+            prepare_time=prepare_time,
+            spiciness=spiciness,
+            is_verificated=is_verificated,
+            cuisine_category=cuisine_category,
+            meal_time_category=meal_time_category,
+            per_serving=per_serving,
+        )
+        recipes.save()
 
         # recipe_products = request.POST
         # print(recipe_products)

@@ -45,27 +45,7 @@
       </div>
       <div class="add_recipe_right">
         <div class="old-form">
-          <div class="add_product_recipe">
-            <label for="product_name">Name: </label>
-            <input type="text" name="product_name" id="product_name" required/><br>
-            <label for="product_unit">Unit: </label>
-            <select name="product_unit" id="product_unit">
-              {% for product_unit in product_units %}
-                  <option value="{{product_unit}}">{{product_unit}}</option>
-              {% endfor %}
-            </select><br/>
-            <label for="product_quantity">Quantity: </label>
-            <input type="number" name="product_quantity" id="product_quantity" placeholder="quantity" min=0 max=9999 required/><br>
-            <button
-              type="button"
-              class="idea_btn"
-              id="submit_changes"
-              onclick="addProduct()"
-            >
-            Add product
-          </button><br/>
-          <p id="display_products"></p>
-          </div>
+
         </div>
         <div class="old-form form-i_block">
           <label for="description">Description: </label>
@@ -73,10 +53,30 @@
         </div>
       </div>
       <div class="submit_center">
-        <button id="submit_recipe">ADD</button>
-        <button id="send_recipe" onclick="send()">send</button>
       </div>
     </form>
+    <button id="submit_recipe" onclick="send()">ADD</button>
+    <div class="add_product_recipe">
+      <label for="product_name">Name: </label>
+      <input type="text" name="product_name" id="product_name" required/><br>
+      <label for="product_unit">Unit: </label>
+      <select name="product_unit" id="product_unit">
+        {% for product_unit in product_units %}
+            <option value="{{product_unit}}">{{product_unit}}</option>
+        {% endfor %}
+      </select><br/>
+      <label for="product_quantity">Quantity: </label>
+      <input type="number" name="product_quantity" id="product_quantity" placeholder="quantity" min=0 max=9999 required/><br>
+      <button
+        type="button"
+        class="idea_btn"
+        id="submit_changes"
+        onclick="addProduct()"
+      >
+      Add product
+    </button><br/>
+    <p id="display_products"></p>
+    </div>
   </div> 
 {% endblock %} 
 {% block page_js%} 
@@ -97,16 +97,38 @@ function addProduct(){
   pr_unit = document.getElementById("product_unit").value;
   pr_quantity = document.getElementById("product_quantity").value;
 
+
   product_unit = [pr_name, pr_unit, pr_quantity];
   recipe_products[pr_name] = product_unit;
   console.log(recipe_products);
+
 }
 
 function send(){
+  recipe_name = document.getElementById("recipe_name").value;
+  description = document.getElementById("description").value;
+  short_description = document.getElementById("short_description").value;
+  cuisine_category = document.getElementById("cuisine_category").value;
+  difficulty = document.getElementById("difficulty").value;
+  meal_time_category = document.getElementById("meal_time_category").value;
+  prepare_time = document.getElementById("prepare_time").value;
+  spiciness = document.getElementById("spiciness").value;
+  per_serving = document.getElementById("per_serving").value;
+
+
   jQuery.ajax({
     type: "POST",
     url: '{% url "recipes_add" %}',
     data: {
+        recipe_name,
+        description,
+        short_description,
+        difficulty,
+        cuisine_category,
+        meal_time_category,
+        prepare_time,
+        spiciness,
+        per_serving,
        'data_dict':  recipe_products,
        "csrfmiddlewaretoken": "{{ csrf_token }}",
     },
