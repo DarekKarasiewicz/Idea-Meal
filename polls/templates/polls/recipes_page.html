@@ -72,6 +72,7 @@
       </div>
       <div class="submit_center">
         <button id="submit_recipe">ADD</button>
+        <button id="send_recipe" onclick="send()">send</button>
       </div>
     </form>
   </div> 
@@ -86,18 +87,20 @@ imgInp.onchange = evt => {
 }
 
 let recipe_products = {};
-
+let product_unit = [];
 
 function addProduct(){
-  let product_unit = {};
-  pr_name = document.getElementById("product_name").value
-  pr_unit = document.getElementById("product_unit").value
-  pr_quantity = document.getElementById("product_quantity").value
 
-  product_unit[pr_unit] = pr_quantity
-  recipe_products[pr_name] = product_unit
-  console.log(recipe_products)
+  pr_name = document.getElementById("product_name").value;
+  pr_unit = document.getElementById("product_unit").value;
+  pr_quantity = document.getElementById("product_quantity").value;
 
+  product_unit = [pr_unit, pr_quantity];
+  recipe_products[pr_name] = product_unit;
+  console.log(recipe_products);
+}
+
+function send(){
   jQuery.ajax({
     type: "POST",
     url: '{% url "recipes_add" %}',

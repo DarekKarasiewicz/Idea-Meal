@@ -222,7 +222,8 @@ def add_recipes(request):
     product_unit = [e.value for e in Product_unit]
 
     if request.method == "POST":
-        recipe_products = request.POST.getlist("recipe_products[][]")
+        # recipe_products = request.POST.getlist("recipe_products[][]")
+        print(request.POST)
 
 
     # if request.method == "POST":
