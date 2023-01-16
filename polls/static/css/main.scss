@@ -2434,7 +2434,7 @@ button:hover{
       border-radius: 10px;
       border: 3px none #707070;
     }
-    div[class^="FAQ_"]{
+    .faq_item{
       width: 80%;
       height: 50px;
       background-color: var(--idea-color-first_plan);
@@ -2444,6 +2444,7 @@ button:hover{
       transition: .25s;
       margin-top: 20px;
       color: var(--idea-color-text);
+      cursor: pointer;
       .question{
         display: flex;
         font-size: 28px;
@@ -2456,15 +2457,15 @@ button:hover{
       .toggle_arrow{
         position: absolute;
         height: 40px;
-        left: 800px;
-        bottom: 3px;
+        right: 5px;
+        bottom: 5px;
         float: right;
   
         img{
           width: 40px;
           height: 40px;
           transform: rotate(90deg);
-          cursor:pointer;
+          filter: var(--idea_img_filter);
           transition: .25s;
         }
       }
@@ -2478,7 +2479,7 @@ button:hover{
       }
     }
   
-    div[class^="FAQ_"].open{
+    .faq_item.open{
       height: auto;
   
       .question{

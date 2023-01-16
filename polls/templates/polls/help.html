@@ -12,7 +12,7 @@
     <h1>FAQ</h1>
   </div>
   <div class="all_FAQ">
-  <div class="FAQ_1" id="FAQ_1">
+  <div class="faq_item" id="FAQ_1" onclick="toggleFAQ(1)">
     <div class="question">How to create good recipe?</div>
     <div class="answear">
       <ol>
@@ -25,12 +25,12 @@
         <li>Set <b>per serving</b> number which says: How many servings you end up with.</li>
       </ol>
     </div>
-    <div class="toggle_arrow"><img id="arrow_1" src="{% static 'img/icon_arrow.png' %}" alt="toggle arrow" onclick="toggleFAQ(1)"/></div>
+    <div class="toggle_arrow"><img id="arrow_1" src="{% static 'img/icon_arrow.png' %}" alt="toggle arrow"/></div>
   </div>
-  <div class="FAQ_2" id="FAQ_2">
+  <div class="faq_item" id="FAQ_2" onclick="toggleFAQ(2)">
     <div class="question">How to cook good?</div>
     <div class="answear">Learn how to cook!</div>
-    <div class="toggle_arrow"><img id="arrow_2" src="{% static 'img/icon_arrow.png' %}" alt="toggle arrow" onclick="toggleFAQ(2)"/></div>
+    <div class="toggle_arrow"><img id="arrow_2" src="{% static 'img/icon_arrow.png' %}" alt="toggle arrow"/></div>
   </div>
 </div>
 </div>
