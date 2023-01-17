@@ -246,3 +246,40 @@
         width: 450px;
     }
 }
+
+// my recipes page
+@media (max-width: 900px){
+    .my_recipes_holder {
+        width: 650px;
+    }
+    .my_recipes_holder div[class^="recipe_box-"] {
+        width: 610px;
+    }
+}
+
+@media (max-width: 675px){
+    .my_recipes_holder {
+        width: 450px;
+    }
+    .my_recipes_holder div[class^="recipe_box-"] {
+        width: 410px;
+        border-radius: 30px;
+    }
+    .my_recipes_holder div[class^="recipe_box-"] .recipe_photo {
+        height: 95px;
+        width: 190px;
+        background-repeat: initial;
+        background-size: contain;
+        background-position: center;
+        border-radius: 15px;
+    }
+    .my_recipes_holder div[class^="recipe_box-"] div[class^="update-"] img {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+    }
+    .my_recipes_holder div[class^="recipe_box-"] div[class^="update-"] {
+        width: 40px;
+        height: 40px;
+    }
+}

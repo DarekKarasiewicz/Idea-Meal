@@ -410,7 +410,7 @@ def my_recipes(request,user_id):
         raise Http404
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
     all_recipes = Recipe.objects.all()
-
+    
     for recipe in all_recipes:
         if recipe.author.id == session_user.id :
             user_recipes.append(recipe)
