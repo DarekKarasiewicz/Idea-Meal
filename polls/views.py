@@ -425,13 +425,14 @@ def my_recipes(request,user_id):
 
 @login_required
 def recipe_update(request,recipe_id):
-    # session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
+    session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
 
     update_recipe = Recipe.objects.get(pk = recipe_id)
 
     if request.method == "POST":
         name = request.POST["recipe_name"]
         description = request.POST["description"]
+        short_description = request.POST["short_description"]
         difficulty = request.POST["difficulty"]
         cuisine_category = request.POST["cuisine_category"]
         meal_time_category = request.POST["meal_time_category"]
@@ -464,6 +465,7 @@ def recipe_update(request,recipe_id):
 
         update_recipe.name = name
         update_recipe.description = description
+        update_recipe.guidance = short_description
         update_recipe.difficulty = difficulty
         update_recipe.cuisine_category = cuisine_category
         update_recipe.meal_time_category = meal_time_category
@@ -482,7 +484,6 @@ def recipe_update(request,recipe_id):
 
 
         update_recipe.save()
-        time.sleep(2)
         return HttpResponseRedirect(reverse("my_recipes", args=(session_user.id,)))
 
     return render(request, 'polls/recipe_update.html',{"recipe": update_recipe})

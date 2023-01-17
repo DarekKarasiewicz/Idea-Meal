@@ -50,17 +50,23 @@
 {% block page_js%} 
 <script>
     window.onload = function(){
+        console.log("{{recipe.prepare_time}}")
+        var sec_num = parseInt("{{recipe.prepare_time}}",10);
+        var hours   = Math.floor(sec_num / 60);
+        var minutes = Math.floor((sec_num - (hours * 60)));
+      
+        if (hours   < 10) {hours   = "0"+hours;}
+        if (minutes < 10) {minutes = "0"+minutes;}
+
+        pr_time = hours + ':' + minutes;
+
         document.getElementById("description").defaultValue = "{{recipe.description}}";
+        document.getElementById("short_description").defaultValue = "{{recipe.guidance}}";
         document.getElementById("recipe_name").defaultValue = "{{recipe.name}}";
         document.getElementById("difficulty").defaultValue = "{{recipe.difficulty}}";
         document.getElementById("cuisine_category").defaultValue = "{{recipe.cuisine_category}}";
         document.getElementById("meal_time_category").defaultValue = "{{recipe.meal_time_category}}";
-        if({{recipe.prepare_time}}<10){
-          document.getElementById("prepare_time").defaultValue = "0{{recipe.prepare_time}}:00";
-        }else{
-          document.getElementById("prepare_time").defaultValue = "{{recipe.prepare_time}}:00";
-
-        }
+        document.getElementById("prepare_time").defaultValue = pr_time;
         document.getElementById("spiciness").defaultValue = "{{recipe.spiciness}}";
         document.getElementById("per_serving").defaultValue = "{{recipe.per_serving}}";
 
