@@ -250,9 +250,9 @@ def add_recipes(request):
         recipes = Recipe(
             author=session_user,
             name=name,
-            description=description,
+            description=short_description,
             difficulty=difficulty,
-            guidance=short_description,
+            guidance=description,
             prepare_time=prepare_time,
             spiciness=spiciness,
             is_verificated=is_verificated,
@@ -294,18 +294,11 @@ def recipes_page(request, recipe_id):
         tmf.save()
         return HttpResponseRedirect(reverse('recipe_page', args=[recipe_id]))
 
-    recipe = Recipe.objects.filter(pk=recipe_id)
-
     all_comments_filtred = {}
     all_comments_to_recipe = Comments_to_Recipe.objects.filter(recipe=recipe_id)
 
     for comments in all_comments_to_recipe:
             all_comments_filtred.setdefault(comments.recipe,[]).append(comments.comment)
-
-    # print(all_comments_filtred)
-    # for x, z in all_comments_filtred.items():
-    #     for y inz:
-    #         print(y.raiting)
 
     return render(
         request,
