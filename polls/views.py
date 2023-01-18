@@ -220,6 +220,7 @@ def main_page(request, user_id):
 def add_recipes(request):
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
     product_unit = [e.value for e in Product_unit]
+    cuisine_category_enum = [member.value for member in Cuisine_category]
 
     if request.method == "POST":
         name = request.POST["recipe_name"]
@@ -277,7 +278,9 @@ def add_recipes(request):
                 recipe_product.save()
 
         return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
-    return render(request, "polls/recipes_page.html", {"user_id": session_user.id,"product_units": product_unit})
+    return render(request, "polls/recipes_page.html", {"user_id": session_user.id
+                                                       ,"product_units":product_unit
+                                                       ,"cuisine_category_enum":cuisine_category_enum })
 
 @login_required
 def recipes_page(request, recipe_id):
