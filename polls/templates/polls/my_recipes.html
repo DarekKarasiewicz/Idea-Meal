@@ -10,24 +10,49 @@
         <h1>My recipes</h1>
     </div>
     <div class="recipes_holder">
-    {%for recipe in recipes%}
-    <div class="recipe_box-{{recipe.id}}" id="{{recipe.id}}">
-        <div class="recipe_photo" ></div>
-        <div class="recipe_name">{{recipe.name}}</div><br>
-        <div class="recipe_short_desc">{{recipe.guidance}}</div>
-        <div class="update-{{recipe.id}}" id="recipe_update{{recipe.id}}" onclick="openTools({{recipe.id}})">
-            <img id="recipe_tools" src="{% static 'img/tools.png' %}" alt="tools image">
-            <a href="/recipe/{{recipe.id}}">Preview</a>
-            <a href="/recipe_update/{{recipe.id}}">Update</a>
-            <a id="delete_recipe" onclick="deleteRecipe({{recipe.id}})">Delete</a>
+        {%for recipe in recipes%}
+        <div class="recipe_box-{{recipe.id}}" id="{{recipe.id}}">
+            <div class="recipe_photo" ></div>
+            <div class="recipe_name">{{recipe.name}}</div><br>
+            <div class="recipe_short_desc">{{recipe.guidance}}</div>
+            <div class="update-{{recipe.id}}" id="recipe_update{{recipe.id}}" onclick="openTools({{recipe.id}})">
+                <img id="recipe_tools" src="{% static 'img/tools.png' %}" alt="tools image">
+                <a href="/recipe/{{recipe.id}}">Preview</a>
+                <a href="/recipe_update/{{recipe.id}}">Update</a>
+                <a id="delete_recipe" data_id="{{recipe.id}}">Delete</a>
+            </div>
         </div>
+        {%endfor%}
     </div>
-    {%endfor%}
 </div>
-</div>
+{% endblock %}
+{% block page_js%} 
 <script>
+    $('#delete_recipe').on('click',()=>{
+      var recipe_id = $('#delete_recipe').attr('data_id');
+      console.log(recipe_id);
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteRecipe(recipe_id);
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }
+      })
+    })
+
     function deleteRecipe(recipeId){
-        jQuery.ajax({
+        $.ajax({
             type: "POST",
             url: '{% url "my_recipes" user_id=user.id %}',
             data: {
@@ -39,10 +64,9 @@
             },
             failure: function (data) {
               console.log("failure");
-              alert("bruh");
+              // alert("bruh");
             },
           })
-        
         document.getElementById(recipeId).style.display = "none";
     }
 </script>

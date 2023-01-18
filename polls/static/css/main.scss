@@ -2068,8 +2068,9 @@ footer {
       height: 175px;
       width: 175px;
       float: left;
-      background-image: url('https://via.placeholder.com/175/09f/fff.png');
+      background-image: url('/static/img/temp_recipe_img_holder.jfif');
       background-repeat: no-repeat;
+      background-size: contain;
       border-top-left-radius: 45px;
       border-bottom-left-radius: 45px;
       margin-right: 10px;

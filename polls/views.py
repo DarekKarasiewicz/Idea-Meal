@@ -486,7 +486,7 @@ def recipe_update(request,recipe_id):
         update_recipe.save()
         return HttpResponseRedirect(reverse("my_recipes", args=(session_user.id,)))
 
-    return render(request, 'polls/recipe_update.html',{"recipe": update_recipe})
+    return render(request, 'polls/recipe_update.html',{"user_id": session_user.id, "recipe": update_recipe})
 
 @login_required
 def help(request):
