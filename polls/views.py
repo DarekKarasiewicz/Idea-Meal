@@ -297,14 +297,15 @@ def recipes_page(request, recipe_id):
     test_show = recipe.__dict__
 
     all_comments_filtred = {}
-    all_comments_to_recipe = Comments_to_Recipe.objects.filter(pk=recipe_id)
+    all_comments_to_recipe = Comments_to_Recipe.objects.filter(recipe=recipe_id)
+
     for comments in all_comments_to_recipe:
             all_comments_filtred.setdefault(comments.recipe,[]).append(comments.comment)
 
     # print(all_comments_filtred)
-    for x, z in all_comments_filtred.items():
-        for y in z:
-            print(y.raiting)
+    # for x, z in all_comments_filtred.items():
+    #     for y inz:
+    #         print(y.raiting)
 
     return render(
         request,
@@ -410,7 +411,7 @@ def my_recipes(request,user_id):
         raise Http404
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
     all_recipes = Recipe.objects.all()
-    
+
     for recipe in all_recipes:
         if recipe.author.id == session_user.id :
             user_recipes.append(recipe)
