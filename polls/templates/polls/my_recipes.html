@@ -13,8 +13,8 @@
     {%for recipe in recipes%}
     <div class="recipe_box-{{recipe.id}}" id="{{recipe.id}}">
         <div class="recipe_photo" ></div>
-        <p class="recipe_name">{{recipe.name}}</p>
-        <p>{{recipe.description}}</p>
+        <div class="recipe_name">{{recipe.name}}</div><br>
+        <div class="recipe_short_desc">{{recipe.guidance}}</div>
         <div class="update-{{recipe.id}}" id="recipe_update{{recipe.id}}" onclick="openTools({{recipe.id}})">
             <img id="recipe_tools" src="{% static 'img/tools.png' %}" alt="tools image">
             <a href="/recipe/{{recipe.id}}">Preview</a>

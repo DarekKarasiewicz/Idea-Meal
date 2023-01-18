@@ -255,10 +255,15 @@
     .my_recipes_holder div[class^="recipe_box-"] {
         width: 610px;
     }
+    .my_recipes_holder .recipes_holder {
+        height: 740px;
+        width: 625px;
+    }
 }
 
 @media (max-width: 675px){
     .my_recipes_holder {
+        height: 650px;
         width: 450px;
     }
     .my_recipes_holder div[class^="recipe_box-"] {
@@ -267,7 +272,7 @@
     }
     .my_recipes_holder div[class^="recipe_box-"] .recipe_photo {
         height: 95px;
-        width: 190px;
+        width: 95px;
         background-repeat: initial;
         background-size: contain;
         background-position: center;
@@ -282,4 +287,61 @@
         width: 40px;
         height: 40px;
     }
+    .my_recipes_holder #page_title {
+        width: 300px;
+        padding-top: 12px;
+    }
+    .my_recipes_holder .recipes_holder {
+        height: 600px;
+        width: 425px;
+    }
 }
+
+@media (max-width: 1150px){
+    .add_recipe_holder.correct_holder .add_recipe_left, 
+    .add_recipe_holder.correct_holder .add_recipe_right {
+        height: 805px;
+    }
+}
+
+// shopping list page
+@media (max-width: 1150px){
+    .shopping_list_holder {
+        width: 900px !important;
+    }
+}
+@media (max-width: 925px){
+    .shopping_list_holder {
+        width: 700px !important;
+    }
+}
+@media (max-width: 725px){
+    .shopping_list_holder {
+        width: 600px !important;
+    }
+    .shopping_list_holder .all_recipes_content_holder{
+        width: 600px !important;
+    }
+}
+
+@media (max-width: 625px){
+    .shopping_list_holder {
+        width: 500px !important;
+    }
+    .shopping_list_holder .all_recipes_content_holder{
+        width: 500px !important;
+    }
+    .shopping_list_holder #page_title{
+        width: 300px !important;
+    }
+}
+
+@media (max-width: 525px){
+    .shopping_list_holder {
+        width: 400px !important;
+    }
+    .shopping_list_holder .all_recipes_content_holder{
+        width: 400px !important;
+    }
+}
+

@@ -655,8 +655,9 @@ footer {
   }
   .nav_results{
     width: 100%;
-    min-height: 60vh;
-    max-height: 67vh;
+    min-height: 55vh;
+    max-height: 60vh;
+    margin-top: 15px;
     background-color: transparent;
     position: relative;
     overflow: auto;
@@ -1312,6 +1313,7 @@ footer {
   cursor: pointer;
   pointer-events: all;
   background-color: var(--idea-color-first_plan);
+  z-index: 1;
   div{
     background-image: url('/static/img/icons8-comments_with_star.png');
     background-repeat: no-repeat;
@@ -1327,6 +1329,7 @@ footer {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1;
   .recipe__user_comment_add{
     min-height: 30vh;
     width: 85%;
@@ -1460,7 +1463,7 @@ footer {
 }
 .add_recipe_holder.correct_holder{
   height: 825px;
-  top: 52%;
+  // top: 52%;
   .add_recipe_left, .add_recipe_right{
     height: 825px;
   }
@@ -2069,13 +2072,18 @@ footer {
       background-repeat: no-repeat;
       border-top-left-radius: 45px;
       border-bottom-left-radius: 45px;
-      margin: 0px;
+      margin-right: 10px;
     }
     .recipe_name{
-      display: flex;
-      float: left;
-      width: 546px;
+      display: contents;
       font-size: 32px;
+      margin: 0px;
+      padding: 10px;
+      color: var(--idea-color-text);
+    }
+    .recipe_short_desc{
+      display: contents;
+      font-size: 16px;
       margin: 0px;
       padding: 10px;
       color: var(--idea-color-text);
@@ -2240,6 +2248,7 @@ footer {
     height: 55px;
     width: 500px;
     position: absolute;
+    padding-top: 7px;
     top: -55px;
     left: 50%;
     transform: translate(-50%);

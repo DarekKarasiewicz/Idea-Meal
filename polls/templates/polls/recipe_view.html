@@ -53,7 +53,7 @@
         {% endfor %}
     </div>
   </div>
-  <div class="add_recipe_holder correct_holder">
+  <div class="add_recipe_holder correct_holder only_add_recipe">
     <div id="page_title">
       <h1>Recipe info</h1>
     </div>
@@ -120,7 +120,7 @@
         <div class="middle_section_right">
           <div class="short_desc_sec">
             <p>
-              {{recipe.description}}
+              {{recipe.guidance}}
             </p>
           </div>
           <div class="ingredients_sec">
@@ -136,7 +136,7 @@
     </div>
     <div class="add_recipe_right">
       <p>Preparation</p>
-      <p>{{recipe.guidance}}</p> 
+      <p>{{recipe.description}}</p> 
     </div>
   </div> 
 {% endblock %}
