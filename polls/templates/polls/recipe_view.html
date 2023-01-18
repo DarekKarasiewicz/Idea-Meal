@@ -46,7 +46,7 @@
                 </div>
               </div>
               <div class="bottom">
-                {{x.comment}}
+                {{x.description}}
               </div>
             </div>
           {% endfor %}
@@ -63,7 +63,7 @@
       <div class="top_section">
         <div class="recipe_photo"></div>
         <div class="recipe_name">
-          <p class="author">AUTOR: {{recipe.author_id}} 
+          <p class="author">AUTOR: {{recipe.author}} 
             <span class="verify">verificated
               {%if recipe.is_verificated == True %}
                 <span class="verificated_recipe"></span>
