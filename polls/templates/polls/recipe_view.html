@@ -29,7 +29,7 @@
             </div>
             <!-- <input type="number" name="raiting" id="raiting"><br> -->
             <textarea type="text" name="comment" id="comment" placeholder="Add comment" oninput="auto_grow(this)" required></textarea><br>
-            <button type="submit" class="idea_btn">ADD</button>
+            <button id="submit_comment" type="submit" class="idea_btn">ADD</button>
         </form>
     </div>
     <div class="recipe__users_comments">
@@ -146,6 +146,16 @@
     element.style.height = "5px";
     element.style.height = (element.scrollHeight)+"px";
   }
+
+  $('#submit_comment').on('click',()=>{
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Your comment has been added!',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  })
 </script>
 {% endblock %} 
 

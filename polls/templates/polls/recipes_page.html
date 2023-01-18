@@ -49,7 +49,7 @@
         </div>
         <div class="old-form form-i_block">
           <label for="description">Description: </label>
-          <textarea type="text" name="description" id="description" rows="15" placeholder="Enter a description..." required></textarea><br>
+          <textarea type="text" name="description" id="description" rows="13" placeholder="Enter a description..." required></textarea><br>
         </div>
       </div>
       
@@ -59,8 +59,9 @@
     </div>
     <div class="add_product_recipe">
       <div class="old-form">
+        <div class="product_section_name">Products</div>
         <label for="product_name">Name: </label>
-        <input type="text" name="product_name" id="product_name" required/><br>
+        <input type="text" name="product_name" id="product_name" required pattern="[a-zA-Z]*" /><br>
         <label for="product_unit">Unit: </label>
         <select name="product_unit" id="product_unit">
           {% for product_unit in product_units %}
@@ -70,7 +71,7 @@
         <label for="product_quantity">Quantity: </label>
         <input type="number" name="product_quantity" id="product_quantity" placeholder="quantity" min=0 max=9999 required/><br>
         <div class="centered_div">
-          <button type="button" class="idea_btn" id="submit_changes" onclick="addProduct()">Add product</button>
+          <button type="button" class="idea_btn" id="submit_changes" onclick="validate()">Add product</button>
         </div>
       <div id="display_products"></div>
     </div>
@@ -88,16 +89,42 @@ imgInp.onchange = evt => {
 
 let recipe_products = {};
 
+function validate() {
+  var product_name = document.getElementById("product_name").value;
+  var regex = new RegExp('^\\d+$');
+  var test = regex.test(product_name);
+
+  if(test === true){
+    Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      title: 'Numbers are not allowed in section "Products" field "Name"!',
+      showConfirmButton: false,
+      timer: 2500
+    })
+  }else{
+    addProduct();
+  }
+}
+
 function addProduct(){
   let product_unit = [];
   pr_name = document.getElementById("product_name").value;
+  if(typeof pr_name !== 'string'){
+    console.log('not string');
+  }
   pr_unit = document.getElementById("product_unit").value;
   pr_quantity = document.getElementById("product_quantity").value;
 
   product_unit = [pr_name, pr_unit, pr_quantity];
   recipe_products[pr_name] = product_unit;
   console.log(recipe_products);
-
+  var html_for_product = '<div class="product_item">'+
+                          '<div class="img"></div>'+
+                          '<div class="name">'+pr_name+'</div>'+
+                          '<div class="quantity">'+pr_quantity+' '+pr_unit+'</div>'+
+                         '</div>';
+  $('#display_products').append(html_for_product);
 }
 
 function send(){
@@ -150,32 +177,32 @@ function send(){
   })
 }
 
-$('#submit_recipe').on('click',function(){
-  if(!$('.recipe_name').val() || 
-      !$('.description').val() ||
-      !$('.difficulty').val() ||
-      !$('.cuisine_category').val() ||
-      !$('.meal_time_category').val() ||
-      !$('.prepare_time').val() ||
-      !$('.spiciness').val() ||
-      !$('.per_serving').val()){
-        Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          title: 'Something went wrong. Try again!',
-          showConfirmButton: false,
-          timer: 1500
-        })
-      }else{
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Your work has been saved',
-          showConfirmButton: false,
-          timer: 1500
-        })
-      }  
-})
+// $('#submit_recipe').on('click',function(){
+//   if(!$('.recipe_name').val() || 
+//       !$('.description').val() ||
+//       !$('.difficulty').val() ||
+//       !$('.cuisine_category').val() ||
+//       !$('.meal_time_category').val() ||
+//       !$('.prepare_time').val() ||
+//       !$('.spiciness').val() ||
+//       !$('.per_serving').val()){
+//         Swal.fire({
+//           position: 'top-end',
+//           icon: 'error',
+//           title: 'Something went wrong. Try again!',
+//           showConfirmButton: false,
+//           timer: 1500
+//         })
+//       }else{
+//         Swal.fire({
+//           position: 'top-end',
+//           icon: 'success',
+//           title: 'Your work has been saved',
+//           showConfirmButton: false,
+//           timer: 1500
+//         })
+//       }  
+// })
 //main page helper
 $('#recipe_helper').on('click',function(){
   Swal.fire({
