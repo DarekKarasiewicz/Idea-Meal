@@ -55,7 +55,7 @@ Since it's a coursework we are working as a group of three.
 
 Darek Karasiewicz - https://github.com/DarekKarasiewicz <br/>
 Sebastian Mackiewicz - https://github.com/CampoNover16 <br/>
-Mikolaj Ksuinski - https://github.com/Mikolajkusinski
+Mikolaj Kusinski - https://github.com/Mikolajkusinski
 
 In the project, we used sites such as:
 - FontAwesome - https://fontawesome.com,
