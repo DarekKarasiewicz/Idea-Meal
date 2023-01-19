@@ -435,9 +435,15 @@ def my_recipes(request,user_id):
 @login_required
 def recipe_update(request,recipe_id):
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
+    product_unit = [e.value for e in Product_unit]
+    cuisine_category_enum = [member.value for member in Cuisine_category]
+    meal_time_category_enum = [member.value for member in Meal_time_category]
+    spiciness_level_enum = [member.value for member in Spiciness_level]
 
     update_recipe = Recipe.objects.get(pk = recipe_id)
+    recipe_products = Recipe_products_counts.objects.filter(recipe = recipe_id)
 
+    print(recipe_products)
     if request.method == "POST":
         name = request.POST["recipe_name"]
         description = request.POST["description"]
@@ -481,21 +487,23 @@ def recipe_update(request,recipe_id):
         update_recipe.prepare_time = prepare_time
         update_recipe.spiciness = spiciness
         update_recipe.per_serving = per_serving
-
-        print(name)
-        print(description)
-        print(difficulty)
-        print(cuisine_category)
-        print(meal_time_category)
-        print(prepare_time)
-        print(spiciness)
-        print(per_serving)
-
-
         update_recipe.save()
+
+        recipe_products_post = request.POST
+        print(recipe_products)
+        for product_dict, key_list in dict(recipe_products_post).items():
+            if "data_dict" in product_dict:
+                new_product = Product(user=session_user, name= key_list[1], unit=
+                                     key_list[2],
+                                      product_category=f"to_recipe_{name}")
+                new_product.save()
+                recipe_product = Recipe_products_counts(product= new_product,
+                                                       recipe=update_recipe,
+                                                       ammount=key_list[3])
+                recipe_product.save()
         return HttpResponseRedirect(reverse("my_recipes", args=(session_user.id,)))
 
-    return render(request, 'polls/recipe_update.html',{"user_id": session_user.id, "recipe": update_recipe})
+    return render(request, 'polls/recipe_update.html',{"user_id": session_user.id,"recipe_products": recipe_products,'product_units' : product_unit,"cuisine_category_enum": cuisine_category_enum,"spiciness_level_enum":spiciness_level_enum,"meal_time_category_enum": meal_time_category_enum , "recipe": update_recipe})
 
 @login_required
 def help(request):
@@ -522,8 +530,7 @@ def contact(request,user_id):
             'message': message,
             'message_title': message_title,
         })
-        # ,'s22615@pjwstk.edu.pl','s22624@pjwstk.edu.pl'
-        send_mail( title ,"",'idea.meal@gmail.com',['s23202@pjwstk.edu.pl'],fail_silently=False,html_message=email_message)
+        send_mail( title ,"",'idea.meal@gmail.com',['s23202@pjwstk.edu.pl','s22615@pjwstk.edu.pl','s22624@pjwstk.edu.pl'],fail_silently=False,html_message=email_message)
 
     return render(request, 'polls/contact.html',{"user_id": session_user.id})
 

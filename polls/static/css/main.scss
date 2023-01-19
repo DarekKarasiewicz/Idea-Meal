@@ -1151,6 +1151,15 @@ footer {
         font-weight: bold;
         vertical-align: sub;
       }  
+      #display_products{
+        max-height: 100px;
+        height: 100px;
+        margin-top: 10px;
+        overflow: auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
     }
     .form-i_block{
       label{

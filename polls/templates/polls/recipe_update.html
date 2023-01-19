@@ -9,7 +9,7 @@
       <h1>Update Recipe</h1>
     </div>
     <a href="/main_page/{{user_id}}"><div class="back_button_img" title="Home"></div></a>
-    <form id="add_recipe_form" method="post">
+    <div id="add_recipe_form" method="post">
       <div class="update_recipe_left">
         {% csrf_token %}
         <div class="old-form">
@@ -48,18 +48,37 @@
           </select>
           <label for="per_serving">Per_serving: </label>
           <input type="number" name="per_serving" id="per_serving" min="1" max="20" required/><br>
+          <div id="display_products"></div>
         </div>
       </div>
       <div class="add_recipe_right">
         <div class="old-form form-i_block">
           <label for="description">Description: </label>
-          <textarea type="text" name="description" id="description" rows="25" placeholder="Enter a description..." required></textarea><br>
+          <textarea type="text" name="description" id="description" rows="13" placeholder="Enter a description..." required></textarea><br>
+        </div>
+        <div class="add_product_recipe">
+          <div class="old-form">
+            <div class="product_section_name">Products</div>
+            <label for="product_name">Name: </label>
+            <input type="text" name="product_name" id="product_name" required pattern="[a-zA-Z]*" /><br>
+            <label for="product_unit">Unit: </label>
+            <select name="product_unit" id="product_unit">
+              {% for product_unit in product_units %}
+                  <option value="{{product_unit}}">{{product_unit}}</option>
+              {% endfor %}
+            </select><br/>
+            <label for="product_quantity">Quantity: </label>
+            <input type="number" name="product_quantity" id="product_quantity" placeholder="quantity" min=0 max=9999 required/><br>
+            <div class="centered_div">
+              <button type="button" class="idea_btn" id="submit_changes" onclick="validate()">Add product</button>
+            </div>
         </div>
       </div>
-      <div class="submit_center">
-        <button id="submit_recipe">UPDATE</button>
       </div>
-    </form>
+      <div class="submit_center">
+        <button id="submit_recipe" onclick="send()">UPDATE</button>
+      </div>
+    </div>
   </div> 
 {%endblock%}
 {% block page_js%} 
@@ -96,6 +115,124 @@
             $("#difficulty").val("hard");
             break;
         }
+
+        {%for product in recipe_products%}
+        var html_for_product = '<div class="product_item">'+
+          '<div class="delete_item" onclick="removeProduct(this,{{product.product.name}})"></div>'+
+          '<div class="img"></div>'+
+          '<div class="name">{{product.product.name}}</div>'+
+          '<div class="quantity">{{product.ammount}} {{product.product.unit}}</div>'+
+        '</div>';
+        $('#display_products').append(html_for_product);
+        {%endfor%}
+    }
+
+    let recipe_products = {};
+
+    function validate() {
+      var product_name = document.getElementById("product_name").value;
+      var product_quantity = document.getElementById("product_quantity").value;
+      var regex = new RegExp('^\\d+$');
+      var test = regex.test(product_name);
+    
+      if(test === true){
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Numbers are not allowed in section "Products" field "Name"!',
+          showConfirmButton: false,
+          timer: 2500
+        })
+      }else if(product_name.length == 0 || product_quantity.length == 0){
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Fields in section "Products" cannot be empty!',
+          showConfirmButton: false,
+          timer: 2500
+        })
+      }else{
+        addProduct();
+      }
+    }
+    
+    function addProduct(){
+      let product_unit = [];
+      pr_name = document.getElementById("product_name").value;
+      pr_unit = document.getElementById("product_unit").value;
+      pr_quantity = document.getElementById("product_quantity").value;
+    
+      var current_item_count = $('#display_products .product_item').length;
+    
+      var created_temp_name = "'"+pr_name+current_item_count+"'";
+    
+      product_unit = [created_temp_name, pr_name, pr_unit, pr_quantity];
+      recipe_products[created_temp_name] = product_unit;
+      console.log(recipe_products);
+    
+      var html_for_product = '<div class="product_item">'+
+                                '<div class="delete_item" onclick="removeProduct(this,'+created_temp_name+')"></div>'+
+                                '<div class="img"></div>'+
+                                '<div class="name">'+pr_name+'</div>'+
+                                '<div class="quantity">'+pr_quantity+' '+pr_unit+'</div>'+
+                             '</div>';
+      $('#display_products').append(html_for_product);
+    }
+    
+    //still not working. I don't know how to get element that was chosen
+    function removeProduct(item,name){
+      console.log(recipe_products);
+      $(item).parent().remove();
+    }
+
+    function send(){
+      recipe_name = document.getElementById("recipe_name").value;
+      description = document.getElementById("description").value;
+      short_description = document.getElementById("short_description").value;
+      cuisine_category = document.getElementById("cuisine_category").value;
+      difficulty = document.getElementById("difficulty").value;
+      meal_time_category = document.getElementById("meal_time_category").value;
+      prepare_time = document.getElementById("prepare_time").value;
+      spiciness = document.getElementById("spiciness").value;
+      per_serving = document.getElementById("per_serving").value;
+    
+      jQuery.ajax({
+        type: "POST",
+        url: '{% url "recipe_update" recipe_id=recipe.id %}',
+        data: {
+            recipe_name,
+            description,
+            short_description,
+            difficulty,
+            cuisine_category,
+            meal_time_category,
+            prepare_time,
+            spiciness,
+            per_serving,
+           'data_dict':  recipe_products,
+           "csrfmiddlewaretoken": "{{ csrf_token }}",
+        },
+        success: function (data) {
+          console.log("success");
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'All changes has been saved',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        },
+        failure: function (data) {
+          console.log("failure");
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Something went wrong! Try again.',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        },
+      })
     }
 </script>
 {%endblock%}
