@@ -86,16 +86,31 @@
     .only_add_recipe{
         .add_product_recipe{
             background: var(--idea_opacity_panel);
-            height: 315px;
+            height: 383px;
             width: 50%;
             border-left: none;
             border-bottom-right-radius: 45px;
             border-bottom-left-radius: 45px;
             left: 25%;
             position: absolute;
+            .old-form {
+                width: 82%;
+                height: 373px;
+                margin: auto;
+                padding: 15px;
+                #display_products {
+                    max-height: 125px;
+                    height: 125px;
+                    margin-top: 10px;
+                    overflow: auto;
+                    display: flex;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                }
+            }
         }
         .add_recipe_right{
-          height: 455px;
+          height: 385px;
           border-bottom-right-radius: 0px;
         }
         .add_recipe_left{

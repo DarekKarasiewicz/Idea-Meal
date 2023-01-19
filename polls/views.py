@@ -40,6 +40,7 @@ class Cuisine_category(StrEnum):
     POLAND = auto()
     AMERICAN = auto()
     ASIAN = auto()
+    OTHER = auto()
 
 # Here puts all Meal_time_category
 class Meal_time_category(StrEnum):
@@ -54,6 +55,12 @@ class Product_category(StrEnum):
     DAIRY = auto()
     FRUIT = auto()
     VEGETABLES = auto()
+
+class Spiciness_level(StrEnum):
+    MILD = auto()
+    MEDIUM = auto()
+    HOT = auto()
+    EXTRA_HOT = auto()
 
 class Product_unit(StrEnum):
     ML = auto()
@@ -221,6 +228,9 @@ def add_recipes(request):
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
     product_unit = [e.value for e in Product_unit]
     cuisine_category_enum = [member.value for member in Cuisine_category]
+    meal_time_category_enum = [member.value for member in Meal_time_category]
+    spiciness_level_enum = [member.value for member in Spiciness_level]
+    
 
     if request.method == "POST":
         name = request.POST["recipe_name"]
@@ -279,8 +289,10 @@ def add_recipes(request):
 
         return HttpResponseRedirect(reverse("main", args=(session_user.id,)))
     return render(request, "polls/recipes_page.html", {"user_id": session_user.id
-                                                       ,"product_units":product_unit
-                                                       ,"cuisine_category_enum":cuisine_category_enum })
+                                                       ,"product_units": product_unit
+                                                       ,"cuisine_category_enum": cuisine_category_enum
+                                                       ,"meal_time_category_enum": meal_time_category_enum
+                                                       ,"spiciness_level_enum": spiciness_level_enum})
 
 @login_required
 def recipes_page(request, recipe_id):

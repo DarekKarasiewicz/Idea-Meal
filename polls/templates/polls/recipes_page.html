@@ -32,13 +32,28 @@
               <option value="hard">Hard</option>
           </select><br>
           <label for="cuisine_category">Cuisine_category: </label>
-          <input type="text" name="cuisine_category" id="cuisine_category" required/><br>
+          <select name="cuisine_category" id="cuisine_category">
+            <option value="0" selected disabled>Choose option</option>
+            {% for cuisine_category in cuisine_category_enum %}
+              <option value="{{cuisine_category}}">{{cuisine_category}}</option>
+            {% endfor %}
+          </select>
           <label for="meal_time_category">Meal_time_category: </label>
-          <input type="text" name="meal_time_category" id="meal_time_category" required/><br>
+          <select name="meal_time_category" id="meal_time_category">
+            <option value="0" selected disabled>Choose option</option>
+            {% for meal_time_category in meal_time_category_enum %}
+              <option value="{{meal_time_category}}">{{meal_time_category}}</option>
+            {% endfor %}
+          </select>
           <label for="prepare_time">Prepare_time: </label>
           <input type="time" name="prepare_time" id="prepare_time" min="00:00" max="24:00" required/><br>
           <label for="spiciness">Spiciness: </label>
-          <input type="number" name="spiciness" id="spiciness" min="1" max="4" required/><br>
+          <select name="spiciness" id="spiciness">
+            <option value="0" selected disabled>Choose option</option>
+            {% for spiciness in spiciness_level_enum %}
+              <option value="{{ forloop.counter }}">{{spiciness}}</option>
+            {% endfor %}
+          </select>
           <label for="per_serving">Per_serving: </label>
           <input type="number" name="per_serving" id="per_serving" min="1" max="20" required/><br>
         </div>
@@ -91,6 +106,7 @@ let recipe_products = {};
 
 function validate() {
   var product_name = document.getElementById("product_name").value;
+  var product_quantity = document.getElementById("product_quantity").value;
   var regex = new RegExp('^\\d+$');
   var test = regex.test(product_name);
 
@@ -102,6 +118,14 @@ function validate() {
       showConfirmButton: false,
       timer: 2500
     })
+  }else if(product_name.length == 0 || product_quantity.length == 0){
+    Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      title: 'Fields in section "Products" cannot be empty!',
+      showConfirmButton: false,
+      timer: 2500
+    })
   }else{
     addProduct();
   }
@@ -110,21 +134,30 @@ function validate() {
 function addProduct(){
   let product_unit = [];
   pr_name = document.getElementById("product_name").value;
-  if(typeof pr_name !== 'string'){
-    console.log('not string');
-  }
   pr_unit = document.getElementById("product_unit").value;
   pr_quantity = document.getElementById("product_quantity").value;
 
-  product_unit = [pr_name, pr_unit, pr_quantity];
-  recipe_products[pr_name] = product_unit;
+  var current_item_count = $('#display_products .product_item').length;
+
+  var created_temp_name = "'"+pr_name+current_item_count+"'";
+
+  product_unit = [created_temp_name, pr_name, pr_unit, pr_quantity];
+  recipe_products[created_temp_name] = product_unit;
   console.log(recipe_products);
+
   var html_for_product = '<div class="product_item">'+
-                          '<div class="img"></div>'+
-                          '<div class="name">'+pr_name+'</div>'+
-                          '<div class="quantity">'+pr_quantity+' '+pr_unit+'</div>'+
+                            '<div class="delete_item" onclick="removeProduct(this,'+created_temp_name+')"></div>'+
+                            '<div class="img"></div>'+
+                            '<div class="name">'+pr_name+'</div>'+
+                            '<div class="quantity">'+pr_quantity+' '+pr_unit+'</div>'+
                          '</div>';
   $('#display_products').append(html_for_product);
+}
+
+//still not working. I don't know how to get element that was chosen
+function removeProduct(item,name){
+  console.log(recipe_products);
+  $(item).parent().remove();
 }
 
 function send(){

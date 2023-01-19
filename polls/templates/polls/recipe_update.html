@@ -24,13 +24,28 @@
               <option value="hard">Hard</option>
           </select><br>
           <label for="cuisine_category">Cuisine_category: </label>
-          <input type="text" name="cuisine_category" id="cuisine_category" required/><br>
+          <select name="cuisine_category" id="cuisine_category">
+            <option value="0" selected disabled>Choose option</option>
+            {% for cuisine_category in cuisine_category_enum %}
+              <option value="{{cuisine_category}}">{{cuisine_category}}</option>
+            {% endfor %}
+          </select>
           <label for="meal_time_category">Meal_time_category: </label>
-          <input type="text" name="meal_time_category" id="meal_time_category" required/><br>
+          <select name="meal_time_category" id="meal_time_category">
+            <option value="0" selected disabled>Choose option</option>
+            {% for meal_time_category in meal_time_category_enum %}
+              <option value="{{meal_time_category}}">{{meal_time_category}}</option>
+            {% endfor %}
+          </select>
           <label for="prepare_time">Prepare_time: </label>
           <input type="time" name="prepare_time" id="prepare_time" min="00:00" max="24:00" required/><br>
           <label for="spiciness">Spiciness: </label>
-          <input type="number" name="spiciness" id="spiciness" min="1" max="4" required/><br>
+          <select name="spiciness" id="spiciness">
+            <option value="0" selected disabled>Choose option</option>
+            {% for spiciness in spiciness_level_enum %}
+              <option value="{{ forloop.counter }}">{{spiciness}}</option>
+            {% endfor %}
+          </select>
           <label for="per_serving">Per_serving: </label>
           <input type="number" name="per_serving" id="per_serving" min="1" max="20" required/><br>
         </div>

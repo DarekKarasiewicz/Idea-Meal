@@ -40,6 +40,16 @@ python manage.py runserver
 
 And after a few seconds server is running under given web address.
 
+If you cannot run your server try also this commands:
+
+```pip
+pip install psycopg2
+```
+
+```pip
+pip install StrEnum
+```
+
 ## Credits
 Since it's a coursework we are working as a group of three.
 
