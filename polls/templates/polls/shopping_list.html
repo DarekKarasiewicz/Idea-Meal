@@ -16,8 +16,9 @@
                 <p style="text-align: center;">
                     Down below you have all ingredients that are needed to create your chosen dishes.
                 </p>
-                {% for product, ammount in shopping_list.items %}
-                    <p>{{product}}  {{ammount}}</p>
+                <button onclick="generate()"> click</button>
+                {% for product in shopping_list %}
+                    <p>{{product}}</p>
                 {% endfor %}
             </div>
         </div>
@@ -27,7 +28,7 @@
 {% block page_js%}
 <script>
 
-    window.onload = function(){
+    function generate(){
         let recipes_list = JSON.parse(localStorage.getItem("user_shopping_list"))
 
         if (recipes_list.length > 0) {
@@ -54,6 +55,10 @@
                 alert("Fail");
                 },
             })
+
+            {% for product in shopping_list %}
+            console.log({{product}})
+            {% endfor %}
         }
     }
 
