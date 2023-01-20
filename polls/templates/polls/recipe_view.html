@@ -64,11 +64,11 @@
         <div class="recipe_photo"></div>
         <div class="recipe_name">
           <p class="author">AUTOR: {{recipe.author}} 
-            <span class="verify">verificated
-              {%if recipe.is_verificated == True %}
+            {%if recipe.is_verificated == True %}
+            <span class="verify">verificated   
                 <span class="verificated_recipe"></span>
-              {% endif %}
             </span>
+            {% endif %}
           </p>
           <p class="name">{{recipe.name}}</p>
         </div>
@@ -114,7 +114,14 @@
             <div class="meal_time_ico" title="Meal time"></div><div class="item_text">{{recipe.meal_time_category}}</div>
           </div>
           <div class="item star_raiting_redirect" onclick="comment_section_toggle()">
-            <div class="raiting_ico" title="Raiting"></div><div class="item_text">{{recipe.comment_id}}</div>
+            <div class="raiting_ico" title="Raiting"></div>
+            <div class="item_text">
+              {%if recipe.comment_id != None %}
+                {{recipe.comment_id}}
+              {% else %}
+                0
+              {% endif %}
+            </div>
           </div>
         </div>
         <div class="middle_section_right">

@@ -19,7 +19,7 @@
                 <img id="recipe_tools" src="{% static 'img/tools.png' %}" alt="tools image">
                 <a href="/recipe/{{recipe.id}}">Preview</a>
                 <a href="/recipe_update/{{recipe.id}}">Update</a>
-                <a id="delete_recipe" data_id="{{recipe.id}}">Delete</a>
+                <a class="delete_recipe" data_id="{{recipe.id}}">Delete</a>
             </div>
         </div>
         {%endfor%}
@@ -28,16 +28,16 @@
 {% endblock %}
 {% block page_js%} 
 <script>
-    $('#delete_recipe').on('click',()=>{
-      var recipe_id = $('#delete_recipe').attr('data_id');
+    $('.delete_recipe').on('click',function(){
+      var recipe_id = $(this).attr('data_id');
       console.log(recipe_id);
       Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        // confirmButtonColor: '#3085d6',
+        // cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {

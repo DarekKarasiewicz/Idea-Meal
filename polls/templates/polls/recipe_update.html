@@ -4,12 +4,12 @@
   Idea-Meal || Update Recipe
 {% endblock %}
 {% block body %}
-<div class="add_recipe_holder">
+<div class="add_recipe_holder update_recipe_holder">
     <div id="page_title">
       <h1>Update Recipe</h1>
     </div>
     <a href="/main_page/{{user_id}}"><div class="back_button_img" title="Home"></div></a>
-    <div id="add_recipe_form" method="post">
+    <div id="add_recipe_form update_recipe_form" method="post">
       <div class="update_recipe_left">
         {% csrf_token %}
         <div class="old-form">
@@ -25,14 +25,14 @@
           </select><br>
           <label for="cuisine_category">Cuisine_category: </label>
           <select name="cuisine_category" id="cuisine_category">
-            <option value="0" selected disabled>Choose option</option>
+            <option value="0" disabled>Choose option</option>
             {% for cuisine_category in cuisine_category_enum %}
               <option value="{{cuisine_category}}">{{cuisine_category}}</option>
             {% endfor %}
           </select>
           <label for="meal_time_category">Meal_time_category: </label>
           <select name="meal_time_category" id="meal_time_category">
-            <option value="0" selected disabled>Choose option</option>
+            <option value="0" disabled>Choose option</option>
             {% for meal_time_category in meal_time_category_enum %}
               <option value="{{meal_time_category}}">{{meal_time_category}}</option>
             {% endfor %}
@@ -41,7 +41,7 @@
           <input type="time" name="prepare_time" id="prepare_time" min="00:00" max="24:00" required/><br>
           <label for="spiciness">Spiciness: </label>
           <select name="spiciness" id="spiciness">
-            <option value="0" selected disabled>Choose option</option>
+            <option value="0" disabled>Choose option</option>
             {% for spiciness in spiciness_level_enum %}
               <option value="{{ forloop.counter }}">{{spiciness}}</option>
             {% endfor %}
@@ -53,8 +53,8 @@
       </div>
       <div class="add_recipe_right">
         <div class="old-form form-i_block">
-          <label for="description">Description: </label>
-          <textarea type="text" name="description" id="description" rows="13" placeholder="Enter a description..." required></textarea><br>
+          <label for="description">Guidance: </label>
+          <textarea type="text" name="description" id="description" rows="13" placeholder="Enter a quick guidance..." required></textarea><br>
         </div>
         <div class="add_product_recipe">
           <div class="old-form">
@@ -69,7 +69,7 @@
             </select><br/>
             <label for="product_quantity">Quantity: </label>
             <input type="number" name="product_quantity" id="product_quantity" placeholder="quantity" min=0 max=9999 required/><br>
-            <div class="centered_div">
+            <div class="centered_div" style="text-align: center;">
               <button type="button" class="idea_btn" id="submit_changes" onclick="validate()">Add product</button>
             </div>
         </div>
@@ -118,7 +118,6 @@
 
         {%for product in recipe_products%}
         var html_for_product = '<div class="product_item">'+
-          '<div class="delete_item" onclick="removeProduct(this,{{product.product.name}})"></div>'+
           '<div class="img"></div>'+
           '<div class="name">{{product.product.name}}</div>'+
           '<div class="quantity">{{product.ammount}} {{product.product.unit}}</div>'+
@@ -161,32 +160,24 @@
       pr_name = document.getElementById("product_name").value;
       pr_unit = document.getElementById("product_unit").value;
       pr_quantity = document.getElementById("product_quantity").value;
+
     
-      var current_item_count = $('#display_products .product_item').length;
-    
-      var created_temp_name = "'"+pr_name+current_item_count+"'";
-    
-      product_unit = [created_temp_name, pr_name, pr_unit, pr_quantity];
-      recipe_products[created_temp_name] = product_unit;
+      product_unit = [pr_name, pr_unit, pr_quantity];
+      recipe_products[pr_name] = product_unit;
       console.log(recipe_products);
     
       var html_for_product = '<div class="product_item">'+
-                                '<div class="delete_item" onclick="removeProduct(this,'+created_temp_name+')"></div>'+
                                 '<div class="img"></div>'+
                                 '<div class="name">'+pr_name+'</div>'+
                                 '<div class="quantity">'+pr_quantity+' '+pr_unit+'</div>'+
                              '</div>';
       $('#display_products').append(html_for_product);
     }
-    
-    //still not working. I don't know how to get element that was chosen
-    function removeProduct(item,name){
-      console.log(recipe_products);
-      $(item).parent().remove();
-    }
 
     function send(){
-      recipe_name = document.getElementById("recipe_name").value;
+      temp_recipe_name = document.getElementById("recipe_name").value;
+      recipe_name = temp_recipe_name.charAt(0).toUpperCase() + temp_recipe_name.slice(1);
+      
       description = document.getElementById("description").value;
       short_description = document.getElementById("short_description").value;
       cuisine_category = document.getElementById("cuisine_category").value;

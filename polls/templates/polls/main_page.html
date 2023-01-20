@@ -53,17 +53,7 @@
 </div>
 {%endblock%}
 <div class="fridge_holder">
-  <h2>Welcome <strong>{{user.username}}</strong></h2>
-
-  <!-- based on that calculate raiting of recipe -->
-  {% for recipe, list_of_comments in recipes_all_comments.items %}
-  {{recipe}}
-    {% for comment in list_of_comments%}
-      {{comment.user}}
-      {{comment.raiting}}
-      {{comment}}
-    {% endfor%}
-  {% endfor%}
+  <h2>Welcome <strong>{{user.username}}!</strong></h2>
   <h3>Products:</h3>
   <div class="products">
     {%for product in products%}
@@ -147,70 +137,78 @@
   <div class="nav_results">
     <div class="nav_recipe_helper" title="results explanation"></div>
     <p class="nav_recipe_h">Results</p>
+    <div id="recipe_boxes_holder">
     {%for x in recipes%}
-    <div class="recipe_box">
-      <div class="recipe_box_simple">
-        {%if x.is_verificated == True %}
-          <span class="verificated_recipe"></span>
-        {% endif %}
-        <div class="name"><p>{{x.name}}</p></div>
-        {%if x.difficulty == 1 %}
-          <div style="background-color: green !important"></div>
-        {% elif x.difficulty == 2 %}
-          <div style="background-color: orange !important"></div>
-        {% else %}
-          <div style="background-color: red !important"></div>
-        {% endif %}
-      </div>
-      <div class="recipe_box_extended" style="display: none;">
-        <div>
-          <div>{{x.description}}</div>
-          <div>
-            {%if x.spiciness == 1 %}
-              <div class="spicy_img green_filter"></div>
-            {% elif x.spiciness == 2 %}
-              <div class="spicy_img yellow_filter"></div>
-            {% elif x.spiciness == 3 %}
-              <div class="spicy_img orange_filter"></div>
-            {% else %}
-              <div class="spicy_img red_filter"></div>
-            {% endif %}
-          </div>
+      <div class="recipe_box" data-per_serving="{{x.per_serving}}" data-spiciness="{{x.spiciness}}" data-prepare_time="{{x.prepare_time}}" data-raiting="{%if x.comment_id != None %}{{x.comment_id}}{% else %}0{% endif %}" data-name="{{x.name}}">
+        <div class="recipe_box_simple">
+          {%if x.is_verificated == True %}
+            <span class="verificated_recipe"></span>
+          {% endif %}
+          <div class="name each_suggested_recipe_name" title = "{{x.name}}"><p>{{x.name}}</p></div>
+          {%if x.difficulty == 1 %}
+            <div style="background-color: green !important"></div>
+          {% elif x.difficulty == 2 %}
+            <div style="background-color: orange !important"></div>
+          {% else %}
+            <div style="background-color: red !important"></div>
+          {% endif %}
         </div>
-        <div class="small-div">
-          <div class="three-seg">
-            <div class="time_img"></div>
-            <div class="info">{{x.prepare_time}}</div>
-          </div>
-          <div class="three-seg">
-            <div class="people_img"></div>
-            <div class="info">{{x.per_serving}}</div>
-          </div>
-          <div class="three-seg">
-            <div class="cuisine_img"></div>
-            <div class="info">
-              {%if x.cuisine_category != None %}
-                {{x.cuisine_category}}
+        <div class="recipe_box_extended" style="display: none;">
+          <div>
+            <div>{{x.description}}</div>
+            <div>
+              {%if x.spiciness == 1 %}
+                <div class="spicy_img green_filter"></div>
+              {% elif x.spiciness == 2 %}
+                <div class="spicy_img yellow_filter"></div>
+              {% elif x.spiciness == 3 %}
+                <div class="spicy_img orange_filter"></div>
               {% else %}
-                ---
+                <div class="spicy_img red_filter"></div>
               {% endif %}
             </div>
           </div>
-        </div>
-        <div class="small-div">
-          <div class="two-seg-one">
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="counter">({{x.comment_id}})</div>
+          <div class="small-div">
+            <div class="three-seg">
+              <div class="time_img"></div>
+              <div class="info">{{x.prepare_time}}</div>
+            </div>
+            <div class="three-seg">
+              <div class="people_img"></div>
+              <div class="info">{{x.per_serving}}</div>
+            </div>
+            <div class="three-seg">
+              <div class="cuisine_img"></div>
+              <div class="info">
+                {%if x.cuisine_category != None %}
+                  {{x.cuisine_category}}
+                {% else %}
+                  ---
+                {% endif %}
+              </div>
+            </div>
           </div>
-          <div class="two-seg-two"><p><a href ="/recipe/{{x.id}}">See more</a></p></div>
+          <div class="small-div">
+            <div class="two-seg-one">
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="counter">        
+                {%if x.comment_id != None %}
+                  ({{x.comment_id}})
+                {% else %}
+                  (0)
+                {% endif %}
+              </div>
+            </div>
+            <div class="two-seg-two"><p><a href ="/recipe/{{x.id}}">See more</a></p></div>
+          </div>
         </div>
       </div>
-    </div>
     {% endfor %}
+    </div>
   </div>
 </div>
 <div id="result-explanation">
@@ -223,9 +221,9 @@ $(document).ready(function(){
     $('#searchbar_mainpage').on('keyup', function(){
       console.log('keyup');
         var searchbar_val = $(this).val().toLowerCase();
-        $('.main_recipes_name').parent().parent().hide();
+        $('.each_suggested_recipe_name').parent().parent().hide();
         
-        $('.main_recipes_name').each(function(){
+        $('.each_suggested_recipe_name').each(function(){
             var recipe_name = $(this).text().toLowerCase();
             if(recipe_name.indexOf(searchbar_val) != -1){
                 $(this).parent().parent().show();
@@ -238,57 +236,57 @@ $('#main_page-recipe_order_by').on('change', function (e) {
     var valueSelected = this.value;
     console.log(valueSelected);
     if(valueSelected == 'spiciness_ASC'){
-        $(".nav_recipe_boxes").append(function() {
+        $("#recipe_boxes_holder").append(function() {
             return $(this).children().sort(function(a, b) {
                 return $(a).attr("data-spiciness") - $(b).attr("data-spiciness");
             })
         })
     }else if(valueSelected == 'spiciness_DESC'){
-        $(".nav_recipe_boxes").append(function() {
+        $("#recipe_boxes_holder").append(function() {
             return $(this).children().sort(function(a, b) {
                 return $(b).attr("data-spiciness") - $(a).attr("data-spiciness");
             })
         })
     }else if(valueSelected == 'popularity'){
-        $(".nav_recipe_boxes").append(function() {
+        $("#recipe_boxes_holder").append(function() {
             return $(this).children().sort(function(a, b) {
                 return $(b).attr("data-raiting") - $(a).attr("data-raiting");
             })
         })
     }else if(valueSelected == 'prepare_time_ASC'){
-        $(".nav_recipe_boxes").append(function() {
+        $("#recipe_boxes_holder").append(function() {
             return $(this).children().sort(function(a, b) {
                 return $(a).attr("data-prepare_time") - $(b).attr("data-prepare_time");
             })
         })
     }else if(valueSelected == 'prepare_time_DESC'){
-        $(".nav_recipe_boxes").append(function() {
+        $("#recipe_boxes_holder").append(function() {
             return $(this).children().sort(function(a, b) {
                 return $(b).attr("data-prepare_time") - $(a).attr("data-prepare_time");
             })
         })
     }else if(valueSelected == 'name_ASC'){
-        $(".nav_recipe_boxes").append(function() {
+        $("#recipe_boxes_holder").append(function() {
             return $(this).children().sort(function(a, b) {
                 return ($(b).attr("data-name")) < ($(a).attr("data-name")) ? 1 : -1;    
             })
         })
     }else if(valueSelected == 'name_DESC'){
-        $(".nav_recipe_boxes").append(function() {
+        $("#recipe_boxes_holder").append(function() {
             return $(this).children().sort(function(a, b) {
                 return ($(b).attr("data-name")) > ($(a).attr("data-name")) ? 1 : -1;    
             })
         })
     }else if(valueSelected == 'per_serving_ASC'){
-        $(".nav_recipe_boxes").append(function() {
+        $("#recipe_boxes_holder").append(function() {
             return $(this).children().sort(function(a, b) {
-                return ($(b).attr("data-serving")) < ($(a).attr("data-serving")) ? 1 : -1;    
+                return ($(b).attr("data-per_serving")) < ($(a).attr("data-per_serving")) ? 1 : -1;    
             })
         })
     }else if(valueSelected == 'per_serving_DESC'){
-        $(".nav_recipe_boxes").append(function() {
+        $("#recipe_boxes_holder").append(function() {
             return $(this).children().sort(function(a, b) {
-                return ($(b).attr("data-serving")) > ($(a).attr("data-serving")) ? 1 : -1;    
+                return ($(b).attr("data-per_serving")) > ($(a).attr("data-per_serving")) ? 1 : -1;    
             })
         })
     }

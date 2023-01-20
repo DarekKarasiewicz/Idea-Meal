@@ -277,7 +277,7 @@ def add_recipes(request):
         print(recipe_products)
         for product_dict, key_list in dict(recipe_products).items():
             if "data_dict" in product_dict:
-                print("coś")
+                # print("coś")
                 new_product = Product(user=session_user, name= key_list[0], unit=
                                      key_list[1],
                                       product_category=f"to_recipe_{name}")

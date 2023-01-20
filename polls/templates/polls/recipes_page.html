@@ -63,8 +63,8 @@
 
         </div>
         <div class="old-form form-i_block">
-          <label for="description">Description: </label>
-          <textarea type="text" name="description" id="description" rows="13" placeholder="Enter a description..." required></textarea><br>
+          <label for="description">Guidance: </label>
+          <textarea type="text" name="description" id="description" rows="13" placeholder="Enter a quick guidance..." required></textarea><br>
         </div>
       </div>
       
@@ -137,16 +137,11 @@ function addProduct(){
   pr_unit = document.getElementById("product_unit").value;
   pr_quantity = document.getElementById("product_quantity").value;
 
-  var current_item_count = $('#display_products .product_item').length;
-
-  var created_temp_name = "'"+pr_name+current_item_count+"'";
-
-  product_unit = [created_temp_name, pr_name, pr_unit, pr_quantity];
-  recipe_products[created_temp_name] = product_unit;
+  product_unit = [pr_name, pr_unit, pr_quantity];
+  recipe_products[pr_name] = product_unit;
   console.log(recipe_products);
 
   var html_for_product = '<div class="product_item">'+
-                            '<div class="delete_item" onclick="removeProduct(this,'+created_temp_name+')"></div>'+
                             '<div class="img"></div>'+
                             '<div class="name">'+pr_name+'</div>'+
                             '<div class="quantity">'+pr_quantity+' '+pr_unit+'</div>'+
@@ -154,14 +149,11 @@ function addProduct(){
   $('#display_products').append(html_for_product);
 }
 
-//still not working. I don't know how to get element that was chosen
-function removeProduct(item,name){
-  console.log(recipe_products);
-  $(item).parent().remove();
-}
-
 function send(){
-  recipe_name = document.getElementById("recipe_name").value;
+  temp_recipe_name = document.getElementById("recipe_name").value;
+  recipe_name = temp_recipe_name.charAt(0).toUpperCase() + temp_recipe_name.slice(1);
+  
+  console.log(recipe_name);
   description = document.getElementById("description").value;
   short_description = document.getElementById("short_description").value;
   cuisine_category = document.getElementById("cuisine_category").value;
@@ -192,7 +184,7 @@ function send(){
       Swal.fire({
         position: 'top-end',
         icon: 'success',
-        title: 'All changes has been saved',
+        title: 'Your recipe has been added successfully',
         showConfirmButton: false,
         timer: 1500
       })

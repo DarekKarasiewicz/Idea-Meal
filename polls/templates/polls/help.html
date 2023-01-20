@@ -10,27 +10,48 @@
     <h1>FAQ</h1>
   </div>
   <div class="all_FAQ">
-  <div class="faq_item" id="FAQ_1" onclick="toggleFAQ(1)">
-    <div class="question">How to create good recipe?</div>
-    <div class="answear">
-      <ol>
-        <li>First of all, <b>Give simple as possible title</b>  of your recipe that attract people</li>
-        <li><b>Write easy to follow instructions.</b> No one wants to read block of complex text, <b>don't you?</b></li>
-        <li><b>Give your readers clear list of ingredients</b> that are needed to prepare this dish</li>
-        <li>When you will be setting a prepare time make sure that you summary <b>all activities</b> that are needed to make it from alpha to omega</li>
-        <li>If you don't know which <b>cuisine</b> is that recipe belongs to choose option <b>unknown</b>. Same thing do for <b>meal_time_category</b></li>
-        <li>When you face to set what <b>difficulty</b> and <b>spiciness</b> of this recipe is keep in mind that should be defined for average person(not experienced one)</li>
-        <li>Set <b>per serving</b> number which says: How many servings you end up with.</li>
-      </ol>
+    <div class="faq_item" id="FAQ_1" onclick="toggleFAQ(1)">
+      <div class="question">How to create good recipe?</div>
+      <div class="answear">
+        <ol>
+          <li>First of all, <b>Give simple as possible title</b>  of your recipe that attract people</li>
+          <li><b>Write easy to follow instructions.</b> No one wants to read block of complex text, <b>don't you?</b></li>
+          <li><b>Give your readers clear list of ingredients</b> that are needed to prepare this dish</li>
+          <li>When you will be setting a prepare time make sure that you summary <b>all activities</b> that are needed to make it from alpha to omega</li>
+          <li>If you don't know which <b>cuisine</b> is that recipe belongs to choose option <b>unknown</b>. Same thing do for <b>meal_time_category</b></li>
+          <li>When you face to set what <b>difficulty</b> and <b>spiciness</b> of this recipe is keep in mind that should be defined for average person(not experienced one)</li>
+          <li>Set <b>per serving</b> number which says: How many servings you end up with.</li>
+        </ol>
+      </div>
+      <div class="toggle_arrow"><img src="{% static 'img/icon_arrow.png' %}" alt="toggle arrow"/></div>
     </div>
-    <div class="toggle_arrow"><img id="arrow_1" src="{% static 'img/icon_arrow.png' %}" alt="toggle arrow"/></div>
+    <div class="faq_item" id="FAQ_2" onclick="toggleFAQ(2)">
+      <div class="question">How to cook good?</div>
+      <div class="answear">Learn how to cook!</div>
+      <div class="toggle_arrow"><img src="{% static 'img/icon_arrow.png' %}" alt="toggle arrow"/></div>
+    </div>
+    <div class="faq_item" id="FAQ_3" onclick="toggleFAQ(3)">
+      <div class="question">Main page results section after product filtering - explanation</div>
+      <div class="answear">
+        <div id="nav_helper_color">
+          <p>On the right side of the recipe name is colored block that determines difficulty level of recipe:</p>
+          <p class="text_visibility" style="padding-left: 14px;"><span style="color:green;">green</span> - easy , <span style="color:yellow;";>yellow</span> - medium , <span style="color:red";>red</span> - hard</p>
+          <ul style="padding-left: 10px;">
+          <li class="result_helper_li"><div class="verificated_helper_img"></div><div class="img_info">Tells if recipe was accepted by moderators</div></li>
+          <li class="result_helper_li"><div class="spicy_helper_img"></div><div class="img_info">Tells about spiciness of recipe</div></li>
+          <li class="result_helper_li"><ul>
+          <li class="result_helper_li text_visibility"><span style="color:green;">green</span> - mild , <span style="color:yellow; text-shadow: 0 0 1px black, 0 0 1px black;";>yellow</span> - medium, <span style="color:orange";>orange</span> - hot ,</li>
+          <li class="result_helper_li text_visibility"><span style="color:red";>red</span> - extra hot</li>
+          </ul></li>
+          <li class="result_helper_li"><div class="time_img"></div><div class="img_info">Tells about time prepare time of recipe</div></li>
+          <li class="result_helper_li"><div class="people_img"></div><div class="img_info">Tells how many portion you receive</div></li>
+          <li class="result_helper_li"><div class="cuisine_img"></div><div class="img_info">Tells about cuisine origin of that recipe</div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="toggle_arrow"><img src="{% static 'img/icon_arrow.png' %}" alt="toggle arrow"/></div>
+    </div>
   </div>
-  <div class="faq_item" id="FAQ_2" onclick="toggleFAQ(2)">
-    <div class="question">How to cook good?</div>
-    <div class="answear">Learn how to cook!</div>
-    <div class="toggle_arrow"><img id="arrow_2" src="{% static 'img/icon_arrow.png' %}" alt="toggle arrow"/></div>
-  </div>
-</div>
 </div>
 {%endblock%}
 {% block page_js%} 
