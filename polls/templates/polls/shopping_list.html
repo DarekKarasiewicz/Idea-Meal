@@ -16,6 +16,9 @@
                 <p style="text-align: center;">
                     Down below you have all ingredients that are needed to create your chosen dishes.
                 </p>
+                {% for product in shopping_products %}
+                <p>{{product}}</p>
+                {% endfor %}
             </div>
         </div>
         <button class="convert_to_pdf" title="Convert to PDF"></button>
@@ -54,7 +57,7 @@
         }
     }
 
-    $(document).ready(function(){
+    {% comment %} $(document).ready(function(){
         let shopping_list = JSON.parse(localStorage.getItem("user_shopping_list"))
 
         if(shopping_list){
@@ -66,7 +69,7 @@
             var html = '<div style="text-align:center">THERE IS NO ELEMENTS IN SHOPPING LIST!</div>';
             $('.all_recipes_content_holder').append(html);
         }
-    });       
+    });        {% endcomment %}
 
 //pdf creating stuff
 window.jsPDF = window.jspdf.jsPDF;

@@ -538,11 +538,12 @@ def contact(request,user_id):
 def shopping_list(request):
     session_user = get_object_or_404(User, pk=int(request.session["_auth_user_id"]))
     user_products = []
+    recipe_products = dict()
+    user_products = dict()
+    all_products = dict()
 
     if request.method == "POST":
-        recipe_products = dict()
-        user_products = dict()
-        all_products = dict()
+
         recipes_ids = request.POST.getlist('recipes_ids[]')
         for rec_id in recipes_ids:
             i = 0
@@ -582,9 +583,9 @@ def shopping_list(request):
                 else:
                     all_products.update({r_key: r_value})
 
-        print(all_products)
+    print(all_products)
 
-    return render(request,"polls/shopping_list.html",{"user_id": session_user.id})
+    return render(request,"polls/shopping_list.html",{"user_id": session_user.id,"shopping_products": all_products})
 
 @login_required
 def contact_succes(request):
