@@ -119,17 +119,18 @@ def create_shopping_list(list_of_recipes_id: list, session_user_id: int ) -> lis
             raise Http404
         for product in products:
             if product.product in dict_of_products:
-                dict_of_products[product.product] += product.ammount
+                dict_of_products[product.product][0] += product.ammount
             else:
-                dict_of_products[product.product] = product.ammount
+                dict_of_products[product.product][0] = product.ammount
+                dict_of_products[product.product][1] = product.unit
     for f_product in fridge_products:
         if f_product.product in dict_of_products:
-            if (dict_of_products[f_product.product] - f_product.ammount) <= 0:
+            if (dict_of_products[f_product.product][0] - f_product.ammount) <= 0:
                 del dict_of_products[f_product.product]
 
             else:
                 dict_of_products[f_product.product] = (
-                    dict_of_products[f_product.product] - f_product.ammount
+                    dict_of_products[f_product.product][0] - f_product.ammount
                 )
 
     return dict_of_products
