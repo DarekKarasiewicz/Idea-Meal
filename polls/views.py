@@ -553,8 +553,8 @@ def shopping_list(request):
             product_amount = list(product_amount)
 
             for p in products:
-                some_product = get_object_or_404(Product, id = p).name
-                recipe_products.update({some_product: product_amount[i]})
+                some_product = get_object_or_404(Product, id = p)
+                recipe_products.update({some_product.name: [product_amount[i],some_product.unit]})
                 i = i + 1
 
         print(recipe_products)
@@ -574,14 +574,14 @@ def shopping_list(request):
         for r_key, r_value in recipe_products.items():
             for u_key, u_value in user_products.items():
                 if r_key == u_key:
-                    if r_value - u_value > 0:
-                        new_amount = r_value - u_value
-                        all_products.update({r_key: new_amount})
+                    if r_value[0] - u_value > 0:
+                        new_amount = r_value[0] - u_value
+                        all_products.update({r_key: [new_amount,r_value[1]]})
                         break
                     else:
                         break
                 else:
-                    all_products.update({r_key: r_value})
+                    all_products.update({r_key: [r_value[0],r_value[1]]})
 
         return HttpResponse(json.dumps({"shopping_list":all_products}), content_type="application/json")
 

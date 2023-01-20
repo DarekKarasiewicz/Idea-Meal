@@ -48,7 +48,7 @@
                 console.log("success");
                 Object.keys(data.shopping_list).forEach(function(key, index) {
                     console.log(key, data.shopping_list[key]);
-                    $("#contentToPrint").append("<p>"+ key +": "+ data.shopping_list[key] + "</p>");
+                    $("#contentToPrint").append("<p>"+ key +": "+ data.shopping_list[key][0] + " " + data.shopping_list[key][1]+ "</p>");
                 });
                 },
                 failure: function (data) {
