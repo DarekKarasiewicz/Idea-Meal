@@ -16,8 +16,8 @@
                 <p style="text-align: center;">
                     Down below you have all ingredients that are needed to create your chosen dishes.
                 </p>
-                {% for product in shopping_products %}
-                <p>{{product}}</p>
+                {% for product, ammount in shopping_list.items %}
+                    <p>{{product}}  {{ammount}}</p>
                 {% endfor %}
             </div>
         </div>
