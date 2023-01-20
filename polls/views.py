@@ -15,6 +15,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils import timezone
+import json
 
 #################################################################################
 #                                   FIXME
@@ -581,10 +582,10 @@ def shopping_list(request):
                 else:
                     all_products.update({r_key: r_value})
 
-        print(all_products)
+        return HttpResponse(json.dumps({"shopping_list":all_products}), content_type="application/json")
 
 
-    return render(request,"polls/shopping_list.html",{"user_id": session_user.id,"shopping_list":all_products})
+    return render(request,"polls/shopping_list.html",{"user_id": session_user.id,})
 
 @login_required
 def contact_succes(request):

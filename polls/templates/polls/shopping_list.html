@@ -16,10 +16,7 @@
                 <p style="text-align: center;">
                     Down below you have all ingredients that are needed to create your chosen dishes.
                 </p>
-                <button onclick="generate()"> click</button>
-                {% for product in shopping_list %}
-                    <p>{{product}}</p>
-                {% endfor %}
+                
             </div>
         </div>
         <button class="convert_to_pdf" title="Convert to PDF"></button>
@@ -28,7 +25,7 @@
 {% block page_js%}
 <script>
 
-    function generate(){
+    window.onload = function(){
         let recipes_list = JSON.parse(localStorage.getItem("user_shopping_list"))
 
         if (recipes_list.length > 0) {
@@ -49,6 +46,10 @@
                 },
                 success: function (data) {
                 console.log("success");
+                Object.keys(data.shopping_list).forEach(function(key, index) {
+                    console.log(key, data.shopping_list[key]);
+                    $("#contentToPrint").append("<p>"+ key +": "+ data.shopping_list[key] + "</p>");
+                });
                 },
                 failure: function (data) {
                 console.log("failure");
@@ -56,9 +57,7 @@
                 },
             })
 
-            {% for product in shopping_list %}
-            console.log({{product}})
-            {% endfor %}
+
         }
     }
 
