@@ -217,7 +217,7 @@ def main_page(request, user_id):
     all_comments = Comments_to_Recipe.objects.all()
     all_comments_filtred ={}
     for comments in all_comments:
-            all_comments_filtred.setdefault(comments.recipe,[]).append(comments.comment)
+            all_comments_filtred.setdefault(comments.recipe,[]).append(comments.comment) 
 
     return render(request,"polls/main_page.html",{'user':session_user
                                                  ,'recipes': all_recipes

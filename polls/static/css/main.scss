@@ -763,9 +763,8 @@ footer {
           background-color: transparent;
           height: 3vh;
           .three-seg{
-            width: 30%;
+            width: 27%;
             height: 3vh;
-            // background-color: blue;
             float: left;
             .time_img{
               background-image: url('/static/img/icons8-wall-clock-32.png');
@@ -797,14 +796,17 @@ footer {
               float: left;
               filter: var(--idea_img_filter);
             }
-            .info{
-              width: 50%;
+            .info {
+              width: auto;
+              overflow: hidden;
               height: 3vh;
               float: left;
+              font-size: 14px;
+              line-height: 3vh;
             }
           }
           .three-seg:last-child{
-            width: 33% !important;
+            width: 45% !important;
           }
           .two-seg-one{
             width: 70%;

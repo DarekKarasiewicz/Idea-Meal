@@ -46,7 +46,7 @@
                 </div>
               </div>
               <div class="bottom">
-                {{x.description}}
+                {{y.description}}
               </div>
             </div>
           {% endfor %}
@@ -116,11 +116,13 @@
           <div class="item star_raiting_redirect" onclick="comment_section_toggle()">
             <div class="raiting_ico" title="Raiting"></div>
             <div class="item_text">
-              {%if recipe.comment_id != None %}
-                {{recipe.comment_id}}
-              {% else %}
-                0
-              {% endif %}
+              {% for x, z in all_comments_to_recipe.items %}
+                {% for y in z %}
+                    {{ forloop.counter }}
+                {% endfor %}
+                {% empty %}
+                <span>0</span>
+              {% endfor %}
             </div>
           </div>
         </div>
