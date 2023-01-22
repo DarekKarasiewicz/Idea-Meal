@@ -80,8 +80,8 @@
 {%endblock%}
 {% block page_js%} 
 <script>
+
     window.onload = function(){
-        console.log("{{recipe.prepare_time}}")
         var sec_num = parseInt("{{recipe.prepare_time}}",10);
         var hours   = Math.floor(sec_num / 60);
         var minutes = Math.floor((sec_num - (hours * 60)));
@@ -91,8 +91,10 @@
 
         pr_time = hours + ':' + minutes;
 
-        document.getElementById("description").defaultValue = "{{recipe.description}}";
-        document.getElementById("short_description").defaultValue = "{{recipe.guidance}}";
+        console.log("{{recipe.guidance}}");
+
+        document.getElementById("description").defaultValue = "{{recipe.guidance}}";
+        document.getElementById("short_description").defaultValue = "{{recipe.description}}";
         document.getElementById("recipe_name").defaultValue = "{{recipe.name}}";
         document.getElementById("difficulty").defaultValue = "{{recipe.difficulty}}";
         document.getElementById("cuisine_category").defaultValue = "{{recipe.cuisine_category}}";
@@ -183,6 +185,8 @@
       prepare_time = document.getElementById("prepare_time").value;
       spiciness = document.getElementById("spiciness").value;
       per_serving = document.getElementById("per_serving").value;
+
+      description = description.replace(/\s+/g,"");
     
       jQuery.ajax({
         type: "POST",

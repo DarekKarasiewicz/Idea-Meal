@@ -163,6 +163,9 @@ function send(){
   spiciness = document.getElementById("spiciness").value;
   per_serving = document.getElementById("per_serving").value;
 
+  description = description.replace(/\s+/g,"");
+  short_description = short_description.replace(/\s+/g,"");
+
   jQuery.ajax({
     type: "POST",
     url: '{% url "recipes_add" %}',
