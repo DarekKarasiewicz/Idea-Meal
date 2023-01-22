@@ -1117,6 +1117,9 @@ footer {
     height: 750px;
     padding: 15px;
     background: var(--idea_opacity_panel);
+    overflow-wrap: break-word;
+    color: var(--idea-color-text);
+    
 
     .add_product_recipe{
       label{

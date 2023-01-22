@@ -186,7 +186,7 @@
       spiciness = document.getElementById("spiciness").value;
       per_serving = document.getElementById("per_serving").value;
 
-      description = description.replace(/\s+/g,"");
+      description = description.replace(/(\r\n|\n|\r)/gm, "");
     
       jQuery.ajax({
         type: "POST",
