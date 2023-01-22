@@ -196,11 +196,12 @@
               <div class="star"></div>
               <div class="star"></div>
               <div class="counter">        
-                {%if x.comment_id != None %}
-                  ({{x.comment_id}})
-                {% else %}
-                  (0)
-                {% endif %}
+              {% for recipes_all_comments_count, raiting in recipes_all_comments_counts.items %}
+                {% if recipes_all_comments_count.id == x.id %}
+                  ({{raiting}})
+                
+                {% endif %}             
+              {% endfor %}
               </div>
             </div>
             <div class="two-seg-two"><p><a href ="/recipe/{{x.id}}">See more</a></p></div>

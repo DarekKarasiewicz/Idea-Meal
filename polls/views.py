@@ -216,13 +216,18 @@ def main_page(request, user_id):
 
     all_comments = Comments_to_Recipe.objects.all()
     all_comments_filtred ={}
+    all_comments_filtred_count ={}
+
     for comments in all_comments:
             all_comments_filtred.setdefault(comments.recipe,[]).append(comments.comment) 
+    for x in all_recipes:
+            all_comments_filtred_count[x] = len(Comments_to_Recipe.objects.filter(recipe=x.id))
 
     return render(request,"polls/main_page.html",{'user':session_user
                                                  ,'recipes': all_recipes
                                                  ,'products': fridge_products
                                                  ,'recipes_all_comments': all_comments_filtred
+                                                 ,'recipes_all_comments_counts': all_comments_filtred_count
                                                   })
 
 @login_required
