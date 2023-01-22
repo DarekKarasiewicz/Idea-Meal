@@ -136,7 +136,7 @@
             <p>Ingredients</p>
             <ul>
             {%for product in list_of_products%}
-                <li>{{product.product.name}}</li>
+                <li>{{product.product.name}}:{{product.ammount}} {{product.product.unit}}</li>
             {%endfor%}
             </ul>
           </div>
