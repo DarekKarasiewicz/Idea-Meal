@@ -116,13 +116,7 @@
           <div class="item star_raiting_redirect" onclick="comment_section_toggle()">
             <div class="raiting_ico" title="Raiting"></div>
             <div class="item_text">
-              {% for x, z in all_comments_to_recipe.items %}
-                {% for y in z %}
-                    {{ forloop.counter }}
-                {% endfor %}
-                {% empty %}
-                <span>0</span>
-              {% endfor %}
+             {{ all_comments_filtred_count}}
             </div>
           </div>
         </div>

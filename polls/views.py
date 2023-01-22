@@ -321,12 +321,14 @@ def recipes_page(request, recipe_id):
 
     for comments in all_comments_to_recipe:
             all_comments_filtred.setdefault(comments.recipe,[]).append(comments.comment)
+    
+    all_comments_filtred_count=len(Comments_to_Recipe.objects.filter(recipe=recipe.id))
 
     return render(
         request,
         "polls/recipe_view.html",
         {"recipe": recipe, "all_comments_to_recipe": all_comments_filtred, "user":session_user,
-         "list_of_products":list_of_products},
+         "list_of_products":list_of_products, "all_comments_filtred_count":all_comments_filtred_count},
     )
 
 @login_required
